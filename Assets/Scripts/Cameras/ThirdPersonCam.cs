@@ -12,6 +12,9 @@ public class ThirdPersonCam : MonoBehaviour
     [SerializeField] private Transform playerObj;
     [SerializeField] private Rigidbody rb;
 
+    [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject arma;
+
     [SerializeField] private float rotationSpeed;
     [SerializeField] private CameraStyle currentStyle;
 
@@ -90,7 +93,19 @@ public class ThirdPersonCam : MonoBehaviour
         topDownCamera.Priority = 0;
 
         if (newStyle == CameraStyle.Basic) basicCamera.Priority = 10;
-        if (newStyle == CameraStyle.Combat) combatCamera.Priority = 10;
+
+        if (newStyle == CameraStyle.Combat)
+        {
+            combatCamera.Priority = 10;
+            crosshair.SetActive(true);
+            arma.SetActive(true);
+        }
+        else
+        {
+            crosshair.SetActive(false);
+            arma.SetActive(false);
+        }
+
         if (newStyle == CameraStyle.TopDown) topDownCamera.Priority = 10;
 
         currentStyle = newStyle;

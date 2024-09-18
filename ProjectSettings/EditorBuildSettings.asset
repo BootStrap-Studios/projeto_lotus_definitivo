@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Vini.unity
+    guid: 322f785ee96eae94eb127171d2104d15
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Vini.unity
-    guid: 322f785ee96eae94eb127171d2104d15
+    path: Assets/Scenes/MargelaH.unity
+    guid: 59d79181f76f1d3428663704cc2a464f
+  - enabled: 1
+    path: Assets/Scenes/PrototipoCenario.unity
+    guid: bd6e7953e0336f1438f9e2fb23ad23f7
   m_configObjects: {}

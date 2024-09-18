@@ -14,12 +14,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform orientation;
     [SerializeField] private float groundDrag;
+    [SerializeField] private CharacterController controller;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMultiplier;
-    bool readyToJump = true;
+    [SerializeField] private float gravidade;
+    bool readyToJump;
 
 
     float horizontalInput;
@@ -31,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        //rb = GetComponent<Rigidbody>();
+        //rb.freezeRotation = true;
     }
 
     private void Update()
@@ -48,8 +50,8 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
-        SpeedControl();
-        HandleDrag();
+        //SpeedControl();
+        //HandleDrag();
     }
 
     private void MyInput()
@@ -57,21 +59,17 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = UnityEngine.Input.GetAxisRaw("Horizontal");
         verticalInput = UnityEngine.Input.GetAxisRaw("Vertical");
 
-        if(UnityEngine.Input.GetKey(KeyCode.Space) && readyToJump && grounded)
-        {
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
+        
     }
 
     private void GroundCheck()
     {
         //ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
+  
+
+        grounded = controller.isGrounded;
         
     }
     
@@ -88,17 +86,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (UnityEngine.Input.GetKey(KeyCode.Space) && grounded)
+        {
+            Jump();
+
+            //Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+
         //Calculate move direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        if(grounded)
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        moveDirection.y += gravidade * Time.deltaTime;
 
-        } else if(!grounded)
-        {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-        }
+        controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
         
 
     }
@@ -116,11 +117,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        
+        Debug.Log("Pulei");
         //Reset velocity
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        //rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        //rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        moveDirection.y += Mathf.Sqrt(jumpForce * -3.0f * gravidade);
     }
 
     private void ResetJump()

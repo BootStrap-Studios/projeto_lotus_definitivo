@@ -557,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141300468}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5057713, y: -0.000000007421693, z: 0.000000004351246, w: 0.8626676}
+  m_LocalRotation: {x: 0.5057713, y: 0.000000007421695, z: -0.0000000043512474, w: 0.8626676}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2126,7 +2126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725012665}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2501946, y: 0.16768348, z: -0.04404352, w: 0.95254666}
+  m_LocalRotation: {x: 0.25019458, y: 0.16768348, z: -0.04404352, w: 0.95254666}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2205,7 +2205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766991587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21062627, y: 0.16935998, z: -0.037078023, w: 0.96207017}
+  m_LocalRotation: {x: 0.21062627, y: 0.16935994, z: -0.037078016, w: 0.96207017}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2603,7 +2603,7 @@ GameObject:
   - component: {fileID: 917460630}
   m_Layer: 7
   m_Name: PlayerObj
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2852,7 +2852,9 @@ MonoBehaviour:
   combatLookAt: {fileID: 1318970432}
   player: {fileID: 1496640530}
   playerObj: {fileID: 917460629}
-  rb: {fileID: 1496640529}
+  rb: {fileID: 0}
+  crosshair: {fileID: 0}
+  arma: {fileID: 0}
   rotationSpeed: 5
   currentStyle: 0
   basicCamera: {fileID: 1723365667}
@@ -3717,7 +3719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277746249}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09252102, y: 0.00000001765986, z: -0.0000000016409466, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252102, y: -0.000000017659854, z: 0.0000000016409462, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4033,7 +4035,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328913703}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5257311, y: -0.000000021954934, z: 0.000000013568895, w: 0.85065085}
+  m_LocalRotation: {x: 0.5257311, y: 0.00000002195493, z: -0.000000013568893, w: 0.85065085}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4720,8 +4722,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1496640530}
-  - component: {fileID: 1496640529}
   - component: {fileID: 1496640528}
+  - component: {fileID: 1496640531}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -4748,36 +4750,11 @@ MonoBehaviour:
   moveSpeed: 7
   orientation: {fileID: 453933002}
   groundDrag: 5
+  controller: {fileID: 1496640531}
   jumpForce: 6
   jumpCooldown: 0.25
   airMultiplier: 0.4
---- !u!54 &1496640529
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496640527}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
+  gravidade: -15
 --- !u!4 &1496640530
 Transform:
   m_ObjectHideFlags: 0
@@ -4795,6 +4772,32 @@ Transform:
   - {fileID: 453933002}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1496640531
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496640527}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1723365663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4848,7 +4851,9 @@ MonoBehaviour:
   combatLookAt: {fileID: 1318970432}
   player: {fileID: 1496640530}
   playerObj: {fileID: 917460629}
-  rb: {fileID: 1496640529}
+  rb: {fileID: 0}
+  crosshair: {fileID: 0}
+  arma: {fileID: 0}
   rotationSpeed: 5
   currentStyle: 0
   basicCamera: {fileID: 1723365667}
