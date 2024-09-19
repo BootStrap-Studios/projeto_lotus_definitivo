@@ -2,132 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Ground Check")]
-    [SerializeField] private float playerHeight;
-    [SerializeField] private LayerMask whatIsGround;
-    bool grounded;
+    [SerializeField] float speed;
+    [SerializeField] float rotationSpeed;
+    [SerializeField] CharacterController characterController;
+    [SerializeField] float jumpSpeed;
+    [SerializeField] Transform transformCamera;
 
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private Transform orientation;
-    [SerializeField] private float groundDrag;
-    [SerializeField] private CharacterController controller;
-
-    [Header("Jump")]
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float jumpCooldown;
-    [SerializeField] private float airMultiplier;
-    [SerializeField] private float gravidade;
-    bool readyToJump;
-
-
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
-
-    Rigidbody rb;
+    float ySpeed;
+    float originalStepOffSet;
 
     private void Start()
     {
-        //rb = GetComponent<Rigidbody>();
-        //rb.freezeRotation = true;
+        originalStepOffSet = characterController.stepOffset;
     }
 
     private void Update()
     {
-        MyInput();
-        GroundCheck();
-        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-        
-        
-    }
+        Vector3 movementDirection = new Vector3 (horizontalInput, 0, verticalInput);
+        float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
 
-    private void FixedUpdate()
-    {
-        MovePlayer();
-        //SpeedControl();
-        //HandleDrag();
-    }
+        movementDirection = Quaternion.AngleAxis(transformCamera.rotation.eulerAngles.y, Vector3.up) * movementDirection;
+        movementDirection.Normalize();
 
-    private void MyInput()
-    {
-        horizontalInput = UnityEngine.Input.GetAxisRaw("Horizontal");
-        verticalInput = UnityEngine.Input.GetAxisRaw("Vertical");
-
-        
-    }
-
-    private void GroundCheck()
-    {
-        //ground check
-        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-  
-
-        grounded = controller.isGrounded;
-        
-    }
-    
-    private void HandleDrag()
-    {
-        if(grounded)
+        if (characterController.isGrounded)
         {
-            rb.drag = groundDrag;
-        } else
-        {
-            rb.drag = 0f;
+            characterController.stepOffset = originalStepOffSet;
+            ySpeed = -0.5f;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                ySpeed = jumpSpeed;
+            }
         }
-    }
-
-    private void MovePlayer()
-    {
-        if (UnityEngine.Input.GetKey(KeyCode.Space) && grounded)
+        else
         {
-            Jump();
-
-            //Invoke(nameof(ResetJump), jumpCooldown);
+            characterController.stepOffset = 0;
         }
 
+        ySpeed += Physics.gravity.y * Time.deltaTime;
 
-        //Calculate move direction
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 velocity = movementDirection * magnitude;
+        velocity.y = ySpeed;
 
-        moveDirection.y += gravidade * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
 
-        controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
-        
-
-    }
-
-    private void SpeedControl()
-    {
-        Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        if(flatVelocity.magnitude > moveSpeed)
+        if(movementDirection != Vector3.zero)
         {
-            Vector3 limitedVelocity = flatVelocity.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
-    }
-
-    private void Jump()
-    {
-        Debug.Log("Pulei");
-        //Reset velocity
-        //rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        //rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
-        moveDirection.y += Mathf.Sqrt(jumpForce * -3.0f * gravidade);
-    }
-
-    private void ResetJump()
-    {
-        readyToJump = true;
     }
 }
