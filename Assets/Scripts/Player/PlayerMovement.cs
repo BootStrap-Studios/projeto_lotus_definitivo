@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] Transform transformCamera;
 
+    public bool cameraCombate;
+
     float ySpeed;
     float originalStepOffSet;
 
@@ -22,15 +24,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Movimentacao();
+    }
+
+    private void Movimentacao()
+    {
+        //Calculando a direção que o player tem que andar com base no input.
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movementDirection = new Vector3 (horizontalInput, 0, verticalInput);
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
 
         movementDirection = Quaternion.AngleAxis(transformCamera.rotation.eulerAngles.y, Vector3.up) * movementDirection;
         movementDirection.Normalize();
 
+        //Checando que o personagem está no chão e o input para poder pular.
         if (characterController.isGrounded)
         {
             characterController.stepOffset = originalStepOffSet;
@@ -46,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
             characterController.stepOffset = 0;
         }
 
+        //Aplicando o pulo no axis y, juntamente do calculo da gravidade.
         ySpeed += Physics.gravity.y * Time.deltaTime;
 
         Vector3 velocity = movementDirection * magnitude;
@@ -53,10 +63,15 @@ public class PlayerMovement : MonoBehaviour
 
         characterController.Move(velocity * Time.deltaTime);
 
-        if(movementDirection != Vector3.zero)
+        //Mudando a rotação do personagem.
+        if (movementDirection != Vector3.zero)
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            //Se a camera de combate estiver ativa, não queremos que o codigo mude a rotação, já que a camera estará fazendo isso.
+            if (!cameraCombate)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 }

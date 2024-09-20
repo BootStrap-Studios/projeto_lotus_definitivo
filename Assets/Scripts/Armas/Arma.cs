@@ -6,37 +6,52 @@ public class Arma : MonoBehaviour
 {
     [SerializeField] private LayerMask aimColliderMask;
 
+    [SerializeField] private ObjectPool objectPool;
+
+    [SerializeField] private Transform pontaDaArma;
+
+    private Projetil projetil;
+    Vector3 hitTransform;
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Shoot();
+            ApertarGatilho();
         }
     }
 
 
-    private void Shoot()
+    private void ApertarGatilho()
+    {
+        Raycast();
+        PedirProjetil();
+        Atirando();
+        
+
+    }
+
+    private void PedirProjetil()
+    {
+        projetil = objectPool.GetPooledObject().GetComponent<Projetil>();
+    }
+
+    private void Raycast()
     {
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-        Transform hitTransform = null;
-
-        if(Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
         {
-            hitTransform = raycastHit.transform;
+            hitTransform = raycastHit.point;
         }
+    }
 
-        if(hitTransform != null)
-        {
-            if(hitTransform.CompareTag("Inimigo"))
-            {
-                Debug.Log("Acertou o inimigo");
-            } else
-            {
-                Debug.Log("Acertou outra coisa");
-            }
-        }
+    private void Atirando()
+    {
+        projetil.transform.position = pontaDaArma.position;
+        projetil.gameObject.SetActive(true);
+        projetil.DefineTargetPosition(hitTransform);
     }
 
 

@@ -18,6 +18,8 @@ public class ThirdPersonCam : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private CameraStyle currentStyle;
 
+    [SerializeField] private PlayerMovement playerMovement;
+
     [Header("Cameras")]
     [SerializeField] private CinemachineFreeLook basicCamera; 
     [SerializeField] private CinemachineFreeLook combatCamera; 
@@ -64,6 +66,7 @@ public class ThirdPersonCam : MonoBehaviour
     {
         if(currentStyle == CameraStyle.Basic || currentStyle == CameraStyle.TopDown)
         {
+            playerMovement.cameraCombate = false;
             Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
             orientation.forward = viewDir.normalized;
 
@@ -78,6 +81,7 @@ public class ThirdPersonCam : MonoBehaviour
             }
         } else if(currentStyle == CameraStyle.Combat)
         {
+            playerMovement.cameraCombate = true;
             //Rotate orientation
             Vector3 viewDirCombat = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y, transform.position.z);
             orientation.forward = viewDirCombat.normalized;
