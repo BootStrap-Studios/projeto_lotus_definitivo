@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static StateInimigos;
 
 public class StateInimigos
 {
     public enum STATE
     {
-        IDLE, CHASE, ATIRAR, RELOAD
+        IDLE, CHASE, ATIRAR, RELOAD, HIT
     }
 
     public enum EVENT
@@ -26,18 +28,18 @@ public class StateInimigos
     protected StateInimigos nextState;
     protected int municao;
     protected float alcanceArma;
-    protected float vida;
+    protected int vida;
     protected float cooldownTiro;
     //protected Animator anim;
 
     
-    float visDistancia = 15.0f;
+    float visDistancia = 20f;
     float visAngulo = 45.0f;
     public float cooldownTiroAux;
     public float municaoAux;
-    public bool totalMunicao = true;
+    public int vidaAtual;
 
-    public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro)
+    public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro)
     {
         inimigo = _inimigo;
         agent = _agent;
@@ -94,7 +96,7 @@ public class StateInimigos
         {
             if(Physics.Linecast(inimigo.transform.position, player.position, out hit))
             {
-                if(hit.transform.tag == "Player")
+                if (hit.transform.tag == "Player")
                 {
                     return true;
                 }
@@ -111,12 +113,12 @@ public class StateInimigos
 
 public class Idle : StateInimigos
 {
-    public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
     {
         stateName = STATE.IDLE;
-        agent.isStopped = true;
+        agent.isStopped = true; 
     }
-
+    
     public override void Enter()
     {
         //mudar animação
@@ -145,7 +147,7 @@ public class Idle : StateInimigos
 
 public class Chase : StateInimigos
 {
-    public Chase(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Chase(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
     {
         stateName = STATE.CHASE;
         agent.speed = 6f;
@@ -188,13 +190,14 @@ public class Chase : StateInimigos
 
 public class Atirar : StateInimigos
 {
-    public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
     {
         stateName = STATE.ATIRAR;
         agent.speed = 3;
         agent.angularSpeed = 500f;
         agent.isStopped = false;
         cooldownTiroAux = cooldownTiro;
+        municaoAux = municao;
     }
 
     public override void Enter()
@@ -202,14 +205,6 @@ public class Atirar : StateInimigos
         //mudar animação
         Debug.Log("entrando no modo de atirar");
         base.Enter();
-
-        if (!totalMunicao)
-        {
-           return;
-        }
-
-        municaoAux = municao;
-        totalMunicao = false;
     }
 
     public override void Update()
@@ -220,7 +215,7 @@ public class Atirar : StateInimigos
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
-            if (distanciaTiro.magnitude <= alcanceArma - 3)
+            if (distanciaTiro.magnitude <= alcanceArma - 2)
             {
                 agent.speed = 0f;
             }
@@ -279,7 +274,7 @@ public class Atirar : StateInimigos
 
 public class Reload : StateInimigos
 {
-    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
     {
         stateName = STATE.RELOAD;
         agent.isStopped = true;
@@ -302,6 +297,44 @@ public class Reload : StateInimigos
     public override void Exit()
     {
         //reset da animação
+        base.Exit();
+    }
+}
+
+public class TomarDano : StateInimigos
+{
+    public TomarDano(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    {
+        stateName = STATE.HIT;
+        vidaAtual = 3;
+    }
+
+    public override void Enter()
+    {
+        //possível animação de levar dano
+        Debug.Log("Estado de levar dano");
+        base.Enter();
+    }
+
+    public override void Update()
+    {
+        vidaAtual--;
+        inimigo.GetComponent<BarraDeVida>().AlterarBarraDeVida(vidaAtual, vida);
+
+        if(vidaAtual <= 0)
+        {
+            GameObject.Destroy(inimigo.gameObject);
+        }
+        else
+        {
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            stage = EVENT.EXIT;
+        }
+    }
+
+    public override void Exit()
+    {
+        //Reset da Animação
         base.Exit();
     }
 }

@@ -35,9 +35,12 @@ public class Projetil : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
+
         if(other.CompareTag("Inimigo"))
         {
             Debug.Log("Acertei o inimigo");
+            other.GetComponent<Inimigo>().TomarDano();
         } else
         {
             Debug.Log("Acertei outra coisa");
