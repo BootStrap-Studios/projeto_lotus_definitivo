@@ -294,6 +294,8 @@ MonoBehaviour:
     m_Bits: 1
   objectPool: {fileID: 0}
   pontaDaArma: {fileID: 8177419053024706631}
+  ammoSystem: {fileID: 0}
+  bulletsPerTap: 0
 --- !u!1 &5632614426761940789
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,4 +438,6 @@ MonoBehaviour:
   characterController: {fileID: 8243644179691258510}
   jumpSpeed: 5
   transformCamera: {fileID: 0}
+  dashTime: 0
+  dashSpeed: 0
   cameraCombate: 0

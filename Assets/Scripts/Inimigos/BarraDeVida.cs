@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class BarraDeVida : MonoBehaviour
 {
-    [SerializeField] Image barraDeVida;
-    [SerializeField] float velAnim;
-    float vidaAtualizada = 1;
-    Camera myCamera;
+    [SerializeField] private Image barraDeVida;
+    [SerializeField] private float velAnim;
+    private float vidaAtualizada;
+    private Camera myCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +23,8 @@ public class BarraDeVida : MonoBehaviour
         barraDeVida.fillAmount = Mathf.MoveTowards(barraDeVida.fillAmount, vidaAtualizada, velAnim * Time.deltaTime);
     }
 
-    public void AlterarBarraDeVida(int vidaAtual, int VidaMaxima)
+    public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
     {
-       vidaAtualizada = (float) vidaAtual / VidaMaxima;
+        vidaAtualizada = vidaAtual / VidaMaxima;
     }
 }
