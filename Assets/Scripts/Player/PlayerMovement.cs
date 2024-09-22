@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
 using Input = UnityEngine.Input;
@@ -12,10 +13,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] Transform transformCamera;
 
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashSpeed;
+
     public bool cameraCombate;
 
     float ySpeed;
     float originalStepOffSet;
+
+    Vector3 movementDirection;
 
     private void Start()
     {
@@ -25,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Movimentacao();
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Dash();
+        }
     }
 
     private void Movimentacao()
@@ -33,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+        movementDirection = new Vector3(horizontalInput, 0, verticalInput);
         float magnitude = Mathf.Clamp01(movementDirection.magnitude) * speed;
 
         movementDirection = Quaternion.AngleAxis(transformCamera.rotation.eulerAngles.y, Vector3.up) * movementDirection;
@@ -72,6 +83,23 @@ public class PlayerMovement : MonoBehaviour
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
+        }
+    }
+
+    private void Dash()
+    {
+        StartCoroutine(DashCoroutine());
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dashTime)
+        {
+            characterController.Move(movementDirection * dashSpeed * Time.deltaTime);
+
+            yield return null;
         }
     }
 }

@@ -20,17 +20,17 @@ public class Projetil : MonoBehaviour
 
     private void MovimentarProjetil()
     {
-        float distanceBefore = Vector3.Distance(transform.position, targetPosition);
+        //float distanceBefore = Vector3.Distance(transform.position, targetPosition);
 
         Vector3 moveDir = (targetPosition - transform.position).normalized;
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
-        float distanceAfter = Vector3.Distance(transform.position, targetPosition);
+        //float distanceAfter = Vector3.Distance(transform.position, targetPosition);
 
-        if(distanceBefore < distanceAfter)
-        {
-            gameObject.SetActive(false);
-        }
+        //if(distanceBefore < distanceAfter)
+        //{
+            //gameObject.SetActive(false);
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,9 +41,11 @@ public class Projetil : MonoBehaviour
         {
             Debug.Log("Acertei o inimigo");
             other.GetComponent<Inimigo>().TomarDano();
+            gameObject.SetActive(false);
         } else
         {
             Debug.Log("Acertei outra coisa");
+            gameObject.SetActive(false);
         }
     }
 }

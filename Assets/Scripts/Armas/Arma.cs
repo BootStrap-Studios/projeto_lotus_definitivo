@@ -10,6 +10,9 @@ public class Arma : MonoBehaviour
 
     [SerializeField] private Transform pontaDaArma;
 
+    [SerializeField] private AmmoSystem ammoSystem;
+    [SerializeField] private int bulletsPerTap;
+
     private Projetil projetil;
     Vector3 hitTransform;
 
@@ -24,9 +27,18 @@ public class Arma : MonoBehaviour
 
     private void ApertarGatilho()
     {
-        Raycast();
-        PedirProjetil();
-        Atirando();
+        //Checa se o player tem munição o bastante para atirar e se ele não está no reload full
+        if(ammoSystem.municaoAtual >= bulletsPerTap && !ammoSystem.toNoReloadFull)
+        {
+            ammoSystem.GastandoMunicao(bulletsPerTap);
+            Raycast();
+            PedirProjetil();
+            Atirando();
+
+        } else
+        {
+            Debug.Log("Não tem munição, ou to reloadando");
+        }
         
 
     }

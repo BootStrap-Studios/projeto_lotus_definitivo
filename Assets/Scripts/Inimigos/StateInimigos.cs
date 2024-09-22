@@ -122,14 +122,14 @@ public class Idle : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        Debug.Log("entrou em idle");
+        //Debug.Log("entrou em idle");
         base.Enter();
     }
 
     public override void Update()
     {
         //verificando se player está em seu campo de visão
-        Debug.Log("checkando");
+        //Debug.Log("checkando");
         if (VejoPlayer())
         {
             nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
@@ -140,7 +140,7 @@ public class Idle : StateInimigos
     public override void Exit()
     {
         //reset da animação
-        Debug.Log("saiu do idle");
+        //Debug.Log("saiu do idle");
         base.Exit();
     }
 }
@@ -158,7 +158,7 @@ public class Chase : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        Debug.Log("entrou na chase");
+        //Debug.Log("entrou na chase");
         base.Enter();
     }
 
@@ -183,7 +183,7 @@ public class Chase : StateInimigos
     public override void Exit()
     {
         //reset da animação
-        Debug.Log("saiu da chase");
+        //Debug.Log("saiu da chase");
         base.Exit();
     }
 }
@@ -203,7 +203,7 @@ public class Atirar : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        Debug.Log("entrando no modo de atirar");
+        //Debug.Log("entrando no modo de atirar");
         base.Enter();
     }
 
@@ -254,7 +254,7 @@ public class Atirar : StateInimigos
         if(municaoAux > 0)
         {
             municaoAux--;
-            Debug.Log("POWWW!!! munição: " + municaoAux);
+            //Debug.Log("POWWW!!! munição: " + municaoAux);
             cooldownTiroAux = cooldownTiro;
         }
         else
@@ -267,7 +267,7 @@ public class Atirar : StateInimigos
     public override void Exit()
     {
         //reset da animação
-        Debug.Log("saindo do modo de Atirar");
+        //Debug.Log("saindo do modo de Atirar");
         base.Exit();
     }
 }
