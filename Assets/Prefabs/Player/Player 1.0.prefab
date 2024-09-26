@@ -295,7 +295,7 @@ MonoBehaviour:
   objectPool: {fileID: 0}
   pontaDaArma: {fileID: 8177419053024706631}
   ammoSystem: {fileID: 0}
-  bulletsPerTap: 0
+  bulletsPerTap: 1
 --- !u!1 &5632614426761940789
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 140276070889115716}
   - component: {fileID: 8243644179691258510}
   - component: {fileID: 8806009633796199273}
+  - component: {fileID: 2259536768969746996}
   m_Layer: 0
   m_Name: Player 1.0
   m_TagString: Player
@@ -438,6 +439,24 @@ MonoBehaviour:
   characterController: {fileID: 8243644179691258510}
   jumpSpeed: 5
   transformCamera: {fileID: 0}
-  dashTime: 0
-  dashSpeed: 0
+  dashTime: 0.25
+  dashSpeed: 20
   cameraCombate: 0
+--- !u!114 &2259536768969746996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451878334732380206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdbc7c8738fbef74b9e1e9b08b78c785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
+  vidaUI: {fileID: 0}
+  barraDeVida: {fileID: 0}
+  velAnim: 2
+  vida: 5

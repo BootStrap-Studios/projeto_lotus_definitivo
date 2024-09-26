@@ -38,6 +38,7 @@ public class StateInimigos
     float visAngulo = 45.0f;
     public float cooldownTiroAux;
     public float cooldownReload;
+    public bool reload = false;
     //public float municaoAux;
     //public float vidaAtual;
 
@@ -160,7 +161,7 @@ public class Chase : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        Debug.Log("entrou na chase");
+        //Debug.Log("entrou na chase");
         base.Enter();
     }
 
@@ -168,7 +169,16 @@ public class Chase : StateInimigos
     {
         //persiguindo player caso ainda não esteja perto o suficiente pra atirar
         agent.SetDestination(player.position);
-        //Debug.Log("Passei");
+
+        if (inimigo.GetComponent<Inimigo>().municaoAux <= 0 && !reload)
+        {
+            //Debug.Log("Reload in Chase");
+            reload = true;
+            nextState = new Reload(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            stage = EVENT.EXIT;
+
+            return;
+        }
 
         if (VejoPlayer())
         {
@@ -187,7 +197,7 @@ public class Chase : StateInimigos
         else
         {
             base.Update();
-        }    
+        }   
     }
 
     public override void Exit()
@@ -215,7 +225,8 @@ public class Atirar : StateInimigos
     }
 
     public override void Update()
-    {   
+    {
+        inimigo.transform.LookAt(player.position);
         agent.SetDestination(player.position);
 
         if (VejoPlayer())
@@ -242,12 +253,65 @@ public class Atirar : StateInimigos
             stage = EVENT.EXIT;
         }
 
-        
-        cooldownTiroAux-= Time.deltaTime;
+        if (inimigo.GetComponent<Inimigo>().municaoAux <= 0 && !reload)
+        {
+            //Debug.Log("Reload");
+            reload = true;
+            nextState = new Reload(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            stage = EVENT.EXIT;
+
+            return;
+        }
+
+
+        cooldownTiroAux -= Time.deltaTime;
         if (cooldownTiroAux <= 0)
         {
-            inimigo.GetComponent<Inimigo>().Atirar();
-            cooldownTiroAux = cooldownTiro;            
+            if(!reload)
+            {
+                //Debug.Log("Powww");
+                inimigo.GetComponent<Inimigo>().Atirar();
+                cooldownTiroAux = cooldownTiro;
+            }        
+        }
+        else
+        {
+            base.Update();
+        }
+    }
+
+    public override void Exit()
+    {
+        //reset da animação
+        base.Exit();
+    } 
+}
+
+public class Reload : StateInimigos
+{
+    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    {
+        stateName = STATE.RELOAD;
+        agent.speed = 0f;
+    }
+
+    public override void Enter()
+    {
+        //trocar animação
+        cooldownReload = 2f;
+        base.Enter();
+    }
+
+    public override void Update()
+    {
+        cooldownReload -= Time.deltaTime;
+
+        if (cooldownReload <= 0)
+        {
+            inimigo.GetComponent<Inimigo>().municaoAux = municao;
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            stage = EVENT.EXIT;
+            reload = false;
         }
         else
         {
@@ -261,85 +325,6 @@ public class Atirar : StateInimigos
         base.Exit();
     }
 }
-
-public class Reload : StateInimigos
-{
-    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
-    {
-        stateName = STATE.RELOAD;
-        agent.speed = 0f;
-        cooldownReload = 2f;
-        
-    }
-
-    public override void Enter()
-    {
-        //trocar animação
-        cooldownReload = 2f;
-        base.Enter();
-    }
-
-    public override void Update()
-    {
-        cooldownReload -= Time.deltaTime;
-        Debug.Log("cooldown reload: " + cooldownReload);
-
-        if (cooldownReload <= 0)
-        {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
-            stage = EVENT.EXIT;
-        }
-
-        base.Update();
-    }
-
-    public override void Exit()
-    {
-        //reset da animação
-        base.Exit();
-    }
-}
-
-/* ============ ESTADO DE TOMAR DANO ==================
- * 
-public class TomarDano : StateInimigos
-{
-    public TomarDano(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, int _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
-    {
-        stateName = STATE.HIT;
-        vidaAtual = 3;
-    }
-
-    public override void Enter()
-    {
-        //possível animação de levar dano
-        Debug.Log("Estado de levar dano");
-        base.Enter();
-    }
-
-    public override void Update()
-    {
-        vidaAtual--;
-        inimigo.GetComponent<BarraDeVida>().AlterarBarraDeVida(vidaAtual, vida);
-
-        if(vidaAtual <= 0)
-        {
-            GameObject.Destroy(inimigo.gameObject);
-        }
-        else
-        {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
-            stage = EVENT.EXIT;
-        }
-    }
-
-    public override void Exit()
-    {
-        //Reset da Animação
-        base.Exit();
-    }
-}
-*/
 
 
 

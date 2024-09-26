@@ -22,7 +22,7 @@ public class Projetil : MonoBehaviour
     {
         //float distanceBefore = Vector3.Distance(transform.position, targetPosition);
 
-        Vector3 moveDir = (targetPosition - transform.position).normalized;
+        Vector3 moveDir = (targetPosition - transform.position);
         transform.position += moveDir * moveSpeed * Time.deltaTime;
 
         //float distanceAfter = Vector3.Distance(transform.position, targetPosition);

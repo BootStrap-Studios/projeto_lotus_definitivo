@@ -2,28 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VidaPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private TextMeshProUGUI vidaUI;
-    [SerializeField] private BarraDeVida _barraDeVida;
+    [SerializeField] private Image barraDeVida;
+    [SerializeField] private float velAnim;
     [SerializeField] private float vida;
+
     private float vidaAtual;
+    private float vidaAtualizada;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         vidaAtual = vida;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+        AlterarBarraDeVida(vidaAtual, vida);
         vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
+    }
+
+    private void Update()
+    {
+        barraDeVida.fillAmount = Mathf.MoveTowards(barraDeVida.fillAmount, vidaAtualizada, velAnim * Time.deltaTime);
     }
 
     public void TomarDano(float dano)
     {
         vidaAtual -= dano;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+        AlterarBarraDeVida(vidaAtual, vida);
         vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
 
         if (vidaAtual <= 0)
@@ -44,10 +53,15 @@ public class VidaPlayer : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         vidaAtual = vida;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+        AlterarBarraDeVida(vidaAtual, vida);
         vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
 
         gameObject.transform.position = new Vector3(20f, 1f, -15f);
         gameObject.SetActive(true);
+    }
+
+    public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
+    {
+        vidaAtualizada = vidaAtual / VidaMaxima;
     }
 }

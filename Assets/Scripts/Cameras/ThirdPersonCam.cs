@@ -13,6 +13,7 @@ public class ThirdPersonCam : MonoBehaviour
     [SerializeField] private Rigidbody rb;
 
     [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject barraMunicao;
     [SerializeField] private GameObject arma;
 
     [SerializeField] private float rotationSpeed;
@@ -102,11 +103,13 @@ public class ThirdPersonCam : MonoBehaviour
         {
             combatCamera.Priority = 10;
             crosshair.SetActive(true);
+            barraMunicao.SetActive(true);
             arma.SetActive(true);
         }
         else
         {
             crosshair.SetActive(false);
+            barraMunicao.SetActive(false);
             arma.SetActive(false);
         }
 

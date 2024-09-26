@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 1845603326009649544}
   - component: {fileID: 589430516802735262}
   - component: {fileID: 7141730594483546657}
+  - component: {fileID: 3060558376259822263}
   m_Layer: 5
   m_Name: InimigoCanvas
   m_TagString: Untagged
@@ -239,6 +240,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3060558376259822263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3572333220835733462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b801ef7008be443a53421825e0c83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barraDeVida: {fileID: 3347702298720743466}
+  velAnim: 2
 --- !u!1 &5148011544643261273
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,9 +342,7 @@ GameObject:
   - component: {fileID: 5112598678632446628}
   - component: {fileID: 3913204490852866316}
   - component: {fileID: 26313390720688342}
-  - component: {fileID: 8593976668695191586}
   - component: {fileID: 4214115328965256345}
-  - component: {fileID: 5103175674914371188}
   m_Layer: 0
   m_Name: InimigoSimples
   m_TagString: Inimigo
@@ -450,29 +463,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &8593976668695191586
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160690153797411868}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Height: 2.2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4214115328965256345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,22 +481,8 @@ MonoBehaviour:
   danoTiro: 1
   cooldownTiro: 1
   alcanceArma: 8
+  _barraDeVida: {fileID: 3060558376259822263}
   vida: 5
-  _barraDeVida: {fileID: 5103175674914371188}
---- !u!114 &5103175674914371188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160690153797411868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b801ef7008be443a53421825e0c83a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barraDeVida: {fileID: 3347702298720743466}
-  velAnim: 2
 --- !u!1 &7310181241010840215
 GameObject:
   m_ObjectHideFlags: 0

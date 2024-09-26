@@ -8,18 +8,24 @@ using static StateInimigos;
 
 public class Inimigo : MonoBehaviour
 {
+    [Header("Outros")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform pontaArma;
+
+    [Header("Arma")]
     [SerializeField] private int municao;
-    private int municaoAux;
     [SerializeField] private float danoTiro;
     [SerializeField] private float cooldownTiro;
     [SerializeField] private float alcanceArma;
-    [SerializeField] private float vida;
-    private float vidaAtual;   
+    public int municaoAux;
+
+    [Header("Vida")]
     [SerializeField] private BarraDeVida _barraDeVida;
+    [SerializeField] private float vida; 
+    private float vidaAtual;   
+    
     private NavMeshAgent agent;
-    private StateInimigos stateAtual;
+    private StateInimigos stateInimigo;
     
     
 
@@ -30,12 +36,12 @@ public class Inimigo : MonoBehaviour
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
         municaoAux = municao;
 
-        stateAtual = new Idle(gameObject, agent, player, municao, alcanceArma, vida, cooldownTiro); 
+        stateInimigo = new Idle(gameObject, agent, player, municao, alcanceArma, vida, cooldownTiro); 
     }
 
     void Update()
     {
-        stateAtual = stateAtual.Process();
+        stateInimigo = stateInimigo.Process();
     }
 
     public void TomarDano(float dano)
@@ -51,16 +57,14 @@ public class Inimigo : MonoBehaviour
 
     public void Atirar()
     {
+        municaoAux--;
+
         if (municaoAux <= 0)
         {
-            municaoAux = municao;
-            stateAtual = new Reload(gameObject, agent, player, municao, alcanceArma, vida, cooldownTiro);
-            stateAtual.stage = EVENT.EXIT;
+            //stateInimigo.reload = true;
         }
         else
-        { 
-            municaoAux--;
-
+        {            
             RaycastHit hit;
 
             if(Physics.Raycast(pontaArma.position, transform.TransformDirection(Vector3.forward), out hit, alcanceArma + 3))
@@ -71,7 +75,7 @@ public class Inimigo : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("pegou em nada");
+                    //Debug.Log("pegou em nada");
                 }
             }
         }
