@@ -85,9 +85,9 @@ public class ThirdPersonCam : MonoBehaviour
             playerMovement.cameraCombate = true;
             //Rotate orientation
             Vector3 viewDirCombat = combatLookAt.position - new Vector3(transform.position.x, combatLookAt.position.y, transform.position.z);
-            orientation.forward = viewDirCombat.normalized;
+            orientation.forward = viewDirCombat;
 
-            playerObj.forward = viewDirCombat.normalized;
+            playerObj.forward = viewDirCombat;
         }
     }
 
