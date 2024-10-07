@@ -442,6 +442,7 @@ MonoBehaviour:
   transformCamera: {fileID: 0}
   dashTime: 0.25
   dashSpeed: 20
+  dashCooldown: 3
   cameraCombate: 0
 --- !u!114 &2259536768969746996
 MonoBehaviour:
@@ -460,4 +461,4 @@ MonoBehaviour:
   vidaUI: {fileID: 0}
   barraDeVida: {fileID: 0}
   velAnim: 2
-  vida: 5
+  vida: 30

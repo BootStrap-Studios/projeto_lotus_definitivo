@@ -9,7 +9,7 @@ public class VidaPlayer : MonoBehaviour
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private TextMeshProUGUI vidaUI;
-    [SerializeField] private Image barraDeVida;
+    [SerializeField] private Slider barraDeVida;
     [SerializeField] private float velAnim;
     [SerializeField] private float vida;
 
@@ -26,7 +26,7 @@ public class VidaPlayer : MonoBehaviour
 
     private void Update()
     {
-        barraDeVida.fillAmount = Mathf.MoveTowards(barraDeVida.fillAmount, vidaAtualizada, velAnim * Time.deltaTime);
+        barraDeVida.value = Mathf.MoveTowards(barraDeVida.value, vidaAtualizada, velAnim * Time.deltaTime);
     }
 
     public void TomarDano(float dano)

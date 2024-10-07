@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BarraDeVida : MonoBehaviour
 {
-    [SerializeField] private Image barraDeVida;
+    [SerializeField] private Slider barraDeVida;
     [SerializeField] private float velAnim;
     private float vidaAtualizada;
     private Camera myCamera;
@@ -19,7 +19,7 @@ public class BarraDeVida : MonoBehaviour
     {
         transform.rotation = Quaternion.LookRotation(transform.position - myCamera.transform.position);
 
-        barraDeVida.fillAmount = Mathf.MoveTowards(barraDeVida.fillAmount, vidaAtualizada, velAnim * Time.deltaTime);
+        barraDeVida.value = Mathf.MoveTowards(barraDeVida.value, vidaAtualizada, velAnim * Time.deltaTime);
     }
 
     public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
