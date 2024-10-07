@@ -8,7 +8,7 @@ public class ManagerCenas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene("PrototipoCenario", LoadSceneMode.Additive);
+        SceneManager.LoadScene("CenaMetricas", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame

@@ -7,7 +7,8 @@ using Input = UnityEngine.Input;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float speed;
+    [SerializeField] float speedAndando;
+    [SerializeField] float speedPulando;
     [SerializeField] float rotationSpeed;
     [SerializeField] CharacterController characterController;
     [SerializeField] float jumpSpeed;
@@ -15,11 +16,14 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float dashTime;
     [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashCooldown;
 
     public bool cameraCombate;
 
+    float speed;
     float ySpeed;
     float originalStepOffSet;
+    float dashCooldownAux;
 
     Vector3 movementDirection;
 
@@ -32,9 +36,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Movimentacao();
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        dashCooldownAux -= Time.deltaTime;
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux <= 0)
         {
             Dash();
+            dashCooldownAux = dashCooldown;
         }
     }
 
@@ -53,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         //Checando que o personagem está no chão e o input para poder pular.
         if (characterController.isGrounded)
         {
+            speed = speedAndando;
             characterController.stepOffset = originalStepOffSet;
             ySpeed = -0.5f;
 
@@ -64,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             characterController.stepOffset = 0;
+            speed = speedPulando;
         }
 
         //Aplicando o pulo no axis y, juntamente do calculo da gravidade.

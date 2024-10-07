@@ -434,10 +434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8afc5e942be00419a4b31d1e918019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speedAndando: 8
+  speedPulando: 4.8
   rotationSpeed: 720
   characterController: {fileID: 8243644179691258510}
-  jumpSpeed: 5
+  jumpSpeed: 7.2
   transformCamera: {fileID: 0}
   dashTime: 0.25
   dashSpeed: 20
