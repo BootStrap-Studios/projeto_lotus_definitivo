@@ -21,6 +21,8 @@ public class AmmoSystem : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI municaoUI; 
     [SerializeField] private Slider barraMunicaoUI; 
+    [SerializeField] private Image barraBackground; 
+    [SerializeField] private Image barraPreenchimento; 
     [SerializeField] private RawImage areaCerta;
     [SerializeField] private float velAnim;
     [SerializeField] private float velReloadBarra;
@@ -37,6 +39,7 @@ public class AmmoSystem : MonoBehaviour
         toNoReloadFull = false;
         timer = timerAux;
         municaoAtual = municaoTotal;
+
     }
     void Update()
     {
@@ -95,9 +98,13 @@ public class AmmoSystem : MonoBehaviour
             municaoAtual++;
 
             timer = timerReload;
-        } else
+        } 
+        else
         {
             toNoReloadFull = false;
+
+            barraBackground.color = new Color(0.4433962f, 0.4007013f, 0.3199982f, 1);
+            barraPreenchimento.color = new Color(0.9811321f, 0.8757644f, 0.5414739f, 1);
         }
         
     }
@@ -109,11 +116,19 @@ public class AmmoSystem : MonoBehaviour
 
     private void AtualizaBarraReload()
     {
-        if (toNoReloadFull)
+        if (toNoReloadFull && QTE)
         {
             municaoAtualizada += Time.deltaTime;
 
             barraMunicaoUI.value = Mathf.MoveTowards(barraMunicaoUI.value, municaoAtualizada, velReloadBarra * Time.deltaTime);
+
+            if(barraMunicaoUI.value >= 1f)
+            {
+                QTE = false;
+                areaCerta.enabled = false;
+                barraBackground.color = new Color(0.27f, 0, 0, 1);
+                barraPreenchimento.color = new Color(0.4622642f, 0, 0, 1);
+            }
         }
         else
         {
@@ -144,7 +159,8 @@ public class AmmoSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("ERROU!!!");
+            barraBackground.color = new Color(0.27f, 0, 0, 1);
+            barraPreenchimento.color = new Color(0.4622642f, 0, 0, 1);
         }    
     }
 

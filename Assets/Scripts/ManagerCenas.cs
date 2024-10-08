@@ -9,7 +9,6 @@ public class ManagerCenas : MonoBehaviour
     void Start()
     {
         SceneManager.LoadScene("CenaMetricas", LoadSceneMode.Additive);
-        //SceneManager.LoadScene("MargelaH", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame

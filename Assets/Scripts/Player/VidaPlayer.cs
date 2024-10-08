@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class VidaPlayer : MonoBehaviour
 {
-    [SerializeField] private GameObject playerUI;
-    [SerializeField] private GameObject gameOverUI;
     [SerializeField] private TextMeshProUGUI vidaUI;
     [SerializeField] private Slider barraDeVida;
     [SerializeField] private float velAnim;
@@ -37,27 +35,8 @@ public class VidaPlayer : MonoBehaviour
 
         if (vidaAtual <= 0)
         {
-            playerUI.SetActive(false);
-            gameOverUI.SetActive(true);
-            gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            EventBus.Instance.GameOver();
         }
-    }
-
-    public void TentarNovamente()
-    {
-        playerUI.SetActive(true);
-        gameOverUI.SetActive(false);
-        
-        Cursor.lockState = CursorLockMode.Locked;
-
-        vidaAtual = vida;
-        AlterarBarraDeVida(vidaAtual, vida);
-        vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
-
-        gameObject.transform.position = new Vector3(20f, 1f, -15f);
-        gameObject.SetActive(true);
     }
 
     public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
