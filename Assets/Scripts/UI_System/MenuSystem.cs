@@ -46,6 +46,7 @@ public class MenuSystem : MonoBehaviour
             if(stateMenu == State.menuFechado)
             {
                 PauseMenu();
+                EventBus.Instance.PauseGame();
             }
             else if(stateMenu == State.menuPause)
             {
@@ -63,7 +64,7 @@ public class MenuSystem : MonoBehaviour
     }
 
     public void PauseMenu()
-    {
+    {        
         playerUI.SetActive(false);
         menuPauseUI.SetActive(true);
         menuConfigUI.SetActive(false);
@@ -78,6 +79,8 @@ public class MenuSystem : MonoBehaviour
 
     public void DesligarUI()    
     {
+        EventBus.Instance.PauseGame();
+
         playerUI.SetActive(true);
         menuPauseUI.SetActive(false);     
         menuConfigUI.SetActive(false);
@@ -93,6 +96,7 @@ public class MenuSystem : MonoBehaviour
 
     private void GameOverUI()
     {
+        EventBus.Instance.PauseGame();
         Time.timeScale = 0;
 
         playerUI.SetActive(false);
@@ -118,7 +122,7 @@ public class MenuSystem : MonoBehaviour
 
     public void BTNVoltarMenuInicial()
     {
-        Debug.Log("Voltar Menu Inicial");
+        SceneManager.LoadScene("MenuPrincipal");
     }
 
     public void BTNSairJogo()

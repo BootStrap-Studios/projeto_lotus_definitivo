@@ -30,6 +30,7 @@ public class Inimigo : MonoBehaviour
 
     void Start()
     {
+        //player = FindObjectOfType<PlayerMovement>().transform;
         agent = GetComponent<NavMeshAgent>();
         vidaAtual = vida;
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
@@ -68,13 +69,14 @@ public class Inimigo : MonoBehaviour
 
             if(Physics.Raycast(pontaArma.position, transform.TransformDirection(Vector3.forward), out hit, alcanceArma + 3))
             {
-                if(hit.transform.tag == "Player")
+
+                if (hit.transform.tag == "Player")
                 {
                     hit.transform.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
                 }
                 else
                 {
-                    //Debug.Log("pegou em nada");
+                   // Debug.Log(hit.collider.gameObject.name);
                 }
             }
         }

@@ -12,11 +12,13 @@ public class EventBus : MonoBehaviour
 
     public event Action onGameOver;
 
+    public event Action <float, Action> onFadeIn;
+    public event Action <float, Action> onFadeOut;
+
     private void Awake()
     {
         Instance = this;
     }
-
 
     public void PauseGame()
     {
@@ -27,4 +29,13 @@ public class EventBus : MonoBehaviour
     {
         onGameOver?.Invoke();
     }  
+
+    public void FadeIn(float duracao, Action posFade)
+    {
+        onFadeIn?.Invoke(duracao, posFade);
+    }
+    public void FadeOut(float duracao, Action posFade)
+    {
+        onFadeOut?.Invoke(duracao, posFade);
+    }
 }

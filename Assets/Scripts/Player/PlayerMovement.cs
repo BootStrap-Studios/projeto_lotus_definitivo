@@ -89,9 +89,16 @@ public class PlayerMovement : MonoBehaviour
             //Se a camera de combate estiver ativa, não queremos que o codigo mude a rotação, já que a camera estará fazendo isso.
             if (!cameraCombate)
             {
+                Debug.Log("Rotacionando Player");
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
+        }
+
+        if (cameraCombate)
+        {
+            Quaternion toRotation = Quaternion.Euler(0f, transformCamera.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -110,5 +117,10 @@ public class PlayerMovement : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void MudaCharacterController()
+    {
+        characterController.enabled = !characterController.enabled;
     }
 }

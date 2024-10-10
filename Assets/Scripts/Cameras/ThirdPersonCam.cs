@@ -24,7 +24,7 @@ public class ThirdPersonCam : MonoBehaviour
     [Header("Cameras")]
     [SerializeField] private CinemachineFreeLook basicCamera; 
     [SerializeField] private CinemachineFreeLook combatCamera; 
-    [SerializeField] private CinemachineFreeLook topDownCamera; 
+    [SerializeField] private CinemachineFreeLook topDownCamera;
     
 
     public enum CameraStyle
@@ -45,7 +45,7 @@ public class ThirdPersonCam : MonoBehaviour
     {
         MyInputs();
         //CalculandoOrientacao();
-        QualCamera();
+        QualCamera();       
     }
 
     private void MyInputs()

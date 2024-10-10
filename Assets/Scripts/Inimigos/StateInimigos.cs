@@ -90,12 +90,13 @@ public class StateInimigos
     //função que verifica se o player está no campo de visão do inimigo
     public bool VejoPlayer()
     {
+        
         Vector3 direcao = player.position - inimigo.transform.position;
         float angulo = Vector3.Angle(direcao, inimigo.transform.forward);
 
         RaycastHit hit;
-        
-        if(direcao.magnitude < visDistancia && angulo < visAngulo)
+
+        if (direcao.magnitude < visDistancia && angulo < visAngulo)
         {
             if(Physics.Linecast(inimigo.transform.position, player.position, out hit))
             {
@@ -125,7 +126,7 @@ public class Idle : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        //Debug.Log("entrou em idle");
+        //Debug.Log(inimigo.name + " entrou em idle");
         base.Enter();
     }
 
@@ -161,7 +162,7 @@ public class Chase : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        //Debug.Log("entrou na chase");
+        //Debug.Log(inimigo.name + " entrou na chase");
         base.Enter();
     }
 
