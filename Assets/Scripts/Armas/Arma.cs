@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,11 @@ public class Arma : MonoBehaviour
     [SerializeField] private AmmoSystem ammoSystem;
     [SerializeField] private int bulletsPerTap;
 
+    [SerializeField] private GameObject vfxHit;
+
     private Projetil projetil;
-    Vector3 hitTransform;
+    Transform hitTransform;
+    Vector3 hitPoint;
 
     private void Update()
     {
@@ -32,8 +36,7 @@ public class Arma : MonoBehaviour
         {
             ammoSystem.GastandoMunicao(bulletsPerTap);
             Raycast();
-            PedirProjetil();
-            Atirando();
+            //PedirProjetil();
 
         } else
         {
@@ -55,15 +58,33 @@ public class Arma : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
         {
-            hitTransform = raycastHit.point;
+            hitPoint = raycastHit.point;
+            hitTransform = raycastHit.transform;
+
+            Atirando();
         }
     }
 
     private void Atirando()
     {
-        projetil.transform.position = pontaDaArma.position;
-        projetil.gameObject.SetActive(true);
-        projetil.DefineTargetPosition(hitTransform);
+        if(hitTransform != null)
+        {
+            if(hitTransform.CompareTag("Inimigo")) {
+
+                hitTransform.GetComponent<Inimigo>().TomarDano(1f);
+                Instantiate(vfxHit, hitPoint, Quaternion.identity);
+
+            } else
+            {
+                Instantiate(vfxHit, hitPoint, Quaternion.identity);
+            }
+        } 
+     
+
+
+        //projetil.transform.position = pontaDaArma.position;
+        //projetil.gameObject.SetActive(true);
+        //projetil.DefineTargetPosition(hitTransform);
     }
 
 

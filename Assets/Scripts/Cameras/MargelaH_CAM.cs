@@ -10,6 +10,7 @@ public class MargelaH_CAM : MonoBehaviour
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject arma;
+    [SerializeField] private GameObject pontaDaArma;
 
     private bool play = true;
 
@@ -41,6 +42,8 @@ public class MargelaH_CAM : MonoBehaviour
 
             player.cameraCombate = true;
 
+            
+
             normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
             normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
         }
@@ -55,6 +58,9 @@ public class MargelaH_CAM : MonoBehaviour
             aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
             aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
         }
+
+        Vector3 newRotation = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
+        pontaDaArma.transform.eulerAngles = newRotation;
     }
 
     private void PauseCam()

@@ -6,7 +6,7 @@ public class Projetil : MonoBehaviour
 {
     private Vector3 targetPosition;
 
-    float moveSpeed = 100f;
+    float moveSpeed = 15f;
 
     void Update()
     {
