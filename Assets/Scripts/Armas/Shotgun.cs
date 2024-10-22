@@ -12,18 +12,35 @@ public class Shotgun : MonoBehaviour
 
     [SerializeField] private GameObject vfxTiro;
 
+    [SerializeField] private AmmoSystem ammoSystem;
+
+    [SerializeField] private int bulletsPerTap;
+
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            for(int i = 0; i < numeroDeProjeteis; i++)
-            {
-                ShotgunRay();
-                Debug.Log("Atirei");
-            }
+            ApertarGatilho();
             
+        }
+    }
+
+    private void ApertarGatilho()
+    {
+        if(ammoSystem.municaoAtual >= bulletsPerTap && !ammoSystem.toNoReloadFull) {
+
+            ammoSystem.GastandoMunicao(bulletsPerTap);
+
+            for (int i = 0; i < numeroDeProjeteis; i++)
+                {
+                    ShotgunRay();
+                    Debug.Log("Atirei");
+                }
+
+            
+
         }
     }
 

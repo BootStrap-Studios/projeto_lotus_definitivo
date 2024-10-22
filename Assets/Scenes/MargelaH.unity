@@ -2529,6 +2529,8 @@ MonoBehaviour:
   numeroDeProjeteis: 8
   range: 30
   vfxTiro: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
+  ammoSystem: {fileID: 1120508008}
+  bulletsPerTap: 3
 --- !u!1 &607605632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,7 +3928,7 @@ MonoBehaviour:
   aimCAM: {fileID: 1173508992}
   player: {fileID: 124442791}
   playerUI: {fileID: 1018121219}
-  arma: {fileID: 601218015}
+  arma: {fileID: 124442792}
   pontaDaArma: {fileID: 1396799762}
 --- !u!1 &952326706
 GameObject:
