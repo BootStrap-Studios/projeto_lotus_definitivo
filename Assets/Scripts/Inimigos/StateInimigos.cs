@@ -12,7 +12,7 @@ public class StateInimigos
 {
     public enum STATE
     {
-        IDLE, CHASE, ATIRAR, RELOAD, HIT
+        IDLE, CHASE, ATIRAR, RELOAD, TOMARDANO
     }
 
     public enum EVENT
@@ -29,7 +29,6 @@ public class StateInimigos
     protected int municao;
     protected float alcanceArma;
     protected float cooldownTiro;
-    protected float vida;
     protected float danoRecebido;
     //protected Animator anim;
 
@@ -37,20 +36,18 @@ public class StateInimigos
     float visDistancia = 20f;
     float visAngulo = 45.0f;
     public float cooldownTiroAux;
-    public float cooldownReload;
+    public float tempoAux;
     public bool reload = false;
-    //public float municaoAux;
-    //public float vidaAtual;
+    public bool stunar = false;
 
-    public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro)
+    public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro)
     {
         inimigo = _inimigo;
         agent = _agent;
         player = _player;
         municao = _municao;
         alcanceArma = _alcanceArma;
-        vida = _vida;
-        cooldownTiro = _cooldownTiro;  
+        cooldownTiro = _cooldownTiro;
     }
 
     public virtual void Enter()
@@ -71,7 +68,7 @@ public class StateInimigos
     public StateInimigos Process()
     {
         if (stage == EVENT.ENTER)
-        {
+        {           
             Enter();
         }
         else if (stage == EVENT.UPDATE)
@@ -89,8 +86,7 @@ public class StateInimigos
 
     //função que verifica se o player está no campo de visão do inimigo
     public bool VejoPlayer()
-    {
-        
+    {      
         Vector3 direcao = player.position - inimigo.transform.position;
         float angulo = Vector3.Angle(direcao, inimigo.transform.forward);
 
@@ -117,26 +113,34 @@ public class StateInimigos
 
 public class Idle : StateInimigos
 {
-    public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro ) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
     {
         stateName = STATE.IDLE;
+        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Idle");
         agent.isStopped = true; 
     }
     
     public override void Enter()
     {
-        //mudar animação
-        //Debug.Log(inimigo.name + " entrou em idle");
+        //tocar animação idle    
         base.Enter();
     }
 
     public override void Update()
     {
+        if (stunar)
+        {
+            stunar = false;
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            stage = EVENT.EXIT;
+
+            return;
+        }
+
         //verificando se player está em seu campo de visão
-        //Debug.Log("checkando");
         if (VejoPlayer())
         {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
             stage = EVENT.EXIT;
         }
     }
@@ -144,50 +148,40 @@ public class Idle : StateInimigos
     public override void Exit()
     {
         //reset da animação
-        //Debug.Log("saiu do idle");
         base.Exit();
     }
 }
 
 public class Chase : StateInimigos
 {
-    public Chase(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Chase(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
     {
         stateName = STATE.CHASE;
         agent.speed = 6f;
         agent.angularSpeed = 250f;
         agent.isStopped = false;
+        tempoAux = 2f;
     }
 
     public override void Enter()
     {
-        //mudar animação
-        //Debug.Log(inimigo.name + " entrou na chase");
+        //tocar animação de persiguição
+        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Persiguindo");
         base.Enter();
     }
 
     public override void Update()
     {
         //persiguindo player caso ainda não esteja perto o suficiente pra atirar
-        agent.SetDestination(player.position);
-
-        if (inimigo.GetComponent<Inimigo>().municaoAux <= 0 && !reload)
-        {
-            //Debug.Log("Reload in Chase");
-            reload = true;
-            nextState = new Reload(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
-            stage = EVENT.EXIT;
-
-            return;
-        }
+        agent.SetDestination(player.position);  
 
         if (VejoPlayer())
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
-            if (distanciaTiro.magnitude <= alcanceArma + 3)
+            if (distanciaTiro.magnitude <= alcanceArma)
             {
-                nextState = new Atirar(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+                nextState = new Atirar(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
                 stage = EVENT.EXIT;
             }
             else
@@ -197,6 +191,18 @@ public class Chase : StateInimigos
         }
         else
         {
+            /*tempoAux -= Time.deltaTime;
+
+            //verificando se tem munição faltando
+            if (inimigo.GetComponent<Inimigo>().municaoAux < municao && tempoAux <= 0)
+            {
+                reload = true;
+                nextState = new Reload(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+                stage = EVENT.EXIT;
+
+                return;
+            }*/
+
             base.Update();
         }   
     }
@@ -210,7 +216,7 @@ public class Chase : StateInimigos
 
 public class Atirar : StateInimigos
 {
-    public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
     {
         stateName = STATE.ATIRAR;
         agent.speed = 3;
@@ -222,11 +228,13 @@ public class Atirar : StateInimigos
     public override void Enter()
     {
         //mudar animação
+        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Atirando");
         base.Enter();
     }
 
     public override void Update()
-    {
+    {     
+        //mirando no player e verificando se continua no alcançe do tiro
         inimigo.transform.LookAt(player.position);
         agent.SetDestination(player.position);
 
@@ -234,46 +242,43 @@ public class Atirar : StateInimigos
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
-            if (distanciaTiro.magnitude <= alcanceArma - 2)
+            if (distanciaTiro.magnitude <= alcanceArma - 3)
             {
                 agent.speed = 0f;
             }
-            else if(distanciaTiro.magnitude <= alcanceArma + 3 && distanciaTiro.magnitude >= alcanceArma - 2)
+            else if(distanciaTiro.magnitude <= alcanceArma && distanciaTiro.magnitude >= alcanceArma - 3)
             {
                 agent.speed = 3f;  
             }
             else
             {
-                nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+                nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
                 stage = EVENT.EXIT;
             }
         }
         else
         {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
             stage = EVENT.EXIT;
         }
 
-        if (inimigo.GetComponent<Inimigo>().municaoAux <= 0 && !reload)
-        {
-            //Debug.Log("Reload");
-            reload = true;
-            nextState = new Reload(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
-            stage = EVENT.EXIT;
-
-            return;
-        }
-
-
+        //verificando cooldown do tiro para disparar
         cooldownTiroAux -= Time.deltaTime;
         if (cooldownTiroAux <= 0)
         {
-            if(!reload)
+            if (!reload)
             {
-                //Debug.Log("Powww");
                 inimigo.GetComponent<Inimigo>().Atirar();
                 cooldownTiroAux = cooldownTiro;
-            }        
+            }
+            else
+            {
+                reload = true;
+                nextState = new Reload(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+                stage = EVENT.EXIT;
+
+                return;
+            }
         }
         else
         {
@@ -290,27 +295,28 @@ public class Atirar : StateInimigos
 
 public class Reload : StateInimigos
 {
-    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _vida, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _vida, _cooldownTiro)
+    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
     {
         stateName = STATE.RELOAD;
         agent.speed = 0f;
+        tempoAux = 2f;
     }
 
     public override void Enter()
     {
-        //trocar animação
-        cooldownReload = 2f;
+        //tocar a animação de reloading
+        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
         base.Enter();
     }
 
     public override void Update()
     {
-        cooldownReload -= Time.deltaTime;
+        tempoAux -= Time.deltaTime;
 
-        if (cooldownReload <= 0)
+        if (tempoAux <= 0)
         {
             inimigo.GetComponent<Inimigo>().municaoAux = municao;
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, vida, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
             stage = EVENT.EXIT;
             reload = false;
         }
@@ -318,6 +324,45 @@ public class Reload : StateInimigos
         {
             base.Update();
         }
+    }
+
+    public override void Exit()
+    {
+        //reset da animação
+        base.Exit();
+    }
+}
+
+public class TomarDano : StateInimigos
+{
+    public TomarDano(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
+    {
+        stateName = STATE.TOMARDANO;
+        agent.speed = 0f;
+        tempoAux = 0.5f;
+    }
+
+    public override void Enter()
+    {
+        //tocar a animação de levar dano
+        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Stunado");
+        base.Enter();
+    }
+
+    public override void Update()
+    {
+        tempoAux -= Time.deltaTime;
+
+        if(tempoAux <= 0)
+        {
+            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            stage = EVENT.EXIT;
+        }
+        else
+        {
+            base.Update();
+        }
+
     }
 
     public override void Exit()

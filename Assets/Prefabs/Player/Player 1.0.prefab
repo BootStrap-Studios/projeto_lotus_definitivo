@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2577305725984658727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837403351468816383}
+  - component: {fileID: 8773810735126341650}
+  m_Layer: 0
+  m_Name: Shotgun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1837403351468816383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2577305725984658727}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 140276070889115716}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8773810735126341650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2577305725984658727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c580344ddd04a1145a3dcae64e9225e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pontaDaArma: {fileID: 8177419053024706631}
+  numeroDeProjeteis: 8
+  range: 30
+  vfxTiro: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
+  ammoSystem: {fileID: 0}
+  bulletsPerTap: 3
 --- !u!1 &3666982982036204446
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718901367380913316}
   m_Layer: 0
-  m_Name: CombatLookAt
+  m_Name: LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,12 +179,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3926493772315054037}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.09, y: 1.199, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.81, y: 0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1525155890364665210}
+  m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5174054128739968532
 GameObject:
@@ -313,6 +363,7 @@ MonoBehaviour:
   pontaDaArma: {fileID: 8177419053024706631}
   ammoSystem: {fileID: 0}
   bulletsPerTap: 1
+  vfxHit: {fileID: 0}
 --- !u!1 &5632614426761940789
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,8 +392,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 718901367380913316}
+  m_Children: []
   m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6930808456312700998
@@ -409,7 +459,9 @@ Transform:
   m_Children:
   - {fileID: 5408378857368954297}
   - {fileID: 1525155890364665210}
+  - {fileID: 718901367380913316}
   - {fileID: 2365636068431055050}
+  - {fileID: 1837403351468816383}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8243644179691258510

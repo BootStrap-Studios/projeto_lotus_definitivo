@@ -24,8 +24,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: MargelaH_CAM
-    m_To: 'MargelaH_AIM_CAM '
+  - m_From: 3TH_Person_Cam
+    m_To: Aim_Cam
     m_Blend:
       m_Style: 6
       m_Time: 0.2
@@ -35,8 +35,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: 'MargelaH_AIM_CAM '
-    m_To: MargelaH_CAM
+  - m_From: Aim_Cam
+    m_To: 3TH_Person_Cam
     m_Blend:
       m_Style: 6
       m_Time: 0.2

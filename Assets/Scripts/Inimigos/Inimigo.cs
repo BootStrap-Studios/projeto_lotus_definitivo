@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using static Cinemachine.CinemachineCore;
@@ -18,9 +19,10 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private float alcanceArma;
     public int municaoAux;
 
-    [Header("Vida")]
+    [Header("UI_Inimigos")]
     [SerializeField] private BarraDeVida _barraDeVida;
     [SerializeField] private float vida; 
+    [SerializeField] private TextMeshProUGUI statusInimigo; 
     private float vidaAtual;   
     
     private NavMeshAgent agent;
@@ -36,7 +38,7 @@ public class Inimigo : MonoBehaviour
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
         municaoAux = municao;
 
-        stateInimigo = new Idle(gameObject, agent, player, municao, alcanceArma, vida, cooldownTiro); 
+        stateInimigo = new Idle(gameObject, agent, player, municao, alcanceArma, cooldownTiro); 
     }
 
     void Update()
@@ -46,10 +48,15 @@ public class Inimigo : MonoBehaviour
 
     public void TomarDano(float dano)
     {
+        if (vidaAtual == vida)
+        {
+            stateInimigo.stunar = true;
+        }
+
         vidaAtual -= dano;
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
 
-        if(vidaAtual <= 0)
+        if (vidaAtual <= 0)
         {
             Destroy(gameObject);
         }
@@ -57,11 +64,9 @@ public class Inimigo : MonoBehaviour
 
     public void Atirar()
     {
-        municaoAux--;
-
         if (municaoAux <= 0)
         {
-            //stateInimigo.reload = true;
+            stateInimigo.reload = true;
         }
         else
         {            
@@ -80,5 +85,12 @@ public class Inimigo : MonoBehaviour
                 }
             }
         }
+
+        municaoAux--;
+    }
+
+    public void AtualizaStatus(string statusAtual)
+    {
+        statusInimigo.text = statusAtual;
     }
 }
