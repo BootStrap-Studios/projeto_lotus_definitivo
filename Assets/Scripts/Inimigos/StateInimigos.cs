@@ -27,27 +27,31 @@ public class StateInimigos
     protected Transform player;
     protected StateInimigos nextState;
     protected int municao;
-    protected float alcanceArma;
+    protected float alcanceMaxArma;
+    protected float alcanceMinArma;
     protected float cooldownTiro;
     protected float danoRecebido;
+    protected float velocidadeAndar;
     //protected Animator anim;
 
     
-    float visDistancia = 20f;
-    float visAngulo = 45.0f;
+    float visDistancia = 22f;
+    float visAngulo = 60f;
     public float cooldownTiroAux;
     public float tempoAux;
     public bool reload = false;
     public bool stunar = false;
 
-    public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro)
+    public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar)
     {
         inimigo = _inimigo;
         agent = _agent;
         player = _player;
         municao = _municao;
-        alcanceArma = _alcanceArma;
+        alcanceMaxArma = _alcanceMaxArma;
+        alcanceMinArma = _alcanceMinArma;
         cooldownTiro = _cooldownTiro;
+        velocidadeAndar = _velocidadeAndar;
     }
 
     public virtual void Enter()
@@ -68,7 +72,7 @@ public class StateInimigos
     public StateInimigos Process()
     {
         if (stage == EVENT.ENTER)
-        {           
+        {
             Enter();
         }
         else if (stage == EVENT.UPDATE)
@@ -113,7 +117,7 @@ public class StateInimigos
 
 public class Idle : StateInimigos
 {
-    public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro ) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
+    public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _velocidadeAndar)
     {
         stateName = STATE.IDLE;
         inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Idle");
@@ -131,7 +135,7 @@ public class Idle : StateInimigos
         if (stunar)
         {
             stunar = false;
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
 
             return;
@@ -140,7 +144,7 @@ public class Idle : StateInimigos
         //verificando se player está em seu campo de visão
         if (VejoPlayer())
         {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
         }
     }
@@ -154,10 +158,10 @@ public class Idle : StateInimigos
 
 public class Chase : StateInimigos
 {
-    public Chase(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
+    public Chase(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _velocidadeAndar)
     {
         stateName = STATE.CHASE;
-        agent.speed = 6f;
+        agent.speed = velocidadeAndar;
         agent.angularSpeed = 250f;
         agent.isStopped = false;
         tempoAux = 2f;
@@ -179,9 +183,9 @@ public class Chase : StateInimigos
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
-            if (distanciaTiro.magnitude <= alcanceArma)
+            if (distanciaTiro.magnitude <= alcanceMaxArma)
             {
-                nextState = new Atirar(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
                 stage = EVENT.EXIT;
             }
             else
@@ -216,11 +220,11 @@ public class Chase : StateInimigos
 
 public class Atirar : StateInimigos
 {
-    public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
+    public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _velocidadeAndar)
     {
         stateName = STATE.ATIRAR;
-        agent.speed = 3;
         agent.angularSpeed = 800f;
+        agent.speed = velocidadeAndar;
         agent.isStopped = false;
         cooldownTiroAux = cooldownTiro;
     }
@@ -242,23 +246,23 @@ public class Atirar : StateInimigos
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
-            if (distanciaTiro.magnitude <= alcanceArma - 3)
+            if (distanciaTiro.magnitude < alcanceMinArma)
             {
                 agent.speed = 0f;
             }
-            else if(distanciaTiro.magnitude <= alcanceArma && distanciaTiro.magnitude >= alcanceArma - 3)
+            else if(distanciaTiro.magnitude <= alcanceMaxArma && distanciaTiro.magnitude >= alcanceMinArma)
             {
-                agent.speed = 3f;  
+                agent.speed = velocidadeAndar;  
             }
             else
             {
-                nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+                nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
                 stage = EVENT.EXIT;
             }
         }
         else
         {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
         }
 
@@ -274,7 +278,7 @@ public class Atirar : StateInimigos
             else
             {
                 reload = true;
-                nextState = new Reload(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+                nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
                 stage = EVENT.EXIT;
 
                 return;
@@ -295,7 +299,7 @@ public class Atirar : StateInimigos
 
 public class Reload : StateInimigos
 {
-    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
+    public Reload(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _velocidadeAndar)
     {
         stateName = STATE.RELOAD;
         agent.speed = 0f;
@@ -316,7 +320,7 @@ public class Reload : StateInimigos
         if (tempoAux <= 0)
         {
             inimigo.GetComponent<Inimigo>().municaoAux = municao;
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
             reload = false;
         }
@@ -335,10 +339,10 @@ public class Reload : StateInimigos
 
 public class TomarDano : StateInimigos
 {
-    public TomarDano(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceArma, _cooldownTiro)
+    public TomarDano(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _velocidadeAndar)
     {
         stateName = STATE.TOMARDANO;
-        agent.speed = 0f;
+        //agent.speed = 0f;
         tempoAux = 0.5f;
     }
 
@@ -355,7 +359,7 @@ public class TomarDano : StateInimigos
 
         if(tempoAux <= 0)
         {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
+            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
         }
         else

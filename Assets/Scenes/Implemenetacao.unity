@@ -131,14 +131,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 500911484771819925, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.01184082
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187864959773689501, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.8222656
+      objectReference: {fileID: 0}
+    - target: {fileID: 2187864959773689501, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.092041
+      objectReference: {fileID: 0}
+    - target: {fileID: 2380101346456474816, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.9370117
+      objectReference: {fileID: 0}
     - target: {fileID: 2424726977964378567, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: nomeScene
       value: Implementacao
       objectReference: {fileID: 0}
+    - target: {fileID: 4253896604830946526, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.8222656
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253896604830946526, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.092041
+      objectReference: {fileID: 0}
     - target: {fileID: 4562518539664244820, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780255462426112943, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5052356729451083795, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
@@ -2362,6 +2397,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1048227159}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &123199650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5495531672261628746, guid: b96f32307a1c90a4c933b39a87de691d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048227159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &130444390
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,13 +2584,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
+      propertyPath: vida
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 240132710}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: municao
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceMaxArma
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceMinArma
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: velocidadeAndar
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_Name
-      value: InimigoSimples (2)
+      value: InimigoSimples
       objectReference: {fileID: 0}
     - target: {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
@@ -2659,13 +2725,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
+      propertyPath: vida
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 240132710}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: municao
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: danoTiro
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceArma
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: cooldownTiro
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceMaxArma
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceMinArma
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: velocidadeAndar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112598678632446628, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f52931be82333846ab57fe63ddfdc72, type: 2}
     - target: {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_Name
-      value: InimigoSimples (1)
+      value: InimigoSniper
       objectReference: {fileID: 0}
     - target: {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
@@ -9242,7 +9353,7 @@ MonoBehaviour:
   aimCAM: {fileID: 1173508992}
   player: {fileID: 311171059}
   playerUI: {fileID: 1008720051}
-  arma: {fileID: 2009658683}
+  arma: {fileID: 123199650}
   pontaDaArma: {fileID: 83909564}
 --- !u!114 &719038804
 MonoBehaviour:
@@ -18822,6 +18933,16 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 3774878338423736963, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774878338423736963, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.769
+      objectReference: {fileID: 0}
     - target: {fileID: 4174655164746707500, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -18839,18 +18960,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
+      propertyPath: vida
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 240132710}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: municao
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: danoTiro
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceArma
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: cooldownTiro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceMaxArma
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: alcanceMinArma
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: velocidadeAndar
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112598678632446628, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b2fc875eb642f84189b1c2046808c2e, type: 2}
     - target: {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_Name
-      value: InimigoSimples
+      value: InimigoBomba
       objectReference: {fileID: 0}
     - target: {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5238517713425038750, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5238517713425038750, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
@@ -18860,7 +19031,7 @@ PrefabInstance:
     - target: {fileID: 5238517713425038750, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.197539
+      value: 7.04
       objectReference: {fileID: 0}
     - target: {fileID: 5238517713425038750, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
@@ -18901,6 +19072,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558853081286623325, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558853081286623325, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558853081286623325, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7558853081286623325, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -21615,7 +21806,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 32
-  tiro: {fileID: 6729907258405002013, guid: 7de456358906618489f7a3b7c3bf7bf6, type: 3}
 --- !u!43 &2015589165
 Mesh:
   m_ObjectHideFlags: 0
