@@ -9176,7 +9176,7 @@ Transform:
   m_GameObject: {fileID: 719038798}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.62, y: 2.1235285, z: -67.08}
+  m_LocalPosition: {x: -2.62, y: 2.9225283, z: -67.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9242,7 +9242,7 @@ MonoBehaviour:
   aimCAM: {fileID: 1173508992}
   player: {fileID: 311171059}
   playerUI: {fileID: 1008720051}
-  arma: {fileID: 1048227160}
+  arma: {fileID: 2009658683}
   pontaDaArma: {fileID: 83909564}
 --- !u!114 &719038804
 MonoBehaviour:
@@ -14231,7 +14231,7 @@ PrefabInstance:
     - target: {fileID: 140276070889115716, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.799
       objectReference: {fileID: 0}
     - target: {fileID: 140276070889115716, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
@@ -14309,6 +14309,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5495531672261628746, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Name
+      value: Pistola
+      objectReference: {fileID: 0}
     - target: {fileID: 6616900032292109443, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: vidaUI
@@ -14336,12 +14341,22 @@ PrefabInstance:
       objectReference: {fileID: 719038801}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 140276070889115716, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2009658684}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b96f32307a1c90a4c933b39a87de691d, type: 3}
---- !u!1 &1048227160 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2577305725984658727, guid: b96f32307a1c90a4c933b39a87de691d,
+--- !u!4 &1048227161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 140276070889115716, guid: b96f32307a1c90a4c933b39a87de691d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048227159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1048227162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8177419053024706631, guid: b96f32307a1c90a4c933b39a87de691d,
     type: 3}
   m_PrefabInstance: {fileID: 1048227159}
   m_PrefabAsset: {fileID: 0}
@@ -20968,7 +20983,7 @@ Transform:
   m_GameObject: {fileID: 1744333364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.2799997, y: 0.54352856, z: -53.97}
+  m_LocalPosition: {x: -3.2799997, y: 1.3425283, z: -53.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21545,6 +21560,62 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2009658683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2009658684}
+  - component: {fileID: 2009658685}
+  m_Layer: 0
+  m_Name: Shuriken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2009658684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009658683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: 0.373, z: 0.889}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1048227161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2009658685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009658683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f896e81ae29009c4a8134b9d94b31e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoSystem: {fileID: 987459331}
+  vfxTiro: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
+  vfxTiro2: {fileID: 7728366230342544413, guid: 212ef1a41838ce044a9ac54994866708,
+    type: 3}
+  bulletsPerTap: 5
+  pontaDaArma: {fileID: 1048227162}
+  boxOffSet: {x: 0, y: 0, z: 0}
+  tamanhoDaCaixa: {x: 1.2468381, y: 0.16028376, z: 0.23231868}
+  layer:
+    serializedVersion: 2
+    m_Bits: 32
+  tiro: {fileID: 6729907258405002013, guid: 7de456358906618489f7a3b7c3bf7bf6, type: 3}
 --- !u!43 &2015589165
 Mesh:
   m_ObjectHideFlags: 0

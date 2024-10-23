@@ -6,11 +6,16 @@ public class Projetil : MonoBehaviour
 {
     private Vector3 targetPosition;
 
-    float moveSpeed = 15f;
+    float moveSpeed = 1f;
 
     void Update()
     {
         MovimentarProjetil();
+    }
+
+    private void Start()
+    {
+        targetPosition = transform.forward;    
     }
 
     public void DefineTargetPosition(Vector3 target)
