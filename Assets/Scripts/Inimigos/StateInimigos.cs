@@ -186,7 +186,7 @@ public class Chase : StateInimigos
             if (distanciaTiro.magnitude <= alcanceMaxArma)
             {
                 nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
-                stage = EVENT.EXIT;
+                stage = EVENT.EXIT; 
             }
             else
             {
@@ -252,7 +252,14 @@ public class Atirar : StateInimigos
             }
             else if(distanciaTiro.magnitude <= alcanceMaxArma && distanciaTiro.magnitude >= alcanceMinArma)
             {
-                agent.speed = velocidadeAndar;  
+                if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+                {
+                    agent.speed = 3;
+                }
+                else
+                {
+                    agent.speed = velocidadeAndar;
+                }   
             }
             else
             {

@@ -2761,12 +2761,17 @@ PrefabInstance:
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: alcanceMinArma
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: velocidadeAndar
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: inimigoExplosivo
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5112598678632446628, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
@@ -14412,8 +14417,28 @@ PrefabInstance:
       objectReference: {fileID: 987459331}
     - target: {fileID: 2577305725984658727, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2577305725984658727, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666982982036204446, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926493772315054037, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174054128739968532, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5174054128739968532, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
@@ -14425,6 +14450,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistola
       objectReference: {fileID: 0}
+    - target: {fileID: 5495531672261628746, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632614426761940789, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6616900032292109443, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: vidaUI
@@ -14435,10 +14470,20 @@ PrefabInstance:
       propertyPath: barraDeVida
       value: 
       objectReference: {fileID: 1545997518}
+    - target: {fileID: 6930808456312700998, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8451878334732380206, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: m_Name
       value: Player 1.0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451878334732380206, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8773810735126341650, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
@@ -18943,6 +18988,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.769
       objectReference: {fileID: 0}
+    - target: {fileID: 3913204490852866316, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913204490852866316, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4174655164746707500, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -18991,17 +19046,27 @@ PrefabInstance:
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: alcanceMaxArma
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: alcanceMinArma
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
       propertyPath: velocidadeAndar
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: inimigoExplosivo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214115328965256345, guid: e4d8dceacb598ba4db72a302bed78a25,
+        type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 5112598678632446628, guid: e4d8dceacb598ba4db72a302bed78a25,
         type: 3}
@@ -21761,7 +21826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009658684}
   - component: {fileID: 2009658685}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shuriken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

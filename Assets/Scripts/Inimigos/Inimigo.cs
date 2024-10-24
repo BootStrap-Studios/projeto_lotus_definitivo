@@ -23,7 +23,7 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private float alcanceMinArma;
     [SerializeField] private float cooldownTiro;
     [SerializeField] private float velocidadeAndar;
-    [SerializeField] private bool inimigoExplosivo;
+    public bool inimigoExplosivo;
     
 
     [Header("UI_Inimigos")]
@@ -86,9 +86,14 @@ public class Inimigo : MonoBehaviour
                    // Debug.Log(hit.collider.gameObject.name);
                 }
             }
-            else if(inimigoExplosivo && Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
+            else if(inimigoExplosivo && Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
             {
-                FindObjectOfType<PlayerMovement>().transform.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
+                player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
+                Destroy(gameObject);
+            }
+            else if(inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
+            {
+                Destroy(gameObject);
             }
         }
 
