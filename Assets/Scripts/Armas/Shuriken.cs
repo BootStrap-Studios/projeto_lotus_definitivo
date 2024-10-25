@@ -17,12 +17,13 @@ public class Shuriken : MonoBehaviour
     [SerializeField] private Vector3 tamanhoDaCaixa;
 
     [SerializeField] private LayerMask layer;
+    [SerializeField] private LayerMask layerInimigo;
 
     [SerializeField] private GameObject cubo;
 
     private RaycastHit[] hits;
 
-    private float distanciaShuriken;
+    private float distanciaShuriken = Mathf.Infinity;
 
     void Update()
     {
@@ -47,19 +48,21 @@ public class Shuriken : MonoBehaviour
     {
         DetectandoParede();
 
-        hits = Physics.BoxCastAll(pontaDaArma.position + boxOffSet, tamanhoDaCaixa / 2, pontaDaArma.forward, Quaternion.identity, distanciaShuriken, ~layer);
+        Vector3 newRotation = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
 
-        cubo.transform.position = pontaDaArma.position + boxOffSet;
-        cubo.transform.localScale = new Vector3(4f / 2, .5f / 2, 1000f);
+        hits = Physics.BoxCastAll(Camera.main.transform.position, tamanhoDaCaixa / 2, Camera.main.transform.forward, Quaternion.Euler(newRotation), distanciaShuriken, ~layer);
 
-        Vector3 newRotation = new Vector3(pontaDaArma.eulerAngles.x, pontaDaArma.eulerAngles.y, pontaDaArma.eulerAngles.z);
-        cubo.transform.eulerAngles = newRotation;
+        cubo.transform.position = Camera.main.transform.position;
+        cubo.transform.localScale = new Vector3(4f, .5f, 1000f);
+
         
+        cubo.transform.eulerAngles = newRotation;
 
 
-        foreach(RaycastHit hit in hits)
+
+        foreach (RaycastHit hit in hits)
         {
-            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log(hit.collider.gameObject.name);
             if(hit.collider.CompareTag("Inimigo"))
             {
                 hit.transform.GetComponent<Inimigo>().TomarDano(3f);
@@ -80,17 +83,16 @@ public class Shuriken : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(pontaDaArma.position, pontaDaArma.forward, out hit, Mathf.Infinity))
+        if(Physics.Raycast(pontaDaArma.position, pontaDaArma.forward, out hit, Mathf.Infinity, ~layerInimigo))
         {
-            if(!hit.collider.CompareTag("Inimigo")) {
-
                 distanciaShuriken = hit.distance;
-
-            }
+            
         } else
         {
             distanciaShuriken = Mathf.Infinity;
         }
+
+        Debug.Log(distanciaShuriken);
     }
 
     private IEnumerator TiroShuriken()
