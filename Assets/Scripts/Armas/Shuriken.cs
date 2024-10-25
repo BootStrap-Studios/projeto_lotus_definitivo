@@ -18,7 +18,11 @@ public class Shuriken : MonoBehaviour
 
     [SerializeField] private LayerMask layer;
 
+    [SerializeField] private GameObject cubo;
+
     private RaycastHit[] hits;
+
+    private float distanciaShuriken;
 
     void Update()
     {
@@ -41,23 +45,51 @@ public class Shuriken : MonoBehaviour
 
     private void ShurikenRay()
     {
-        hits = Physics.BoxCastAll(pontaDaArma.position + boxOffSet, tamanhoDaCaixa / 2, pontaDaArma.forward, Quaternion.identity, Mathf.Infinity, ~layer);
+        DetectandoParede();
+
+        hits = Physics.BoxCastAll(pontaDaArma.position + boxOffSet, tamanhoDaCaixa / 2, pontaDaArma.forward, Quaternion.identity, distanciaShuriken, ~layer);
+
+        cubo.transform.position = pontaDaArma.position + boxOffSet;
+        cubo.transform.localScale = new Vector3(4f / 2, .5f / 2, 1000f);
+
+        Vector3 newRotation = new Vector3(pontaDaArma.eulerAngles.x, pontaDaArma.eulerAngles.y, pontaDaArma.eulerAngles.z);
+        cubo.transform.eulerAngles = newRotation;
+        
+
 
         foreach(RaycastHit hit in hits)
         {
+            Debug.Log(hit.collider.gameObject.name);
             if(hit.collider.CompareTag("Inimigo"))
             {
                 hit.transform.GetComponent<Inimigo>().TomarDano(3f);
                 Instantiate(vfxTiro, hit.point, Quaternion.identity);
                
-                Debug.Log("Hitei Inimigo");
+                
 
             } else
             {
                 Instantiate(vfxTiro2, hit.point, Quaternion.identity);
-                Debug.Log("Hitei");
-                break;
+                
+                
             }
+        }
+    }
+
+    private void DetectandoParede()
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(pontaDaArma.position, pontaDaArma.forward, out hit, Mathf.Infinity))
+        {
+            if(!hit.collider.CompareTag("Inimigo")) {
+
+                distanciaShuriken = hit.distance;
+
+            }
+        } else
+        {
+            distanciaShuriken = Mathf.Infinity;
         }
     }
 
