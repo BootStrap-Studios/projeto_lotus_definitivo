@@ -11,6 +11,8 @@ public class Inimigo : MonoBehaviour
     [Header("Outros")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform pontaArma;
+    [SerializeField] private ObjectPool objectPool;
+    private ProjetilInimigo tiro;
     public LayerMask playerMask;
     private NavMeshAgent agent;
     private StateInimigos stateInimigo;
@@ -79,7 +81,10 @@ public class Inimigo : MonoBehaviour
 
                 if (hit.transform.tag == "Player")
                 {
-                    hit.transform.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
+                    player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
+                    //tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
+                    //tiro.gameObject.SetActive(true);
+                    //tiro.InstanciaProjetil(danoTiro, pontaArma.position);
                 }
                 else
                 {

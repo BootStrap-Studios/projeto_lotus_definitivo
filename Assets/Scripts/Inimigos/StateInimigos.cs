@@ -239,8 +239,7 @@ public class Atirar : StateInimigos
     public override void Update()
     {     
         //mirando no player e verificando se continua no alcançe do tiro
-        inimigo.transform.LookAt(player.position);
-        agent.SetDestination(player.position);
+        inimigo.transform.LookAt(player.position);        
 
         if (VejoPlayer())
         {
@@ -248,18 +247,11 @@ public class Atirar : StateInimigos
 
             if (distanciaTiro.magnitude < alcanceMinArma)
             {
-                agent.speed = 0f;
+                agent.SetDestination(inimigo.transform.position);
             }
             else if(distanciaTiro.magnitude <= alcanceMaxArma && distanciaTiro.magnitude >= alcanceMinArma)
             {
-                if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-                {
-                    agent.speed = 3;
-                }
-                else
-                {
-                    agent.speed = velocidadeAndar;
-                }   
+                agent.SetDestination(player.position);
             }
             else
             {
