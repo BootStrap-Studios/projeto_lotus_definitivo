@@ -40,7 +40,7 @@ public class StateInimigos
     public float cooldownTiroAux;
     public float tempoAux;
     public bool reload = false;
-    public bool stunar = false;
+    public bool ativarChase = false;
 
     public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar)
     {
@@ -132,9 +132,9 @@ public class Idle : StateInimigos
 
     public override void Update()
     {
-        if (stunar)
+        if (ativarChase)
         {
-            stunar = false;
+            ativarChase = false;
             nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
 

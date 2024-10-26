@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,13 @@ public class MargelaH_CAM : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera aimCAM;
     [SerializeField] private PlayerMovement player;
     [SerializeField] private GameObject playerUI;
-    [SerializeField] private GameObject arma;
+    [SerializeField] private GameObject[] armas;
     [SerializeField] private GameObject pontaDaArma;
 
+    private GameObject armaAtual;
+    private int numArma;
     private bool play = true;
-
+     
     private void OnEnable()
     {
         EventBus.Instance.onPauseGame += PauseCam;
@@ -26,6 +29,7 @@ public class MargelaH_CAM : MonoBehaviour
     void Start()
     {
         aimCAM.gameObject.SetActive(false);
+        armaAtual = armas[0];
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -38,7 +42,7 @@ public class MargelaH_CAM : MonoBehaviour
         {
             playerUI.SetActive(true);
             aimCAM.gameObject.SetActive(true);
-            arma.SetActive(true);
+            armaAtual.SetActive(true);
 
             player.cameraCombate = true;
 
@@ -51,12 +55,28 @@ public class MargelaH_CAM : MonoBehaviour
         {
             playerUI.SetActive(false);
             aimCAM.gameObject.SetActive(false);
-            arma.SetActive(false);
+            armaAtual.SetActive(false);
 
             player.cameraCombate = false;
 
             aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
             aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Debug.Log("Você trocou o modo de disparo para: PISTOLA");
+                TrocarArma(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("Você trocou o modo de disparo para: SHOTGUN");
+                TrocarArma(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Debug.Log("Você trocou o modo de disparo para: SHURIKEN");
+                TrocarArma(2);
+            }
         }
 
         Vector3 newRotation = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
@@ -69,5 +89,19 @@ public class MargelaH_CAM : MonoBehaviour
 
         aimCAM.enabled = play;
         normalCAM.enabled = play;
+    }
+
+    private void TrocarArma(int num)
+    {
+        armaAtual = armas[num];
+    }
+
+    public void AplicarSensi(float sensiOlhar, float sensiMirar)
+    {
+        normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = sensiOlhar;
+        normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = sensiOlhar;
+
+        aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = sensiMirar;
+        aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = sensiMirar;
     }
 }

@@ -7,11 +7,19 @@ using UnityEngine.UI;
 
 public class MenuSystem : MonoBehaviour
 {
+    [Header("Menus")]
     [SerializeField] private GameObject playerUI;
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject menuPauseUI;
     [SerializeField] private GameObject menuConfigUI;
+
+    [Header("Congigurações")]
     [SerializeField] private string nomeScene;
+    [SerializeField] private Slider sensiOlhar;
+    [SerializeField] private Slider sensiMirar;
+
+    [Header("Outros")]
+    [SerializeField] private MargelaH_CAM scriptCAM;
 
     private enum State
     {
@@ -71,6 +79,8 @@ public class MenuSystem : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        scriptCAM.AplicarSensi(sensiOlhar.value, sensiMirar.value);
 
         stateMenu = State.menuPause;
 

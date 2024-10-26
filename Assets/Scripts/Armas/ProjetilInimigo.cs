@@ -5,8 +5,9 @@ using UnityEngine;
 public class ProjetilInimigo : MonoBehaviour
 {
     [SerializeField] private Rigidbody rbProjetil;
-    [SerializeField] private float velProjetil;
     [SerializeField] private float tempoAtivo;
+    [SerializeField] private TrailRenderer rastroProjetil;
+    private float velProjetil;   
     private float tempoAtivoAux;
     private float danoProjetil;
 
@@ -15,12 +16,20 @@ public class ProjetilInimigo : MonoBehaviour
     {      
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<VidaPlayer>().TomarDano(danoProjetil);
-            gameObject.SetActive(false);
+            try
+            {
+                other.GetComponent<VidaPlayer>().TomarDano(danoProjetil);
+                rastroProjetil.time = 0;
+                gameObject.SetActive(false);
+            }
+            catch
+            {
+                //nada
+            }
         }
         else
         {
-            Debug.Log("Inimigo errou tiro");
+            rastroProjetil.time = 0;
             gameObject.SetActive(false);
         }
     }
@@ -32,16 +41,20 @@ public class ProjetilInimigo : MonoBehaviour
 
         tempoAtivoAux -= Time.deltaTime;
 
-        if(tempoAtivoAux < 0)
+        if(tempoAtivoAux <= 0)
         {
+            rastroProjetil.time = 0;
             gameObject.SetActive(false);
         }
     }
 
-    public void InstanciaProjetil(float dano, Vector3 pontaArma)
+    public void InstanciaProjetil(float dano, Transform pontaArma, float velocidadeProjetil)
     {
         tempoAtivoAux = tempoAtivo;
-        transform.position = pontaArma;
+        transform.position = pontaArma.position;
         danoProjetil = dano;
+        transform.rotation = pontaArma.rotation;
+        velProjetil = velocidadeProjetil;
+        rastroProjetil.time = 0.3f;
     }
 }

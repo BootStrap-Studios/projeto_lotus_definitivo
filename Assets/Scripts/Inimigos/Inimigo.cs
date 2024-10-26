@@ -17,7 +17,7 @@ public class Inimigo : MonoBehaviour
     private NavMeshAgent agent;
     private StateInimigos stateInimigo;
 
-    [Header("Arma & Personagem")]
+    [Header("Arma")]
     [SerializeField] private int municao;
     public int municaoAux;
     [SerializeField] private float danoTiro;
@@ -25,9 +25,12 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private float alcanceMaxArma;
     [SerializeField] private float alcanceMinArma;
     [SerializeField] private float cooldownTiro;
+    [SerializeField] private float velProjetil;
+    
+
+    [Header("Personagem")]
     [SerializeField] private float velocidadeAndar;
     public bool inimigoExplosivo;
-    
 
     [Header("UI_Inimigos")]
     [SerializeField] private BarraDeVida _barraDeVida;
@@ -37,9 +40,9 @@ public class Inimigo : MonoBehaviour
 
 
     [Header("Status")]
-    private int statusCorrosao = 0;
-    private bool boolCorrosao = false;
     public float danoCorrosao = 1f;
+    private int statusCorrosao = 0;
+    private bool boolCorrosao = false; 
 
     private int statusMovimentacao = 0;
     private bool boolMovimentacao = false;
@@ -67,7 +70,12 @@ public class Inimigo : MonoBehaviour
 
     public void TomarDano(float dano, string tipoDoDano)
     {
-        switch(tipoDoDano)
+        if (vidaAtual == vida)
+        {
+            stateInimigo.ativarChase = true;
+        }
+
+        switch (tipoDoDano)
         {
             case "Critico":
 
@@ -94,21 +102,11 @@ public class Inimigo : MonoBehaviour
                 EfeitoBurst(dano);
                 break;
 
-            case "Default":
+            case "Default":                
                 vidaAtual -= dano;
                 _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
                 break;
-        }
-
-
-
-
-        //if (vidaAtual == vida)
-        //{
-            //stateInimigo.stunar = true;
-        //}
-
-        
+        }      
 
         if (vidaAtual <= 0)
         {
@@ -133,10 +131,9 @@ public class Inimigo : MonoBehaviour
 
                 if (hit.transform.tag == "Player")
                 {
-                    player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
-                    //tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
-                    //tiro.gameObject.SetActive(true);
-                    //tiro.InstanciaProjetil(danoTiro, pontaArma.position);
+                    tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();                    
+                    tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
+                    tiro.gameObject.SetActive(true);
                 }
                 else
                 {

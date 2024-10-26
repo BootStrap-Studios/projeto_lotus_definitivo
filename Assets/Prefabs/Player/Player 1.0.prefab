@@ -50,6 +50,7 @@ MonoBehaviour:
   vfxTiro: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
   ammoSystem: {fileID: 0}
   bulletsPerTap: 3
+  tipoDoBuff: Default
 --- !u!1 &3666982982036204446
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +187,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4668407194737091223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136791939342212844}
+  - component: {fileID: 8961193682299429162}
+  m_Layer: 7
+  m_Name: Shuriken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1136791939342212844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668407194737091223}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: 0.373, z: 0.889}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 140276070889115716}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8961193682299429162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668407194737091223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f896e81ae29009c4a8134b9d94b31e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoSystem: {fileID: 0}
+  vfxTiro: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
+  vfxTiro2: {fileID: 7728366230342544413, guid: 212ef1a41838ce044a9ac54994866708,
+    type: 3}
+  bulletsPerTap: 5
+  pontaDaArma: {fileID: 8177419053024706631}
+  boxOffSet: {x: 0.5, y: 0.4, z: 0}
+  tamanhoDaCaixa: {x: 4, y: 0.5, z: 0.5}
+  layer:
+    serializedVersion: 2
+    m_Bits: 160
+  layerInimigo:
+    serializedVersion: 2
+    m_Bits: 256
+  cubo: {fileID: 0}
+  tipoDoBuff: Default
 --- !u!1 &5174054128739968532
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,9 +260,9 @@ GameObject:
   - component: {fileID: 8598718556682429382}
   - component: {fileID: 4746805734180760083}
   - component: {fileID: 6616900032292109443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerObj
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -364,6 +425,7 @@ MonoBehaviour:
   ammoSystem: {fileID: 0}
   bulletsPerTap: 1
   vfxHit: {fileID: 0}
+  tipoDoBuff: 
 --- !u!1 &5632614426761940789
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +499,7 @@ GameObject:
   - component: {fileID: 140276070889115716}
   - component: {fileID: 8243644179691258510}
   - component: {fileID: 8806009633796199273}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player 1.0
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -462,6 +524,7 @@ Transform:
   - {fileID: 718901367380913316}
   - {fileID: 2365636068431055050}
   - {fileID: 1837403351468816383}
+  - {fileID: 1136791939342212844}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8243644179691258510
