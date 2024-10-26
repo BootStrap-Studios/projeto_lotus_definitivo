@@ -20,6 +20,8 @@ public class Arma : MonoBehaviour
     Transform hitTransform;
     Vector3 hitPoint;
 
+    public string tipoDoBuff;
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -71,7 +73,7 @@ public class Arma : MonoBehaviour
         {
             if(hitTransform.CompareTag("Inimigo")) {
 
-                hitTransform.GetComponent<Inimigo>().TomarDano(1f);
+                hitTransform.GetComponent<Inimigo>().TomarDano(1f, tipoDoBuff);
                 Instantiate(vfxHit, hitPoint, Quaternion.identity);
 
             } else

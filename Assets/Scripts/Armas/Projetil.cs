@@ -45,7 +45,7 @@ public class Projetil : MonoBehaviour
         if(other.CompareTag("Inimigo"))
         {
             //Debug.Log("Acertei o inimigo");
-            other.GetComponent<Inimigo>().TomarDano(1f);
+            //other.GetComponent<Inimigo>().TomarDano(1f);
             gameObject.SetActive(false);
         } else
         {

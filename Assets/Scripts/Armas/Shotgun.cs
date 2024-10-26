@@ -16,6 +16,8 @@ public class Shotgun : MonoBehaviour
 
     [SerializeField] private int bulletsPerTap;
 
+    public string tipoDoBuff;
+
 
     // Update is called once per frame
     void Update()
@@ -61,7 +63,7 @@ public class Shotgun : MonoBehaviour
 
             if(hit.transform.CompareTag("Inimigo"))
             {
-                hit.transform.GetComponent<Inimigo>().TomarDano(1f);
+                hit.transform.GetComponent<Inimigo>().TomarDano(1f, tipoDoBuff);
                 Debug.Log("Hitei");
                 
             }
