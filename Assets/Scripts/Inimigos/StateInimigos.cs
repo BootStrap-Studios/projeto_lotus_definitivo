@@ -39,7 +39,8 @@ public class StateInimigos
     float visAngulo = 60f;
     public float cooldownTiroAux;
     public float tempoAux;
-    public bool reload = false;
+    public float municaoAux;
+    public bool newReload = true;
     public bool ativarChase = false;
 
     public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar)
@@ -237,7 +238,13 @@ public class Atirar : StateInimigos
     }
 
     public override void Update()
-    {     
+    {
+        if (newReload)
+        {
+            municaoAux = municao;
+            newReload = false;
+        }
+
         //mirando no player e verificando se continua no alcançe do tiro
         inimigo.transform.LookAt(player.position);        
 
@@ -269,14 +276,21 @@ public class Atirar : StateInimigos
         cooldownTiroAux -= Time.deltaTime;
         if (cooldownTiroAux <= 0)
         {
-            if (!reload)
+            if (municaoAux > 0)
             {
-                inimigo.GetComponent<Inimigo>().Atirar();
-                cooldownTiroAux = cooldownTiro;
+                if (inimigo.GetComponent<Inimigo>().Atirar())
+                {
+                    municaoAux--;
+                    cooldownTiroAux = cooldownTiro;
+                }
+                else
+                {
+                    agent.SetDestination(player.position);
+                    base.Update();
+                }
             }
             else
             {
-                reload = true;
                 nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
                 stage = EVENT.EXIT;
 
@@ -318,10 +332,9 @@ public class Reload : StateInimigos
 
         if (tempoAux <= 0)
         {
-            inimigo.GetComponent<Inimigo>().municaoAux = municao;
             nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
-            reload = false;
+            newReload = true;
         }
         else
         {

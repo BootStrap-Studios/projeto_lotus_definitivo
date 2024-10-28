@@ -12,6 +12,7 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform pontaArma;
     [SerializeField] private ObjectPool objectPool;
+    [SerializeField] private GameObject dropPrefab;
     private ProjetilInimigo tiro;
     public LayerMask playerMask;
     private NavMeshAgent agent;
@@ -19,7 +20,6 @@ public class Inimigo : MonoBehaviour
 
     [Header("Arma")]
     [SerializeField] private int municao;
-    public int municaoAux;
     [SerializeField] private float danoTiro;
     [SerializeField] private float danoTiroReduzido;
     [SerializeField] private float alcanceMaxArma;
@@ -58,7 +58,6 @@ public class Inimigo : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         vidaAtual = vida;
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
-        municaoAux = municao;
 
         stateInimigo = new Idle(gameObject, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar); 
     }
@@ -110,48 +109,55 @@ public class Inimigo : MonoBehaviour
 
         if (vidaAtual <= 0)
         {
+            DroparItem();
             Destroy(gameObject);
         }
     }
 
-                
 
-    public void Atirar()
+
+    public bool Atirar()
     {
-        if (municaoAux <= 0)
+        RaycastHit hit;
+
+        if (!inimigoExplosivo && Physics.Raycast(pontaArma.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
         {
-            stateInimigo.reload = true;
+
+            if (hit.transform.tag == "Player")
+            {
+                tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
+                tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
+                tiro.gameObject.SetActive(true);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
-        {            
-            RaycastHit hit;
-
-            if(!inimigoExplosivo && Physics.Raycast(pontaArma.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
-            {
-
-                if (hit.transform.tag == "Player")
-                {
-                    tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();                    
-                    tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
-                    tiro.gameObject.SetActive(true);
-                }
-                else
-                {
-                   // Debug.Log(hit.collider.gameObject.name);
-                }
-            }
-            else if(inimigoExplosivo && Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
+        {
+            if (inimigoExplosivo && Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
             {
                 player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
+                Debug.Log("Dano Completo");
                 Destroy(gameObject);
             }
-            else if(inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
+            else if (inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
             {
+                player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro / 2);
+                Debug.Log("Metade do Dano");
                 Destroy(gameObject);
             }
-        }
+            else if (inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && !Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
+            {
+                Debug.Log("Nenhum Dano");
+                Destroy(gameObject);
+            }
 
-        municaoAux--;
+            return true;
+        }
     }
 
     public void AtualizaStatus(string statusAtual)
@@ -168,6 +174,14 @@ public class Inimigo : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, 20f);
     }
+
+    private void DroparItem()
+    {
+        Instantiate(dropPrefab, transform.position, transform.rotation);
+    }
+
+
+    #region Efeitos de Dano
 
     public void EfeitoCritico(float dano)
     {
@@ -326,4 +340,6 @@ public class Inimigo : MonoBehaviour
         danoTiro = aux;
         boolDefesa = false;
     }
+
+    #endregion
 }

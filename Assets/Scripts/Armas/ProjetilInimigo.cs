@@ -45,6 +45,12 @@ public class ProjetilInimigo : MonoBehaviour
         {
             rastroProjetil.time = 0;
             gameObject.SetActive(false);
+            return;
+        }
+
+        if(tempoAtivoAux < tempoAtivo)
+        {
+            rastroProjetil.time = 0.3f;
         }
     }
 
@@ -55,6 +61,5 @@ public class ProjetilInimigo : MonoBehaviour
         danoProjetil = dano;
         transform.rotation = pontaArma.rotation;
         velProjetil = velocidadeProjetil;
-        rastroProjetil.time = 0.3f;
     }
 }

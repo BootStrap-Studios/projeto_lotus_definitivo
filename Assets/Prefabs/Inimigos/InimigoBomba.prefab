@@ -468,6 +468,8 @@ MonoBehaviour:
   player: {fileID: 0}
   pontaArma: {fileID: 7274119449571051963}
   objectPool: {fileID: 0}
+  dropPrefab: {fileID: 7399106940259868427, guid: e9f07bbc6365c0f4c8b1c687e26348df,
+    type: 3}
   playerMask:
     serializedVersion: 2
     m_Bits: 128

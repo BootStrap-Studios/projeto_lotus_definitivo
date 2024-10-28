@@ -118,7 +118,6 @@ public class MenuSystem : MonoBehaviour
         stateMenu = State.menuGameOver;
     }
 
-    //FUNÇÕES ATRELADAS SOMENTE A BOTÕES NA UI
     #region FunçõesBotõesUI
 
     public void BTNConfigMenu()
@@ -148,4 +147,6 @@ public class MenuSystem : MonoBehaviour
     }
 
     #endregion
+
+
 }

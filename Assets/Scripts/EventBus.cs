@@ -15,6 +15,8 @@ public class EventBus : MonoBehaviour
     public event Action <float, Action> onFadeIn;
     public event Action <float, Action> onFadeOut;
 
+    public event Action <string, float> onColetaItem;
+
     private void Awake()
     {
         Instance = this;
@@ -37,5 +39,10 @@ public class EventBus : MonoBehaviour
     public void FadeOut(float duracao, Action posFade)
     {
         onFadeOut?.Invoke(duracao, posFade);
+    }
+    
+    public void ColetaItem(string nomeItem, float quantidadeItem)
+    {
+        onColetaItem?.Invoke(nomeItem, quantidadeItem);
     }
 }
