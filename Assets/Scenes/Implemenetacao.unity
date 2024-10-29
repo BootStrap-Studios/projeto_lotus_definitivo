@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 283180833793512174, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 283180833793512174, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -14983,6 +14983,11 @@ PrefabInstance:
       propertyPath: tipoDoBuff
       value: Default
       objectReference: {fileID: 0}
+    - target: {fileID: 1900775655823586086, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: aimColliderMask.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 2577305725984658727, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: m_Layer
@@ -15048,6 +15053,11 @@ PrefabInstance:
       propertyPath: ammoSystem
       value: 
       objectReference: {fileID: 987459331}
+    - target: {fileID: 8773810735126341650, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: aimColliderMask.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 8806009633796199273, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: transformCamera
