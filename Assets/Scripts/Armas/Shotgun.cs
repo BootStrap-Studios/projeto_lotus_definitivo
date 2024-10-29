@@ -16,6 +16,8 @@ public class Shotgun : MonoBehaviour
 
     [SerializeField] private int bulletsPerTap;
 
+    [SerializeField] private LayerMask aimColliderMask;
+
     public string tipoDoBuff;
 
 
@@ -57,7 +59,7 @@ public class Shotgun : MonoBehaviour
         direction += spread.normalized * Random.Range(0f, 0.2f);
 
         RaycastHit hit;
-        if(Physics.Raycast(pontaDaArma.transform.position, direction, out hit, range))
+        if(Physics.Raycast(pontaDaArma.transform.position, direction, out hit, range, aimColliderMask))
         {
             Debug.DrawLine(pontaDaArma.transform.position, hit.point, Color.green, 5f);
 
