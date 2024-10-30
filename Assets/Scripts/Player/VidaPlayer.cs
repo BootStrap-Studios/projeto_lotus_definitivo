@@ -14,12 +14,16 @@ public class VidaPlayer : MonoBehaviour
     private float vidaAtual;
     private float vidaAtualizada;
 
+    private StatusJogador statusJogador;
+
     // Start is called before the first frame update
     private void Start()
     {
         vidaAtual = vida;
         AlterarBarraDeVida(vidaAtual, vida);
         vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
+
+        statusJogador = FindObjectOfType<StatusJogador>();
     }
 
     private void Update()
@@ -33,6 +37,9 @@ public class VidaPlayer : MonoBehaviour
         AlterarBarraDeVida(vidaAtual, vida);
         vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
 
+        //Buff misc da velocidade
+        ConferindoBuffMiscMovimentacao();
+
         if (vidaAtual <= 0)
         {
             EventBus.Instance.GameOver();
@@ -42,5 +49,16 @@ public class VidaPlayer : MonoBehaviour
     public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
     {
         vidaAtualizada = vidaAtual / VidaMaxima;
+    }
+
+    private void ConferindoBuffMiscMovimentacao()
+    {
+        if (vidaAtual <= vida / 4)
+        {
+            if (statusJogador.misc2movimentacao)
+            {
+                statusJogador.BuffVelocidade();
+            }
+        }
     }
 }

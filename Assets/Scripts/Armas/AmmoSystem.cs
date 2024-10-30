@@ -29,7 +29,7 @@ public class AmmoSystem : MonoBehaviour
     private float municaoAtualizada;
     private bool QTE;
 
-    
+    private StatusJogador statusJogador;
 
 
     void Start()
@@ -39,6 +39,8 @@ public class AmmoSystem : MonoBehaviour
         toNoReloadFull = false;
         timer = timerAux;
         municaoAtual = municaoTotal;
+
+        statusJogador = FindObjectOfType<StatusJogador>();
 
     }
     void Update()
@@ -172,6 +174,20 @@ public class AmmoSystem : MonoBehaviour
 
         areaCerta.rectTransform.anchoredPosition = new Vector2(posX, areaCerta.rectTransform.anchoredPosition.y);
         areaCerta.enabled = true;
+    }
+
+    public void MunicaoInfinita()
+    {
+        StartCoroutine(MunicaoInfinitaCoroutine());
+    }
+
+    private IEnumerator MunicaoInfinitaCoroutine()
+    {
+        municaoAtual = 1000000000;
+
+        yield return new WaitForSeconds(statusJogador.duracaoUltimateMovimentacao);
+
+        municaoAtual = municaoTotal;
     }
 
 }

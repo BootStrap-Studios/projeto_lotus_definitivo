@@ -50,7 +50,42 @@ MonoBehaviour:
   vfxTiro: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
   ammoSystem: {fileID: 0}
   bulletsPerTap: 3
+  aimColliderMask:
+    serializedVersion: 2
+    m_Bits: 0
   tipoDoBuff: Default
+  tipoDeArma: 
+--- !u!1 &3170620440045834065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8600996343546916260}
+  m_Layer: 7
+  m_Name: ColliderDash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8600996343546916260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170620440045834065}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5408378857368954297}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3666982982036204446
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +282,7 @@ MonoBehaviour:
     m_Bits: 256
   cubo: {fileID: 0}
   tipoDoBuff: Default
+  tipoDeArma: 
 --- !u!1 &5174054128739968532
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +318,7 @@ Transform:
   m_Children:
   - {fileID: 4098094633777667937}
   - {fileID: 8177419053024706631}
+  - {fileID: 8600996343546916260}
   m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6063665375638039518
@@ -426,6 +463,7 @@ MonoBehaviour:
   bulletsPerTap: 1
   vfxHit: {fileID: 0}
   tipoDoBuff: 
+  tipoDeArma: 
 --- !u!1 &5632614426761940789
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,8 +603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8afc5e942be00419a4b31d1e918019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedAndando: 8
-  speedPulando: 4.8
   rotationSpeed: 720
   characterController: {fileID: 8243644179691258510}
   jumpSpeed: 7.2

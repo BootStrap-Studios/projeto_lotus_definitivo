@@ -7,8 +7,6 @@ using Input = UnityEngine.Input;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float speedAndando;
-    [SerializeField] float speedPulando;
     [SerializeField] float rotationSpeed;
     [SerializeField] CharacterController characterController;
     [SerializeField] float jumpSpeed;
@@ -27,21 +25,32 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 movementDirection;
 
+    private StatusJogador statusJogador;
+
     private void Start()
     {
         originalStepOffSet = characterController.stepOffset;
+
+        statusJogador = FindObjectOfType<StatusJogador>();
     }
 
     private void Update()
     {
         Movimentacao();
 
+    
         dashCooldownAux -= Time.deltaTime;
-
+        
+        
         if(Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux <= 0)
         {
             Dash();
-            dashCooldownAux = dashCooldown;
+
+            if(statusJogador.quantidadeDeDash <= 0)
+            {
+                dashCooldownAux = dashCooldown;
+                statusJogador.quantidadeDeDash = statusJogador.quantidadeDeDashTotal;
+            }
         }
     }
 
@@ -60,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         //Checando que o personagem está no chão e o input para poder pular.
         if (characterController.isGrounded)
         {
-            speed = speedAndando;
+            speed = statusJogador.velocidadeAndando;
             characterController.stepOffset = originalStepOffSet;
             ySpeed = -0.5f;
 
@@ -72,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             characterController.stepOffset = 0;
-            speed = speedPulando;
+            speed = statusJogador.velocidadePulando;
         }
 
         //Aplicando o pulo no axis y, juntamente do calculo da gravidade.
@@ -104,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
     private void Dash()
     {
         StartCoroutine(DashCoroutine());
+        statusJogador.quantidadeDeDash -= 1;
     }
 
     private IEnumerator DashCoroutine()

@@ -140,11 +140,24 @@ public class Inimigo : MonoBehaviour
         if (vidaAtual <= 0)
         {
             DroparItem();
+
+            MiscMovimentacao();
+
             Destroy(gameObject);
         }
     }
 
+    #region BuffsQueAfetamOInimigoAoMorrer
 
+    private void MiscMovimentacao()
+    {
+        if (statusJogador.misc1movimentacao)
+        {
+            statusJogador.BuffVelocidade();
+        }
+    }
+
+    #endregion
 
     public bool Atirar()
     {
