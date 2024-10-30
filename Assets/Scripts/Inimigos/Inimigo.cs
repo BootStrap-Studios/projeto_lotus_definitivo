@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 using static Cinemachine.CinemachineCore;
@@ -52,9 +53,16 @@ public class Inimigo : MonoBehaviour
 
     private bool boolDefesa = false;
 
+    private StatusJogador statusJogador;
+
+    private float danoDaArma;
+
     void Start()
     {
         //player = FindObjectOfType<PlayerMovement>().transform;
+
+        statusJogador = FindObjectOfType<StatusJogador>();
+
         agent = GetComponent<NavMeshAgent>();
         vidaAtual = vida;
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
@@ -67,42 +75,64 @@ public class Inimigo : MonoBehaviour
         stateInimigo = stateInimigo.Process();
     }
 
-    public void TomarDano(float dano, string tipoDoDano)
+    public void TomarDano(string tipoDeArma, string tipoDoDano)
     {
         if (vidaAtual == vida)
         {
             stateInimigo.ativarChase = true;
         }
 
+        switch(tipoDeArma)
+        {
+            case "Pistola":
+
+                danoDaArma = statusJogador.danoAtualPistola;
+
+                break;
+
+            case "Shotgun":
+
+                danoDaArma = statusJogador.danoAtualShotgun;
+
+                break;
+
+            case "Shuriken":
+
+                danoDaArma = statusJogador.danoAtualShuriken;
+
+                break;
+        }
+
+
         switch (tipoDoDano)
         {
             case "Critico":
 
-                EfeitoCritico(dano);
+                EfeitoCritico(danoDaArma);
                 break;
 
             case "Defesa":
 
-                EfeitoDefesa(dano);
+                EfeitoDefesa(danoDaArma);
                 break;
 
             case "Movimentacao":
 
-                EfeitoMovimentacao(dano);
+                EfeitoMovimentacao(danoDaArma);
                 break;
 
             case "Corrosao":
 
-                EfeitoCorrosao(dano);
+                EfeitoCorrosao(danoDaArma);
                 break;
 
             case "Burst":
 
-                EfeitoBurst(dano);
+                EfeitoBurst(danoDaArma);
                 break;
 
             case "Default":                
-                vidaAtual -= dano;
+                vidaAtual -= danoDaArma;
                 _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
                 break;
         }      
@@ -185,13 +215,12 @@ public class Inimigo : MonoBehaviour
 
     public void EfeitoCritico(float dano)
     {
-        //Ideia: Ter um script que mantem todas as infos sobre os status do player, como a chance de critico por exemplo, e ai usar aqui :)
 
         int aux = Random.Range(1, 11);
 
-        if(aux == 1)
+        if(aux <= statusJogador.chanceDeAcertoCriticoAtual)
         {
-            dano *= 1.5f;
+            dano *= statusJogador.danoDoAcertoCritico;
             Debug.Log("Critei" + dano);
         }
 

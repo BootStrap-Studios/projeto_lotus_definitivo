@@ -26,6 +26,7 @@ public class Shuriken : MonoBehaviour
     private float distanciaShuriken = Mathf.Infinity;
 
     public string tipoDoBuff;
+    public string tipoDeArma;
 
     void Update()
     {
@@ -67,7 +68,7 @@ public class Shuriken : MonoBehaviour
             //Debug.Log(hit.collider.gameObject.name);
             if(hit.collider.CompareTag("Inimigo"))
             {
-                hit.transform.GetComponent<Inimigo>().TomarDano(3f,tipoDoBuff);
+                hit.transform.GetComponent<Inimigo>().TomarDano(tipoDeArma,tipoDoBuff);
                 Instantiate(vfxTiro, hit.point, Quaternion.identity);
                
                 

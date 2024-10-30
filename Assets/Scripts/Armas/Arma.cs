@@ -21,6 +21,7 @@ public class Arma : MonoBehaviour
     Vector3 hitPoint;
 
     public string tipoDoBuff;
+    public string tipoDeArma;
 
     private void Update()
     {
@@ -73,7 +74,7 @@ public class Arma : MonoBehaviour
         {
             if(hitTransform.CompareTag("Inimigo")) {
 
-                hitTransform.GetComponent<Inimigo>().TomarDano(1f, tipoDoBuff);
+                hitTransform.GetComponent<Inimigo>().TomarDano(tipoDeArma, tipoDoBuff);
                 Instantiate(vfxHit, hitPoint, Quaternion.identity);
 
             } else

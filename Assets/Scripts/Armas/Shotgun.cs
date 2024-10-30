@@ -19,6 +19,7 @@ public class Shotgun : MonoBehaviour
     [SerializeField] private LayerMask aimColliderMask;
 
     public string tipoDoBuff;
+    public string tipoDeArma;
 
 
     // Update is called once per frame
@@ -65,7 +66,7 @@ public class Shotgun : MonoBehaviour
 
             if(hit.transform.CompareTag("Inimigo"))
             {
-                hit.transform.GetComponent<Inimigo>().TomarDano(1f, tipoDoBuff);
+                hit.transform.GetComponent<Inimigo>().TomarDano(tipoDeArma, tipoDoBuff);
                 Debug.Log("Hitei");
                 
             }
