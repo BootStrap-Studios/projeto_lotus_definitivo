@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class DashCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private StatusJogador statusJogador;
+
+    [SerializeField] private float danoDoDash;
+
+    private void Start()
     {
-        
+        statusJogador = FindObjectOfType<StatusJogador>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.CompareTag("Inimigo"))
+        {
+            if(statusJogador.dashAcertoCritico)
+            {
+                //Efeito do dash critico
+            }
+
+            if(statusJogador.dashBurst)
+            {
+                other.GetComponent<Inimigo>().TomarDanoDireto(danoDoDash);
+            }
+
+        }
     }
 }

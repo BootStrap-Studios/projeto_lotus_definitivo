@@ -135,13 +135,27 @@ public class Inimigo : MonoBehaviour
                 vidaAtual -= danoDaArma;
                 _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
                 break;
-        }      
+        }
 
+        ConferirMorte();
+    }
+
+    public void TomarDanoDireto(float dano)
+    {
+        vidaAtual -= dano;
+        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+
+        ConferirMorte();
+    }
+
+    private void ConferirMorte()
+    {
         if (vidaAtual <= 0)
         {
             DroparItem();
 
             MiscMovimentacao();
+
 
             Destroy(gameObject);
         }
@@ -156,6 +170,17 @@ public class Inimigo : MonoBehaviour
             statusJogador.BuffVelocidade();
         }
     }
+
+    private void MiscBurst1()
+    {
+        statusJogador.ReloadBurst();
+    }
+
+    private void MiscBurst2()
+    {
+        //MARGELAH REPLIQUE O CODIGO DO INIMIGO BOMBA AQUI POR FAVOR
+    }
+    
 
     #endregion
 

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashCooldown;
+    [SerializeField] private GameObject dashObj;
 
     public bool cameraCombate;
 
@@ -120,12 +121,16 @@ public class PlayerMovement : MonoBehaviour
     {
         float startTime = Time.time;
 
+        dashObj.SetActive(true);
+
         while(Time.time < startTime + dashTime)
         {
             characterController.Move(movementDirection * dashSpeed * Time.deltaTime);
 
             yield return null;
         }
+
+        dashObj.SetActive(false);
     }
 
     public void MudaCharacterController()

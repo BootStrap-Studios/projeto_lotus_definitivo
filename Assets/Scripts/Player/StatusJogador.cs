@@ -15,12 +15,17 @@ public class StatusJogador : MonoBehaviour
     public float danoAtualShotgun;
     public float danoAtualShuriken;
 
+    [Header("Armadilhas")]
+    public float danoArmadilha1;
+
 
     [Header("Acerto crítico")]
     public float chanceDeAcertoCriticoBase = 0;
     public float chanceDeAcertoCriticoAtual = 0;
 
     public float danoDoAcertoCritico = 1.5f;
+
+    public bool dashAcertoCritico;
 
     [Header("Movimentação")]
     public float velocidadeAndando;
@@ -37,6 +42,24 @@ public class StatusJogador : MonoBehaviour
     public bool misc2movimentacao;
 
 
+    [Header("Burst")]
+
+    public bool dashBurst;
+    public float danoBurst;
+
+    //Essa variavel é para aumentar o dano quando os inimigos sao derrotados
+    public bool misc1Burst;
+
+    //Essa variavel é para os inimigos explodirem
+    public bool misc2Burst;
+
+    [Header("Defesa")]
+    public bool ultimateDefesa;
+
+    //Variavel para a misc de defesa, onde o jogador ganha mais dano se estiver com escudo
+    public bool misc1Defesa;
+    public bool misc2Defesa;
+
     private void Start()
     {
         Reset();
@@ -44,14 +67,26 @@ public class StatusJogador : MonoBehaviour
 
     private void Reset()
     {
+        danoArmadilha1 = 5;
+
         chanceDeAcertoCriticoBase = 0f;
         danoDoAcertoCritico = 1.5f;
+        dashAcertoCritico = false;
 
         quantidadeDeDash = 1;
         quantidadeDeDashTotal = 1;
         duracaoBuffVelocidade = 3.5f;
         duracaoUltimateMovimentacao = 12f;
         misc1movimentacao = false;
+
+        dashBurst = false;
+        danoBurst = 3f;
+        misc1Burst = false;
+        misc2Burst = false;
+
+        ultimateDefesa = false;
+        misc1Defesa = false;
+        misc2Defesa = false;
     }
 
 
@@ -104,4 +139,55 @@ public class StatusJogador : MonoBehaviour
 
     #endregion
 
+
+    #region  BuffsBurst
+
+    public void ReloadBurst()
+    {
+        StartCoroutine(ReloadBurstCoroutine());
+    }
+
+    private IEnumerator ReloadBurstCoroutine()
+    {
+        danoAtualPistola += 2;
+        danoAtualShotgun += 2;
+        danoAtualShuriken += 2;
+
+        yield return new WaitForSeconds(3f);
+
+        danoAtualPistola = danoBasePistola;
+        danoAtualShotgun = danoBaseShotgun;
+        danoAtualShuriken = danoBaseShuriken;
+
+    }
+
+    public void Misc1Burst()
+    {
+        danoBurst = 5f;
+    }
+
+
+    #endregion
+
+    #region BuffsDefesa
+
+    public void UltimateDefesa()
+    {
+        StartCoroutine(UltimateDefesaCoroutine());
+    }
+
+    private IEnumerator UltimateDefesaCoroutine()
+    {
+        ultimateDefesa = true;
+
+        yield return new WaitForSeconds(12f);
+
+        ultimateDefesa = false;
+    }
+
+    public void ReceberMenosDanoArmadilha()
+    {
+        danoArmadilha1 = 3f;
+    }
+    #endregion
 }
