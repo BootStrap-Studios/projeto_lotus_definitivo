@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 140276070889115716}
   - component: {fileID: 8243644179691258510}
   - component: {fileID: 8806009633796199273}
+  - component: {fileID: 80179656904436247}
   m_Layer: 7
   m_Name: Player 1.0
   m_TagString: Player
@@ -611,3 +612,32 @@ MonoBehaviour:
   dashSpeed: 20
   dashCooldown: 3
   cameraCombate: 0
+--- !u!114 &80179656904436247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451878334732380206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0da965ed38f4b84292d174c083acb0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  danoBasePistola: 0
+  danoBaseShotgun: 0
+  danoBaseShuriken: 0
+  danoAtualPistola: 0
+  danoAtualShotgun: 0
+  danoAtualShuriken: 0
+  chanceDeAcertoCriticoBase: 0
+  chanceDeAcertoCriticoAtual: 0
+  danoDoAcertoCritico: 1.5
+  velocidadeAndando: 8
+  velocidadePulando: 4.8
+  duracaoBuffVelocidade: 3.5
+  quantidadeDeDashTotal: 1
+  quantidadeDeDash: 1
+  duracaoUltimateMovimentacao: 12
+  misc1movimentacao: 0
+  misc2movimentacao: 0
