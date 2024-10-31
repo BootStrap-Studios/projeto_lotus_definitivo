@@ -1027,16 +1027,17 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  municao: 4
-  municaoAux: 0
+  municao: 3
   danoTiro: 3
   danoTiroReduzido: 0
   alcanceMaxArma: 10000
-  alcanceMinArma: 10000
+  alcanceMinArma: 20
   cooldownTiro: 2.5
-  velProjetil: 50
+  velProjetil: 85
   velocidadeAndar: 5
   inimigoExplosivo: 0
+  inimigoSniper: 1
+  inimigoNormal: 0
   _barraDeVida: {fileID: 7009076138045804874}
   vida: 5
   statusInimigo: {fileID: 2220492415571558955}

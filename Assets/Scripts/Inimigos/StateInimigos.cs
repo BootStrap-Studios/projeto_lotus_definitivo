@@ -42,6 +42,7 @@ public class StateInimigos
     public float municaoAux;
     public bool newReload = true;
     public bool ativarChase = false;
+    public bool pararAndar = false;
 
     public StateInimigos(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar)
     {
@@ -136,8 +137,17 @@ public class Idle : StateInimigos
         if (ativarChase)
         {
             ativarChase = false;
-            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
-            stage = EVENT.EXIT;
+
+            if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+            {
+                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
+                stage = EVENT.EXIT;
+            }
+            else
+            {
+                nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
+                stage = EVENT.EXIT;
+            }
 
             return;
         }
@@ -245,16 +255,31 @@ public class Atirar : StateInimigos
             newReload = false;
         }
 
-        //mirando no player e verificando se continua no alcançe do tiro
-        inimigo.transform.LookAt(player.position);        
+        if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+        {
+            pararAndar = true;
+            Debug.Log("passeio");
+        }
 
-        if (VejoPlayer())
+        //mirando no player e verificando se continua no alcançe do tiro
+        inimigo.transform.LookAt(player.position);
+
+        if (pararAndar)
+        {
+            agent.SetDestination(inimigo.transform.position);
+        }
+        else if (VejoPlayer())
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
             if (distanciaTiro.magnitude < alcanceMinArma)
             {
                 agent.SetDestination(inimigo.transform.position);
+
+                if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+                {
+                    pararAndar = true;
+                }
             }
             else if(distanciaTiro.magnitude <= alcanceMaxArma && distanciaTiro.magnitude >= alcanceMinArma)
             {
@@ -283,7 +308,7 @@ public class Atirar : StateInimigos
                     municaoAux--;
                     cooldownTiroAux = cooldownTiro;
                 }
-                else
+                else if(!pararAndar)
                 {
                     agent.SetDestination(player.position);
                     base.Update();
@@ -332,7 +357,7 @@ public class Reload : StateInimigos
 
         if (tempoAux <= 0)
         {
-            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
+            nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar);
             stage = EVENT.EXIT;
             newReload = true;
         }
@@ -361,7 +386,7 @@ public class TomarDano : StateInimigos
     public override void Enter()
     {
         //tocar a animação de levar dano
-        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Stunado");
+        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: TomandoDano");
         base.Enter();
     }
 

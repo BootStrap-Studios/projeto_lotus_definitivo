@@ -7,24 +7,25 @@ using Input = UnityEngine.Input;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed;
+    [Header("Movimentação Player")]
     [SerializeField] CharacterController characterController;
-    [SerializeField] float jumpSpeed;
     [SerializeField] Transform transformCamera;
+    [SerializeField] float rotationSpeed;    
+    [SerializeField] float jumpSpeed;
+    public bool cameraCombate;
 
+    [Header("Dash")]
     [SerializeField] private float dashTime;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashCooldown;
     [SerializeField] private GameObject dashObj;
 
-    public bool cameraCombate;
+    private float speed;
+    private float ySpeed;
+    private float originalStepOffSet;
+    private float dashCooldownAux;
 
-    float speed;
-    float ySpeed;
-    float originalStepOffSet;
-    float dashCooldownAux;
-
-    Vector3 movementDirection;
+    private Vector3 movementDirection;
 
     private StatusJogador statusJogador;
 
@@ -53,8 +54,15 @@ public class PlayerMovement : MonoBehaviour
                 statusJogador.quantidadeDeDash = statusJogador.quantidadeDeDashTotal;
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.F) && statusJogador.tenhoULT)
+        {
+            statusJogador.Ultando();
+        }
     }
 
+
+    #region Funções da Movimentação do Player
     private void Movimentacao()
     {
         //Calculando a direção que o player tem que andar com base no input.
@@ -111,6 +119,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void MudaCharacterController()
+    {
+        characterController.enabled = !characterController.enabled;
+    }
+
+    #endregion
+
+    #region Funções do Dash
     private void Dash()
     {
         StartCoroutine(DashCoroutine());
@@ -133,8 +149,5 @@ public class PlayerMovement : MonoBehaviour
         dashObj.SetActive(false);
     }
 
-    public void MudaCharacterController()
-    {
-        characterController.enabled = !characterController.enabled;
-    }
+    #endregion
 }

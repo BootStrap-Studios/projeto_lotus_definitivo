@@ -16,6 +16,7 @@ public class AmmoSystem : MonoBehaviour
     [Header("Timers")]
     [SerializeField] private float timerAux;
     [SerializeField] private float timerReload;
+    [SerializeField] private float timerQTECertoReload;
     private float timer;
 
     [Header("UI")]
@@ -27,7 +28,7 @@ public class AmmoSystem : MonoBehaviour
     [SerializeField] private float velAnim;
     [SerializeField] private float velReloadBarra;
     [SerializeField] private Image[] balas;
-    private float municaoAtualizada;
+    private float valorBarraReload;
     private bool QTE;
 
     private StatusJogador statusJogador;
@@ -47,9 +48,7 @@ public class AmmoSystem : MonoBehaviour
     void Update()
     {
         //todo segundo um timer é tickado, para saber se a arma deve ou não recarregar.
-
         timer -= Time.deltaTime;
-
 
         //Se o timer chegar a zero, a função de reload é chamada.
         if(timer <= 0f)
@@ -57,14 +56,14 @@ public class AmmoSystem : MonoBehaviour
             Reload();
         }
 
-
-        //Atualizando a quantidade de balas na ui
-        AtualizaBarraReload();
-
+        //se o quick time event estiver ativado quando o player pressionar o "R", a função QTECheck é chamada
         if (Input.GetKeyDown(KeyCode.R) && QTE)
         {
+
             QTEcheck();
         }
+
+        BarraReloadMovimento();
     }
 
     public void GastandoMunicao(int municao)
@@ -81,15 +80,14 @@ public class AmmoSystem : MonoBehaviour
             }
         }
         
-        //Se a munição chegar a zero, o player tem que esperar a arma carregar totalmente, portando a boolando fica true
+        //Se a munição chegar a zero, o player tem que esperar a arma carregar totalmente, portando a boolando fica true e o QTE é ativado
         if(municaoAtual == 0)
         {
             timer = timerAux;
             toNoReloadFull = true;
 
             QTE = true;
-            QTEreload();
-            municaoAtualizada = 0f;
+            QTEreload();            
         }
         else {
 
@@ -119,21 +117,20 @@ public class AmmoSystem : MonoBehaviour
         } 
         else
         {
-            toNoReloadFull = false;
-
-            barraMunicaoUI.gameObject.SetActive(false);
-            barraBackground.color = new Color(0.85f, 0.85f, 0.85f, 1);
+            toNoReloadFull = false; 
         }
         
     }
 
-    private void AtualizaBarraReload()
+    private void BarraReloadMovimento()
     {
+        //função que faz a barra se mexer para o QTE do reload
+
         if (toNoReloadFull && QTE)
         {
-            municaoAtualizada += Time.deltaTime;
+            valorBarraReload += Time.deltaTime;
 
-            barraMunicaoUI.value = Mathf.MoveTowards(barraMunicaoUI.value, municaoAtualizada, velReloadBarra * Time.deltaTime);
+            barraMunicaoUI.value = Mathf.MoveTowards(barraMunicaoUI.value, valorBarraReload, velReloadBarra * Time.deltaTime);
 
             if(barraMunicaoUI.value >= 1f)
             {
@@ -141,19 +138,15 @@ public class AmmoSystem : MonoBehaviour
                 areaCerta.enabled = false;
                 areaCertaMeio.enabled = false;
                 tracoCerto.enabled = false;
-                barraBackground.color = new Color(0.6f, 0, 0, 1);
+                barraBackground.enabled = false;
             }
-        }
-        else
-        {
-            municaoAtualizada = (float) municaoAtual / municaoTotal;
-
-            barraMunicaoUI.value = Mathf.MoveTowards(barraMunicaoUI.value, municaoAtualizada, velAnim * Time.deltaTime);
         }
     }
 
     private void QTEcheck()
     {
+        //função que verifica se o player acertou ou não o QTE
+
         QTE = false;
         areaCerta.enabled = false;
         areaCertaMeio.enabled = false;
@@ -172,13 +165,16 @@ public class AmmoSystem : MonoBehaviour
             {
                 balas[i].color = new Color(0.6f, 0, 0, 1);
             }
-            barraBackground.color = new Color(0.6f, 0, 0, 1);
+
+            barraBackground.enabled = false;
         }    
     }
 
     private void QTEreload()
     {
-        barraMunicaoUI.gameObject.SetActive(true);
+        //função que ativa a barra do QTE e aleatoriza a posição que o player deve acertar
+
+       barraBackground.enabled = true;
 
         float posX = Random.Range(-67.3f, 47.4f);
 
@@ -205,18 +201,18 @@ public class AmmoSystem : MonoBehaviour
 
     private IEnumerator BalasRecaregando()
     {
-        barraMunicaoUI.gameObject.SetActive(false);
+        barraBackground.enabled = false;
 
         for (int i = 0; i < balas.Length; i++)
         {
             balas[i].color = new Color(1, 1, 1, 1);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(timerQTECertoReload);
         }
 
         municaoAtual = municaoTotal;
         toNoReloadFull = false;
-        barraMunicaoUI.value = 1f;
+        barraMunicaoUI.value = 0f;
     }
 
 }

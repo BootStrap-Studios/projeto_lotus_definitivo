@@ -52,9 +52,9 @@ MonoBehaviour:
   bulletsPerTap: 3
   aimColliderMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 257
   tipoDoBuff: Default
-  tipoDeArma: 
+  tipoDeArma: Shotgun
 --- !u!1 &3170620440045834065
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +282,7 @@ MonoBehaviour:
     m_Bits: 256
   cubo: {fileID: 0}
   tipoDoBuff: Default
-  tipoDeArma: 
+  tipoDeArma: Shuriken
 --- !u!1 &5174054128739968532
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +410,7 @@ MonoBehaviour:
   barraDeVida: {fileID: 0}
   velAnim: 2
   vida: 30
+  escudoAtivo: 0
 --- !u!1 &5495531672261628746
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,14 +457,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimColliderMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 257
   objectPool: {fileID: 0}
   pontaDaArma: {fileID: 8177419053024706631}
   ammoSystem: {fileID: 0}
   bulletsPerTap: 1
-  vfxHit: {fileID: 0}
-  tipoDoBuff: 
-  tipoDeArma: 
+  vfxHit: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
+  tipoDoBuff: Default
+  tipoDeArma: Pistola
 --- !u!1 &5632614426761940789
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,6 +612,7 @@ MonoBehaviour:
   dashTime: 0.25
   dashSpeed: 20
   dashCooldown: 3
+  dashObj: {fileID: 0}
   cameraCombate: 0
 --- !u!114 &80179656904436247
 MonoBehaviour:
@@ -624,15 +626,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0da965ed38f4b84292d174c083acb0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  danoBasePistola: 0
-  danoBaseShotgun: 0
-  danoBaseShuriken: 0
+  danoBasePistola: 1
+  danoBaseShotgun: 1
+  danoBaseShuriken: 3
   danoAtualPistola: 0
   danoAtualShotgun: 0
   danoAtualShuriken: 0
+  danoArmadilha1: 0
   chanceDeAcertoCriticoBase: 0
   chanceDeAcertoCriticoAtual: 0
   danoDoAcertoCritico: 1.5
+  dashAcertoCritico: 0
   velocidadeAndando: 8
   velocidadePulando: 4.8
   duracaoBuffVelocidade: 3.5
@@ -641,3 +645,10 @@ MonoBehaviour:
   duracaoUltimateMovimentacao: 12
   misc1movimentacao: 0
   misc2movimentacao: 0
+  dashBurst: 0
+  danoBurst: 0
+  misc1Burst: 0
+  misc2Burst: 0
+  ultimateDefesa: 0
+  misc1Defesa: 0
+  misc2Defesa: 0

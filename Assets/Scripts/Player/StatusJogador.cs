@@ -60,6 +60,11 @@ public class StatusJogador : MonoBehaviour
     public bool misc1Defesa;
     public bool misc2Defesa;
 
+    [Header("ULT")]
+    public bool tenhoULT;
+    public string qualULT;
+
+
     private void Start()
     {
         Reset();
@@ -67,6 +72,10 @@ public class StatusJogador : MonoBehaviour
 
     private void Reset()
     {
+        danoAtualPistola = danoBasePistola;
+        danoAtualShotgun = danoBaseShotgun;
+        danoAtualShuriken = danoBaseShuriken;
+
         danoArmadilha1 = 5;
 
         chanceDeAcertoCriticoBase = 0f;
@@ -87,6 +96,8 @@ public class StatusJogador : MonoBehaviour
         ultimateDefesa = false;
         misc1Defesa = false;
         misc2Defesa = false;
+
+        tenhoULT = false;
     }
 
 
@@ -190,4 +201,18 @@ public class StatusJogador : MonoBehaviour
         danoArmadilha1 = 3f;
     }
     #endregion
+
+
+    //quando jogador selecionar uma ult chamar essa função
+    public void DesbloqueiaUlt(string _qualUlt)
+    {
+        tenhoULT = true;
+        qualULT = _qualUlt;
+    }
+
+    public void Ultando()
+    {
+        //switch case com todas as ult que ira chamar a função da ult no StatusJogador
+
+    }
 }

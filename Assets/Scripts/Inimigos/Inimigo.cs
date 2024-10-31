@@ -32,6 +32,8 @@ public class Inimigo : MonoBehaviour
     [Header("Personagem")]
     [SerializeField] private float velocidadeAndar;
     public bool inimigoExplosivo;
+    public bool inimigoSniper;
+    public bool inimigoNormal;
 
     [Header("UI_Inimigos")]
     [SerializeField] private BarraDeVida _barraDeVida;
@@ -59,8 +61,6 @@ public class Inimigo : MonoBehaviour
 
     void Start()
     {
-        //player = FindObjectOfType<PlayerMovement>().transform;
-
         statusJogador = FindObjectOfType<StatusJogador>();
 
         agent = GetComponent<NavMeshAgent>();
@@ -77,6 +77,8 @@ public class Inimigo : MonoBehaviour
 
     public void TomarDano(string tipoDeArma, string tipoDoDano)
     {
+        Debug.Log(tipoDeArma + "/" + tipoDoDano);
+
         if (vidaAtual == vida)
         {
             stateInimigo.ativarChase = true;
@@ -131,7 +133,7 @@ public class Inimigo : MonoBehaviour
                 EfeitoBurst(danoDaArma);
                 break;
 
-            case "Default":                
+            case "Default":
                 vidaAtual -= danoDaArma;
                 _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
                 break;

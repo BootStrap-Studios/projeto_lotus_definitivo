@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 3913204490852866316}
   - component: {fileID: 26313390720688342}
   - component: {fileID: 4214115328965256345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InimigoSimples
   m_TagString: Inimigo
   m_Icon: {fileID: 0}
@@ -707,16 +707,17 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 128
-  municao: 8
-  municaoAux: 0
+  municao: 6
   danoTiro: 1
   danoTiroReduzido: 0
   alcanceMaxArma: 15
   alcanceMinArma: 10
   cooldownTiro: 1
-  velProjetil: 30
+  velProjetil: 35
   velocidadeAndar: 7
   inimigoExplosivo: 0
+  inimigoSinper: 0
+  inimigoNormal: 1
   _barraDeVida: {fileID: 3060558376259822263}
   vida: 10
   statusInimigo: {fileID: 7447116055161541127}
