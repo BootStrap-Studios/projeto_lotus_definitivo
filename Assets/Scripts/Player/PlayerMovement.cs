@@ -139,6 +139,16 @@ public class PlayerMovement : MonoBehaviour
 
         dashObj.SetActive(true);
 
+        //Conferindo se os buffs de dash de defesa ou corrosao estao ativos;
+        if(statusJogador.dashDefesaAtivo)
+        {
+            statusJogador.AtivarEscudo();
+        }
+        if(statusJogador.dashCorrosaoAtivo)
+        {
+            statusJogador.SpawnarPocaCorrosao();
+        }
+
         while(Time.time < startTime + dashTime)
         {
             characterController.Move(movementDirection * dashSpeed * Time.deltaTime);

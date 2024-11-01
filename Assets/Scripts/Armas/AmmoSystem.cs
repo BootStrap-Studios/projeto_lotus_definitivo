@@ -203,6 +203,8 @@ public class AmmoSystem : MonoBehaviour
     {
         barraBackground.enabled = false;
 
+        statusJogador.ReloadBuffs();
+
         for (int i = 0; i < balas.Length; i++)
         {
             balas[i].color = new Color(1, 1, 1, 1);

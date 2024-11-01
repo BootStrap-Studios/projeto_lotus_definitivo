@@ -222,6 +222,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4379497302672827635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8831259769576532249}
+  m_Layer: 7
+  m_Name: "P\xE9DoJogador"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8831259769576532249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379497302672827635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.927, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5408378857368954297}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4668407194737091223
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +350,7 @@ Transform:
   - {fileID: 4098094633777667937}
   - {fileID: 8177419053024706631}
   - {fileID: 8600996343546916260}
+  - {fileID: 8831259769576532249}
   m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6063665375638039518
@@ -410,7 +442,6 @@ MonoBehaviour:
   barraDeVida: {fileID: 0}
   velAnim: 2
   vida: 30
-  escudoAtivo: 0
 --- !u!1 &5495531672261628746
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,15 +636,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8afc5e942be00419a4b31d1e918019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 720
   characterController: {fileID: 8243644179691258510}
-  jumpSpeed: 7.2
   transformCamera: {fileID: 0}
+  rotationSpeed: 720
+  jumpSpeed: 7.2
+  cameraCombate: 0
   dashTime: 0.25
   dashSpeed: 20
   dashCooldown: 3
   dashObj: {fileID: 0}
-  cameraCombate: 0
 --- !u!114 &80179656904436247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +663,9 @@ MonoBehaviour:
   danoAtualPistola: 0
   danoAtualShotgun: 0
   danoAtualShuriken: 0
+  arma: {fileID: 0}
+  shotgun: {fileID: 0}
+  shuriken: {fileID: 0}
   danoArmadilha1: 0
   chanceDeAcertoCriticoBase: 0
   chanceDeAcertoCriticoAtual: 0
@@ -650,5 +684,16 @@ MonoBehaviour:
   misc1Burst: 0
   misc2Burst: 0
   ultimateDefesa: 0
+  escudoAtivo: 0
   misc1Defesa: 0
   misc2Defesa: 0
+  danoCorrosao: 0
+  duracaoCorrosao: 0
+  duracaoPoca: 0
+  pocaCorrosao: {fileID: 0}
+  peDoJogador: {fileID: 0}
+  tenhoULT: 0
+  qualULT: 
+  qualReload: 
+  dashDefesaAtivo: 0
+  dashCorrosaoAtivo: 0

@@ -133,7 +133,7 @@ public class Inimigo : MonoBehaviour
                 EfeitoBurst(danoDaArma);
                 break;
 
-            case "Default":
+            case "Nenhum":
                 vidaAtual -= danoDaArma;
                 _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
                 break;
@@ -316,34 +316,32 @@ public class Inimigo : MonoBehaviour
         }
     }
 
+    public void CorrosaoDireto()
+    {
+        if(!boolCorrosao)
+        {
+            statusCorrosao = 5;
+
+            StartCoroutine(CoroutineCorrosao());
+        }
+        
+    }
+
     private IEnumerator CoroutineCorrosao()
     {
         boolCorrosao = true;
 
-        vidaAtual -= danoCorrosao;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+        int i = 0;
 
-        yield return new WaitForSeconds(1f);
+        while(i < statusJogador.duracaoCorrosao)
+        {
+            vidaAtual -= statusJogador.danoCorrosao;
+            _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
 
-        vidaAtual -= danoCorrosao;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+            yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(1f);
-
-        vidaAtual -= danoCorrosao;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
-
-        yield return new WaitForSeconds(1f);
-
-        vidaAtual -= danoCorrosao;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
-
-        yield return new WaitForSeconds(1f);
-
-        vidaAtual -= danoCorrosao;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
-
-        yield return new WaitForSeconds(1f);
+            i++;
+        }
 
         statusCorrosao = 0;
 

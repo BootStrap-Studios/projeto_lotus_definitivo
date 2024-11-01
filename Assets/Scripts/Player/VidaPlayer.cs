@@ -16,7 +16,7 @@ public class VidaPlayer : MonoBehaviour
 
     private StatusJogador statusJogador;
 
-    public bool escudoAtivo;
+    
 
     // Start is called before the first frame update
     private void Start()
@@ -25,7 +25,7 @@ public class VidaPlayer : MonoBehaviour
         AlterarBarraDeVida(vidaAtual, vida);
         vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
 
-        escudoAtivo = false;
+        
 
         statusJogador = FindObjectOfType<StatusJogador>();
     }
@@ -37,7 +37,7 @@ public class VidaPlayer : MonoBehaviour
         //Se o jogador tiver a habilidade de ganhar mais dano com escudo ativo
         if(statusJogador.misc1Defesa)
         {
-            if(escudoAtivo)
+            if(statusJogador.escudoAtivo)
             {
                 statusJogador.danoAtualPistola += 2;
                 statusJogador.danoAtualShotgun += 2;
@@ -59,9 +59,9 @@ public class VidaPlayer : MonoBehaviour
             return;
         }
 
-        if(escudoAtivo)
+        if(statusJogador.escudoAtivo)
         {
-            escudoAtivo = false;
+            statusJogador.escudoAtivo = false;
             return;
         }
 
@@ -103,29 +103,10 @@ public class VidaPlayer : MonoBehaviour
         {
             if (statusJogador.misc2Defesa)
             {
-                AtivarEscudo();
+                statusJogador.AtivarEscudo();
             }
         }
     }
 
-    public void AtivarEscudo()
-    {
-        if (!escudoAtivo)
-        {
-            StartCoroutine(AtivarEscudoCoroutine());
-        }
-        
-    }
-
-    private IEnumerator AtivarEscudoCoroutine()
-    {
-        escudoAtivo = true;
-
-        yield return new WaitForSeconds(3f);
-
-        if(escudoAtivo)
-        {
-            escudoAtivo = false;
-        }
-    }
+    
 }
