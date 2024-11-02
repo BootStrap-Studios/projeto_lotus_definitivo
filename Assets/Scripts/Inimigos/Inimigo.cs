@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,7 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform pontaArma;
     [SerializeField] private ObjectPool objectPool;
-    [SerializeField] private GameObject dropPrefab;
+    [SerializeField] private GameObject[] dropPrefab;
     private ProjetilInimigo tiro;
     public LayerMask playerMask;
     private NavMeshAgent agent;
@@ -34,6 +35,7 @@ public class Inimigo : MonoBehaviour
     public bool inimigoExplosivo;
     public bool inimigoSniper;
     public bool inimigoNormal;
+    private bool dropando;
 
     [Header("UI_Inimigos")]
     [SerializeField] private BarraDeVida _barraDeVida;
@@ -76,9 +78,7 @@ public class Inimigo : MonoBehaviour
     }
 
     public void TomarDano(string tipoDeArma, string tipoDoDano)
-    {
-        Debug.Log(tipoDeArma + "/" + tipoDoDano);
-
+    { 
         if (vidaAtual == vida)
         {
             stateInimigo.ativarChase = true;
@@ -256,7 +256,33 @@ public class Inimigo : MonoBehaviour
 
     private void DroparItem()
     {
-        Instantiate(dropPrefab, transform.position, transform.rotation);
+        if (!dropando)
+        {
+            dropando = true;
+        }
+        else
+        {
+            return;
+        }
+
+        float posX = Random.Range(transform.position.x - 2, transform.position.x + 2);
+        float posZ = Random.Range(transform.position.z - 2, transform.position.z + 2);
+
+        Vector3 posDrop = new Vector3(posX, transform.position.y, posZ); 
+
+        Instantiate(dropPrefab[0], posDrop, transform.rotation);
+        int itemExtra = Random.Range(1, 11);
+
+        if(itemExtra <= 3)
+        {
+            float posX2 = Random.Range(transform.position.x - 2, transform.position.x + 2);
+            float posZ2 = Random.Range(transform.position.z - 2, transform.position.z + 2);
+
+            posDrop = new Vector3(posX2, transform.position.y, posZ2);
+
+            int qualItemDropar = Random.Range(1, dropPrefab.Length);
+            Instantiate(dropPrefab[qualItemDropar], posDrop, transform.rotation);
+        }
     }
 
 

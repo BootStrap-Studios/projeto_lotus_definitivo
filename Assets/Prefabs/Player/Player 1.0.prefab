@@ -53,7 +53,7 @@ MonoBehaviour:
   aimColliderMask:
     serializedVersion: 2
     m_Bits: 257
-  tipoDoBuff: Default
+  tipoDoBuff: Nenhum
   tipoDeArma: Shotgun
 --- !u!1 &3170620440045834065
 GameObject:
@@ -64,6 +64,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8600996343546916260}
+  - component: {fileID: 6688680156009788627}
+  - component: {fileID: 3878304044997670798}
   m_Layer: 7
   m_Name: ColliderDash
   m_TagString: Untagged
@@ -86,6 +88,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5408378857368954297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6688680156009788627
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170620440045834065}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.4359411
+  m_Center: {x: 0, y: 0.15102589, z: 0}
+--- !u!114 &3878304044997670798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170620440045834065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8098dabb21e28574db6d702b339e082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  danoDoDash: 2
 --- !u!1 &3666982982036204446
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 3926493772315054037}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 0.58, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -312,7 +348,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   cubo: {fileID: 0}
-  tipoDoBuff: Default
+  tipoDoBuff: Nenhum
   tipoDeArma: Shuriken
 --- !u!1 &5174054128739968532
 GameObject:
@@ -452,7 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2365636068431055050}
   - component: {fileID: 1900775655823586086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +530,7 @@ MonoBehaviour:
   ammoSystem: {fileID: 0}
   bulletsPerTap: 1
   vfxHit: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
-  tipoDoBuff: Default
+  tipoDoBuff: Nenhum
   tipoDeArma: Pistola
 --- !u!1 &5632614426761940789
 GameObject:
@@ -570,6 +606,7 @@ GameObject:
   - component: {fileID: 8243644179691258510}
   - component: {fileID: 8806009633796199273}
   - component: {fileID: 80179656904436247}
+  - component: {fileID: 3233126048945909831}
   m_Layer: 7
   m_Name: Player 1.0
   m_TagString: Player
@@ -644,7 +681,7 @@ MonoBehaviour:
   dashTime: 0.25
   dashSpeed: 20
   dashCooldown: 3
-  dashObj: {fileID: 0}
+  dashObj: {fileID: 3170620440045834065}
 --- !u!114 &80179656904436247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,9 +700,9 @@ MonoBehaviour:
   danoAtualPistola: 0
   danoAtualShotgun: 0
   danoAtualShuriken: 0
-  arma: {fileID: 0}
-  shotgun: {fileID: 0}
-  shuriken: {fileID: 0}
+  arma: {fileID: 1900775655823586086}
+  shotgun: {fileID: 8773810735126341650}
+  shuriken: {fileID: 8961193682299429162}
   danoArmadilha1: 0
   chanceDeAcertoCriticoBase: 0
   chanceDeAcertoCriticoAtual: 0
@@ -681,8 +718,8 @@ MonoBehaviour:
   misc2movimentacao: 0
   dashBurst: 0
   danoBurst: 0
-  misc1Burst: 0
   misc2Burst: 0
+  misc3Burst: 0
   ultimateDefesa: 0
   escudoAtivo: 0
   misc1Defesa: 0
@@ -690,10 +727,24 @@ MonoBehaviour:
   danoCorrosao: 0
   duracaoCorrosao: 0
   duracaoPoca: 0
-  pocaCorrosao: {fileID: 0}
-  peDoJogador: {fileID: 0}
+  pocaCorrosao: {fileID: 1299712541643738981, guid: 2ab99c223b6255743878405e8d1010b0,
+    type: 3}
+  peDoJogador: {fileID: 4379497302672827635}
   tenhoULT: 0
   qualULT: 
   qualReload: 
   dashDefesaAtivo: 0
   dashCorrosaoAtivo: 0
+--- !u!114 &3233126048945909831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8451878334732380206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5507232c249e5c048bbc0e83405257f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeInteracao: 20

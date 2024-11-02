@@ -20,18 +20,23 @@ public class AmmoSystem : MonoBehaviour
     private float timer;
 
     [Header("UI")]
-    [SerializeField] private Slider barraMunicaoUI; 
-    [SerializeField] private Image barraBackground; 
-    [SerializeField] private Image tracoCerto; 
+    [SerializeField] private Slider barraMunicaoUI;
+    [SerializeField] private Image barraBackground;
+    [SerializeField] private Image tracoCerto;
     [SerializeField] private Image areaCerta;
     [SerializeField] private Image areaCertaMeio;
     [SerializeField] private float velAnim;
     [SerializeField] private float velReloadBarra;
+    [SerializeField] private float velBrilhoBalas;
     [SerializeField] private Image[] balas;
     private float valorBarraReload;
     private bool QTE;
 
     private StatusJogador statusJogador;
+    private bool brilhar;
+    private float valorCor;
+    private Color corNova;
+    private int faseBrilho;
 
 
     void Start()
@@ -51,7 +56,7 @@ public class AmmoSystem : MonoBehaviour
         timer -= Time.deltaTime;
 
         //Se o timer chegar a zero, a função de reload é chamada.
-        if(timer <= 0f)
+        if (timer <= 0f)
         {
             Reload();
         }
@@ -64,6 +69,16 @@ public class AmmoSystem : MonoBehaviour
         }
 
         BarraReloadMovimento();
+
+        if (brilhar)
+        {
+            Brilhando();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            MunicaoInfinita();
+        }
     }
 
     public void GastandoMunicao(int municao)
@@ -72,36 +87,37 @@ public class AmmoSystem : MonoBehaviour
 
         municaoAtual -= municao;
 
-        for(int i = 0; i < balas.Length; i++)
+        for (int i = 0; i < balas.Length; i++)
         {
             if (i >= municaoAtual)
             {
                 balas[i].color = new Color(0.6f, 0.6f, 0.6f, 1);
             }
         }
-        
+
         //Se a munição chegar a zero, o player tem que esperar a arma carregar totalmente, portando a boolando fica true e o QTE é ativado
-        if(municaoAtual == 0)
+        if (municaoAtual == 0)
         {
             timer = timerAux;
             toNoReloadFull = true;
 
             QTE = true;
-            QTEreload();            
+            QTEreload();
         }
-        else {
+        else
+        {
 
             timer = timerAux;
         }
 
-        
+
     }
 
     private void Reload()
     {
         //A função de reload recarrega 1 bala da arma sempre que é chamada, se a munição ficar cheia ela reseta a bool do reload full
 
-        if(municaoAtual < municaoTotal)
+        if (municaoAtual < municaoTotal && !toNoReloadFull)
         {
             municaoAtual++;
 
@@ -114,12 +130,7 @@ public class AmmoSystem : MonoBehaviour
             }
 
             timer = timerReload;
-        } 
-        else
-        {
-            toNoReloadFull = false; 
         }
-        
     }
 
     private void BarraReloadMovimento()
@@ -132,13 +143,21 @@ public class AmmoSystem : MonoBehaviour
 
             barraMunicaoUI.value = Mathf.MoveTowards(barraMunicaoUI.value, valorBarraReload, velReloadBarra * Time.deltaTime);
 
-            if(barraMunicaoUI.value >= 1f)
+            if (barraMunicaoUI.value >= 1f)
             {
                 QTE = false;
                 areaCerta.enabled = false;
                 areaCertaMeio.enabled = false;
                 tracoCerto.enabled = false;
                 barraBackground.enabled = false;
+                barraMunicaoUI.value = 0;
+
+                for (int i = 0; i < balas.Length; i++)
+                {
+                    balas[i].color = new Color(0.6f, 0, 0, 1);
+                }
+
+                StartCoroutine(BalasRecaregando(timerReload));
             }
         }
     }
@@ -157,7 +176,7 @@ public class AmmoSystem : MonoBehaviour
 
         if (barraMunicaoUI.handleRect.position.x > valorMin && barraMunicaoUI.handleRect.position.x < valorMax)
         {
-            StartCoroutine(BalasRecaregando());                  
+            StartCoroutine(BalasRecaregando(timerQTECertoReload));
         }
         else
         {
@@ -167,14 +186,16 @@ public class AmmoSystem : MonoBehaviour
             }
 
             barraBackground.enabled = false;
-        }    
+
+            StartCoroutine(BalasRecaregando(timerReload));
+        }
     }
 
     private void QTEreload()
     {
         //função que ativa a barra do QTE e aleatoriza a posição que o player deve acertar
 
-       barraBackground.enabled = true;
+        barraBackground.enabled = true;
 
         float posX = Random.Range(-67.3f, 47.4f);
 
@@ -192,29 +213,127 @@ public class AmmoSystem : MonoBehaviour
 
     private IEnumerator MunicaoInfinitaCoroutine()
     {
+        brilhar = true;
         municaoAtual = 1000000000;
 
         yield return new WaitForSeconds(statusJogador.duracaoUltimateMovimentacao);
 
+        brilhar = false;
+        faseBrilho = 0;
+
+        for (int i = 0; i < balas.Length; i++)
+        {
+            balas[i].color = new Color(1, 1, 1, 1);
+        }
+
         municaoAtual = municaoTotal;
     }
 
-    private IEnumerator BalasRecaregando()
+    private IEnumerator BalasRecaregando(float tempoReload)
     {
         barraBackground.enabled = false;
-
-        statusJogador.ReloadBuffs();
 
         for (int i = 0; i < balas.Length; i++)
         {
             balas[i].color = new Color(1, 1, 1, 1);
 
-            yield return new WaitForSeconds(timerQTECertoReload);
+            yield return new WaitForSeconds(tempoReload);
         }
 
         municaoAtual = municaoTotal;
         toNoReloadFull = false;
         barraMunicaoUI.value = 0f;
+    }
+
+    private void Brilhando()
+    {
+        if (faseBrilho == 0)
+        {
+            for (int i = 0; i < balas.Length; i++)
+            {
+                balas[i].color = new Color(1, 0, 0, 1);
+            }
+
+            faseBrilho = 1;
+            valorCor = 0;
+        }
+        else if (faseBrilho == 1)
+        {
+            corNova = new Color(1, valorCor, 0, 1);
+
+            valorCor += Time.deltaTime * velBrilhoBalas;
+
+            if (valorCor >= 1)
+            {
+                faseBrilho = 2;
+                valorCor = 1;
+            }
+        }
+        else if (faseBrilho == 2)
+        {
+            corNova = new Color(valorCor, 1, 0, 1);
+
+            valorCor -= Time.deltaTime * velBrilhoBalas;
+
+            if (valorCor <= 0)
+            {
+                faseBrilho = 3;
+                valorCor = 0;
+            }
+        }
+        else if (faseBrilho == 3)
+        {
+            corNova = new Color(0, 1, valorCor, 1);
+
+            valorCor += Time.deltaTime * velBrilhoBalas;
+
+            if (valorCor >= 1)
+            {
+                faseBrilho = 4;
+                valorCor = 1;
+            }
+        }
+        else if (faseBrilho == 4)
+        {
+            corNova = new Color(0, valorCor, 1, 1);
+
+            valorCor -= Time.deltaTime * velBrilhoBalas;
+
+            if (valorCor <= 0)
+            {
+                faseBrilho = 5;
+                valorCor = 0;
+            }
+        }
+        else if (faseBrilho == 5)
+        {
+            corNova = new Color(valorCor, 0, 1, 1);
+
+            valorCor += Time.deltaTime * velBrilhoBalas;
+
+            if (valorCor >= 1)
+            {
+                faseBrilho = 6;
+                valorCor = 1;
+            }
+        }
+        else if (faseBrilho == 6)
+        {
+            corNova = new Color(corNova.r, corNova.g, valorCor, 1);
+
+            valorCor -= Time.deltaTime * velBrilhoBalas;
+
+            if (valorCor <= 0)
+            {
+                faseBrilho = 1;
+                valorCor = 0;
+            }
+        }
+
+        for (int i = 0; i < balas.Length; i++)
+        {
+            balas[i].color = corNova;
+        }
     }
 
 }

@@ -205,19 +205,7 @@ public class Chase : StateInimigos
             }
         }
         else
-        {
-            /*tempoAux -= Time.deltaTime;
-
-            //verificando se tem munição faltando
-            if (inimigo.GetComponent<Inimigo>().municaoAux < municao && tempoAux <= 0)
-            {
-                reload = true;
-                nextState = new Reload(inimigo, agent, player, municao, alcanceArma, cooldownTiro);
-                stage = EVENT.EXIT;
-
-                return;
-            }*/
-
+        {         
             base.Update();
         }   
     }
@@ -258,7 +246,6 @@ public class Atirar : StateInimigos
         if (inimigo.GetComponent<Inimigo>().inimigoSniper)
         {
             pararAndar = true;
-            Debug.Log("passeio");
         }
 
         //mirando no player e verificando se continua no alcançe do tiro
