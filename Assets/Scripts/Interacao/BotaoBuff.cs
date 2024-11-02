@@ -13,7 +13,6 @@ public class BotaoBuff : MonoBehaviour
 
     private void RetirarBuff()
     {
-        Debug.Log("Retirando buff");
         buffManager.RetirandoBuffDaLista(qualArvore, this.gameObject);
     }
 

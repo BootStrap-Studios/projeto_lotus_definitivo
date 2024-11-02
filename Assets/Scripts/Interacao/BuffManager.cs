@@ -52,7 +52,7 @@ public class BuffManager : MonoBehaviour
                 break;
 
             case 2:
-                SorteandoQuaisBuffs(botoesCorrosaoList);
+                SorteandoQuaisBuffs(botoesDefesaList);
                 //Debug.Log("Corrosao");
                 break;
 
@@ -61,12 +61,12 @@ public class BuffManager : MonoBehaviour
                 break;
 
             case 4:
-                SorteandoQuaisBuffs(botoesMovimentacaoList);
+                SorteandoQuaisBuffs(botoesDefesaList);
                 //Debug.Log("Movimentacao");
                 break;
 
             case 5:
-                SorteandoQuaisBuffs(botoesBurstList);
+                SorteandoQuaisBuffs(botoesDefesaList);
                 //Debug.Log("Burst");
                 break;
         }
@@ -80,31 +80,53 @@ public class BuffManager : MonoBehaviour
         for(int i = 0; i < buffs.Count; i++)
         {
             numbers.Add(i);
+            Debug.Log(i);
         }
+        
 
         List<int> numeroUsados = new List<int>();
 
-        int primeiroBuff = Random.Range(0, buffs.Count - 1);
-        numeroUsados.Add(primeiroBuff);
-
-        int segundoBuff = Random.Range(0, buffs.Count - 1);
-        while(numeroUsados.Contains(segundoBuff))
+        if(buffs.Count > 3)
         {
-            segundoBuff = Random.Range(0, buffs.Count - 1);
-        }
-        numeroUsados.Add(segundoBuff);
+            int primeiroBuff = Random.Range(0, buffs.Count - 1);
+            numeroUsados.Add(primeiroBuff);
 
-        int terceiroBuff = Random.Range(0, buffs.Count - 1);
-        while(numeroUsados.Contains(terceiroBuff))
+            buffs[primeiroBuff].gameObject.SetActive(true);
+
+
+            int segundoBuff = Random.Range(0, buffs.Count - 1);
+
+
+
+            while (numeroUsados.Contains(segundoBuff))
+            {
+                segundoBuff = Random.Range(0, buffs.Count - 1);
+            }
+
+
+            numeroUsados.Add(segundoBuff);
+
+            buffs[segundoBuff].gameObject.SetActive(true);
+
+
+            int terceiroBuff = Random.Range(0, buffs.Count - 1);
+
+            while (numeroUsados.Contains(terceiroBuff))
+            {
+                terceiroBuff = Random.Range(0, buffs.Count - 1);
+            }
+
+            buffs[terceiroBuff].gameObject.SetActive(true);
+        } else
         {
-            terceiroBuff = Random.Range(0, buffs.Count - 1);
+            foreach(GameObject botao in buffs)
+            {
+                botao.SetActive(true);
+            }
         }
+        
 
         menuBuffsUI.SetActive(true);
-        buffs[primeiroBuff].gameObject.SetActive(true);
-        buffs[segundoBuff].gameObject.SetActive(true);
-        buffs[terceiroBuff].gameObject.SetActive(true);
-
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -142,7 +164,6 @@ public class BuffManager : MonoBehaviour
 
     public void RetirandoBuffDaLista(int qualArvore, GameObject botaoBuff) 
     {
-        Debug.Log("Retirando buff");
         switch(qualArvore)
         {
             case 1:
