@@ -1027,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 7399106940259868427, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
   - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
   - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  agent: {fileID: 3150992084815142018}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -1038,9 +1039,11 @@ MonoBehaviour:
   cooldownTiro: 2.5
   velProjetil: 85
   velocidadeAndar: 5
+  giro: {fileID: 7197857029520921749}
   inimigoExplosivo: 0
   inimigoSniper: 1
   inimigoNormal: 0
+  inimigoTorreta: 0
   _barraDeVida: {fileID: 7009076138045804874}
   vida: 5
   statusInimigo: {fileID: 2220492415571558955}

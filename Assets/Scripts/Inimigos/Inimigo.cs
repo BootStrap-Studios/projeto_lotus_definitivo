@@ -15,9 +15,9 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private Transform pontaArma;
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private GameObject[] dropPrefab;
-    private ProjetilInimigo tiro;
+    [SerializeField] private NavMeshAgent agent;
     public LayerMask playerMask;
-    private NavMeshAgent agent;
+    private ProjetilInimigo tiro;   
     private StateInimigos stateInimigo;
 
     [Header("Arma")]
@@ -32,9 +32,11 @@ public class Inimigo : MonoBehaviour
 
     [Header("Personagem")]
     [SerializeField] private float velocidadeAndar;
+    public GameObject giro;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
     public bool inimigoNormal;
+    public bool inimigoTorreta;
     private bool dropando;
 
     [Header("UI_Inimigos")]
@@ -65,7 +67,6 @@ public class Inimigo : MonoBehaviour
     {
         statusJogador = FindObjectOfType<StatusJogador>();
 
-        agent = GetComponent<NavMeshAgent>();
         vidaAtual = vida;
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
 
@@ -196,14 +197,14 @@ public class Inimigo : MonoBehaviour
     #endregion
 
     public bool Atirar()
-    {
+    {        
         RaycastHit hit;
 
         if (!inimigoExplosivo && Physics.Raycast(pontaArma.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
-        {
-
-            if (hit.transform.tag == "Player")
+        {          
+            if (hit.transform.tag == "Player" || inimigoTorreta)
             {
+                Debug.Log("passeio2");
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
                 tiro.gameObject.SetActive(true);
@@ -268,7 +269,7 @@ public class Inimigo : MonoBehaviour
         float posX = Random.Range(transform.position.x - 2, transform.position.x + 2);
         float posZ = Random.Range(transform.position.z - 2, transform.position.z + 2);
 
-        Vector3 posDrop = new Vector3(posX, transform.position.y, posZ); 
+        Vector3 posDrop = new Vector3(posX, transform.position.y, posZ);
 
         Instantiate(dropPrefab[0], posDrop, transform.rotation);
         int itemExtra = Random.Range(1, 11);

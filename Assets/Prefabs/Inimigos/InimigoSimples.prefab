@@ -494,7 +494,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -707,6 +707,7 @@ MonoBehaviour:
   - {fileID: 7399106940259868427, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
   - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
   - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  agent: {fileID: 3913204490852866316}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -718,9 +719,11 @@ MonoBehaviour:
   cooldownTiro: 1
   velProjetil: 35
   velocidadeAndar: 7
+  giro: {fileID: 5160690153797411868}
   inimigoExplosivo: 0
   inimigoSniper: 0
   inimigoNormal: 1
+  inimigoTorreta: 0
   _barraDeVida: {fileID: 3060558376259822263}
   vida: 10
   statusInimigo: {fileID: 7447116055161541127}
