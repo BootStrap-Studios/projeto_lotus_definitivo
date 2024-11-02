@@ -53,10 +53,10 @@ public class StatusJogador : MonoBehaviour
     public float danoBurst;
 
     //Essa variavel é para aumentar o dano quando os inimigos sao derrotados
-    public bool misc1Burst;
+    public bool misc2Burst;
 
     //Essa variavel é para os inimigos explodirem
-    public bool misc2Burst;
+    public bool misc3Burst;
 
     [Header("Defesa")]
     public bool ultimateDefesa;
@@ -97,6 +97,9 @@ public class StatusJogador : MonoBehaviour
         danoArmadilha1 = 5;
 
         qualReload = "Nenhum";
+        arma.tipoDoBuff = "Nenhum";
+        shotgun.tipoDoBuff = "Nenhum";
+        shuriken.tipoDoBuff = "Nenhum";
 
         chanceDeAcertoCriticoBase = 0f;
         danoDoAcertoCritico = 1.5f;
@@ -110,8 +113,8 @@ public class StatusJogador : MonoBehaviour
 
         dashBurst = false;
         danoBurst = 3f;
-        misc1Burst = false;
         misc2Burst = false;
+        misc3Burst = false;
 
         danoCorrosao = 1f;
         duracaoCorrosao = 5;
@@ -130,11 +133,40 @@ public class StatusJogador : MonoBehaviour
 
     #region BuffsMovimentação
 
-    public void BuffMovimentacaoDash()
+    public void BuffDisparoMovimentacao()
+    {
+        arma.tipoDoBuff = "Movimentacao";
+        shotgun.tipoDoBuff = "Movimentacao";
+        shuriken.tipoDoBuff = "Movimentacao";
+    }
+    public void BuffDashMovimentacao()
     {
         quantidadeDeDashTotal++;
         quantidadeDeDash = quantidadeDeDashTotal;
     }
+
+    public void BuffReloadMovimentacao()
+    {
+        qualReload = "Movimentacao";
+    }
+
+    //Destruir um inimigo da velocidade de movimento
+    public void BuffMisc1Movimentacao()
+    {
+        misc1movimentacao = true;
+    }
+
+    //Player ganhar velocidade ao ficar com pouca vida
+    public void BuffMisc2Movimentacao()
+    {
+        misc2movimentacao = true;
+    }
+
+    public void BuffMisc3Movimentacao()
+    {
+        AumentarDuracaoBuffVelocidade();
+    }
+
 
     public void BuffVelocidade()
     {
@@ -199,10 +231,40 @@ public class StatusJogador : MonoBehaviour
 
     }
 
-    public void Misc1Burst()
+    
+
+    public void BuffDisparoBurst()
+    {
+        arma.tipoDoBuff = "Burst";
+        shotgun.tipoDoBuff = "Burst";
+        shuriken.tipoDoBuff = "Burst";
+    }
+
+    public void BuffDashBurst()
+    {
+        dashBurst = true;
+    }
+
+    public void BuffReloadBurst()
+    {
+        qualReload = "Burst";
+    }
+
+    public void BuffMisc1Burst()
     {
         danoBurst = 5f;
     }
+
+    public void BuffMisc2Burst()
+    {
+        misc2Burst = true;
+    }
+
+    public void BuffMisc3Burst()
+    {
+        misc3Burst = true;
+    }
+
 
 
     #endregion
@@ -223,10 +285,7 @@ public class StatusJogador : MonoBehaviour
         ultimateDefesa = false;
     }
 
-    public void ReceberMenosDanoArmadilha()
-    {
-        danoArmadilha1 = 3f;
-    }
+   
 
     public void AtivarEscudo()
     {
@@ -248,7 +307,6 @@ public class StatusJogador : MonoBehaviour
             escudoAtivo = false;
         }
     }
-
     public void BuffTiroDefesa()
     {
         arma.tipoDoBuff = "Defesa";
@@ -271,16 +329,53 @@ public class StatusJogador : MonoBehaviour
         misc2Defesa = true;
     }
 
+    public void ReceberMenosDanoArmadilha()
+    {
+        danoArmadilha1 = 3f;
+    }
+
     #endregion
 
     #region BuffsCorrosao
 
+    public void BuffTiroCorrosao()
+    {
+        arma.tipoDoBuff = "Corrosao";
+        shotgun.tipoDoBuff = "Corrosao";
+        shuriken.tipoDoBuff = "Corrosao";
+    }
     public void SpawnarPocaCorrosao()
     {
         Instantiate(pocaCorrosao, peDoJogador.transform);
     }
 
+    public void BuffDashCorrosao()
+    {
+        dashCorrosaoAtivo = true;
+    }
+
+    public void BuffReloadCorrosao()
+    {
+        qualReload = "Corrosao";
+    }
+
+    public void BuffMisc1Corrosao()
+    {
+        danoCorrosao = 1.5f;
+    }
+
+    public void BuffMisc2Corrosao()
+    {
+        duracaoCorrosao = 7;
+    }
+
+    public void BuffMisc3Corrosao()
+    {
+        duracaoPoca = 7;
+    }
     #endregion
+
+
     //quando jogador selecionar uma ult chamar essa função
     public void DesbloqueiaUlt(string _qualUlt)
     {

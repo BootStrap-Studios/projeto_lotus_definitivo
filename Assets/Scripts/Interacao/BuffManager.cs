@@ -2,93 +2,172 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
-public class BuffManager : MonoBehaviour, IInteractable
+public class BuffManager : MonoBehaviour
 {
-    [SerializeField] private GameObject botoesArea;
-
     [SerializeField] private GameObject[] botoesDefesa;
     [SerializeField] private GameObject[] botoesCorrosao;
-    [SerializeField] private GameObject[] botoesCritico;
+    //[SerializeField] private GameObject[] botoesCritico;
     [SerializeField] private GameObject[] botoesMovimentacao;
     [SerializeField] private GameObject[] botoesBurst;
 
+    private List<GameObject> botoesDefesaList;
+    private List<GameObject> botoesCorrosaoList;
+    //private List<GameObject> botoesCriticoList;
+    private List<GameObject> botoesMovimentacaoList;
+    private List<GameObject> botoesBurstList;
+
     private StatusJogador statusJogador;
+
+    [SerializeField] private GameObject menuBuffsUI;
 
     private void Start()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
-    }
-    public void Interagir()
-    {
-        SorteandoQualArvore();
+
+        PassandoArrayPraList();
     }
 
-    private void SorteandoQualArvore()
+    private void PassandoArrayPraList()
     {
-        int aux = Random.Range(1, 5);
+        botoesDefesaList = botoesDefesa.ToList();
+        botoesCorrosaoList = botoesCorrosao.ToList();
+        //botoesCriticoList = botoesCritico.ToList();
+        botoesMovimentacaoList = botoesMovimentacao.ToList();
+        botoesBurstList = botoesBurst.ToList();
+    }
 
-        switch(aux)
+    public void SorteandoQualArvore()
+    {
+        int i = Random.Range(1, 5);
+
+        //Debug.Log(i);
+
+        switch(i)
         {
             case 1:
-
-                SorteandoQuaisBuffs(botoesDefesa);
+                SorteandoQuaisBuffs(botoesDefesaList);
+                //Debug.Log("Defesa");
                 break;
 
             case 2:
-                SorteandoQuaisBuffs(botoesCorrosao);
+                SorteandoQuaisBuffs(botoesCorrosaoList);
+                //Debug.Log("Corrosao");
                 break;
 
             case 3:
-                SorteandoQuaisBuffs(botoesBurst);
+                //SorteandoQuaisBuffs(botoesCriticoList);
                 break;
 
             case 4:
-                SorteandoQuaisBuffs(botoesCritico);
+                SorteandoQuaisBuffs(botoesMovimentacaoList);
+                //Debug.Log("Movimentacao");
                 break;
 
             case 5:
-                SorteandoQuaisBuffs(botoesMovimentacao);
+                SorteandoQuaisBuffs(botoesBurstList);
+                //Debug.Log("Burst");
                 break;
         }
+        
     }
 
-    private void SorteandoQuaisBuffs(GameObject[] buffs)
+    private void SorteandoQuaisBuffs(List<GameObject> buffs)
     {
-        int aux1 = Random.Range(0, buffs.Length);
-        int aux2 = Random.Range(0, buffs.Length);
-        int aux3 = Random.Range(0, buffs.Length);
+        List<int> numbers = new List<int>();
 
-        buffs[aux1].SetActive(true);
-        buffs[aux2].SetActive(true);
-        buffs[aux3].SetActive(true);
+        for(int i = 0; i < buffs.Count; i++)
+        {
+            numbers.Add(i);
+        }
+
+        List<int> numeroUsados = new List<int>();
+
+        int primeiroBuff = Random.Range(0, buffs.Count - 1);
+        numeroUsados.Add(primeiroBuff);
+
+        int segundoBuff = Random.Range(0, buffs.Count - 1);
+        while(numeroUsados.Contains(segundoBuff))
+        {
+            segundoBuff = Random.Range(0, buffs.Count - 1);
+        }
+        numeroUsados.Add(segundoBuff);
+
+        int terceiroBuff = Random.Range(0, buffs.Count - 1);
+        while(numeroUsados.Contains(terceiroBuff))
+        {
+            terceiroBuff = Random.Range(0, buffs.Count - 1);
+        }
+
+        menuBuffsUI.SetActive(true);
+        buffs[primeiroBuff].gameObject.SetActive(true);
+        buffs[segundoBuff].gameObject.SetActive(true);
+        buffs[terceiroBuff].gameObject.SetActive(true);
+
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
     }
 
     public void DesativandoTodosOsBotoes()
     {
-        for(int i = 0; i < botoesBurst.Length; i++)
-        {
-            botoesBurst[i].SetActive(false);
-        }
-
-        for (int i = 0; i < botoesDefesa.Length; i++)
+        for(int i = 0; i < botoesDefesa.Length; i++)
         {
             botoesDefesa[i].SetActive(false);
         }
-
-        for (int i = 0; i < botoesCritico.Length; i++)
+        for (int i = 0; i < botoesCorrosao.Length; i++)
+        {
+            botoesCorrosao[i].SetActive(false);
+        }
+        /*for (int i = 0; i < botoesCritico.Length; i++)
         {
             botoesCritico[i].SetActive(false);
-        }
-
+        }*/
         for (int i = 0; i < botoesMovimentacao.Length; i++)
         {
             botoesMovimentacao[i].SetActive(false);
         }
-
-        for (int i = 0; i < botoesCorrosao.Length; i++)
+        for (int i = 0; i < botoesBurst.Length; i++)
         {
-            botoesCorrosao[i].SetActive(false);
+            botoesBurst[i].SetActive(false);
+        }
+
+        menuBuffsUI.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void RetirandoBuffDaLista(int qualArvore, GameObject botaoBuff) 
+    {
+        Debug.Log("Retirando buff");
+        switch(qualArvore)
+        {
+            case 1:
+                botoesDefesaList.Remove(botaoBuff);
+                Debug.Log(botaoBuff);
+                break;
+
+            case 2:
+                botoesCorrosaoList.Remove(botaoBuff);
+                Debug.Log(botaoBuff);
+                break;
+
+            case 3:
+                //botoesCriticoList.Remove(botaoBuff);
+                break;
+
+            case 4:
+                botoesMovimentacaoList.Remove(botaoBuff);
+                Debug.Log(botaoBuff);
+                break;
+
+            case 5:
+                botoesBurstList.Remove(botaoBuff);
+                Debug.Log(botaoBuff);
+                break;
         }
     }
 }

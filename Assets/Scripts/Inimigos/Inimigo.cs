@@ -157,7 +157,8 @@ public class Inimigo : MonoBehaviour
             DroparItem();
 
             MiscMovimentacao();
-
+            MiscBurst2();
+            MiscBurst3();
 
             Destroy(gameObject);
         }
@@ -173,14 +174,22 @@ public class Inimigo : MonoBehaviour
         }
     }
 
-    private void MiscBurst1()
-    {
-        statusJogador.ReloadBurst();
-    }
-
     private void MiscBurst2()
     {
-        //MARGELAH REPLIQUE O CODIGO DO INIMIGO BOMBA AQUI POR FAVOR
+        if(statusJogador.misc2Burst)
+        {
+            statusJogador.ReloadBurst();
+        }
+        
+    }
+
+    private void MiscBurst3()
+    {
+        if(statusJogador.misc3Burst)
+        {
+            //MARGELAH REPLIQUE O CODIGO DO INIMIGO BOMBA AQUI POR FAVOR
+        }
+        
     }
     
 
