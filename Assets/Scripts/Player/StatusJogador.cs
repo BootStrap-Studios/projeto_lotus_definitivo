@@ -348,7 +348,8 @@ public class StatusJogador : MonoBehaviour
     }
     public void SpawnarPocaCorrosao()
     {
-        Instantiate(pocaCorrosao, peDoJogador.transform);
+        Debug.Log("Spawnando poça corrosao");
+        Instantiate(pocaCorrosao, peDoJogador.transform.position, Quaternion.identity);
     }
 
     public void BuffDashCorrosao()

@@ -17,6 +17,7 @@ public class PocaCorrosao : MonoBehaviour
     {
         if(other.CompareTag("Inimigo"))
         {
+            Debug.Log("Corroendo");
             other.GetComponent<Inimigo>().CorrosaoDireto();
         }
     }

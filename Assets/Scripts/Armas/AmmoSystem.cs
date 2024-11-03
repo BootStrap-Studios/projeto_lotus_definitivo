@@ -177,6 +177,7 @@ public class AmmoSystem : MonoBehaviour
         if (barraMunicaoUI.handleRect.position.x > valorMin && barraMunicaoUI.handleRect.position.x < valorMax)
         {
             StartCoroutine(BalasRecaregando(timerQTECertoReload));
+            statusJogador.ReloadBuffs();
         }
         else
         {
