@@ -32,6 +32,8 @@ public class StatusJogador : MonoBehaviour
 
     public bool dashAcertoCritico;
 
+    public bool misc2Critico;
+
     [Header("Movimentação")]
     public float velocidadeAndando;
     public float velocidadePulando;
@@ -104,6 +106,7 @@ public class StatusJogador : MonoBehaviour
         chanceDeAcertoCriticoBase = 0f;
         danoDoAcertoCritico = 1.5f;
         dashAcertoCritico = false;
+        misc2Critico = false;
 
         quantidadeDeDash = 1;
         quantidadeDeDashTotal = 1;
@@ -208,7 +211,6 @@ public class StatusJogador : MonoBehaviour
 
 
     #endregion
-
 
     #region  BuffsBurst
 
@@ -373,6 +375,37 @@ public class StatusJogador : MonoBehaviour
     {
         duracaoPoca = 7;
     }
+    #endregion
+
+    #region BuffsCritico
+
+    public void BuffDisparoCritico()
+    {
+        arma.tipoDoBuff = "Critico";
+        shotgun.tipoDoBuff = "Critico";
+        shuriken.tipoDoBuff = "Critico";
+    }
+
+    public void BuffDashCritico()
+    {
+        dashAcertoCritico = true;
+    }
+
+    public void BuffReloadCritico()
+    {
+        qualReload = "Critico";
+    }
+
+    public void BuffMisc1Critico()
+    {
+        danoDoAcertoCritico = 1.8f;
+    }
+
+    public void BuffMisc2Critico()
+    {
+        misc2Critico = true;
+    }
+
     #endregion
 
 

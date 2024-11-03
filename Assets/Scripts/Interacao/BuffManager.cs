@@ -8,13 +8,13 @@ public class BuffManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] botoesDefesa;
     [SerializeField] private GameObject[] botoesCorrosao;
-    //[SerializeField] private GameObject[] botoesCritico;
+    [SerializeField] private GameObject[] botoesCritico;
     [SerializeField] private GameObject[] botoesMovimentacao;
     [SerializeField] private GameObject[] botoesBurst;
 
     private List<GameObject> botoesDefesaList;
     private List<GameObject> botoesCorrosaoList;
-    //private List<GameObject> botoesCriticoList;
+    private List<GameObject> botoesCriticoList;
     private List<GameObject> botoesMovimentacaoList;
     private List<GameObject> botoesBurstList;
 
@@ -33,7 +33,7 @@ public class BuffManager : MonoBehaviour
     {
         botoesDefesaList = botoesDefesa.ToList();
         botoesCorrosaoList = botoesCorrosao.ToList();
-        //botoesCriticoList = botoesCritico.ToList();
+        botoesCriticoList = botoesCritico.ToList();
         botoesMovimentacaoList = botoesMovimentacao.ToList();
         botoesBurstList = botoesBurst.ToList();
     }
@@ -52,21 +52,21 @@ public class BuffManager : MonoBehaviour
                 break;
 
             case 2:
-                SorteandoQuaisBuffs(botoesDefesaList);
+                SorteandoQuaisBuffs(botoesCorrosaoList);
                 //Debug.Log("Corrosao");
                 break;
 
             case 3:
-                //SorteandoQuaisBuffs(botoesCriticoList);
+                SorteandoQuaisBuffs(botoesCriticoList);
                 break;
 
             case 4:
-                SorteandoQuaisBuffs(botoesDefesaList);
+                SorteandoQuaisBuffs(botoesMovimentacaoList);
                 //Debug.Log("Movimentacao");
                 break;
 
             case 5:
-                SorteandoQuaisBuffs(botoesDefesaList);
+                SorteandoQuaisBuffs(botoesBurstList);
                 //Debug.Log("Burst");
                 break;
         }
@@ -143,10 +143,10 @@ public class BuffManager : MonoBehaviour
         {
             botoesCorrosao[i].SetActive(false);
         }
-        /*for (int i = 0; i < botoesCritico.Length; i++)
+        for (int i = 0; i < botoesCritico.Length; i++)
         {
             botoesCritico[i].SetActive(false);
-        }*/
+        }
         for (int i = 0; i < botoesMovimentacao.Length; i++)
         {
             botoesMovimentacao[i].SetActive(false);
@@ -177,7 +177,7 @@ public class BuffManager : MonoBehaviour
                 break;
 
             case 3:
-                //botoesCriticoList.Remove(botaoBuff);
+                botoesCriticoList.Remove(botaoBuff);
                 break;
 
             case 4:

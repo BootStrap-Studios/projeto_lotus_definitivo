@@ -19,7 +19,7 @@ public class DashCollider : MonoBehaviour
         {
             if(statusJogador.dashAcertoCritico)
             {
-                //Efeito do dash critico
+                other.GetComponent<Inimigo>().vulneravel = true;
             }
 
             if(statusJogador.dashBurst)

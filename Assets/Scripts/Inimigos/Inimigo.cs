@@ -63,12 +63,16 @@ public class Inimigo : MonoBehaviour
 
     private float danoDaArma;
 
+    public bool vulneravel;
+
     void Start()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
 
         vidaAtual = vida;
         _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+
+        vulneravel = false;
 
         stateInimigo = new Idle(gameObject, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar); 
     }
@@ -111,32 +115,79 @@ public class Inimigo : MonoBehaviour
         {
             case "Critico":
 
-                EfeitoCritico(danoDaArma);
+                
+                    EfeitoCritico(danoDaArma);
+              
+                
                 break;
 
             case "Defesa":
 
-                EfeitoDefesa(danoDaArma);
+                if(vulneravel)
+                {
+                    EfeitoDefesa(danoDaArma *= statusJogador.danoDoAcertoCritico);
+                    vulneravel = false;
+                } else
+                {
+                    EfeitoDefesa(danoDaArma);
+                }
+                
                 break;
 
             case "Movimentacao":
 
-                EfeitoMovimentacao(danoDaArma);
+                if(vulneravel)
+                {
+                    EfeitoMovimentacao(danoDaArma *= statusJogador.danoDoAcertoCritico);
+                    vulneravel = false;
+                }
+                else
+                {
+                    EfeitoMovimentacao(danoDaArma);
+                }
+                
                 break;
 
             case "Corrosao":
 
-                EfeitoCorrosao(danoDaArma);
+                if(vulneravel)
+                {
+                    EfeitoCorrosao(danoDaArma *= statusJogador.danoDoAcertoCritico);
+                    vulneravel = false;
+                } else
+                {
+                    EfeitoCorrosao(danoDaArma);
+                }
+                
                 break;
 
             case "Burst":
 
-                EfeitoBurst(danoDaArma);
+                if(vulneravel)
+                {
+                    EfeitoBurst(danoDaArma *= statusJogador.danoDoAcertoCritico);
+                    vulneravel = false;
+
+                } else
+                {
+                    EfeitoBurst(danoDaArma);
+                }
+                
                 break;
 
             case "Nenhum":
-                vidaAtual -= danoDaArma;
-                _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+                if(vulneravel)
+                {
+                    vidaAtual -= danoDaArma *= statusJogador.danoDoAcertoCritico;
+                    _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+                    vulneravel = false;
+                } else
+                {
+                    vidaAtual -= danoDaArma;
+                    _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+                }
+                
+
                 break;
         }
 
@@ -160,6 +211,7 @@ public class Inimigo : MonoBehaviour
             MiscMovimentacao();
             MiscBurst2();
             MiscBurst3();
+            Misc2Critico();
 
             Destroy(gameObject);
         }
@@ -191,6 +243,16 @@ public class Inimigo : MonoBehaviour
             //MARGELAH REPLIQUE O CODIGO DO INIMIGO BOMBA AQUI POR FAVOR
         }
         
+    }
+
+    private void Misc2Critico()
+    {
+        Inimigo inimigoX = FindObjectOfType<Inimigo>();
+
+        if(inimigoX != null)
+        {
+            inimigoX.vulneravel = true;
+        }
     }
     
 
@@ -292,16 +354,26 @@ public class Inimigo : MonoBehaviour
     public void EfeitoCritico(float dano)
     {
 
-        int aux = Random.Range(1, 11);
-
-        if(aux <= statusJogador.chanceDeAcertoCriticoAtual)
+        if(vulneravel)
         {
             dano *= statusJogador.danoDoAcertoCritico;
-            Debug.Log("Critei" + dano);
-        }
+            vidaAtual -= dano;
+            _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
 
-        vidaAtual -= dano;
-        _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+        } else
+        {
+            int aux = Random.Range(1, 11);
+
+            if (aux <= statusJogador.chanceDeAcertoCriticoAtual)
+            {
+                dano *= statusJogador.danoDoAcertoCritico;
+                Debug.Log("Critei" + dano);
+            }
+
+            vidaAtual -= dano;
+            _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
+        }
+        
     }
 
     public void EfeitoDefesa(float dano)
