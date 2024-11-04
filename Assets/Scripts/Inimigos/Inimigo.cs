@@ -66,6 +66,8 @@ public class Inimigo : MonoBehaviour
 
     void Start()
     {
+        player = FindObjectOfType<PlayerMovement>().GetComponent<Transform>();
+        objectPool = FindObjectOfType<ObjectPool>();
         statusJogador = FindObjectOfType<StatusJogador>();
 
         vidaAtual = vida;
@@ -246,7 +248,11 @@ public class Inimigo : MonoBehaviour
             colisaoArea.gameObject.SetActive(true);
             colisaoArea.OqueFazer("darDanoExplosao");
             StartCoroutine(MorrerAposExplosao());
-        }      
+        }
+        else
+        {
+            Destroy(objInimigo);
+        }
     }
 
     private IEnumerator MorrerAposExplosao()

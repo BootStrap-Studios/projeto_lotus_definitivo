@@ -5,19 +5,9 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     private List<GameObject> pooledObjects = new List<GameObject>();
-    [SerializeField] private int amountToPool;
+    private int amountToPool;
 
     [SerializeField] private GameObject objectToPool;
-
-    void Start()
-    {
-        for(int i = 0; i < amountToPool; i++)
-        {
-            GameObject obj = Instantiate(objectToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
-        }
-    }
 
     public GameObject GetPooledObject()
     {
@@ -30,5 +20,17 @@ public class ObjectPool : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void DeterminaPool(int quantidadeInimigos,int quantidadeWaves)
+    {
+        amountToPool = (quantidadeInimigos / quantidadeWaves) * 10;
+
+        for (int i = 0; i < amountToPool; i++)
+        {
+            GameObject obj = Instantiate(objectToPool);
+            obj.SetActive(false);
+            pooledObjects.Add(obj);
+        }
     }
 }
