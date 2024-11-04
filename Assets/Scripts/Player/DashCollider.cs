@@ -24,7 +24,10 @@ public class DashCollider : MonoBehaviour
 
             if(statusJogador.dashBurst)
             {
-                other.GetComponent<Inimigo>().TomarDanoDireto(danoDoDash);
+                if (other.GetComponent<Inimigo>() != null)
+                {
+                    other.GetComponent<Inimigo>().TomarDanoDireto(danoDoDash);
+                }
             }
 
         }

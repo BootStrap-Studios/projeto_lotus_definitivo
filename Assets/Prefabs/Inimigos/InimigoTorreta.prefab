@@ -134,6 +134,100 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2296097861306036615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7816690809654736197}
+  - component: {fileID: 11523790270618456}
+  - component: {fileID: 4501753547164981160}
+  - component: {fileID: 3672210165336642477}
+  m_Layer: 8
+  m_Name: ColliderArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7816690809654736197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296097861306036615}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4948591793796373246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &11523790270618456
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296097861306036615}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &4501753547164981160
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296097861306036615}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3672210165336642477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296097861306036615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c06ef825ec4b34ea4da3f2ff209c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2595575320872573650
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +239,10 @@ GameObject:
   - component: {fileID: 2070096447842189582}
   - component: {fileID: 7986410829739466391}
   - component: {fileID: 3976502807399100710}
+  - component: {fileID: 5991357276424664163}
   - component: {fileID: 7367771199799504424}
   - component: {fileID: 8216139500462382335}
+  - component: {fileID: 7817837371371520518}
   m_Layer: 8
   m_Name: CorpoTorreta
   m_TagString: Inimigo
@@ -221,6 +317,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5991357276424664163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595575320872573650}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.5, z: 2}
+  m_Center: {x: 0, y: -0.75, z: 0}
 --- !u!136 &7367771199799504424
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -238,7 +355,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -266,6 +383,51 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7817837371371520518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595575320872573650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e68ccd63aa34d48b48aa243db287fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  pontaArma: {fileID: 7157145739056762475}
+  objectPool: {fileID: 0}
+  dropPrefab:
+  - {fileID: 7399106940259868427, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: 7399106940259868427, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
+  - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  agent: {fileID: 8216139500462382335}
+  colisaoArea: {fileID: 3672210165336642477}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  inimigoMask:
+    serializedVersion: 2
+    m_Bits: 256
+  municao: 3
+  danoTiro: 2
+  danoTiroReduzido: 1
+  alcanceMaxArma: 20
+  alcanceMinArma: 1
+  cooldownTiro: 2.5
+  velProjetil: 45
+  velocidadeAndar: 0
+  objInimigo: {fileID: 9109107839324818849}
+  inimigoExplosivo: 0
+  inimigoSniper: 0
+  inimigoNormal: 0
+  inimigoTorreta: 1
+  _barraDeVida: {fileID: 1697084210859825114}
+  vida: 10
+  statusInimigo: {fileID: 2676457566838484742}
+  vulneravel: 0
 --- !u!1 &2638659160133016147
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +885,7 @@ Transform:
   m_GameObject: {fileID: 3583482381206284349}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.339, z: 0.899}
+  m_LocalPosition: {x: 0, y: 0.339, z: 0.716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -905,7 +1067,7 @@ GameObject:
   - component: {fileID: 4563999168191810072}
   - component: {fileID: 5315162130115982303}
   - component: {fileID: 7700869593383533521}
-  - component: {fileID: 5716794825863173540}
+  - component: {fileID: 6260908817313065128}
   m_Layer: 8
   m_Name: BaseTorreta
   m_TagString: Inimigo
@@ -978,8 +1140,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5716794825863173540
-CapsuleCollider:
+--- !u!65 &6260908817313065128
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -995,12 +1157,10 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0.00000023841858, z: -0.00000008940697}
 --- !u!1 &6943535443049210776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,9 +1318,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4948591793796373246}
-  - component: {fileID: 2957686132871761115}
-  - component: {fileID: 2996194800946598442}
-  - component: {fileID: 8307197660038877092}
   m_Layer: 8
   m_Name: InimigoTorreta
   m_TagString: Inimigo
@@ -1184,91 +1341,6 @@ Transform:
   - {fileID: 5603896409504416740}
   - {fileID: 2070096447842189582}
   - {fileID: 4563999168191810072}
+  - {fileID: 7816690809654736197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2957686132871761115
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9109107839324818849}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.5, z: 0}
---- !u!65 &2996194800946598442
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9109107839324818849}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.4, z: 2}
-  m_Center: {x: 0, y: -1, z: 0}
---- !u!114 &8307197660038877092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9109107839324818849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61e68ccd63aa34d48b48aa243db287fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  pontaArma: {fileID: 7157145739056762475}
-  objectPool: {fileID: 0}
-  dropPrefab:
-  - {fileID: 7399106940259868427, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
-  - {fileID: 7399106940259868427, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
-  - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
-  - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
-  agent: {fileID: 8216139500462382335}
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  municao: 3
-  danoTiro: 1
-  danoTiroReduzido: 0
-  alcanceMaxArma: 20
-  alcanceMinArma: 1
-  cooldownTiro: 2.5
-  velProjetil: 45
-  velocidadeAndar: 0
-  giro: {fileID: 2595575320872573650}
-  inimigoExplosivo: 0
-  inimigoSniper: 0
-  inimigoNormal: 0
-  inimigoTorreta: 1
-  _barraDeVida: {fileID: 1697084210859825114}
-  vida: 10
-  statusInimigo: {fileID: 2676457566838484742}
-  danoCorrosao: 1
-  danoBurst: 3

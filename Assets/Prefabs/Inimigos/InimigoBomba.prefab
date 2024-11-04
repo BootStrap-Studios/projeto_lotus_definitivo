@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 758840349870609398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.42, z: 0.769}
+  m_LocalPosition: {x: 0, y: 0.42, z: 0.729}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -356,6 +356,7 @@ Transform:
   - {fileID: 6437805210063521181}
   - {fileID: 2967844197978323477}
   - {fileID: 7274119449571051963}
+  - {fileID: 5366447887826866689}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &567547199691000535
@@ -474,18 +475,22 @@ MonoBehaviour:
   - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
   - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
   agent: {fileID: 1687168945723254847}
+  colisaoArea: {fileID: 2343993740260766673}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
+  inimigoMask:
+    serializedVersion: 2
+    m_Bits: 256
   municao: 1
   danoTiro: 8
-  danoTiroReduzido: 0
+  danoTiroReduzido: 6
   alcanceMaxArma: 4
   alcanceMinArma: 2.75
   cooldownTiro: 0.6
   velProjetil: 30
   velocidadeAndar: 15
-  giro: {fileID: 3416823112405702447}
+  objInimigo: {fileID: 3416823112405702447}
   inimigoExplosivo: 1
   inimigoSniper: 0
   inimigoNormal: 0
@@ -493,8 +498,101 @@ MonoBehaviour:
   _barraDeVida: {fileID: 3245221272968474681}
   vida: 3
   statusInimigo: {fileID: 4775557570939304502}
-  danoCorrosao: 1
-  danoBurst: 3
+  vulneravel: 0
+--- !u!1 &3835908710334161532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5366447887826866689}
+  - component: {fileID: 3590553111075355075}
+  - component: {fileID: 7905551933822992116}
+  - component: {fileID: 2343993740260766673}
+  m_Layer: 8
+  m_Name: ColliderArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5366447887826866689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3835908710334161532}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121688100182035073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &3590553111075355075
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3835908710334161532}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &7905551933822992116
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3835908710334161532}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2343993740260766673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3835908710334161532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c06ef825ec4b34ea4da3f2ff209c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4139730664208401287
 GameObject:
   m_ObjectHideFlags: 0

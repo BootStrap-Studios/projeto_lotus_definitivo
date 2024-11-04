@@ -80,7 +80,6 @@ public class BuffManager : MonoBehaviour
         for(int i = 0; i < buffs.Count; i++)
         {
             numbers.Add(i);
-            Debug.Log(i);
         }
         
 

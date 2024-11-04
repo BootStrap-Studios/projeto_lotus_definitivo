@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 1101724948185662059}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0, y: 0.234, z: 0.718}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -366,6 +366,100 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4893085601904158198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5172970112103646518}
+  - component: {fileID: 3739231406097077368}
+  - component: {fileID: 1881568310825981224}
+  - component: {fileID: 8306862236601383029}
+  m_Layer: 8
+  m_Name: ColliderArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5172970112103646518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893085601904158198}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3514350389769855035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &3739231406097077368
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893085601904158198}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &1881568310825981224
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893085601904158198}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8306862236601383029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893085601904158198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c06ef825ec4b34ea4da3f2ff209c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5633998233913100924
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +1004,7 @@ Transform:
   - {fileID: 3401194028593486679}
   - {fileID: 344816830506500355}
   - {fileID: 5238335158701005813}
+  - {fileID: 5172970112103646518}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4216822139916718748
@@ -1028,18 +1123,22 @@ MonoBehaviour:
   - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
   - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
   agent: {fileID: 3150992084815142018}
+  colisaoArea: {fileID: 8306862236601383029}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
+  inimigoMask:
+    serializedVersion: 2
+    m_Bits: 256
   municao: 3
   danoTiro: 3
-  danoTiroReduzido: 0
+  danoTiroReduzido: 1
   alcanceMaxArma: 10000
   alcanceMinArma: 20
   cooldownTiro: 2.5
   velProjetil: 85
   velocidadeAndar: 5
-  giro: {fileID: 7197857029520921749}
+  objInimigo: {fileID: 7197857029520921749}
   inimigoExplosivo: 0
   inimigoSniper: 1
   inimigoNormal: 0
@@ -1047,8 +1146,7 @@ MonoBehaviour:
   _barraDeVida: {fileID: 7009076138045804874}
   vida: 5
   statusInimigo: {fileID: 2220492415571558955}
-  danoCorrosao: 1
-  danoBurst: 3
+  vulneravel: 0
 --- !u!1 &7394826602719657590
 GameObject:
   m_ObjectHideFlags: 0

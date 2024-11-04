@@ -16,7 +16,8 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private GameObject[] dropPrefab;
     [SerializeField] private NavMeshAgent agent;
-    public LayerMask playerMask;
+    [SerializeField] private ColliderArea colisaoArea;
+    public LayerMask playerMask, inimigoMask;
     private ProjetilInimigo tiro;   
     private StateInimigos stateInimigo;
 
@@ -32,7 +33,7 @@ public class Inimigo : MonoBehaviour
 
     [Header("Personagem")]
     [SerializeField] private float velocidadeAndar;
-    public GameObject giro;
+    [SerializeField] private GameObject objInimigo;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
     public bool inimigoNormal;
@@ -47,7 +48,6 @@ public class Inimigo : MonoBehaviour
 
 
     [Header("Status")]
-    public float danoCorrosao = 1f;
     private int statusCorrosao = 0;
     private bool boolCorrosao = false; 
 
@@ -55,7 +55,6 @@ public class Inimigo : MonoBehaviour
     private bool boolMovimentacao = false;
 
     private int statusBurst = 0;
-    public float danoBurst = 3f;
 
     private bool boolDefesa = false;
 
@@ -127,6 +126,7 @@ public class Inimigo : MonoBehaviour
                 {
                     EfeitoDefesa(danoDaArma *= statusJogador.danoDoAcertoCritico);
                     vulneravel = false;
+                    Debug.Log("Critei");
                 } else
                 {
                     EfeitoDefesa(danoDaArma);
@@ -140,6 +140,7 @@ public class Inimigo : MonoBehaviour
                 {
                     EfeitoMovimentacao(danoDaArma *= statusJogador.danoDoAcertoCritico);
                     vulneravel = false;
+                    Debug.Log("Critei");
                 }
                 else
                 {
@@ -154,6 +155,7 @@ public class Inimigo : MonoBehaviour
                 {
                     EfeitoCorrosao(danoDaArma *= statusJogador.danoDoAcertoCritico);
                     vulneravel = false;
+                    Debug.Log("Critei");
                 } else
                 {
                     EfeitoCorrosao(danoDaArma);
@@ -167,6 +169,7 @@ public class Inimigo : MonoBehaviour
                 {
                     EfeitoBurst(danoDaArma *= statusJogador.danoDoAcertoCritico);
                     vulneravel = false;
+                    Debug.Log("Critei");
 
                 } else
                 {
@@ -180,7 +183,7 @@ public class Inimigo : MonoBehaviour
                 {
                     vidaAtual -= danoDaArma *= statusJogador.danoDoAcertoCritico;
                     _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
-                    vulneravel = false;
+                    vulneravel = false; 
                 } else
                 {
                     vidaAtual -= danoDaArma;
@@ -212,8 +215,6 @@ public class Inimigo : MonoBehaviour
             MiscBurst2();
             MiscBurst3();
             Misc2Critico();
-
-            Destroy(gameObject);
         }
     }
 
@@ -224,6 +225,7 @@ public class Inimigo : MonoBehaviour
         if (statusJogador.misc1movimentacao)
         {
             statusJogador.BuffVelocidade();
+            Destroy(objInimigo);
         }
     }
 
@@ -232,17 +234,26 @@ public class Inimigo : MonoBehaviour
         if(statusJogador.misc2Burst)
         {
             statusJogador.ReloadBurst();
+            Destroy(objInimigo);
         }
         
     }
 
     private void MiscBurst3()
     {
-        if(statusJogador.misc3Burst)
+        if (statusJogador.misc3Burst)
         {
-            //MARGELAH REPLIQUE O CODIGO DO INIMIGO BOMBA AQUI POR FAVOR
-        }
-        
+            colisaoArea.gameObject.SetActive(true);
+            colisaoArea.OqueFazer("darDanoExplosao");
+            StartCoroutine(MorrerAposExplosao());
+        }      
+    }
+
+    private IEnumerator MorrerAposExplosao()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        Destroy(objInimigo);
     }
 
     private void Misc2Critico()
@@ -266,7 +277,6 @@ public class Inimigo : MonoBehaviour
         {          
             if (hit.transform.tag == "Player" || inimigoTorreta)
             {
-                Debug.Log("passeio2");
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
                 tiro.gameObject.SetActive(true);
@@ -366,8 +376,7 @@ public class Inimigo : MonoBehaviour
 
             if (aux <= statusJogador.chanceDeAcertoCriticoAtual)
             {
-                dano *= statusJogador.danoDoAcertoCritico;
-                Debug.Log("Critei" + dano);
+                dano *= statusJogador.danoDoAcertoCritico;  
             }
 
             vidaAtual -= dano;
@@ -471,13 +480,14 @@ public class Inimigo : MonoBehaviour
 
     private IEnumerator CoroutineMovimentacao()
     {
+        float velAux = velocidadeAndar;
         boolMovimentacao = true;
 
-        agent.speed = 2.5f;
+        velocidadeAndar = 2.5f;
 
         yield return new WaitForSeconds(5f);
 
-        agent.speed = 3.5f;
+        velocidadeAndar = velAux;
 
         boolMovimentacao = false;
     }
@@ -488,7 +498,7 @@ public class Inimigo : MonoBehaviour
 
         if(statusBurst >= 5)
         {
-            vidaAtual -= danoBurst;
+            vidaAtual -= statusJogador.danoBurst;
             _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
             statusBurst = 0;
         }

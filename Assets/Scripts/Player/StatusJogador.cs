@@ -25,6 +25,7 @@ public class StatusJogador : MonoBehaviour
 
 
     [Header("Acerto crítico")]
+    [SerializeField] private ColliderArea colliderAreaCritico;
     public float chanceDeAcertoCriticoBase = 0;
     public float chanceDeAcertoCriticoAtual = 0;
 
@@ -348,7 +349,6 @@ public class StatusJogador : MonoBehaviour
     }
     public void SpawnarPocaCorrosao()
     {
-        Debug.Log("Spawnando poça corrosao");
         Instantiate(pocaCorrosao, peDoJogador.transform.position, Quaternion.identity);
     }
 
@@ -385,6 +385,8 @@ public class StatusJogador : MonoBehaviour
         arma.tipoDoBuff = "Critico";
         shotgun.tipoDoBuff = "Critico";
         shuriken.tipoDoBuff = "Critico";
+
+        chanceDeAcertoCriticoAtual = 3;
     }
 
     public void BuffDashCritico()
@@ -449,7 +451,9 @@ public class StatusJogador : MonoBehaviour
                 break;
 
             case "Critico":
-
+                Debug.Log("teste3");
+                colliderAreaCritico.gameObject.SetActive(true);
+                colliderAreaCritico.OqueFazer("vulneravel");
                 break;
 
             case "Defesa":
