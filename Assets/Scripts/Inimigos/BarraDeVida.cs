@@ -5,9 +5,21 @@ using UnityEngine.UI;
 
 public class BarraDeVida : MonoBehaviour
 {
+    [Header("Vida:")]
     [SerializeField] private Slider barraDeVida;
     [SerializeField] private float velAnim;
     private float vidaAtualizada;
+
+    [Header("Status:")]
+    [SerializeField] private Image burst;
+    [SerializeField] private Image burstBG;
+    [SerializeField] private Image movimentacao;
+    [SerializeField] private Image movimentacaoBG;
+    [SerializeField] private Image corrosao;
+    [SerializeField] private Image corrosaoBG;
+    [SerializeField] private Image vulneravel;
+    [SerializeField] private Image fraco;
+
     private Camera myCamera;
 
     void Start()
@@ -25,5 +37,75 @@ public class BarraDeVida : MonoBehaviour
     public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
     {
         vidaAtualizada = vidaAtual / VidaMaxima;
+    }
+
+    public void AtualizaStatus(float statusAtual, float statusTotal, string qualStatus, bool status)
+    {
+        switch (qualStatus)
+        {
+            case "burst":
+
+                if(statusAtual <= 0)
+                {
+                    burst.gameObject.SetActive(status);
+                    burstBG.gameObject.SetActive(status);
+                    burst.fillAmount = 0;
+                }
+                else
+                {
+                    burst.gameObject.SetActive(status);
+                    burstBG.gameObject.SetActive(status);
+                    burst.fillAmount = statusAtual / statusTotal;
+                }
+
+                break;
+
+            case "movimentacao":
+
+                if (statusAtual <= 0)
+                {
+                    movimentacao.gameObject.SetActive(status);
+                    movimentacaoBG.gameObject.SetActive(status);
+                    movimentacao.fillAmount = 0;
+                }
+                else
+                {
+                    movimentacao.gameObject.SetActive(status);
+                    movimentacaoBG.gameObject.SetActive(status);
+                    movimentacao.fillAmount = statusAtual / statusTotal;
+                }
+
+                break;
+
+            case "corrosao":
+
+                if (statusAtual <= 0)
+                {
+                    corrosao.gameObject.SetActive(status);
+                    corrosaoBG.gameObject.SetActive(status);
+                    corrosao.fillAmount = 0;
+                }
+                else
+                {
+                    corrosao.gameObject.SetActive(status);
+                    corrosaoBG.gameObject.SetActive(status);
+                    corrosao.fillAmount = statusAtual / statusTotal;
+                }
+
+                break;
+
+            case "vulneravel":
+
+                    vulneravel.gameObject.SetActive(status);
+
+                break;
+
+            case "fraco":
+
+                fraco.gameObject.SetActive(status);
+
+                break;
+        }
+          
     }
 }

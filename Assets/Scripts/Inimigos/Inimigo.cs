@@ -81,6 +81,8 @@ public class Inimigo : MonoBehaviour
     void Update()
     {
         stateInimigo = stateInimigo.Process();
+
+        _barraDeVida.AtualizaStatus(1, 1, "vulneravel", vulneravel);
     }
 
     public void TomarDano(string tipoDeArma, string tipoDoDano)
@@ -318,11 +320,6 @@ public class Inimigo : MonoBehaviour
         }
     }
 
-    public void AtualizaStatus(string statusAtual)
-    {
-        statusInimigo.text = statusAtual;
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -430,6 +427,8 @@ public class Inimigo : MonoBehaviour
         if (!boolCorrosao)
         {
             statusCorrosao++;
+            _barraDeVida.AtualizaStatus(statusCorrosao, 5, "corrosao", true);
+
 
             if (statusCorrosao >= 5)
             {
@@ -444,6 +443,7 @@ public class Inimigo : MonoBehaviour
         if(!boolCorrosao)
         {
             statusCorrosao = 5;
+            _barraDeVida.AtualizaStatus(statusCorrosao, 5, "corrosao", true);
 
             StartCoroutine(CoroutineCorrosao());
         }
@@ -461,12 +461,15 @@ public class Inimigo : MonoBehaviour
             vidaAtual -= statusJogador.danoCorrosao;
             _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
 
+            ConferirMorte();
+
             yield return new WaitForSeconds(1f);
 
             i++;
         }
 
         statusCorrosao = 0;
+        _barraDeVida.AtualizaStatus(statusCorrosao, 5, "corrosao", false);
 
         boolCorrosao = false;
     }
@@ -476,6 +479,7 @@ public class Inimigo : MonoBehaviour
         if(!boolMovimentacao)
         {
             statusMovimentacao++;
+            _barraDeVida.AtualizaStatus(statusMovimentacao, 3, "movimentacao", true);
 
             if(statusMovimentacao >= 3)
             {
@@ -495,18 +499,22 @@ public class Inimigo : MonoBehaviour
 
         velocidadeAndar = velAux;
 
+        statusMovimentacao = 0;
+        _barraDeVida.AtualizaStatus(statusMovimentacao, 3, "movimentacao", false);
         boolMovimentacao = false;
     }
 
     private void StatusBurst()
     {
         statusBurst++;
+        _barraDeVida.AtualizaStatus(statusBurst, 5, "burst", true);
 
         if(statusBurst >= 5)
         {
             vidaAtual -= statusJogador.danoBurst;
             _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
             statusBurst = 0;
+            _barraDeVida.AtualizaStatus(statusBurst, 5, "burst", false);
         }
     }
 
@@ -522,6 +530,8 @@ public class Inimigo : MonoBehaviour
     {
         boolDefesa = true;
 
+        _barraDeVida.AtualizaStatus(1, 1, "fraco", boolDefesa);
+
         float aux = danoTiro;
 
         danoTiro = danoTiroReduzido;
@@ -530,6 +540,8 @@ public class Inimigo : MonoBehaviour
 
         danoTiro = aux;
         boolDefesa = false;
+
+        _barraDeVida.AtualizaStatus(1, 1, "fraco", boolDefesa);
     }
 
     #endregion

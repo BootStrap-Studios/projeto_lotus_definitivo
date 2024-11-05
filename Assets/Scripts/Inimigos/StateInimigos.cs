@@ -124,7 +124,7 @@ public class Idle : StateInimigos
     public Idle(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, float _velocidadeAndar) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _velocidadeAndar)
     {
         stateName = STATE.IDLE;
-        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Idle");
+        //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Idle");
         agent.isStopped = true; 
     }
     
@@ -182,7 +182,7 @@ public class Chase : StateInimigos
     public override void Enter()
     {
         //tocar animação de persiguição
-        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Persiguindo");
+        //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Persiguindo");
         base.Enter();
     }
 
@@ -239,7 +239,7 @@ public class Atirar : StateInimigos
     public override void Enter()
     {
         //mudar animação
-        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Atirando");
+        //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Atirando");
         base.Enter();
     }
 
@@ -363,7 +363,7 @@ public class Reload : StateInimigos
     public override void Enter()
     {
         //tocar a animação de reloading
-        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
+        //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
         base.Enter();
     }
 
@@ -402,7 +402,7 @@ public class TomarDano : StateInimigos
     public override void Enter()
     {
         //tocar a animação de levar dano
-        inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: TomandoDano");
+        //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: TomandoDano");
         base.Enter();
     }
 

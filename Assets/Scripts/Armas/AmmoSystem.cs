@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class AmmoSystem : MonoBehaviour
 {
     [Header("Munição")]
-    [SerializeField] private int municaoTotal;
+    [SerializeField] public int municaoTotal;
     public int municaoAtual;
     public bool toNoReloadFull;
 
@@ -62,7 +62,7 @@ public class AmmoSystem : MonoBehaviour
         }
 
         //se o quick time event estiver ativado quando o player pressionar o "R", a função QTECheck é chamada
-        if (Input.GetKeyDown(KeyCode.R) && QTE)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && QTE)
         {
 
             QTEcheck();

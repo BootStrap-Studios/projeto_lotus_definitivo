@@ -9,10 +9,11 @@ public class MargelaH_CAM : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera normalCAM;
     [SerializeField] private CinemachineVirtualCamera aimCAM;
     [SerializeField] private PlayerMovement player;
-    [SerializeField] private GameObject playerUI;
+    [SerializeField] private GameObject armaUI;
     [SerializeField] private GameObject[] armas;
     [SerializeField] private GameObject pontaDaArma;
 
+    private AmmoSystem ammoSystem;
     private GameObject armaAtual;
     private int numArma;
     private bool play = true;
@@ -28,6 +29,8 @@ public class MargelaH_CAM : MonoBehaviour
 
     void Start()
     {
+        ammoSystem = FindObjectOfType<AmmoSystem>();
+
         aimCAM.gameObject.SetActive(false);
         armaAtual = armas[0];
 
@@ -40,7 +43,7 @@ public class MargelaH_CAM : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            playerUI.SetActive(true);
+            armaUI.SetActive(true);
             aimCAM.gameObject.SetActive(true);
             armaAtual.SetActive(true);
 
@@ -53,7 +56,15 @@ public class MargelaH_CAM : MonoBehaviour
         }
         else
         {
-            playerUI.SetActive(false);
+            if(ammoSystem.municaoAtual < ammoSystem.municaoTotal)
+            {
+                armaUI.SetActive(true);
+            }
+            else
+            {
+                armaUI.SetActive(false);
+            }
+
             aimCAM.gameObject.SetActive(false);
             armaAtual.SetActive(false);
 

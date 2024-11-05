@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CanosSpawners : MonoBehaviour
 {
-    public void SpawnandoInimigo(GameObject inimigo)
+    [SerializeField] private SpawnInimigos spawnInimigos;  
+
+    public void SpawnandoInimigo(GameObject inimigo, int i)
     {
-        Instantiate(inimigo, gameObject.transform);
+        spawnInimigos.inimigosVivos[i] = Instantiate(inimigo, gameObject.transform.position, gameObject.transform.rotation);
+        //spawnInimigos.inimigosVivos[i].SetActive(false);
     }
 }
