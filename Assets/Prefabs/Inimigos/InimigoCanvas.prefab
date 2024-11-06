@@ -1475,8 +1475,8 @@ MonoBehaviour:
   movimentacaoBG: {fileID: 7768297693373265058}
   corrosao: {fileID: 2146161720144950919}
   corrosaoBG: {fileID: 5778741639158508684}
-  vulneravel: {fileID: 0}
-  fraco: {fileID: 0}
+  vulneravel: {fileID: 2807763367374868522}
+  fraco: {fileID: 4052988713099745775}
 --- !u!1 &8481951643220582763
 GameObject:
   m_ObjectHideFlags: 0
