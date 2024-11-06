@@ -291,7 +291,7 @@ MonoBehaviour:
   inimigoNormal: 0
   inimigoTorreta: 1
   _barraDeVida: {fileID: 1697084210859825114}
-  vida: 10
+  vida: 20
   statusInimigo: {fileID: 2676457566838484742}
   vulneravel: 0
 --- !u!1 &2638659160133016147

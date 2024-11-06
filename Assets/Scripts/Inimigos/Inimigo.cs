@@ -80,9 +80,9 @@ public class Inimigo : MonoBehaviour
 
     void Update()
     {
-        stateInimigo = stateInimigo.Process();
-
         _barraDeVida.AtualizaStatus(1, 1, "vulneravel", vulneravel);
+       
+        stateInimigo = stateInimigo.Process(); 
     }
 
     public void TomarDano(string tipoDeArma, string tipoDoDano)
