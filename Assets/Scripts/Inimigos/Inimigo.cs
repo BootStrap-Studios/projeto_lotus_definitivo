@@ -17,6 +17,7 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private GameObject[] dropPrefab;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private ColliderArea colisaoArea;
+    public Animator animator;
     public LayerMask playerMask, inimigoMask;
     private ProjetilInimigo tiro;   
     private StateInimigos stateInimigo;

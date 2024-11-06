@@ -33,7 +33,7 @@ public class StateInimigos
     protected float cooldownTiro;
     protected float danoRecebido;
     protected float velocidadeAndar;
-    //protected Animator anim;
+    protected Animator anim;
 
     
     float visDistancia = 22f;
@@ -183,6 +183,7 @@ public class Chase : StateInimigos
     {
         //tocar animação de persiguição
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Persiguindo");
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", true);
         base.Enter();
     }
 
@@ -221,6 +222,7 @@ public class Chase : StateInimigos
     public override void Exit()
     {
         //reset da animação
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", false);
         base.Exit();
     }
 }
@@ -240,6 +242,7 @@ public class Atirar : StateInimigos
     {
         //mudar animação
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Atirando");
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", true);
         base.Enter();
     }
 
@@ -347,6 +350,7 @@ public class Atirar : StateInimigos
     public override void Exit()
     {
         //reset da animação
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", false);
         base.Exit();
     } 
 }
@@ -364,6 +368,9 @@ public class Reload : StateInimigos
     {
         //tocar a animação de reloading
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
+
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", false);
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", false);
         base.Enter();
     }
 

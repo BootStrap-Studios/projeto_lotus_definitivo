@@ -12,6 +12,7 @@ public class MargelaH_CAM : MonoBehaviour
     [SerializeField] private GameObject armaUI;
     [SerializeField] private GameObject[] armas;
     [SerializeField] private GameObject pontaDaArma;
+    [SerializeField] private Animator animator;
 
     private AmmoSystem ammoSystem;
     private GameObject armaAtual;
@@ -49,7 +50,7 @@ public class MargelaH_CAM : MonoBehaviour
 
             player.cameraCombate = true;
 
-            
+            animator.SetBool("Atirando", true);
 
             normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
             normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
@@ -72,6 +73,8 @@ public class MargelaH_CAM : MonoBehaviour
 
             aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
             aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
+
+            animator.SetBool("Atirando", false);
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {

@@ -14731,6 +14731,7 @@ MonoBehaviour:
   - {fileID: 1522602278}
   - {fileID: 2009658683}
   pontaDaArma: {fileID: 83909564}
+  animator: {fileID: 1649911896}
 --- !u!114 &719038804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20534,6 +20535,11 @@ PrefabInstance:
       objectReference: {fileID: 26533745}
     - target: {fileID: 8806009633796199273, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1649911896}
+    - target: {fileID: 8806009633796199273, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
       propertyPath: transformCamera
       value: 
       objectReference: {fileID: 719038801}
@@ -20556,7 +20562,11 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3666982982036204446, guid: b96f32307a1c90a4c933b39a87de691d, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7347802385941414107, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1649911896}
   m_SourcePrefab: {fileID: 100100000, guid: b96f32307a1c90a4c933b39a87de691d, type: 3}
 --- !u!4 &1048227160 stripped
 Transform:
@@ -31684,6 +31694,33 @@ RectTransform:
   m_AnchoredPosition: {x: -6.6184845, y: 6.675868}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1649911894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7347802385941414107, guid: b96f32307a1c90a4c933b39a87de691d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048227159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1649911896
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649911894}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e49842f8d624c448822d988c0dbf803, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1650961903
 MonoBehaviour:
   m_ObjectHideFlags: 0

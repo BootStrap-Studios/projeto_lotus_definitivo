@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     private StatusJogador statusJogador;
 
+    [SerializeField] private Animator animator;
+
     private void Start()
     {
         originalStepOffSet = characterController.stepOffset;
@@ -75,6 +77,13 @@ public class PlayerMovement : MonoBehaviour
         movementDirection = Quaternion.AngleAxis(transformCamera.rotation.eulerAngles.y, Vector3.up) * movementDirection;
         movementDirection.Normalize();
 
+        if(movementDirection != Vector3.zero)
+        {
+            animator.SetBool("Correndo", true);
+        } else {
+            animator.SetBool("Correndo", false);
+        }
+
         //Checando que o personagem está no chão e o input para poder pular.
         if (characterController.isGrounded)
         {
@@ -85,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 ySpeed = jumpSpeed;
+                animator.SetTrigger("Pulo");
             }
         }
         else
@@ -131,6 +141,8 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(DashCoroutine());
         statusJogador.quantidadeDeDash -= 1;
+        
+
     }
 
     private IEnumerator DashCoroutine()
@@ -138,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
         float startTime = Time.time;
 
         dashObj.SetActive(true);
+
+        animator.SetTrigger("Dash");
 
         //Conferindo se os buffs de dash de defesa ou corrosao estao ativos;
         if(statusJogador.dashDefesaAtivo)
@@ -157,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         dashObj.SetActive(false);
+
     }
 
     #endregion
