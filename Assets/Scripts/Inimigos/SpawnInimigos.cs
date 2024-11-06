@@ -67,7 +67,8 @@ public class SpawnInimigos : MonoBehaviour
         }
     }
 
-    public void RanomizandoInimigos()
+    [ContextMenu("SpawnInimigos")]
+    private void RanomizandoInimigos()
     {
         //Debug.Log("Randomizando Inimigos");        
 
@@ -227,12 +228,28 @@ public class SpawnInimigos : MonoBehaviour
 
         SpawnandoInimigos();
     }
-
+ 
     private void SpawnandoInimigos()
-    {             
+    {           
+        /*for(int i = 0; i < spawners.Length; i++)
+        {
+            spawners[i].SpawnandoInimigo(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], inimigosInstanciados);
+            inimigosInstanciados++;
+        }
+
+        if (inimigosInstanciados + 1 < inimigosTotais)
+        {
+            SpawnandoInimigos();
+        }
+        else
+        {
+            inimigosInstanciados = 0;
+            AtivandoInimigos();
+        }*/
+
         for (int i = 0; i < spawners.Length; i++)
         {
-            //Debug.Log("Spawner: " + (i + 1) + "/" + inimigosQueSpawnam.Count);
+            //Debug.Log("Spawner: " + (i + 1) + "/" + spawners.Length);
             spawners[i].SpawnandoInimigo(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], inimigosInstanciados);
             inimigosInstanciados++; 
 
@@ -258,13 +275,38 @@ public class SpawnInimigos : MonoBehaviour
         }
     }
 
+    private void AtivandoInimigos()
+    {
+        for (int i = 0; i < inimigosPorWave[wavesSpawnadas]; i++)
+        {
+            intervaloSpawn = 1f;
+
+            while(intervaloSpawn > 0)
+            {
+                intervaloSpawn -= Time.deltaTime;
+            }
+
+            inimigosVivos[inimigosInstanciados].SetActive(true);
+            inimigosInstanciados++;          
+        }
+        if (inimigosPorWave[wavesSpawnadas] > 0)
+        {
+            AtivandoInimigos();
+        }
+        else if((wavesSpawnadas + 1) < waves)
+        {
+            //Debug.Log("Wave: " + (wavesSpawnadas) + "/" + waves);
+            fimWaveAtual = true;
+        }
+    }
+
     private void VerificaInimigosVivos()
     {
         int qntdInimigosVivos = 0;
 
         for (int i = 0; i < inimigosVivos.Length; i++)
         {
-            if (inimigosVivos[i] != null)
+            if (inimigosVivos != null)
             {
                 qntdInimigosVivos++;
             }

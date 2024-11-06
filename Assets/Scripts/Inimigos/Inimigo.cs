@@ -76,7 +76,7 @@ public class Inimigo : MonoBehaviour
 
         vulneravel = false;
 
-        stateInimigo = new Idle(gameObject, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, velocidadeAndar); 
+        stateInimigo = new Idle(gameObject, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro); 
     }
 
     void Update()
@@ -328,7 +328,7 @@ public class Inimigo : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, alcanceMinArma);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 20f);
+        Gizmos.DrawWireSphere(transform.position, 25f);
     }
 
     private void DroparItem()

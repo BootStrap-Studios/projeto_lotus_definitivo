@@ -8,7 +8,12 @@ public class CanosSpawners : MonoBehaviour
 
     public void SpawnandoInimigo(GameObject inimigo, int i)
     {
-        spawnInimigos.inimigosVivos[i] = Instantiate(inimigo, gameObject.transform.position, gameObject.transform.rotation);
+        float posSpawnX = Random.Range(gameObject.transform.position.x - 2, gameObject.transform.position.x + 2);
+        float posSpawnZ = Random.Range(gameObject.transform.position.z - 2, gameObject.transform.position.z + 2);
+
+        Vector3 posSpawn = new Vector3(posSpawnX, gameObject.transform.position.y, posSpawnZ);
+
+        spawnInimigos.inimigosVivos[i] = Instantiate(inimigo, posSpawn, gameObject.transform.rotation);
         //spawnInimigos.inimigosVivos[i].SetActive(false);
     }
 }

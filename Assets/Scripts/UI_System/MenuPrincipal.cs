@@ -10,7 +10,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void BTNJogar()
     {
-        SceneManager.LoadScene("Vini");
+        SceneManager.LoadScene("Implemenetacao");
     }
 
     public void BTNControles()

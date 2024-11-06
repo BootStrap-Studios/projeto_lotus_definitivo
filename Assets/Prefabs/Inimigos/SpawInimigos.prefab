@@ -104,6 +104,6 @@ MonoBehaviour:
   spawners: []
   tierSala: 1
   inimigoSimples: 0
-  inimigoSniper: 1
+  inimigoSniper: 0
   inimigoExplosivo: 0
   inimigoTorreta: 0

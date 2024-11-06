@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuPrincipal.unity
     guid: 1c87fbd9b6c1beb45a20a8853a0e33eb
   - enabled: 1
+    path: Assets/Scenes/Implemenetacao.unity
+    guid: 4e48489b27633e049b8c969e0ecb162d
+  - enabled: 0
     path: Assets/Scenes/Vini.unity
     guid: 322f785ee96eae94eb127171d2104d15
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CenaMetricas.unity
     guid: 32c278b2d30ca274390d9fffc77645a6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MargelaH.unity
     guid: 59d79181f76f1d3428663704cc2a464f
   - enabled: 0
