@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows;
+using TMPro;
 using Input = UnityEngine.Input;
 
 public class PlayerMovement : MonoBehaviour
@@ -19,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashCooldown;
     [SerializeField] private GameObject dashObj;
+    [SerializeField] private Image dashImage;
+    [SerializeField] private TextMeshProUGUI dashTXT;
 
     private float speed;
     private float ySpeed;
@@ -42,17 +46,24 @@ public class PlayerMovement : MonoBehaviour
     {
         Movimentacao();
 
-    
-        dashCooldownAux -= Time.deltaTime;
-        
-        
-        if(Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux <= 0)
+        if(dashCooldownAux < dashCooldown)
+        {
+            dashCooldownAux += Time.deltaTime;
+            dashImage.fillAmount = dashCooldownAux / dashCooldown;
+        }
+        else
+        {
+            dashTXT.text = statusJogador.quantidadeDeDash.ToString() + "X";
+        }
+ 
+        if(Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux >= dashCooldown)
         {
             Dash();
 
             if(statusJogador.quantidadeDeDash <= 0)
             {
-                dashCooldownAux = dashCooldown;
+                dashCooldownAux = 0;
+                dashImage.fillAmount = dashCooldownAux / dashCooldown;
                 statusJogador.quantidadeDeDash = statusJogador.quantidadeDeDashTotal;
             }
         }
@@ -141,8 +152,7 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(DashCoroutine());
         statusJogador.quantidadeDeDash -= 1;
-        
-
+        dashTXT.text = statusJogador.quantidadeDeDash.ToString() + "X";
     }
 
     private IEnumerator DashCoroutine()

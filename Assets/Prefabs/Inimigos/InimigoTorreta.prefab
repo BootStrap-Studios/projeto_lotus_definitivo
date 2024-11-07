@@ -271,6 +271,7 @@ MonoBehaviour:
   - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
   agent: {fileID: 8216139500462382335}
   colisaoArea: {fileID: 3672210165336642477}
+  animator: {fileID: 0}
   playerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -280,7 +281,7 @@ MonoBehaviour:
   municao: 3
   danoTiro: 2
   danoTiroReduzido: 1
-  alcanceMaxArma: 20
+  alcanceMaxArma: 15
   alcanceMinArma: 1
   cooldownTiro: 2.5
   velProjetil: 45

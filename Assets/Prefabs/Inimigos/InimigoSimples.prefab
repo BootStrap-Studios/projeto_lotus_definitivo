@@ -197,7 +197,7 @@ MonoBehaviour:
   municao: 6
   danoTiro: 2
   danoTiroReduzido: 1
-  alcanceMaxArma: 15
+  alcanceMaxArma: 12
   alcanceMinArma: 10
   cooldownTiro: 1
   velProjetil: 35

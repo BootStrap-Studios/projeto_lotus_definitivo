@@ -33,7 +33,7 @@ public class Inimigo : MonoBehaviour
     
 
     [Header("Personagem")]
-    [SerializeField] private float velocidadeAndar;
+    public float velocidadeAndar;
     [SerializeField] private GameObject objInimigo;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
@@ -67,7 +67,7 @@ public class Inimigo : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<PlayerMovement>().GetComponent<Transform>();
+        player = FindObjectOfType<VidaPlayer>().GetComponent<Transform>();
         objectPool = FindObjectOfType<ObjectPool>();
         statusJogador = FindObjectOfType<StatusJogador>();
 
@@ -301,19 +301,21 @@ public class Inimigo : MonoBehaviour
         {
             if (inimigoExplosivo && Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
             {
-                player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro);
-                Debug.Log("Dano Completo");
+
+                player.GetComponent<VidaPlayer>().TomarDano(danoTiro);
+                Debug.Log(gameObject.name + "aplicou dano completo");
                 Destroy(gameObject);
+
             }
             else if (inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
             {
-                player.GetComponentInParent<VidaPlayer>().TomarDano(danoTiro / 2);
-                Debug.Log("Metade do Dano");
+                player.GetComponent<VidaPlayer>().TomarDano(danoTiro / 2);
+                Debug.Log(gameObject.name + "aplicou metade do dano");
                 Destroy(gameObject);
             }
             else if (inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && !Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
             {
-                Debug.Log("Nenhum Dano");
+                Debug.Log(gameObject.name + "não aplicou nenhum dano");
                 Destroy(gameObject);
             }
 
@@ -328,7 +330,7 @@ public class Inimigo : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, alcanceMinArma);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 25f);
+        Gizmos.DrawWireSphere(transform.position, stateInimigo.visDistancia);
     }
 
     private void DroparItem()

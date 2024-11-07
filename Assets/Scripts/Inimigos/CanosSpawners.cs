@@ -14,6 +14,7 @@ public class CanosSpawners : MonoBehaviour
         Vector3 posSpawn = new Vector3(posSpawnX, gameObject.transform.position.y, posSpawnZ);
 
         spawnInimigos.inimigosVivos[i] = Instantiate(inimigo, posSpawn, gameObject.transform.rotation);
-        //spawnInimigos.inimigosVivos[i].SetActive(false);
+        spawnInimigos.inimigosVivos[i].name = "Inimigo " + i + " ";
+        spawnInimigos.inimigosVivos[i].SetActive(false);
     }
 }

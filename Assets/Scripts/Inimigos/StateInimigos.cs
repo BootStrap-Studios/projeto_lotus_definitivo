@@ -32,12 +32,11 @@ public class StateInimigos
     protected float alcanceMinArma;
     protected float cooldownTiro;
     protected float danoRecebido;
-    protected float velocidadeAndar;
     protected Animator anim;
 
     
-    float visDistancia = 25f;
-    float visAngulo = 90f;
+    public float visDistancia = 25f;
+    float visAngulo = 80f;
     public float cooldownTiroAux;
     public float tempoAux;
     public float municaoAux;
@@ -96,6 +95,11 @@ public class StateInimigos
     {      
         Vector3 direcao = player.position - inimigo.transform.position;
         float angulo = Vector3.Angle(direcao, inimigo.transform.forward);
+
+        if (inimigo.GetComponent<Inimigo>().inimigoTorreta)
+        {
+            visDistancia = alcanceMaxArma;
+        }
 
         RaycastHit hit;
 
@@ -195,7 +199,7 @@ public class Chase : StateInimigos
 
     public override void Update()
     {
-        agent.speed = velocidadeAndar;
+        agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
 
         //persiguindo player caso ainda não esteja perto o suficiente pra atirar
         agent.SetDestination(player.position);
@@ -252,16 +256,18 @@ public class Atirar : StateInimigos
     {
         //mudar animação
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Atirando");
+
         if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
         {
             inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", true);
         }
+
         base.Enter();
     }
 
     public override void Update()
     {
-        agent.speed = velocidadeAndar;
+        agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
 
         if (newReload)
         {
