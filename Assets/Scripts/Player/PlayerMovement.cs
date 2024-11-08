@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    private bool tp;
+
     private void Start()
     {
         originalStepOffSet = characterController.stepOffset;
@@ -143,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
     public void MudaCharacterController()
     {
         characterController.enabled = !characterController.enabled;
+        tp = !tp;
     }
 
     #endregion

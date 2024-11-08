@@ -31,6 +31,7 @@ public class ScreenFader : MonoBehaviour
 
     public void FadeOut(float duracao, Action posFade)
     {
+
         if (ocupado) return;
         StartCoroutine(CO_FadeOut(duracao, posFade));
     }

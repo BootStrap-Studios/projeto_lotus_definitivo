@@ -17,4 +17,9 @@ public class CanosSpawners : MonoBehaviour
         spawnInimigos.inimigosVivos[i].name = "Inimigo " + i + " ";
         spawnInimigos.inimigosVivos[i].SetActive(false);
     }
+
+    public void AtivaRobo()
+    {
+
+    }
 }

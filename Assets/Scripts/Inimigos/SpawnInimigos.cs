@@ -17,8 +17,8 @@ public class SpawnInimigos : MonoBehaviour
     private int[] inimigosPorWave;
     private float intervaloSpawn;
     private int inimigosInstanciados;
-    private int qntdInimigosMortosTotal;
     private bool fimWaveAtual;
+    private bool pauseWave;
 
 
     [Header("Tipos de Inimigos")]
@@ -39,20 +39,31 @@ public class SpawnInimigos : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            colliderSpawn.enabled = false;
-            AtivandoInimigos();
+            if(waves > 0)
+            {
+                colliderSpawn.enabled = false;
+                AtivandoInimigos();
+            }   
         }       
     }
 
     private void Start()
     {
-        objectPool = FindObjectOfType<ObjectPool>();
-        RanomizandoInimigos();
-        
+        objectPool = FindObjectOfType<ObjectPool>();        
     }
 
     private void Update()
     {
+        if (pauseWave)
+        {
+            intervaloSpawn -= Time.deltaTime;
+
+            if(intervaloSpawn <= 0)
+            {               
+                pauseWave = false;
+                AtivandoInimigos();
+            }
+        }
         if (fimWaveAtual)
         {
             VerificaInimigosVivos();
@@ -60,7 +71,7 @@ public class SpawnInimigos : MonoBehaviour
     }
 
     [ContextMenu("SpawnInimigos")]
-    private void RanomizandoInimigos()
+    public void RanomizandoInimigos()
     {
         //Debug.Log("Randomizando Inimigos");        
 
@@ -124,6 +135,11 @@ public class SpawnInimigos : MonoBehaviour
 
                 RandomizandoInimigosPorWave();
 
+                break;
+
+            case 0:
+                Debug.Log("SEM INIMIGOS");
+                waves = -5;
                 break;
        
         }
@@ -243,31 +259,34 @@ public class SpawnInimigos : MonoBehaviour
         }
         else
         {
-            inimigosInstanciados = 0;   
-            qntdInimigosMortosTotal = 0;
+            inimigosInstanciados = 0; 
         }    
     }
 
     [ContextMenu("Ativa Inimigos")]
     private void AtivandoInimigos()
     {
-        for (int i = 0; i < inimigosPorWave[wavesSpawnadas]; i++)
+        for (int i = 0; i < spawners.Length; i++)
         {
             //Debug.Log((i + 1) + "/" + inimigosPorWave[wavesSpawnadas]);
-            intervaloSpawn = 1f;
-
-            while(intervaloSpawn > 0)
-            {
-                intervaloSpawn -= Time.deltaTime;
-            }
 
             inimigosVivos[inimigosInstanciados].SetActive(true);
             inimigosInstanciados++;
+            inimigosPorWave[wavesSpawnadas]--;
+
+            spawners[i].AtivaRobo();
+
+            if (inimigosPorWave[wavesSpawnadas] == 0)
+            {
+                break;
+            }
           
         }
-        if (inimigosPorWave[wavesSpawnadas] > inimigosInstanciados)
+      
+        if (inimigosPorWave[wavesSpawnadas] > 0)
         {
-            AtivandoInimigos();
+            pauseWave = true;
+            intervaloSpawn = 5f;
         }
         else
         {           

@@ -22,15 +22,36 @@ public class ObjectPool : MonoBehaviour
         return null;
     }
 
-    public void DeterminaPool(int quantidadeInimigos,int quantidadeWaves)
+    public void DeterminaPool(int quantidadeInimigos, int quantidadeWaves)
     {
-        amountToPool = (quantidadeInimigos / quantidadeWaves) * 6;
+        int quantidadePool = (quantidadeInimigos / quantidadeWaves) * 6;
 
-        for (int i = 0; i < amountToPool; i++)
+        if (amountToPool == 0)
         {
-            GameObject obj = Instantiate(objectToPool);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
+            Debug.Log("Munições definidas para " + quantidadePool);
+            amountToPool = quantidadePool;
+
+            for (int i = 0; i < amountToPool; i++)
+            {
+                GameObject obj = Instantiate(objectToPool);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
+            }
+        }
+        else if(amountToPool < quantidadePool)
+        {
+            Debug.Log("Aumentiei as munições de " + amountToPool + " para " + quantidadePool);
+
+            int novoPool = quantidadePool - amountToPool;
+
+            for (int i = 0; i < novoPool; i++)
+            {
+                GameObject obj = Instantiate(objectToPool);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
+            }
+
+            amountToPool = quantidadePool;
         }
     }
 }

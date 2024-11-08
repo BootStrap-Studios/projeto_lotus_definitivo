@@ -325,12 +325,19 @@ public class Inimigo : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, alcanceMaxArma);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, alcanceMinArma);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, stateInimigo.visDistancia);
+        try
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, alcanceMaxArma);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, alcanceMinArma);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, stateInimigo.visDistancia);
+        }
+        catch
+        {
+
+        }
     }
 
     private void DroparItem()

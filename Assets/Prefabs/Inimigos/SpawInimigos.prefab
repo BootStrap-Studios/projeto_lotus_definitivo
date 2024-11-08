@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderSpawn: {fileID: 8073575393503591927}
+  terminalBuff: {fileID: 0}
   inimigos:
   - {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25, type: 3}
   - {fileID: 7197857029520921749, guid: 8207f9d9fee4d8643826c637a5b02e79, type: 3}
