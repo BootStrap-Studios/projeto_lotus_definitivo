@@ -13,6 +13,7 @@ public class Inimigo : MonoBehaviour
     [Header("Outros")]
     [SerializeField] private Transform player;
     [SerializeField] private Transform pontaArma;
+    public Transform peInimigo;
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private GameObject[] dropPrefab;
     [SerializeField] private NavMeshAgent agent;

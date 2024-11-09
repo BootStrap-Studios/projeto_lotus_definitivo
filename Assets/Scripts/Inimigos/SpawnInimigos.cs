@@ -11,14 +11,15 @@ public class SpawnInimigos : MonoBehaviour
     public GameObject[] inimigosVivos;    
     [SerializeField] private CanosSpawners[] spawners;
     [SerializeField] private int tierSala;
+    [SerializeField] private float intervaloSpawn;
     private List<GameObject> inimigosQueSpawnam = new List<GameObject>();
     private int waves;
     private int wavesSpawnadas;
-    private int[] inimigosPorWave;
-    private float intervaloSpawn;
+    private int[] inimigosPorWave;   
     private int inimigosInstanciados;
     private bool fimWaveAtual;
     private bool pauseWave;
+    private float intervaloSpawnAux;
 
 
     [Header("Tipos de Inimigos")]
@@ -54,16 +55,17 @@ public class SpawnInimigos : MonoBehaviour
 
     private void Update()
     {
-        if (pauseWave)
+        /*if (pauseWave)
         {
-            intervaloSpawn -= Time.deltaTime;
+            intervaloSpawnAux -= Time.deltaTime;
 
-            if(intervaloSpawn <= 0)
+            if(intervaloSpawnAux <= 0)
             {               
                 pauseWave = false;
                 AtivandoInimigos();
             }
-        }
+        }*/
+
         if (fimWaveAtual)
         {
             VerificaInimigosVivos();
@@ -93,7 +95,7 @@ public class SpawnInimigos : MonoBehaviour
                     objectPool.DeterminaPool(inimigosTotais, waves);
                     //Debug.Log("Inimigos Totais: " + inimigosTotais);
 
-                    VerificaTipoDeInimigos();
+                    SpawnaInimigos();
                 }
                 else
                 {
@@ -187,7 +189,7 @@ public class SpawnInimigos : MonoBehaviour
             {
                 inimigosPorWave[i] = Random.Range(spawners.Length - 1, (inimigosRestantes / wavesCalculo) + 2);
                 //Debug.Log("Min e Max de inimigos na Wave: " + (spawners.Length - 1) + "/" + ((inimigosRestantes / wavesCalculo) + 1));
-                //Debug.Log("Inimigos na Wave: " + inimigosPorWave[i]);
+                Debug.Log("Inimigos na Wave: " + inimigosPorWave[i]);
 
                 inimigosRestantes -= inimigosPorWave[i];
                 //Debug.Log("Inimigos Restantes: " + inimigosRestantes);
@@ -197,17 +199,17 @@ public class SpawnInimigos : MonoBehaviour
             else
             {
                 inimigosPorWave[i] = inimigosRestantes;
-                //Debug.Log("Inimigos na Wave final: " + inimigosPorWave[i]);
+                Debug.Log("Inimigos na Wave final: " + inimigosPorWave[i]);
             }
         }
 
         objectPool.DeterminaPool(inimigosTotais, waves);
         //Debug.Log("Inimigos Totais: " + inimigosTotais);
 
-        VerificaTipoDeInimigos();
+        SpawnaInimigos();
     }
 
-    private void VerificaTipoDeInimigos()
+    private void SpawnaInimigos()
     {
 
         if (inimigoSimples)
@@ -234,33 +236,14 @@ public class SpawnInimigos : MonoBehaviour
         wavesSpawnadas = 0;
         inimigosInstanciados = 0;
 
-        SpawnandoInimigos();
-    }
- 
-    private void SpawnandoInimigos()
-    {           
-        for(int i = 0; i < spawners.Length; i++)
-        {
-            spawners[i].SpawnandoInimigo(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], inimigosInstanciados);           
-            inimigosInstanciados++;
 
-            if(inimigosInstanciados == inimigosTotais)
-            {
-                break;
-            }
+        Vector3 posSpawn = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
+
+        for (int i = 0; i < inimigosTotais; i++)
+        {
+            inimigosVivos[i] = Instantiate(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], posSpawn, gameObject.transform.rotation);
+            inimigosVivos[i].SetActive(false);
         }
-
-        //Debug.Log(inimigosInstanciados + "/" + inimigosTotais);
-
-        if (inimigosInstanciados < inimigosTotais)
-        {
-            
-            SpawnandoInimigos();
-        }
-        else
-        {
-            inimigosInstanciados = 0; 
-        }    
     }
 
     [ContextMenu("Ativa Inimigos")]
@@ -270,11 +253,12 @@ public class SpawnInimigos : MonoBehaviour
         {
             //Debug.Log((i + 1) + "/" + inimigosPorWave[wavesSpawnadas]);
 
-            inimigosVivos[inimigosInstanciados].SetActive(true);
+            inimigosVivos[inimigosInstanciados].SetActive(true);           
+
+            spawners[i].AtivaInimigo(inimigosInstanciados);
+
             inimigosInstanciados++;
             inimigosPorWave[wavesSpawnadas]--;
-
-            spawners[i].AtivaRobo();
 
             if (inimigosPorWave[wavesSpawnadas] == 0)
             {
@@ -285,8 +269,10 @@ public class SpawnInimigos : MonoBehaviour
       
         if (inimigosPorWave[wavesSpawnadas] > 0)
         {
-            pauseWave = true;
-            intervaloSpawn = 5f;
+            //intervaloSpawnAux = intervaloSpawn;
+            //pauseWave = true;
+
+            AtivandoInimigos();
         }
         else
         {           
