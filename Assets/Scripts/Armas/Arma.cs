@@ -16,6 +16,8 @@ public class Arma : MonoBehaviour
 
     [SerializeField] private GameObject vfxHit;
 
+    [SerializeField] private AudioSource sourceDisparo;
+
     private Projetil projetil;
     Transform hitTransform;
     Vector3 hitPoint;
@@ -39,6 +41,7 @@ public class Arma : MonoBehaviour
         {
             ammoSystem.GastandoMunicao(bulletsPerTap);
             Raycast();
+            sourceDisparo.PlayOneShot(sourceDisparo.clip);
             //PedirProjetil();
 
         } else

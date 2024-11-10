@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -18,6 +19,7 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private GameObject[] dropPrefab;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private ColliderArea colisaoArea;
+    
     public Animator animator;
     public LayerMask playerMask, inimigoMask;
     private ProjetilInimigo tiro;   
@@ -65,6 +67,10 @@ public class Inimigo : MonoBehaviour
     private float danoDaArma;
 
     public bool vulneravel;
+
+    [Header("Sons")]
+    [SerializeField] private AudioSource sourceCorrosao;
+    [SerializeField] private AudioSource sourceDisparoNormal;
 
     void Start()
     {
@@ -290,6 +296,7 @@ public class Inimigo : MonoBehaviour
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
                 tiro.gameObject.SetActive(true);
+                sourceDisparoNormal.PlayOneShot(sourceDisparoNormal.clip);
 
                 return true;
             }
@@ -464,6 +471,8 @@ public class Inimigo : MonoBehaviour
     private IEnumerator CoroutineCorrosao()
     {
         boolCorrosao = true;
+
+        sourceCorrosao.PlayOneShot(sourceCorrosao.clip);
 
         int i = 0;
 
