@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Atirando_Mask
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Hands33
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL/LFOOT_CTRL_GROUP
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL/LFOOT_CTRL_GROUP/L__ANKLE_GROUP
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL/LFOOT_CTRL_GROUP/L__ANKLE_GROUP/L_LEG_IK
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL/LFOOT_CTRL_GROUP/L_BALL_GROUP
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL/LFOOT_CTRL_GROUP/L_BALL_GROUP/L_TOE_IK
+    m_Weight: 1
+  - m_Path: L_FOOT_CTRL/LFOOT_CTRL_GROUP/L_BALL_IK
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL/R_FOOT_HEEL
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL/R_FOOT_HEEL/R_ANKLE_GROUP
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL/R_FOOT_HEEL/R_ANKLE_GROUP/R_LEG_IK
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL/R_FOOT_HEEL/R_BALL_IK
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL/R_FOOT_HEEL/R_TOE_GROUP
+    m_Weight: 1
+  - m_Path: R_FOOT_CTRL/R_FOOT_HEEL/R_TOE_GROUP/R_TOE_IK
+    m_Weight: 1
+  - m_Path: ROOT_CTRL
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle1
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle1/nurbsCircle2
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle3
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle3/nurbsCircle4
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle3/nurbsCircle4/nurbsCircle5
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle8
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle8/nurbsCircle7
+    m_Weight: 1
+  - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle8/nurbsCircle7/nurbsCircle6
+    m_Weight: 1
+  - m_Path: ROOT_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/END_HEAD_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/END_HEAD_JNT/HEAD_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/END_HEAD_JNT/HEAD_JNT/joint2
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/L_SHOULDER_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/L_SHOULDER_JNT/L_ELBOW_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/L_SHOULDER_JNT/L_ELBOW_JNT/L_WRIST_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/R_SHOULDER_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/R_SHOULDER_JNT/R_ELBOW_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/R_SHOULDER_JNT/R_ELBOW_JNT/R_WRIST_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/L_THIGH_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/L_THIGH_JNT/L_KNEE_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/L_THIGH_JNT/L_KNEE_JNT/L_ANKLE_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/L_THIGH_JNT/L_KNEE_JNT/L_ANKLE_JNT/L_MIDLE_FOOT_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/L_THIGH_JNT/L_KNEE_JNT/L_ANKLE_JNT/L_MIDLE_FOOT_JNT/L_TOE_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/R_THIGH_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/R_THIGH_JNT/R_KNEE_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/R_THIGH_JNT/R_KNEE_JNT/R_ANKLE_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/R_THIGH_JNT/R_KNEE_JNT/R_ANKLE_JNT/R_MIDLE_FOOT_JNT
+    m_Weight: 1
+  - m_Path: ROOT_JNT/R_THIGH_JNT/R_KNEE_JNT/R_ANKLE_JNT/R_MIDLE_FOOT_JNT/R_TOE_JNT
+    m_Weight: 1

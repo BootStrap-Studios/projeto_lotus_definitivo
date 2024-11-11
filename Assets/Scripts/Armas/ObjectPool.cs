@@ -24,6 +24,8 @@ public class ObjectPool : MonoBehaviour
 
     public void DeterminaPool(int quantidadeInimigos, int quantidadeWaves)
     {
+        if (quantidadeWaves <= 0) quantidadeWaves = 1;
+
         int quantidadePool = (quantidadeInimigos / quantidadeWaves) * 6;
 
         if (amountToPool == 0)

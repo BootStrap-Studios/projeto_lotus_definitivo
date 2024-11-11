@@ -37,8 +37,8 @@ public class TP_Player : MonoBehaviour
     {
         player.GetComponent<PlayerMovement>().MudaCharacterController();
 
-        try
-        {
+        if(spawn != null)
+        { 
             player.gameObject.transform.position = spawn.gameObject.transform.position;
             player.gameObject.transform.rotation = spawn.gameObject.transform.rotation;
             spawn.RanomizandoInimigos();
@@ -47,7 +47,7 @@ public class TP_Player : MonoBehaviour
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = spawn.gameObject.transform.eulerAngles.y;
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = 0;
         }
-        catch
+        else
         {
             player.gameObject.transform.position = posTP;
         }

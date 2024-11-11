@@ -43,6 +43,7 @@ public class Inimigo : MonoBehaviour
     public bool inimigoNormal;
     public bool inimigoTorreta;
     private bool dropando;
+    private bool explodindo;
 
     [Header("UI_Inimigos")]
     [SerializeField] private BarraDeVida _barraDeVida;
@@ -66,13 +67,23 @@ public class Inimigo : MonoBehaviour
 
     private float danoDaArma;
 
-    public bool vulneravel;
+    public bool vulneravel = false;
 
     [Header("Sons")]
     [SerializeField] private AudioSource sourceCorrosao;
     [SerializeField] private AudioSource sourceDisparoNormal;
     [SerializeField] private AudioSource sourceExplosao;
     [SerializeField] private AudioSource sourcePreExplosao;
+
+    private void OnEnable()
+    {
+        EventBus.Instance.onAtivaInimigos += AtivarChase;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Instance.onAtivaInimigos -= AtivarChase;
+    }
 
     void Start()
     {
@@ -90,16 +101,22 @@ public class Inimigo : MonoBehaviour
 
     void Update()
     {
-        _barraDeVida.AtualizaStatus(1, 1, "vulneravel", vulneravel);
+        _barraDeVida.AtualizaStatus(0, 1, "vulneravel", vulneravel);
        
         stateInimigo = stateInimigo.Process(); 
     }
 
+    private void AtivarChase(bool estado)
+    {
+        stateInimigo.ativarChase = estado;
+    }
+
     public void TomarDano(string tipoDeArma, string tipoDoDano)
     { 
-        if (vidaAtual == vida)
+        if (vidaAtual == vida && !stateInimigo.ativarChase)
         {
             stateInimigo.ativarChase = true;
+            EventBus.Instance.AtivaInimigos(true);
         }
 
         switch(tipoDeArma)
@@ -309,7 +326,7 @@ public class Inimigo : MonoBehaviour
         }
         else
         {
-            if (inimigoExplosivo)
+            if (inimigoExplosivo && !explodindo)
             {
                 sourcePreExplosao.PlayOneShot(sourcePreExplosao.clip);
                 StartCoroutine(Explodir());
@@ -321,6 +338,8 @@ public class Inimigo : MonoBehaviour
 
     private IEnumerator Explodir()
     {
+        explodindo = true;
+
         yield return new WaitForSeconds(1f);
 
         sourceExplosao.PlayOneShot(sourceExplosao.clip);

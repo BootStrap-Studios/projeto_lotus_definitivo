@@ -143,10 +143,10 @@ public class Idle : StateInimigos
 
     public override void Update()
     {
+        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
+
         if (ativarChase)
         {
-            ativarChase = false;
-
             if (inimigo.GetComponent<Inimigo>().inimigoSniper || inimigo.GetComponent<Inimigo>().inimigoTorreta)
             {
                 nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
@@ -190,16 +190,21 @@ public class Chase : StateInimigos
     {
         //tocar animação de persiguição
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Persiguindo");
-        if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", true);
-        }        
+        //if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+        //{
+        //    inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", true);
+        //}        
         base.Enter();
     }
 
     public override void Update()
     {
+        nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+        stage = EVENT.EXIT;
+
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
+
+        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
         //persiguindo player caso ainda não esteja perto o suficiente pra atirar
         agent.SetDestination(player.position);
@@ -232,10 +237,10 @@ public class Chase : StateInimigos
     public override void Exit()
     {
         //reset da animação
-        if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", false);
-        }
+        //if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+        //{
+        //   inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", false);
+        //}
             
         base.Exit();
     }
@@ -246,7 +251,7 @@ public class Atirar : StateInimigos
     public Atirar(GameObject _inimigo, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro) : base(_inimigo, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro)
     {
         stateName = STATE.ATIRAR;
-        agent.angularSpeed = 800f;
+        agent.angularSpeed = 250f;
         
         agent.isStopped = false;
         cooldownTiroAux = cooldownTiro;
@@ -257,20 +262,17 @@ public class Atirar : StateInimigos
         //mudar animação
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Atirando");
 
-        if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", true);
-        }
-
         base.Enter();
     }
 
     public override void Update()
     {
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
+        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
         if (newReload)
         {
+            cooldownTiroAux = 0;
             municaoAux = municao;
             newReload = false;
         }
@@ -279,19 +281,10 @@ public class Atirar : StateInimigos
         {
             pararAndar = true;
         }
-
-        if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+        else if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
         {
             agent.acceleration = 30f;
-        }
-
-        if (inimigo.GetComponent<Inimigo>().inimigoExplosivo && pararAndar)
-        {
-            cooldownTiroAux = 5;
-        }
-
-        //mirando no player e verificando se continua no alcançe do tiro
-        inimigo.transform.LookAt(player.transform);
+        }     
 
         if (pararAndar)
         {
@@ -301,14 +294,14 @@ public class Atirar : StateInimigos
         {
             Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
+            Vector3 lookPos = player.transform.position - inimigo.transform.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+
             if (distanciaTiro.magnitude < alcanceMinArma)
             {
                 agent.SetDestination(inimigo.transform.position);
-
-                if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-                {
-                    pararAndar = true;
-                }
             }
             else if(distanciaTiro.magnitude <= alcanceMaxArma && distanciaTiro.magnitude >= alcanceMinArma)
             {
@@ -347,7 +340,9 @@ public class Atirar : StateInimigos
                     }
                     else if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
                     {
+                        municao--;
                         pararAndar = true;
+                        cooldownTiroAux = 1000;
                     }
                     else
                     {
@@ -356,7 +351,7 @@ public class Atirar : StateInimigos
                     }
                 }
                 else if(!pararAndar)
-                {
+                { 
                     agent.SetDestination(player.position);
                     base.Update();
                 }
@@ -378,10 +373,7 @@ public class Atirar : StateInimigos
     public override void Exit()
     {
         //reset da animação
-        if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", false);
-        }        
+        
         base.Exit();
     } 
 }
@@ -399,16 +391,16 @@ public class Reload : StateInimigos
     {
         //tocar a animação de reloading
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
-        if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", false);
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Andando", false);
-        }
+
+        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", 0);
+
         base.Enter();
     }
 
     public override void Update()
     {
+        inimigo.transform.rotation = inimigo.transform.rotation;
+
         tempoAux -= Time.deltaTime;
 
         if (tempoAux <= 0)

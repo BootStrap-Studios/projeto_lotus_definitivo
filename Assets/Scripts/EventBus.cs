@@ -17,6 +17,8 @@ public class EventBus : MonoBehaviour
 
     public event Action <string, float, bool> onColetaItem;
 
+    public event Action<bool> onAtivaInimigos;
+
     private void Awake()
     {
         Instance = this;
@@ -44,5 +46,10 @@ public class EventBus : MonoBehaviour
     public void ColetaItem(string nomeItem, float quantidadeItem, bool itemColetado)
     {
         onColetaItem?.Invoke(nomeItem, quantidadeItem, itemColetado);
+    }
+
+    public void AtivaInimigos(bool ativarInimigos)
+    {
+        onAtivaInimigos?.Invoke(ativarInimigos);
     }
 }

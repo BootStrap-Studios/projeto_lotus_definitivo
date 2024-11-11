@@ -37,7 +37,7 @@ public class CanosSpawners : MonoBehaviour
         {
             tempoAtivandoAux -= Time.deltaTime;
 
-            plataforma.transform.position = Vector3.Lerp(plataforma.transform.position, posFinal.position, vel * Time.deltaTime);
+            plataforma.transform.position = Vector3.Slerp(plataforma.transform.position, posFinal.position, vel * Time.deltaTime);
 
             for (int i = 0; i < inimigosSpawnados.Count; i++)
             {

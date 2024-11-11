@@ -83979,7 +83979,7 @@ PrefabInstance:
     - target: {fileID: 8073575393503591927, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}
       propertyPath: m_Center.z
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8255792275407312374, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}

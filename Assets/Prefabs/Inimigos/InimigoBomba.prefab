@@ -205,7 +205,7 @@ MonoBehaviour:
   alcanceMinArma: 2
   cooldownTiro: 0
   velProjetil: 30
-  velocidadeAndar: 10
+  velocidadeAndar: 8
   objInimigo: {fileID: 3416823112405702447}
   inimigoExplosivo: 1
   inimigoSniper: 0
