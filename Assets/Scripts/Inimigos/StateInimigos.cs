@@ -285,6 +285,11 @@ public class Atirar : StateInimigos
             agent.acceleration = 30f;
         }
 
+        if (inimigo.GetComponent<Inimigo>().inimigoExplosivo && pararAndar)
+        {
+            cooldownTiroAux = 5;
+        }
+
         //mirando no player e verificando se continua no alcançe do tiro
         inimigo.transform.LookAt(player.transform);
 
@@ -339,6 +344,10 @@ public class Atirar : StateInimigos
                             cooldownTiroAux = cooldownTiro;
                             contagemTiros = 0;
                         }
+                    }
+                    else if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+                    {
+                        pararAndar = true;
                     }
                     else
                     {

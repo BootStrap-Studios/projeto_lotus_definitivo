@@ -131,6 +131,7 @@ public class MenuSystem : MonoBehaviour
 
     public void BTNVoltarMenuInicial()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MenuPrincipal");
     }
 

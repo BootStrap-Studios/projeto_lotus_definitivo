@@ -71,6 +71,8 @@ public class Inimigo : MonoBehaviour
     [Header("Sons")]
     [SerializeField] private AudioSource sourceCorrosao;
     [SerializeField] private AudioSource sourceDisparoNormal;
+    [SerializeField] private AudioSource sourceExplosao;
+    [SerializeField] private AudioSource sourcePreExplosao;
 
     void Start()
     {
@@ -307,27 +309,45 @@ public class Inimigo : MonoBehaviour
         }
         else
         {
-            if (inimigoExplosivo && Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
+            if (inimigoExplosivo)
             {
-
-                player.GetComponent<VidaPlayer>().TomarDano(danoTiro);
-                Debug.Log(gameObject.name + "aplicou dano completo");
-                Destroy(gameObject);
-
+                sourcePreExplosao.PlayOneShot(sourcePreExplosao.clip);
+                StartCoroutine(Explodir());
             }
-            else if (inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
-            {
-                player.GetComponent<VidaPlayer>().TomarDano(danoTiro / 2);
-                Debug.Log(gameObject.name + "aplicou metade do dano");
-                Destroy(gameObject);
-            }
-            else if (inimigoExplosivo && !Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && !Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
-            {
-                Debug.Log(gameObject.name + "não aplicou nenhum dano");
-                Destroy(gameObject);
-            }
-
+                       
             return true;
+        }
+    }
+
+    private IEnumerator Explodir()
+    {
+        yield return new WaitForSeconds(1f);
+
+        sourceExplosao.PlayOneShot(sourceExplosao.clip);
+
+        if (Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
+        {
+            player.GetComponent<VidaPlayer>().TomarDano(danoTiro);
+            Debug.Log(gameObject.name + "aplicou dano completo");
+
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
+
+        }
+        else if (!Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
+        {
+            player.GetComponent<VidaPlayer>().TomarDano(danoTiro / 2);
+            Debug.Log(gameObject.name + "aplicou metade do dano");
+
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
+        }
+        else if (!Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && !Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
+        {
+            Debug.Log(gameObject.name + "não aplicou nenhum dano");
+
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
         }
     }
 

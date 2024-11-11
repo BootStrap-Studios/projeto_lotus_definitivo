@@ -101,7 +101,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d89c4b3be9822840b00a7046111ff23, type: 2}
+  - {fileID: 2100000, guid: 3e7abfe9a2f42d54eae40a86aaab8d57, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   inimigoMask:
     serializedVersion: 2
     m_Bits: 256
-  municao: 6
+  municao: 5
   danoTiro: 2
   danoTiroReduzido: 1
   alcanceMaxArma: 12
@@ -217,6 +217,8 @@ MonoBehaviour:
   vulneravel: 0
   sourceCorrosao: {fileID: 7207427347858847434}
   sourceDisparoNormal: {fileID: 4168134615512783134}
+  sourceExplosao: {fileID: 0}
+  sourcePreExplosao: {fileID: 0}
 --- !u!82 &7207427347858847434
 AudioSource:
   m_ObjectHideFlags: 0
@@ -617,6 +619,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inimogo_Base_Riggado
       objectReference: {fileID: 0}
+    - target: {fileID: 5934939217489072807, guid: 4ab776e98417a2547b6405103660aa63,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f59a994c526bf1e438ac4cd340f24b90, type: 2}
+    - target: {fileID: 5934939217489072807, guid: 4ab776e98417a2547b6405103660aa63,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e7abfe9a2f42d54eae40a86aaab8d57, type: 2}
+    - target: {fileID: 5934939217489072807, guid: 4ab776e98417a2547b6405103660aa63,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: fcdb15fe111926e43b63d244621eb4f2, type: 2}
+    - target: {fileID: 5934939217489072807, guid: 4ab776e98417a2547b6405103660aa63,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79eaf64c81fd3704c8413aadecc9e3b6, type: 2}
+    - target: {fileID: 5934939217489072807, guid: 4ab776e98417a2547b6405103660aa63,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2cfe21f524b525f408565b43072e7633, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

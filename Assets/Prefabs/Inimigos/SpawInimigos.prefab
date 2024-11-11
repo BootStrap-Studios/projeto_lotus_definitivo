@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2efc9a9fb9d2184ba6a3075aff6d3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minInimigos: 7
+  maxInimigos: 15
   colliderSpawn: {fileID: 8073575393503591927}
   terminalBuff: {fileID: 0}
   inimigos:

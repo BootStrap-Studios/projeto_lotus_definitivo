@@ -234,7 +234,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2595575320872573650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -256,13 +256,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2595575320872573650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61e68ccd63aa34d48b48aa243db287fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   pontaArma: {fileID: 7157145739056762475}
+  peInimigo: {fileID: 0}
   objectPool: {fileID: 0}
   dropPrefab:
   - {fileID: 7399106940259868427, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
@@ -295,6 +296,10 @@ MonoBehaviour:
   vida: 20
   statusInimigo: {fileID: 2676457566838484742}
   vulneravel: 0
+  sourceCorrosao: {fileID: 0}
+  sourceDisparoNormal: {fileID: 0}
+  sourceExplosao: {fileID: 0}
+  sourcePreExplosao: {fileID: 0}
 --- !u!1 &2638659160133016147
 GameObject:
   m_ObjectHideFlags: 0

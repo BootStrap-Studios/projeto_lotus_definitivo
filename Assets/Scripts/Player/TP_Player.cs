@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class TP_Player : MonoBehaviour
 {
     [SerializeField] private Vector3 posTP;
     [SerializeField] private SpawnInimigos spawn;
     [SerializeField] private CinemachineVirtualCamera cameraPlayer;
+    [SerializeField] private bool tpFinal;
+    [SerializeField] private GameObject fimUI;
     private PlayerMovement player;
 
 
@@ -16,8 +19,17 @@ public class TP_Player : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            player = other.GetComponent<PlayerMovement>();
-            EventBus.Instance.FadeIn(0.5f, DarTP);
+            if (tpFinal)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                fimUI.SetActive(true);
+            }
+            else
+            {
+                player = other.GetComponent<PlayerMovement>();
+                EventBus.Instance.FadeIn(0.5f, DarTP);
+            }
         }
     }
 
@@ -41,5 +53,13 @@ public class TP_Player : MonoBehaviour
         }
         
         EventBus.Instance.FadeOut(0.5f, player.GetComponent<PlayerMovement>().MudaCharacterController);
+    }
+
+    public void JogarNovamente()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        fimUI.SetActive(false);
+        SceneManager.LoadScene("Implemenetacao");
     }
 }
