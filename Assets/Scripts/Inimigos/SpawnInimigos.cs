@@ -14,6 +14,7 @@ public class SpawnInimigos : MonoBehaviour
     [SerializeField] private CanosSpawners[] spawners;
     [SerializeField] private int tierSala;
     [SerializeField] private float intervaloSpawn;
+    [SerializeField] private AudioSource sourceTerminouSala;
     private List<GameObject> inimigosQueSpawnam = new List<GameObject>();
     private int waves;
     private int wavesSpawnadas;
@@ -340,6 +341,7 @@ public class SpawnInimigos : MonoBehaviour
             {
                 fimWaveAtual = false;
                 terminalBuff.SetActive(true);
+                sourceTerminouSala.PlayOneShot(sourceTerminouSala.clip);
             }
         }       
     }

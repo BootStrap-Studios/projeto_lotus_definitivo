@@ -10,9 +10,13 @@ public class MenuPrincipal : MonoBehaviour
 
     public void BTNJogar()
     {
-        SceneManager.LoadScene("Implemenetacao");
+        SceneManager.LoadScene("CutsceneInicial");
     }
 
+    public void BotaoContinuar()
+    {
+        SceneManager.LoadScene("Implemenetacao");
+    }
     public void BTNControles()
     {
         menuBase_UI.SetActive(false);
