@@ -18,6 +18,8 @@ public class Shotgun : MonoBehaviour
 
     [SerializeField] private LayerMask aimColliderMask;
 
+    [SerializeField] private AudioSource sourceDisparo;
+
     public string tipoDoBuff;
     public string tipoDeArma;
 
@@ -37,6 +39,8 @@ public class Shotgun : MonoBehaviour
         if(ammoSystem.municaoAtual >= bulletsPerTap && !ammoSystem.toNoReloadFull) {
 
             ammoSystem.GastandoMunicao(bulletsPerTap);
+
+            sourceDisparo.PlayOneShot(sourceDisparo.clip);
 
             for (int i = 0; i < numeroDeProjeteis; i++)
                 {

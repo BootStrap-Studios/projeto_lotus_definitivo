@@ -928,6 +928,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1595357166339268160, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 272414958}
+    - target: {fileID: 1595357166339268160, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: sourceReloadCerto
+      value: 
+      objectReference: {fileID: 272414958}
     - target: {fileID: 1614502544998548021, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -9418,6 +9428,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4770052907740655687, guid: eebf32931bf8cd44eb123239d3f0be0a, type: 3}
+--- !u!82 &272414958 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4322596836643912240, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 26533744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &273326449
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43625,6 +43641,11 @@ PrefabInstance:
       propertyPath: ammoSystem
       value: 
       objectReference: {fileID: 26533745}
+    - target: {fileID: 8773810735126341650, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: sourceDisparo
+      value: 
+      objectReference: {fileID: 1545393964}
     - target: {fileID: 8806009633796199273, guid: b96f32307a1c90a4c933b39a87de691d,
         type: 3}
       propertyPath: dashTXT
@@ -43665,6 +43686,11 @@ PrefabInstance:
       propertyPath: ammoSystem
       value: 
       objectReference: {fileID: 26533745}
+    - target: {fileID: 8961193682299429162, guid: b96f32307a1c90a4c933b39a87de691d,
+        type: 3}
+      propertyPath: sourceDisparo
+      value: 
+      objectReference: {fileID: 1545393963}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3666982982036204446, guid: b96f32307a1c90a4c933b39a87de691d, type: 3}
@@ -59628,6 +59654,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3906832884256009306, guid: eebf32931bf8cd44eb123239d3f0be0a, type: 3}
+--- !u!82 &1545393963 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8941569550743170427, guid: b96f32307a1c90a4c933b39a87de691d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048227159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1545393964 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2110850932406591145, guid: b96f32307a1c90a4c933b39a87de691d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1048227159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1545997518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8383565939145876997, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
@@ -62414,6 +62452,134 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 272620219224400015, guid: eebf32931bf8cd44eb123239d3f0be0a, type: 3}
+--- !u!1 &1696148181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696148183}
+  - component: {fileID: 1696148182}
+  m_Layer: 0
+  m_Name: SOUNDTRACK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1696148182
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696148181}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 66189a9064f2cd04183069708d88db4d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.05
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1696148183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696148181}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.98, y: 0.95, z: -79.88}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1696396788
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -69570,3 +69736,4 @@ SceneRoots:
   - {fileID: 1417296682}
   - {fileID: 926029672}
   - {fileID: 760531792}
+  - {fileID: 1696148183}
