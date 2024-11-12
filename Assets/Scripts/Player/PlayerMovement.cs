@@ -54,8 +54,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log(statusJogador.quantidadeDeDash);
-            Debug.Log(statusJogador.quantidadeDeDashTotal);
             dashImage.fillAmount =  (float) statusJogador.quantidadeDeDash / statusJogador.quantidadeDeDashTotal;
         }
  
