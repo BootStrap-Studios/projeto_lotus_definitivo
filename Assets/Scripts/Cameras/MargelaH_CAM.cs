@@ -3,20 +3,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; 
 
 public class MargelaH_CAM : MonoBehaviour
 {
+    [Header("Armas")]
+    [SerializeField] private GameObject miraUI;
+    [SerializeField] private GameObject[] armas;
+    [SerializeField] private GameObject[] armasUI;
+    [SerializeField] private TextMeshProUGUI armasDesc;
+
+    [Header("Outros")]
     [SerializeField] private CinemachineVirtualCamera normalCAM;
     [SerializeField] private CinemachineVirtualCamera aimCAM;
-    [SerializeField] private PlayerMovement player;
-    [SerializeField] private GameObject armaUI;
-    [SerializeField] private GameObject[] armas;
+    [SerializeField] private PlayerMovement player;   
     [SerializeField] private GameObject pontaDaArma;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject crosshair;
 
     private AmmoSystem ammoSystem;
     private GameObject armaAtual;
-    private int numArma;
+    
     private bool play = true;
      
     private void OnEnable()
@@ -44,7 +51,8 @@ public class MargelaH_CAM : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            armaUI.SetActive(true);
+            miraUI.SetActive(true);
+            crosshair.SetActive(true);
             aimCAM.gameObject.SetActive(true);
             armaAtual.SetActive(true);
 
@@ -59,13 +67,15 @@ public class MargelaH_CAM : MonoBehaviour
         {
             if(ammoSystem.municaoAtual < ammoSystem.municaoTotal)
             {
-                armaUI.SetActive(true);
+                miraUI.SetActive(true);
             }
             else
             {
-                armaUI.SetActive(false);
+                miraUI.SetActive(false);
             }
 
+
+            crosshair.SetActive(false);
             aimCAM.gameObject.SetActive(false);
             armaAtual.SetActive(false);
 
@@ -78,17 +88,14 @@ public class MargelaH_CAM : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Debug.Log("Você trocou o modo de disparo para: PISTOLA");
                 TrocarArma(0);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Debug.Log("Você trocou o modo de disparo para: SHOTGUN");
                 TrocarArma(1);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                Debug.Log("Você trocou o modo de disparo para: SHURIKEN");
                 TrocarArma(2);
             }
         }
@@ -108,6 +115,34 @@ public class MargelaH_CAM : MonoBehaviour
     private void TrocarArma(int num)
     {
         armaAtual = armas[num];
+
+        for(int i = 0; i < armasUI.Length; i++)
+        {
+            if(i == num)
+            {
+                armasUI[i].SetActive(true);
+            }
+            else
+            {
+                armasUI[i].SetActive(false);
+            }
+        }
+
+        switch (num)
+        {
+            case 0:
+                armasDesc.text = "Pistola";
+                break;
+
+            case 1:
+                armasDesc.text = "Shotgun";
+                break;
+
+            case 2:
+                armasDesc.text = "Shurikens";
+                break;
+        }
+            
     }
 
     public void AplicarSensi(float sensiOlhar, float sensiMirar)

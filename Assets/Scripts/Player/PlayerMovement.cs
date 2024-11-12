@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCooldown;
     [SerializeField] private GameObject dashObj;
     [SerializeField] private Image dashImage;
-    [SerializeField] private TextMeshProUGUI dashTXT;
 
     private float speed;
     private float ySpeed;
@@ -55,17 +54,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            dashTXT.text = statusJogador.quantidadeDeDash.ToString() + "X";
+            Debug.Log(statusJogador.quantidadeDeDash);
+            Debug.Log(statusJogador.quantidadeDeDashTotal);
+            dashImage.fillAmount =  (float) statusJogador.quantidadeDeDash / statusJogador.quantidadeDeDashTotal;
         }
  
         if(Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux >= dashCooldown)
         {
             Dash();
-
-            if(statusJogador.quantidadeDeDash <= 0)
+           
+            if (statusJogador.quantidadeDeDash <= 0)
             {
                 dashCooldownAux = 0;
-                dashImage.fillAmount = dashCooldownAux / dashCooldown;
                 statusJogador.quantidadeDeDash = statusJogador.quantidadeDeDashTotal;
             }
         }
@@ -155,7 +155,6 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(DashCoroutine());
         statusJogador.quantidadeDeDash -= 1;
-        dashTXT.text = statusJogador.quantidadeDeDash.ToString() + "X";
     }
 
     private IEnumerator DashCoroutine()
