@@ -88,9 +88,9 @@ AvatarMask:
   - m_Path: Root_jnt/R_Thigh_jnt/R_knee_jnt/R_amkle_jnt/R_foot_roll_jnt/R_toe_jnt
     m_Weight: 0
   - m_Path: Root_jnt/Spine_01_jnt
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Root_jnt/Spine_01_jnt/Spine_02_jnt
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Root_jnt/Spine_01_jnt/Spine_02_jnt/Bubbles_root
     m_Weight: 1
   - m_Path: Root_jnt/Spine_01_jnt/Spine_02_jnt/Bubbles_root/Bubbles_2

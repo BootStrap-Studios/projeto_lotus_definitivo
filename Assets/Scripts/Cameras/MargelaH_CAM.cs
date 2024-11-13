@@ -149,11 +149,9 @@ public class MargelaH_CAM : MonoBehaviour
 
     private void Animacao()
     {
-        float valorX = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
-        float valorY = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
+        float valorY = - aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
 
-        animator.SetFloat("x", valorX);
-        animator.SetFloat("y", valorY);
+        animator.SetFloat("EixoY", valorY);
     }
 
 
