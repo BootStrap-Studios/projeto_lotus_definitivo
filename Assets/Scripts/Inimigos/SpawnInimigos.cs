@@ -102,8 +102,12 @@ public class SpawnInimigos : MonoBehaviour
                 inimigosTotais = Random.Range(minInimigos * waves, maxInimigos * waves);
 
                 break;
-        }
 
+            case 0:
+                waves = 0;
+                inimigosTotais = 0;
+                break;
+        }
 
         /*
         inimigosTotais = Random.Range(minInimigos, maxInimigos + 1 );
@@ -116,10 +120,6 @@ public class SpawnInimigos : MonoBehaviour
         }
         */
 
-
-
-
-
         Debug.Log("Inimigos no total: " + inimigosTotais);
         Debug.Log("Total de waves: " + waves);
 
@@ -128,6 +128,8 @@ public class SpawnInimigos : MonoBehaviour
 
     private void RandomizandoInimigosPorWave()
     {
+        if (waves == 0) return;
+
         //Debug.Log("Randomizando Inimigos por Wave");
 
         inimigosPorWave = new int[waves];
