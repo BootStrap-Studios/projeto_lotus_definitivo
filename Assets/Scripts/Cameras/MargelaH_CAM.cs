@@ -60,6 +60,8 @@ public class MargelaH_CAM : MonoBehaviour
 
             animator.SetBool("Atirando", true);
 
+            Animacao();
+
             normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
             normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
         }
@@ -105,7 +107,7 @@ public class MargelaH_CAM : MonoBehaviour
     }
 
     private void PauseCam()
-    {
+    {  
         play = !play;
 
         aimCAM.enabled = play;
@@ -144,6 +146,16 @@ public class MargelaH_CAM : MonoBehaviour
         }
             
     }
+
+    private void Animacao()
+    {
+        float valorX = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
+        float valorY = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
+
+        animator.SetFloat("x", valorX);
+        animator.SetFloat("y", valorY);
+    }
+
 
     public void AplicarSensi(float sensiOlhar, float sensiMirar)
     {

@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     {
         originalStepOffSet = characterController.stepOffset;
 
-        statusJogador = FindObjectOfType<StatusJogador>();
+        statusJogador = FindObjectOfType<StatusJogador>();       
     }
 
     private void Update()
@@ -135,8 +135,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (cameraCombate)
         {
-            Quaternion toRotation = Quaternion.Euler(0f, transformCamera.eulerAngles.y, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+               Quaternion toRotation = Quaternion.Euler(0f, transformCamera.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
     }
 

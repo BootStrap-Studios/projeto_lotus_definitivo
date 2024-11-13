@@ -7,7 +7,7 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MaveMirando
-  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -90,7 +90,7 @@ AvatarMask:
   - m_Path: Root_jnt/Spine_01_jnt
     m_Weight: 0
   - m_Path: Root_jnt/Spine_01_jnt/Spine_02_jnt
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root_jnt/Spine_01_jnt/Spine_02_jnt/Bubbles_root
     m_Weight: 1
   - m_Path: Root_jnt/Spine_01_jnt/Spine_02_jnt/Bubbles_root/Bubbles_2

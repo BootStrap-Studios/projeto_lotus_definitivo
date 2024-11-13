@@ -24,7 +24,8 @@ public class InteracaoPlayer : MonoBehaviour
                 botaoInteragir.gameObject.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    interactObj.Interagir();                    
+                    interactObj.Interagir();
+                    botaoInteragir.gameObject.SetActive(false);
                 }
             }
             else

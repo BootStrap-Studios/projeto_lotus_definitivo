@@ -5,15 +5,14 @@ using UnityEngine;
 public class SpawnInimigos : MonoBehaviour
 {
     [Header("Configurações do Spawn")]
+    [SerializeField] private int tierSala;
     [SerializeField] private int minInimigos;
     [SerializeField] private int maxInimigos;
     [SerializeField] private BoxCollider colliderSpawn;
     [SerializeField] private GameObject terminalBuff;
     [SerializeField] private GameObject[] inimigos;    
     public GameObject[] inimigosVivos;    
-    [SerializeField] private CanosSpawners[] spawners;
-    [SerializeField] private int tierSala;
-    [SerializeField] private float intervaloSpawn;
+    [SerializeField] private CanosSpawners[] spawners;   
     [SerializeField] private AudioSource sourceTerminouSala;
     private List<GameObject> inimigosQueSpawnam = new List<GameObject>();
     private int waves;
@@ -58,17 +57,6 @@ public class SpawnInimigos : MonoBehaviour
 
     private void Update()
     {
-        /*if (pauseWave)
-        {
-            intervaloSpawnAux -= Time.deltaTime;
-
-            if(intervaloSpawnAux <= 0)
-            {               
-                pauseWave = false;
-                AtivandoInimigos();
-            }
-        }*/
-
         if (fimWaveAtual)
         {
             VerificaInimigosVivos();
@@ -80,119 +68,62 @@ public class SpawnInimigos : MonoBehaviour
     {
         //Debug.Log("Randomizando Inimigos");        
 
-
-        inimigosTotais = Random.Range(minInimigos, maxInimigos + 1 );
-
-        waves = inimigosTotais / spawners.Length;
-
-        if(inimigosTotais - spawners.Length >=   spawners.Length / 2)
-        {
-            waves++;
-        }
-
-        //Debug.Log(inimigosTotais);
-        //Debug.Log(waves);
-
-        RandomizandoInimigosPorWave();
-
-        //sorteando quantidade de waves, de inimigos e de inimigos por wave, com base no tier e quantidade de spawners da sala
-        /*switch (tierSala)
+        switch (tierSala)
         {
             case 1:
 
-                waves = Random.Range(1, 4);
+                minInimigos = spawners.Length - (spawners.Length / 3);
+                maxInimigos = spawners.Length + 1;
 
-                if (waves == 1)
-                {
-                    inimigosTotais = Random.Range((spawners.Length * waves) - (spawners.Length / 4), (spawners.Length * waves) + (spawners.Length / 4) + 1);
-                    DebugQuantidadeInimigos();
+                waves = Random.Range(1, 3);
 
-                    inimigosPorWave = new int[waves];
-                    inimigosPorWave[0] = inimigosTotais;
-
-                    objectPool.DeterminaPool(inimigosTotais, waves);
-
-                    SpawnaInimigos();
-                }
-                else
-                {
-                    int maxInimigos = spawners.Length * waves;
-                    Debug.Log("maximos inimigos: " + maxInimigos);
-                    inimigosTotais = Random.Range((spawners.Length * waves) - (spawners.Length / 2), maxInimigos + 1);
-                    DebugQuantidadeInimigos();
-
-                    RandomizandoInimigosPorWave();
-                }
+                inimigosTotais = Random.Range(minInimigos * waves, maxInimigos * waves);
 
                 break;
 
             case 2:
 
+                minInimigos = spawners.Length - (spawners.Length / 3);
+                maxInimigos = spawners.Length + 1;
+
                 waves = Random.Range(3, 5);
 
-                if (waves == 3)
-                {
-                    inimigosTotais = Random.Range((spawners.Length * waves) - (spawners.Length / 4), (spawners.Length * waves) + (spawners.Length / 4) + 1);
-                    DebugQuantidadeInimigos();
-
-                    RandomizandoInimigosPorWave();
-                }
-                else
-                {
-                    int maxInimigos = spawners.Length * waves;
-                    Debug.Log("maximos inimigos: " + maxInimigos);
-                    inimigosTotais = Random.Range((spawners.Length * waves) - (spawners.Length / 2), maxInimigos + 1);
-                    DebugQuantidadeInimigos();
-
-                    RandomizandoInimigosPorWave();
-                }
+                inimigosTotais = Random.Range(minInimigos * waves, maxInimigos * waves);
 
                 break;
 
             case 3:
 
+                minInimigos = spawners.Length - (spawners.Length / 3);
+                maxInimigos = spawners.Length + 1;
+
                 waves = 5;
 
-                inimigosTotais = Random.Range((spawners.Length * waves - spawners.Length), (spawners.Length * waves) + spawners.Length + 1);
-                DebugQuantidadeInimigos();
-
-                RandomizandoInimigosPorWave();
+                inimigosTotais = Random.Range(minInimigos * waves, maxInimigos * waves);
 
                 break;
-
-            case 0:
-                Debug.Log("SEM INIMIGOS");
-                waves = -5;
-                break;
-       
-        }*/
-    }
-
-    private void DebugQuantidadeInimigos()
-    {
-        if(waves == 1 || waves == 3)
-        {
-            Debug.Log("Waves de Inimigos: " + waves);
-            Debug.Log("Inimigos Min: " + ((spawners.Length * waves) - (spawners.Length / 4)));
-            Debug.Log("Inimigos Max: " + ((spawners.Length * waves) + (spawners.Length / 4)));
-            Debug.Log("Inimigos Sorteados: " + inimigosTotais);
         }
-        else if (waves == 2 || waves == 4)
-        {
-            inimigosTotais = Random.Range(spawners.Length * waves, ((spawners.Length * waves) + spawners.Length));
 
-            Debug.Log("Waves de Inimigos: " + waves);
-            Debug.Log("Inimigos Min: " + ((spawners.Length * waves) - (spawners.Length / 2)));
-            Debug.Log("Inimigos Max: " + (spawners.Length * waves));
-            Debug.Log("Inimigos Sorteados: " + inimigosTotais);
-        }
-        else
+
+        /*
+        inimigosTotais = Random.Range(minInimigos, maxInimigos + 1 );
+
+        waves = inimigosTotais / spawners.Length;
+
+        if(inimigosTotais - (spawners.Length * waves) >=   spawners.Length / 2)
         {
-            Debug.Log("Waves de Inimigos: " + waves);
-            Debug.Log("Inimigos Min: " + (spawners.Length * waves - (spawners.Length / 2)));
-            Debug.Log("Inimigos Max: " + ((spawners.Length * waves) + spawners.Length));
-            Debug.Log("Inimigos Sorteados: " + inimigosTotais);
+            waves++;
         }
+        */
+
+
+
+
+
+        Debug.Log("Inimigos no total: " + inimigosTotais);
+        Debug.Log("Total de waves: " + waves);
+
+        RandomizandoInimigosPorWave();
     }
 
     private void RandomizandoInimigosPorWave()
@@ -210,7 +141,7 @@ public class SpawnInimigos : MonoBehaviour
             {
                 inimigosPorWave[i] = Random.Range(spawners.Length - 1, (inimigosRestantes / wavesCalculo) + 2);
                 //Debug.Log("Min e Max de inimigos na Wave: " + (spawners.Length - 1) + "/" + ((inimigosRestantes / wavesCalculo) + 1));
-                Debug.Log("Inimigos na Wave: " + inimigosPorWave[i]);
+                Debug.Log("Inimigos na Wave " + (i+1) +": " + inimigosPorWave[i]);
 
                 inimigosRestantes -= inimigosPorWave[i];
                 //Debug.Log("Inimigos Restantes: " + inimigosRestantes);
@@ -220,7 +151,7 @@ public class SpawnInimigos : MonoBehaviour
             else
             {
                 inimigosPorWave[i] = inimigosRestantes;
-                Debug.Log("Inimigos na Wave final: " + inimigosPorWave[i]);
+                Debug.Log("Inimigos na Wave " + (i + 1) + ": " + inimigosPorWave[i]);
             }
         }
 
@@ -290,8 +221,6 @@ public class SpawnInimigos : MonoBehaviour
       
         if (inimigosPorWave[wavesSpawnadas] > 0)
         {
-            //intervaloSpawnAux = intervaloSpawn;
-            //pauseWave = true;
 
             AtivandoInimigos();
         }

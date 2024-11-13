@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 
-public class TP_Player : MonoBehaviour
+public class TP_Player : MonoBehaviour, IInteractable
 {
     [SerializeField] private Vector3 posTP;
     [SerializeField] private SpawnInimigos spawn;
@@ -13,7 +13,20 @@ public class TP_Player : MonoBehaviour
     [SerializeField] private GameObject fimUI;
     private PlayerMovement player;
 
-
+    public void Interagir()
+    {
+        if (tpFinal)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            fimUI.SetActive(true);
+        }
+        else
+        {
+            player = FindObjectOfType<PlayerMovement>();
+            EventBus.Instance.FadeIn(0.5f, DarTP);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -159,6 +159,9 @@ public class BuffManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1;
+
+        EventBus.Instance.PauseGame();
     }
 
     public void RetirandoBuffDaLista(int qualArvore, GameObject botaoBuff) 

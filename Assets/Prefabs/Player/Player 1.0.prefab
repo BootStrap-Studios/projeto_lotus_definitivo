@@ -1027,7 +1027,6 @@ MonoBehaviour:
   dashCooldown: 2
   dashObj: {fileID: 3170620440045834065}
   dashImage: {fileID: 0}
-  dashTXT: {fileID: 0}
   animator: {fileID: 1080298710523985698}
 --- !u!114 &80179656904436247
 MonoBehaviour:
@@ -1096,7 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5507232c249e5c048bbc0e83405257f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeInteracao: 20
+  rangeInteracao: 3
   botaoInteragir: {fileID: 0}
 --- !u!1001 &7582314129122360714
 PrefabInstance:

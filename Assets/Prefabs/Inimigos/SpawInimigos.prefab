@@ -95,8 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2efc9a9fb9d2184ba6a3075aff6d3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minInimigos: 7
-  maxInimigos: 15
+  tierSala: 1
+  minInimigos: 0
+  maxInimigos: 0
   colliderSpawn: {fileID: 8073575393503591927}
   terminalBuff: {fileID: 0}
   inimigos:
@@ -106,8 +107,6 @@ MonoBehaviour:
   - {fileID: 9109107839324818849, guid: 72f5820916e21304cb6b2dad0110ea4b, type: 3}
   inimigosVivos: []
   spawners: []
-  tierSala: 1
-  intervaloSpawn: 4
   sourceTerminouSala: {fileID: 8182570635267566300}
   inimigoSimples: 0
   inimigoSniper: 0

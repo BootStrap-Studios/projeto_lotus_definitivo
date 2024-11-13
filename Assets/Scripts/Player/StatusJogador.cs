@@ -425,12 +425,6 @@ public class StatusJogador : MonoBehaviour
 
     }
 
-    public void DesativandoBotoesBuffsUI()
-    {
-        BuffManager buff = FindObjectOfType<BuffManager>();
-        buff.DesativandoTodosOsBotoes();
-    }
-
     public void ReloadBuffs()
     {
         switch (qualReload)
