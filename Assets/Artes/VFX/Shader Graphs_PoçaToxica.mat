@@ -51,18 +51,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NormalStrengh: 0.12
+    - _NormalStrengh: -0.11
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 1.4
-    - _VoronoiAgitation: 1
-    - _VoronoiPower: 2.11
-    - _VoronoisScale: 7
+    - _VoronoiAgitation: 0.75
+    - _VoronoiPower: 3
+    - _VoronoisScale: 11.45
     - _metalic: 0.4
-    - _transparency: 0.19
+    - _transparency: 0
     m_Colors:
     - _BaseColor: {r: 0.14871743, g: 0.5754717, b: 0, a: 0.3921569}
     - _VoronoiSpeed: {r: 0.1, g: 0, b: 0, a: 0}
-    - _VoronoiTiling: {r: 1.29, g: 0.82, b: 0, a: 0}
+    - _VoronoiTiling: {r: 3.96, g: 0.82, b: 0, a: 0}
     - _voronoi: {r: 0.30736738, g: 1, b: 0.023584902, a: 0.3921569}
   m_BuildTextureStacks: []

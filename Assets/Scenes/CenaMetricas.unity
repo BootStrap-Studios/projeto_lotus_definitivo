@@ -2245,6 +2245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posTP: {x: -5, y: 1, z: -132.2}
+  spawn: {fileID: 0}
+  cameraPlayer: {fileID: 0}
+  tpFinal: 0
+  fimUI: {fileID: 0}
 --- !u!1 &216072418
 GameObject:
   m_ObjectHideFlags: 0
@@ -8242,6 +8246,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posTP: {x: 17.02, y: 1, z: -138}
+  spawn: {fileID: 0}
+  cameraPlayer: {fileID: 0}
+  tpFinal: 0
+  fimUI: {fileID: 0}
 --- !u!1 &846441859
 GameObject:
   m_ObjectHideFlags: 0
@@ -12369,6 +12377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posTP: {x: -73.471, y: 1, z: -140}
+  spawn: {fileID: 0}
+  cameraPlayer: {fileID: 0}
+  tpFinal: 0
+  fimUI: {fileID: 0}
 --- !u!1001 &930894207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18803,6 +18815,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posTP: {x: -5.77, y: 1, z: -95}
+  spawn: {fileID: 0}
+  cameraPlayer: {fileID: 0}
+  tpFinal: 0
+  fimUI: {fileID: 0}
 --- !u!43 &1875848722
 Mesh:
   m_ObjectHideFlags: 0
@@ -24944,7 +24960,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7715750927115045199, guid: 31c98f38eb9cf224fa8d62b9a0b190a7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 31c98f38eb9cf224fa8d62b9a0b190a7, type: 3}
 --- !u!1 &7345629756511508215
 GameObject:
