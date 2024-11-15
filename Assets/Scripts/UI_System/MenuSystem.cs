@@ -12,12 +12,14 @@ public class MenuSystem : MonoBehaviour
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject menuPauseUI;
     [SerializeField] private GameObject menuConfigUI;
+    [SerializeField] private GameObject menuAudioUI;
 
     [Header("Congigurações")]
     [SerializeField] private string nomeScene;
     [SerializeField] private Slider sensiOlhar;
     [SerializeField] private Slider sensiMirar;
-
+    [SerializeField] private Scrollbar scrollbar;
+    
     [Header("Outros")]
     [SerializeField] private MargelaH_CAM scriptCAM;
 
@@ -27,6 +29,7 @@ public class MenuSystem : MonoBehaviour
         menuPause,
         menuConfig,
         menuGameOver,
+        menuAudio,
     };
 
     private State stateMenu;
@@ -64,6 +67,10 @@ public class MenuSystem : MonoBehaviour
             {
                 PauseMenu();
             }
+            else if (stateMenu == State.menuAudio)
+            {
+                PauseMenu();
+            }
             else if(stateMenu == State.menuGameOver)
             {
                 Debug.Log("Função indisponível agora!!!");
@@ -76,6 +83,7 @@ public class MenuSystem : MonoBehaviour
         playerUI.SetActive(false);
         menuPauseUI.SetActive(true);
         menuConfigUI.SetActive(false);
+        menuAudioUI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -94,6 +102,7 @@ public class MenuSystem : MonoBehaviour
         playerUI.SetActive(true);
         menuPauseUI.SetActive(false);     
         menuConfigUI.SetActive(false);
+        menuAudioUI.SetActive(false);
         gameOverUI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -125,9 +134,18 @@ public class MenuSystem : MonoBehaviour
         menuPauseUI.SetActive(false);
         menuConfigUI.SetActive(true);
 
+        scrollbar.value = 0.999f;
+
         stateMenu = State.menuConfig;
     }
 
+    public void BTNAudioMenu()
+    {
+        menuPauseUI.SetActive(false);
+        menuAudioUI.SetActive(true);
+
+        stateMenu = State.menuConfig;
+    }
 
     public void BTNVoltarMenuInicial()
     {

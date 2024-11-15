@@ -87102,7 +87102,7 @@ PrefabInstance:
     - target: {fileID: 2329830485628206249, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}
       propertyPath: tierSala
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2329830485628206249, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}
@@ -87114,6 +87114,11 @@ PrefabInstance:
       propertyPath: minInimigos
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 2329830485628206249, guid: 4f679da5eaf6fc5419ad65540410841c,
+        type: 3}
+      propertyPath: terminalBuff
+      value: 
+      objectReference: {fileID: 3607028044794558951}
     - target: {fileID: 2329830485628206249, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}
       propertyPath: spawners.Array.size

@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Movimentacao();
 
-        if(dashCooldownAux < dashCooldown)
+        if (dashCooldownAux < dashCooldown)
         {
             dashCooldownAux += Time.deltaTime;
             dashImage.fillAmount = dashCooldownAux / dashCooldown;
@@ -185,4 +185,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #endregion
+
 }

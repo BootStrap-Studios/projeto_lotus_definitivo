@@ -77,8 +77,15 @@ public class Arma : MonoBehaviour
         {
             if(hitTransform.CompareTag("Inimigo")) {
 
-                hitTransform.GetComponent<Inimigo>().TomarDano(tipoDeArma, tipoDoBuff);
-                Instantiate(vfxHit, hitPoint, Quaternion.identity);
+                try
+                {
+                    hitTransform.GetComponent<Inimigo>().TomarDano(tipoDeArma, tipoDoBuff);
+                    Instantiate(vfxHit, hitPoint, Quaternion.identity);
+                }
+                catch
+                {
+                    Instantiate(vfxHit, hitPoint, Quaternion.identity);
+                }
 
             } else
             {

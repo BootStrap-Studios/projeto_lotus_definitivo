@@ -13,7 +13,7 @@ public class Inimigo : MonoBehaviour
 {
     [Header("Outros")]
     [SerializeField] private Transform player;
-    [SerializeField] private Transform pontaArma;
+    public Transform pontaArma;
     public Transform peInimigo;
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private GameObject[] dropPrefab;
@@ -23,7 +23,8 @@ public class Inimigo : MonoBehaviour
     public Animator animator;
     public LayerMask playerMask, inimigoMask;
     private ProjetilInimigo tiro;   
-    private StateInimigos stateInimigo;
+    public StateInimigos stateInimigo;
+    public SpawnInimigos spawnInimigos;
 
     [Header("Arma")]
     [SerializeField] private int municao;
