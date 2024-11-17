@@ -21,8 +21,6 @@ public class Shuriken : MonoBehaviour
 
     [SerializeField] private GameObject cubo;
 
-    [SerializeField] private AudioSource sourceDisparo;
-
     private RaycastHit[] hits;
 
     private float distanciaShuriken = Mathf.Infinity;
@@ -101,7 +99,7 @@ public class Shuriken : MonoBehaviour
 
     private IEnumerator TiroShuriken()
     {
-        sourceDisparo.PlayOneShot(sourceDisparo.clip);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.manoShuri, transform.position);
         yield return new WaitForSeconds(1.5f);
 
         ShurikenRay();

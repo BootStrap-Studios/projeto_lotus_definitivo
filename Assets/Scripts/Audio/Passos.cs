@@ -19,6 +19,7 @@ public class Passos : MonoBehaviour
     void RunEvent()
     {
         Debug.Log("Run event");
+
         MaterialCheck();
         EventInstance run = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
         RuntimeManager.AttachInstanceToGameObject(run, transform, true);

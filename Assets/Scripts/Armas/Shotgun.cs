@@ -18,8 +18,6 @@ public class Shotgun : MonoBehaviour
 
     [SerializeField] private LayerMask aimColliderMask;
 
-    [SerializeField] private AudioSource sourceDisparo;
-
     public string tipoDoBuff;
     public string tipoDeArma;
 
@@ -40,7 +38,7 @@ public class Shotgun : MonoBehaviour
 
             ammoSystem.GastandoMunicao(bulletsPerTap);
 
-            sourceDisparo.PlayOneShot(sourceDisparo.clip);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.manoEsco, transform.position);
 
             for (int i = 0; i < numeroDeProjeteis; i++)
                 {
@@ -55,18 +53,18 @@ public class Shotgun : MonoBehaviour
 
     private void ShotgunRay()
     {
-        Vector3 direction = pontaDaArma.forward;
+        Vector3 direction = Camera.main.transform.forward;
         Vector3 spread = Vector3.zero;
 
-        spread += pontaDaArma.up * Random.Range(-1f, 1f);
-        spread += pontaDaArma.right * Random.Range(-1f, 1f);
+        spread += Camera.main.transform.up * Random.Range(-.2f, .2f);
+        spread += Camera.main.transform.right * Random.Range(-.2f, .2f);
 
         direction += spread.normalized * Random.Range(0f, 0.2f);
 
         RaycastHit hit;
-        if(Physics.Raycast(pontaDaArma.transform.position, direction, out hit, range, aimColliderMask))
+        if(Physics.Raycast(Camera.main.transform.position, direction, out hit, range, aimColliderMask))
         {
-            Debug.DrawLine(pontaDaArma.transform.position, hit.point, Color.green, 5f);
+            Debug.DrawLine(Camera.main.transform.position, hit.point, Color.green, 5f);
 
             if(hit.transform.CompareTag("Inimigo"))
             {
