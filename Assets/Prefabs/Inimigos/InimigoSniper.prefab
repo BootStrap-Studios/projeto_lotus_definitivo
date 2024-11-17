@@ -396,6 +396,7 @@ MonoBehaviour:
   inimigoMask:
     serializedVersion: 2
     m_Bits: 256
+  spawnInimigos: {fileID: 0}
   municao: 3
   danoTiro: 3
   danoTiroReduzido: 1

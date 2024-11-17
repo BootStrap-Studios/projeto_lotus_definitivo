@@ -18,7 +18,9 @@ public class BarraDeVida : MonoBehaviour
     [SerializeField] private Image corrosao;
     [SerializeField] private Image corrosaoBG;
     [SerializeField] private Image vulneravel;
+    [SerializeField] private Image vulneravelBG;
     [SerializeField] private Image fraco;
+    [SerializeField] private Image fracoBG;
 
     private Camera myCamera;
 
@@ -96,13 +98,16 @@ public class BarraDeVida : MonoBehaviour
 
             case "vulneravel":
 
-                    vulneravel.gameObject.SetActive(status);
+                vulneravel.gameObject.SetActive(status);
+                vulneravelBG.gameObject.SetActive(status);
+                Debug.Log("vulneravel: " + status);
 
                 break;
 
             case "fraco":
 
                 fraco.gameObject.SetActive(status);
+                fracoBG.gameObject.SetActive(status);
 
                 break;
         }
