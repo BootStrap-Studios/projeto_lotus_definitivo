@@ -75,10 +75,12 @@ public class Cover : MonoBehaviour
     private void VerificaCover2()
     {
         RaycastHit hit;
+        Vector3 direcao = player.transform.position - gameObject.transform.position;
+        float angulo = Vector3.Angle(direcao, gameObject.transform.forward);
 
-        if(Physics.Linecast(gameObject.transform.position, player.transform.position, out hit))
+        if (Physics.Linecast(gameObject.transform.position, player.transform.position, out hit))
         {
-            if (hit.transform.tag == "Player")
+            if (hit.transform.tag == "Player" || direcao.magnitude < 1000f && angulo < 100f)
             {
                 coverEscondido = false;
                 coverCheio = false;
