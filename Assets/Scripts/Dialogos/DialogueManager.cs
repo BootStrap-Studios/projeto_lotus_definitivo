@@ -16,6 +16,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
 
+    [SerializeField] private GameObject playerUI;
+
     private Story currentStory;
 
     public bool dialogueIsPlaying { get; private set; }
@@ -60,6 +62,7 @@ public class DialogueManager : MonoBehaviour
 
         dialogueIsPlaying = true;
         dialogueUI.SetActive(true);
+        playerUI.SetActive(false);
 
         ContinueStory();
     }
@@ -69,6 +72,8 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialogueUI.SetActive(false);
         dialogueText.text = "";
+
+        playerUI.SetActive(true);
 
     }
 
