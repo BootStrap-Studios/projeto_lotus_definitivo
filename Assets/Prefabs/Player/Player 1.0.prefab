@@ -147,7 +147,6 @@ MonoBehaviour:
   aimColliderMask:
     serializedVersion: 2
     m_Bits: 257
-  sourceDisparo: {fileID: 0}
   tipoDoBuff: Nenhum
   tipoDeArma: Shotgun
 --- !u!1 &3170620440045834065
@@ -701,7 +700,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   cubo: {fileID: 0}
-  sourceDisparo: {fileID: 2110850932406591145}
   tipoDoBuff: Nenhum
   tipoDeArma: Shuriken
 --- !u!1 &5174054128739968532
@@ -884,7 +882,6 @@ MonoBehaviour:
   ammoSystem: {fileID: 0}
   bulletsPerTap: 1
   vfxHit: {fileID: 5933602760919840800, guid: fcb74f28d107e284e80af037bfec14ca, type: 3}
-  sourceDisparo: {fileID: 3838646886156410816}
   tipoDoBuff: Nenhum
   tipoDeArma: Pistola
 --- !u!1 &5632614426761940789

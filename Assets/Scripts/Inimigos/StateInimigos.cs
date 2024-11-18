@@ -129,7 +129,7 @@ public class StateInimigos
 
     public bool TemCover()
     {
-        if(inimigo.GetComponent<Inimigo>().spawnInimigos.covers[0] != null)
+        if(inimigo.GetComponent<Inimigo>().spawnInimigos.covers.Length > 0)
         {
             for (int i = 0; i < inimigo.GetComponent<Inimigo>().spawnInimigos.covers.Length; i++)
             {

@@ -10,9 +10,11 @@ public class VidaPlayer : MonoBehaviour
     [SerializeField] private Slider barraDeVida;
     [SerializeField] private float velAnim;
     [SerializeField] private float vida;
+    [SerializeField] private Image vidaIMG;
 
     private float vidaAtual;
     private float vidaAtualizada;
+    private bool vidaBaixa;
 
     private StatusJogador statusJogador;
 
@@ -84,6 +86,12 @@ public class VidaPlayer : MonoBehaviour
     public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
     {
         vidaAtualizada = vidaAtual / VidaMaxima;
+
+        if (vidaAtual <= VidaMaxima / 4 && !vidaBaixa)
+        {
+            vidaBaixa = true;
+            StartCoroutine(CO_VidaPiscandoFadeOut());
+        }
     }
 
     private void ConferindoBuffMiscMovimentacao()
@@ -108,5 +116,26 @@ public class VidaPlayer : MonoBehaviour
         }
     }
 
-    
+    private IEnumerator CO_VidaPiscandoFadeIn()
+    {
+        while (vidaIMG.color.a < 1)
+        {
+            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, vidaIMG.color.a + (Time.deltaTime / 0.3f));
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(.3f);
+        StartCoroutine(CO_VidaPiscandoFadeOut());
+    }
+
+    private IEnumerator CO_VidaPiscandoFadeOut()
+    {
+        while (vidaIMG.color.a > 0)
+        {
+            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, vidaIMG.color.a - (Time.deltaTime / 0.3f));
+            yield return null;
+        }
+
+        StartCoroutine(CO_VidaPiscandoFadeIn());
+    }
 }
