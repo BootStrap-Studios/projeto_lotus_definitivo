@@ -42877,35 +42877,35 @@ MonoBehaviour:
       Data2: 1101464058
       Data3: -94899793
       Data4: -230047973
-    Path: event:/personagens/mavie/passos
+    Path: event:/SFX/personagens/mavie/passos
   <manoEsco>k__BackingField:
     Guid:
       Data1: -1856319547
       Data2: 1270431467
       Data3: -72715590
       Data4: -1068559510
-    Path: event:/personagens/mavie/manoesco
+    Path: event:/SFX/personagens/mavie/manoesco
   <manoPistol>k__BackingField:
     Guid:
       Data1: -1587523682
       Data2: 1187363038
       Data3: 597295257
       Data4: -1765536473
-    Path: event:/personagens/mavie/manopisto
+    Path: event:/SFX/personagens/mavie/manopisto
   <manoShuri>k__BackingField:
     Guid:
       Data1: 1989706920
       Data2: 1154226789
       Data3: 37953455
       Data4: 573907357
-    Path: event:/personagens/mavie/manoshuri
+    Path: event:/SFX/personagens/mavie/manoshuri
   <morte>k__BackingField:
     Guid:
       Data1: 928067590
       Data2: 1193361506
       Data3: -131894357
       Data4: 529538833
-    Path: event:/personagens/mavie/morte
+    Path: event:/SFX/personagens/mavie/morte
 --- !u!64 &821263245
 MeshCollider:
   m_ObjectHideFlags: 0
