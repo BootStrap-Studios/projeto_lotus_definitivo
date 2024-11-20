@@ -6,9 +6,20 @@ using UnityEngine;
 
 public class Passos : MonoBehaviour
 {
+    private enum TipoPassos
+    {
+        PLAYER,
+        INIMIGO_BASE,
+        INIMIGO_BOMBA,
+        INIMIGO_SNIPER
+    }
+
+
     private LayerMask lm;
     private int materialValue;
     private RaycastHit rh;
+
+    [SerializeField] private TipoPassos passo;
 
 
     void Start()
@@ -18,16 +29,56 @@ public class Passos : MonoBehaviour
 
     void RunEvent()
     {
-        Debug.Log("Run event");
+        switch (passo) 
+        {
+            case TipoPassos.PLAYER:
 
-        MaterialCheck();
-        EventInstance run = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
-        RuntimeManager.AttachInstanceToGameObject(run, transform, true);
+                Debug.Log("Run event");
 
-        run.setParameterByName("terreno", materialValue);
+                MaterialCheck();
+                EventInstance run = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                RuntimeManager.AttachInstanceToGameObject(run, transform, true);
 
-        run.start();
-        run.release();
+                run.setParameterByName("terreno", materialValue);
+
+                run.start();
+                run.release();
+
+                break;
+
+            case TipoPassos.INIMIGO_BASE:
+
+                EventInstance runIB = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                RuntimeManager.AttachInstanceToGameObject(runIB, transform, true);
+
+                runIB.start();
+                runIB.release();
+
+                break;
+
+            case TipoPassos.INIMIGO_BOMBA:
+
+                EventInstance runIBOMBA = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                RuntimeManager.AttachInstanceToGameObject(runIBOMBA, transform, true);
+                runIBOMBA.start();
+                runIBOMBA.release();
+
+                break;
+
+            case TipoPassos.INIMIGO_SNIPER:
+
+                EventInstance runIS = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                RuntimeManager.AttachInstanceToGameObject(runIS, transform, true);
+                runIS.start();
+                runIS.release();
+
+                break;
+
+
+        }
+
+
+        
     }
 
     private void MaterialCheck()

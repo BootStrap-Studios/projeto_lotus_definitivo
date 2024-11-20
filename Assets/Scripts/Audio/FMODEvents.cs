@@ -41,6 +41,30 @@ public class FMODEvents : MonoBehaviour
     [field: Header("MusicaFabrica")]
     [field: SerializeField] public EventReference musicaFabrica { get; private set; }
 
+    [field: Header("TiroInimigoBase")]
+    [field: SerializeField] public EventReference tiroInimigoBase { get; private set; }
+
+    [field: Header("TiroInimigoSniper")]
+    [field: SerializeField] public EventReference tiroInimigoSniper { get; private set; }
+
+    [field: Header("TiroInimigoTorreta")]
+    [field: SerializeField] public EventReference tiroInimigoTorreta { get; private set; }
+
+    [field: Header("AvisoBomba")]
+    [field: SerializeField] public EventReference avisoBomba { get; private set; }
+
+    [field: Header("BombaExplodiu")]
+    [field: SerializeField] public EventReference bombaExplodiu { get; private set; }
+
+    [field: Header("PassosInimigoBase")]
+    [field: SerializeField] public EventReference inimigoBasePassos { get; private set; }
+
+    [field: Header("PassosInimigoBomba")]
+    [field: SerializeField] public EventReference inimigoBombaPassos { get; private set; }
+
+    [field: Header("PassosInimigoSniper")]
+    [field: SerializeField] public EventReference inimigoSniperPassos { get; private set; }
+
     public static FMODEvents instance { get; private set; }
 
     private void Awake()

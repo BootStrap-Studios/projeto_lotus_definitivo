@@ -70,11 +70,7 @@ public class Inimigo : MonoBehaviour
 
     public bool vulneravel = false;
 
-    [Header("Sons")]
-    [SerializeField] private AudioSource sourceCorrosao;
-    [SerializeField] private AudioSource sourceDisparoNormal;
-    [SerializeField] private AudioSource sourceExplosao;
-    [SerializeField] private AudioSource sourcePreExplosao;
+
 
     private void OnEnable()
     {
@@ -316,19 +312,19 @@ public class Inimigo : MonoBehaviour
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
                 tiro.gameObject.SetActive(true);
-                sourceDisparoNormal.PlayOneShot(sourceDisparoNormal.clip);
+
 
                 if (inimigoNormal)
                 {
-                    //SOM TIRO INIMIGO NORMAL
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoBase, transform.position);
                 }
                 if (inimigoSniper)
                 {
-                    //SOM TIRO INIMIGO SNIPER
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoSniper, transform.position);
                 }
                 if (inimigoTorreta)
                 {
-                    //SOM TIRO TORRETA
+                    AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoTorreta, transform.position);
                 }
 
                 return true;
@@ -342,7 +338,7 @@ public class Inimigo : MonoBehaviour
         {
             if (inimigoExplosivo && !explodindo)
             {
-                //SOM VAI EXPLODIR
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.avisoBomba, transform.position);
                 StartCoroutine(Explodir());
             }
                        
@@ -356,7 +352,7 @@ public class Inimigo : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        //SOM EXPLOSÃO
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.bombaExplodiu, transform.position);
 
         if (Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
         {
@@ -525,7 +521,7 @@ public class Inimigo : MonoBehaviour
     {
         boolCorrosao = true;
 
-        sourceCorrosao.PlayOneShot(sourceCorrosao.clip);
+
 
         int i = 0;
 

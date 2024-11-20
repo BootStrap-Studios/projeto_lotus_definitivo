@@ -19,6 +19,7 @@ public class StatusJogador : MonoBehaviour
     [SerializeField] private Arma arma;
     [SerializeField] private Shotgun shotgun;
     [SerializeField] private Shuriken shuriken;
+    [SerializeField] private AmmoSystem ammoSystem;
 
     [Header("Armadilhas")]
     public float danoArmadilha1;
@@ -197,6 +198,8 @@ public class StatusJogador : MonoBehaviour
     public void UltimateMovimentacao()
     {
         StartCoroutine(UltimateMovimentacaoCoroutine());
+        ammoSystem.MunicaoInfinita();
+        
     }
 
     private IEnumerator UltimateMovimentacaoCoroutine()
@@ -268,7 +271,10 @@ public class StatusJogador : MonoBehaviour
         misc3Burst = true;
     }
 
+    private void UltimateBurst()
+    {
 
+    }
 
     #endregion
 
@@ -376,6 +382,12 @@ public class StatusJogador : MonoBehaviour
     {
         duracaoPoca = 7;
     }
+
+    private void UltimateCorrosao()
+    {
+
+    }
+
     #endregion
 
     #region BuffsCritico
@@ -409,6 +421,22 @@ public class StatusJogador : MonoBehaviour
         misc2Critico = true;
     }
 
+    private void UltimateCritico()
+    {
+        StartCoroutine(UltimateCriticoCoroutine());
+    }
+
+    private IEnumerator UltimateCriticoCoroutine()
+    {
+        //DEVERIA TER ALGUM SOM OU EFEITO NA TELA
+        float aux = chanceDeAcertoCriticoAtual;
+        chanceDeAcertoCriticoAtual = 10f;
+
+        yield return new WaitForSeconds(12f);
+
+        chanceDeAcertoCriticoAtual = aux;
+    }
+
     #endregion
 
 
@@ -422,6 +450,34 @@ public class StatusJogador : MonoBehaviour
     public void Ultando()
     {
         //switch case com todas as ult que ira chamar a função da ult no StatusJogador
+
+        switch(qualULT)
+        {
+            case "Movimentacao":
+                UltimateMovimentacao();
+
+                break;
+
+            case "Defesa":
+                UltimateDefesa();
+
+                break;
+
+            case "Critico":
+                UltimateCritico();
+
+                break;
+
+            case "Burst":
+                UltimateBurst();
+
+                break;
+
+            case "Corrosao":
+                UltimateCorrosao();
+
+                break;
+        }
 
     }
 

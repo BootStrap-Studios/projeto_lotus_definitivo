@@ -414,10 +414,6 @@ MonoBehaviour:
   vida: 5
   statusInimigo: {fileID: 0}
   vulneravel: 0
-  sourceCorrosao: {fileID: 0}
-  sourceDisparoNormal: {fileID: 0}
-  sourceExplosao: {fileID: 0}
-  sourcePreExplosao: {fileID: 0}
 --- !u!1 &7933029950089467436
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +453,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3514350389769855035}
     m_Modifications:
+    - target: {fileID: 1165833908593067979, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165833908593067979, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1173736726555696729, guid: 38eaffe0d8f631249808110155ca751a,
         type: 3}
       propertyPath: m_Pivot.x
@@ -556,6 +562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535364353703740558, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8466103087306775086, guid: 38eaffe0d8f631249808110155ca751a,
         type: 3}
