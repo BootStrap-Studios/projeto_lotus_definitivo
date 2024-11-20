@@ -572,6 +572,7 @@ public class Inimigo : MonoBehaviour
         if(statusBurst >= 5)
         {
             vidaAtual -= statusJogador.danoBurst;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.burstProc, transform.position);
             _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
             statusBurst = 0;
             _barraDeVida.AtualizaStatus(statusBurst, 5, "burst", false);

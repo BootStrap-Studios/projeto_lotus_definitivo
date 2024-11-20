@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
 
+    private EventInstance ambienceEventInstance;
+    private EventInstance musicEventInstance;
+
     [Header("Volume")]
 
     [Range(0, 1)]
@@ -43,11 +46,11 @@ public class AudioManager : MonoBehaviour
 
         masterBus = RuntimeManager.GetBus("bus:/");
 
-        musicBus = RuntimeManager.GetBus("bus:/Music");
+        //musicBus = RuntimeManager.GetBus("bus:/Music");
 
-        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
+        //ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
 
-        sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        //sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
     private void Update()
@@ -58,9 +61,28 @@ public class AudioManager : MonoBehaviour
         sfxBus.setVolume(sfxVolume);
     }
 
+    private void Start()
+    {
+        Debug.Log("Iniciei");
+        InitializeAmbienceEventInstance(FMODEvents.instance.ambienteFabrica);
+        InitializeMusicEventInstance(FMODEvents.instance.musicaFabrica);
+    }
+
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+
+    private void InitializeAmbienceEventInstance(EventReference ambienceEvent)
+    {
+        ambienceEventInstance = CreateEventInstance(ambienceEvent);
+        ambienceEventInstance.start();
+    }
+
+    private void InitializeMusicEventInstance(EventReference musicEvent)
+    {
+        musicEventInstance = CreateEventInstance(musicEvent);
+        musicEventInstance.start();
     }
 
     public EventInstance CreateEventInstance(EventReference eventReference)

@@ -5,12 +5,13 @@ using UnityEngine;
 public class PocaCorrosao : MonoBehaviour
 {
     private StatusJogador statusJogador;
-    [SerializeField] private AudioSource source;
+    
 
     private void Start()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
-        source.PlayOneShot(source.clip);
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.spawnPoca, transform.position);
 
         Destroy(gameObject, statusJogador.duracaoPoca);
     }

@@ -8,7 +8,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
     private BuffManager buffManager;
 
     [SerializeField] private GameObject elevador;
-    [SerializeField] private AudioSource source;
+
     void Start()
     {
         buffManager = FindObjectOfType<BuffManager>();
@@ -19,7 +19,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
         EventBus.Instance.PauseGame();
         
         buffManager.SorteandoQualArvore();
-        source.PlayOneShot(source.clip);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.abrirTerminalBuffs, transform.position);
         gameObject.GetComponent<BoxCollider>().enabled = false;
         elevador.SetActive(true);
 

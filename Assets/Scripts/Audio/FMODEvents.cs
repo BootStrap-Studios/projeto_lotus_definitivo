@@ -20,6 +20,27 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Morte")]
     [field: SerializeField] public EventReference morte { get; private set; }
 
+    [field: Header("SpawnPoca")]
+    [field: SerializeField] public EventReference spawnPoca { get; private set; }
+    
+    [field: Header("BurstProc")]
+    [field: SerializeField] public EventReference burstProc { get; private set; }
+    
+    [field: Header("TerminouSala")]
+    [field: SerializeField] public EventReference terminouSala { get; private set; }
+
+    [field: Header("PauseGame")]
+    [field: SerializeField] public EventReference pauseGame { get; private set; }
+
+    [field: Header("AbrirTerminalBuffs")]
+    [field: SerializeField] public EventReference abrirTerminalBuffs { get; private set; }
+
+    [field: Header("AmbienteFabrica")]
+    [field: SerializeField] public EventReference ambienteFabrica { get; private set; }
+
+    [field: Header("MusicaFabrica")]
+    [field: SerializeField] public EventReference musicaFabrica { get; private set; }
+
     public static FMODEvents instance { get; private set; }
 
     private void Awake()

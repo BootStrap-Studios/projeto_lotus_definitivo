@@ -85,6 +85,8 @@ public class MenuSystem : MonoBehaviour
         menuConfigUI.SetActive(false);
         menuAudioUI.SetActive(false);
 
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseGame, transform.position);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 

@@ -20383,7 +20383,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elevador: {fileID: 1452013511}
-  source: {fileID: 462322726}
 --- !u!65 &462322728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42906,6 +42905,55 @@ MonoBehaviour:
       Data3: -131894357
       Data4: 529538833
     Path: event:/SFX/personagens/mavie/morte
+  <spawnPoca>k__BackingField:
+    Guid:
+      Data1: 1381940812
+      Data2: 1269348900
+      Data3: -1808010334
+      Data4: 37302615
+    Path: event:/SFX/habilidades/corrosao/poca
+  <burstProc>k__BackingField:
+    Guid:
+      Data1: 956182399
+      Data2: 1315865825
+      Data3: -1043764608
+      Data4: 1376641141
+    Path: event:/SFX/habilidades/burst/burst
+  <terminouSala>k__BackingField:
+    Guid:
+      Data1: -1563960734
+      Data2: 1284310405
+      Data3: -1562389577
+      Data4: 41629761
+    Path: event:/SFX/ui/fimDeLevel
+  <pauseGame>k__BackingField:
+    Guid:
+      Data1: -946911356
+      Data2: 1196460623
+      Data3: -1108471163
+      Data4: 1808368257
+    Path: event:/SFX/ui/Start
+  <abrirTerminalBuffs>k__BackingField:
+    Guid:
+      Data1: -940944476
+      Data2: 1075243000
+      Data3: 231293326
+      Data4: -267474319
+    Path: event:/SFX/ui/terminal
+  <ambienteFabrica>k__BackingField:
+    Guid:
+      Data1: -112736265
+      Data2: 1133483710
+      Data3: -424737348
+      Data4: 374209615
+    Path: event:/SFX/ambience/teste
+  <musicaFabrica>k__BackingField:
+    Guid:
+      Data1: -82511759
+      Data2: 1077283053
+      Data3: -1220321634
+      Data4: 231480287
+    Path: event:/SFX/music/testeStrart
 --- !u!64 &821263245
 MeshCollider:
   m_ObjectHideFlags: 0
