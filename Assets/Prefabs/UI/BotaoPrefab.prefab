@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 7105732782605736195}
   - component: {fileID: 5041624792704944154}
   - component: {fileID: 8993916010640409136}
+  - component: {fileID: 6527862458184109014}
   m_Layer: 5
   m_Name: BotaoPrefab
   m_TagString: Untagged
@@ -255,3 +256,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6527862458184109014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690478497968031185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef62c74cdfa26d541a4e6b79833bc753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botao: {fileID: 8993916010640409136}
+  botaoTXT: {fileID: 2537138869410123731}

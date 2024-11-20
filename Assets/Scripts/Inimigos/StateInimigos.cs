@@ -202,6 +202,7 @@ public class Idle : StateInimigos
         //verificando se player está em seu campo de visão
         if (VejoPlayer())
         {
+            //SOM PERCEBE INIMIGO
             nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
             stage = EVENT.EXIT;
         }
@@ -355,6 +356,8 @@ public class Atirar : StateInimigos
                 lookPos.y = 0;
                 Quaternion rotation = Quaternion.LookRotation(lookPos);
                 inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+
+                //SOM TORRETA SE MEXENDO
 
                 if (distanciaTiro.magnitude < alcanceMinArma)
                 {

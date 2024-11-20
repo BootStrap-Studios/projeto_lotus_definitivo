@@ -5,13 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 
-public class InventarioSystem : MonoBehaviour
+public class InventarioSystem : MonoBehaviour, ISave
 {
     [Header("Listas dos Itens")]
-    [SerializeField] private ItemDropado[] listaItens;
+    public ItemDropado[] listaItens;
     private Image[] spritesItens;
     private TextMeshProUGUI[] quantidadeTotalItemUI;    
-    private float[] quantidadeTotalItem;
+    public float[] quantidadeTotalItem;
     
 
     [Header("Item Atual")]
@@ -47,6 +47,8 @@ public class InventarioSystem : MonoBehaviour
             quantidadeTotalItemUI[i] = Instantiate(textoBase, objStringList.transform);
             quantidadeTotalItemUI[i].gameObject.SetActive(false);     
         }
+
+        SaveSystemManager.instance.CarregarJogo();
     }
 
     private void VerificaListaItens(string nomeItem, float qntdItem, bool itemColetado)
@@ -70,5 +72,30 @@ public class InventarioSystem : MonoBehaviour
                 break;
             }
         }           
-    } 
+    }
+
+    public void CarregarSave(InfosSave save)
+    {
+        for (int i = 0; i < quantidadeTotalItem.Length; i++)
+        {
+            quantidadeTotalItem[i] = save.quantidadeItem[i];
+            quantidadeTotalItemUI[i].text = listaItens[i].nomeItem + ": " + quantidadeTotalItem[i].ToString();
+            //Debug.Log(listaItens[i].nomeItem + ": " + quantidadeTotalItem[i]);
+
+            if (quantidadeTotalItem[i] > 0)
+            {
+                spritesItens[i].gameObject.SetActive(true);
+                quantidadeTotalItemUI[i].gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void SalvarSave(ref InfosSave save)
+    {
+        for(int i = 0; i < quantidadeTotalItem.Length; i++)
+        {
+            save.quantidadeItem[i] = quantidadeTotalItem[i];
+        }
+    }
 }
+

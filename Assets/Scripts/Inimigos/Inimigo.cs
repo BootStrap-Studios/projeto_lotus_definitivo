@@ -318,6 +318,19 @@ public class Inimigo : MonoBehaviour
                 tiro.gameObject.SetActive(true);
                 sourceDisparoNormal.PlayOneShot(sourceDisparoNormal.clip);
 
+                if (inimigoNormal)
+                {
+                    //SOM TIRO INIMIGO NORMAL
+                }
+                if (inimigoSniper)
+                {
+                    //SOM TIRO INIMIGO SNIPER
+                }
+                if (inimigoTorreta)
+                {
+                    //SOM TIRO TORRETA
+                }
+
                 return true;
             }
             else
@@ -329,7 +342,7 @@ public class Inimigo : MonoBehaviour
         {
             if (inimigoExplosivo && !explodindo)
             {
-                sourcePreExplosao.PlayOneShot(sourcePreExplosao.clip);
+                //SOM VAI EXPLODIR
                 StartCoroutine(Explodir());
             }
                        
@@ -343,7 +356,7 @@ public class Inimigo : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        sourceExplosao.PlayOneShot(sourceExplosao.clip);
+        //SOM EXPLOSÃO
 
         if (Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
         {

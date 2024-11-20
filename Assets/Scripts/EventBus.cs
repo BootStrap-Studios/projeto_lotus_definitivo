@@ -32,7 +32,7 @@ public class EventBus : MonoBehaviour
     public void GameOver()
     {
         onGameOver?.Invoke();
-    }  
+    }
 
     public void FadeIn(float duracao, Action posFade)
     {
