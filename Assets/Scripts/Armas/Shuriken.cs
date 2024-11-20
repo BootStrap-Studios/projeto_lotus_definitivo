@@ -25,6 +25,8 @@ public class Shuriken : MonoBehaviour
 
     private float distanciaShuriken = Mathf.Infinity;
 
+    private bool carregandoTiro = false;
+
     public string tipoDoBuff;
     public string tipoDeArma;
 
@@ -54,11 +56,11 @@ public class Shuriken : MonoBehaviour
 
         hits = Physics.BoxCastAll(Camera.main.transform.position, tamanhoDaCaixa / 2, Camera.main.transform.forward, Quaternion.Euler(newRotation), distanciaShuriken, ~layer);
 
-        cubo.transform.position = Camera.main.transform.position;
-        cubo.transform.localScale = new Vector3(4f, .5f, 1000f);
+        //cubo.transform.position = Camera.main.transform.position;
+        //cubo.transform.localScale = new Vector3(4f, .5f, 1000f);
 
         
-        cubo.transform.eulerAngles = newRotation;
+        //cubo.transform.eulerAngles = newRotation;
 
 
 
@@ -99,10 +101,16 @@ public class Shuriken : MonoBehaviour
 
     private IEnumerator TiroShuriken()
     {
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.manoShuri, transform.position);
-        yield return new WaitForSeconds(1.5f);
+        if(!carregandoTiro)
+        {
+            carregandoTiro = true;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.manoShuri, transform.position);
+            yield return new WaitForSeconds(1.5f);
 
-        ShurikenRay();
-        ammoSystem.GastandoMunicao(bulletsPerTap);
+            ShurikenRay();
+            ammoSystem.GastandoMunicao(bulletsPerTap);
+            carregandoTiro = false;
+        }
+        
     }
 }

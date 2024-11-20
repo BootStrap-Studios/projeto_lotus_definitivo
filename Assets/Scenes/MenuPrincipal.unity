@@ -4601,8 +4601,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.638}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: -379.32373, y: -96.055}
+  m_AnchoredPosition: {x: 41, y: -15}
+  m_SizeDelta: {x: -197.93, y: -3.9332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1745894318
 MonoBehaviour:
@@ -4626,8 +4626,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Projeto \nL\xF3tus"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 48efb735c2765d64ba1e765124095a7b, type: 2}
+  m_sharedMaterial: {fileID: 4868467707467006354, guid: 48efb735c2765d64ba1e765124095a7b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4657,7 +4658,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 127.52
-  m_fontStyle: 1
+  m_fontStyle: 2
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
