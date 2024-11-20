@@ -12,7 +12,6 @@ public class SpawnInimigos : MonoBehaviour
     public GameObject[] inimigosVivos;    
     [SerializeField] private CanosSpawners[] spawners;
     public Cover[] covers;
-    [SerializeField] private AudioSource sourceTerminouSala;
     private List<GameObject> inimigosQueSpawnam = new List<GameObject>();
     private int minInimigos;
     private int maxInimigos;
@@ -276,7 +275,7 @@ public class SpawnInimigos : MonoBehaviour
             {
                 fimWaveAtual = false;
                 terminalBuff.SetActive(true);
-                sourceTerminouSala.PlayOneShot(sourceTerminouSala.clip);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.terminouSala, transform.position);
             }
         }       
     }

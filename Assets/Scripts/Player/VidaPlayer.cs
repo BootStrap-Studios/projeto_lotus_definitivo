@@ -116,6 +116,8 @@ public class VidaPlayer : MonoBehaviour
         }
     }
 
+    #region Animação da barra piscando
+
     private IEnumerator CO_VidaPiscandoFadeIn()
     {
         while (vidaIMG.color.a < 1)
@@ -138,4 +140,6 @@ public class VidaPlayer : MonoBehaviour
 
         StartCoroutine(CO_VidaPiscandoFadeIn());
     }
+
+    #endregion
 }

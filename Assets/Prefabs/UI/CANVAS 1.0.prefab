@@ -10215,7 +10215,7 @@ GameObject:
   - component: {fileID: 7125765476942864145}
   - component: {fileID: 2424726977964378567}
   - component: {fileID: 1595357166339268160}
-  - component: {fileID: 8093277024868077417}
+  - component: {fileID: 7671323510598248933}
   - component: {fileID: 4322596836643912240}
   m_Layer: 5
   m_Name: CANVAS 1.0
@@ -10400,7 +10400,7 @@ MonoBehaviour:
   - {fileID: 7721224254227505467}
   - {fileID: 8001338357932328745}
   sourceReloadCerto: {fileID: 4322596836643912240}
---- !u!114 &8093277024868077417
+--- !u!114 &7671323510598248933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10417,6 +10417,7 @@ MonoBehaviour:
   - {fileID: -9115670298403210258, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
   - {fileID: -9115670298403210258, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
   - {fileID: -9115670298403210258, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  quantidadeTotalItem: []
   posItemAtual: {fileID: 3561880447385462109}
   itemAtual: {fileID: -5253117121933398674, guid: ef0d9c59c0e769246a40ca9ccecd78fb,
     type: 3}
