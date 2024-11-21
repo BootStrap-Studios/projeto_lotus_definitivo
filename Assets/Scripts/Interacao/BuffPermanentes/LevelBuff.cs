@@ -5,14 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEditor;
 
-public class QualBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler
+public class LevelBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler
 {
     [Header("Config Buff")]
     [SerializeField] private Image buffDesbloqueado;
-    [SerializeField] private int idBuff;
-    [SerializeField] private string nomeBuff;
     [SerializeField] private int levelBuff;
-    [SerializeField] private string[] nomeItensGastos;
+    [SerializeField] private ItemDropado[] itensGastos;
     [SerializeField] private int[] qntdItensGastos;
     public bool levelComprado;
     private bool levelDesbloqueado;
@@ -22,6 +20,7 @@ public class QualBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandl
 
     [Header("Outros Scripts")]
     [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
+    [SerializeField] private LinhaBuffPermanente linhaBuffPermanente;
     [SerializeField] private InventarioSystem inventarioSystem;
 
 
@@ -30,8 +29,8 @@ public class QualBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandl
     {
         if (pressionado)
         {
-            tenhoRecursos = inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, false);
-            levelDesbloqueado = buffsPermanenteManager.LevelDesbloqueado(idBuff, levelBuff);
+            tenhoRecursos = inventarioSystem.ConfereRecursos(itensGastos, qntdItensGastos, false);
+            levelDesbloqueado = linhaBuffPermanente.ConfereLevel(levelBuff);
 
             if (tenhoRecursos && levelDesbloqueado)
             {
@@ -43,8 +42,9 @@ public class QualBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandl
                     buffDesbloqueado.fillAmount = 1;
                     buffDesbloqueado.raycastTarget = true;
                     levelComprado = true;
-                    buffsPermanenteManager.QualBuff(idBuff, levelBuff);
-                    inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, true);
+                    buffsPermanenteManager.QualBuff(linhaBuffPermanente.idBuff, levelBuff);
+                    inventarioSystem.ConfereRecursos(itensGastos, qntdItensGastos, true);
+                    buffsPermanenteManager.AtualizaInventario();
                 }
             }
             else

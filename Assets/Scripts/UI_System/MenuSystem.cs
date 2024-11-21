@@ -22,6 +22,7 @@ public class MenuSystem : MonoBehaviour
     
     [Header("Outros")]
     [SerializeField] private MargelaH_CAM scriptCAM;
+    private bool interagindo;
 
     private enum State
     {
@@ -38,11 +39,13 @@ public class MenuSystem : MonoBehaviour
     private void OnEnable()
     {
         EventBus.Instance.onGameOver += GameOverUI;
+        EventBus.Instance.onInteragindo += Interagindo;
     }
 
     private void OnDisable()
     {
         EventBus.Instance.onGameOver -= GameOverUI;
+        EventBus.Instance.onInteragindo -= Interagindo;
     }
 
     private void Start()
@@ -52,7 +55,7 @@ public class MenuSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !interagindo)
         {
             if(stateMenu == State.menuFechado)
             {
@@ -76,6 +79,11 @@ public class MenuSystem : MonoBehaviour
                 Debug.Log("Função indisponível agora!!!");
             }
         }
+    }
+
+    private void Interagindo()
+    {
+        interagindo = !interagindo;
     }
 
     public void PauseMenu()

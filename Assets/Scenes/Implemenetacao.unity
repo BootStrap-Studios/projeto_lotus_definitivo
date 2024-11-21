@@ -1547,6 +1547,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1529801817964569499, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1547637347966821545, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -7059,10 +7064,10 @@ RectTransform:
   - {fileID: 1699618421}
   m_Father: {fileID: 787235363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5985625, y: 0}
+  m_AnchorMin: {x: 0.5985625, y: 0.19648768}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -88.08502, y: -279.70697}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_SizeDelta: {x: -88.08502, y: -67.70697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!64 &31233606
 MeshCollider:
@@ -10016,14 +10021,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffDesbloqueado: {fileID: 1487946570}
-  idBuff: 0
-  nomeBuff: "Disparo \xDAnico"
   levelBuff: 5
-  nomeItensGastos:
-  - Entulho
-  qntdItensGastos: 01000000
+  itensGastos:
+  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  qntdItensGastos: 32000000
   levelComprado: 0
   buffsPermanenteManager: {fileID: 787235366}
+  linhaBuffPermanente: {fileID: 1236152816}
   inventarioSystem: {fileID: 1479555892}
 --- !u!64 &61602337
 MeshCollider:
@@ -14304,14 +14308,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffDesbloqueado: {fileID: 1725618960}
-  idBuff: 0
-  nomeBuff: "Disparo \xDAnico"
   levelBuff: 4
-  nomeItensGastos:
-  - Entulho
-  qntdItensGastos: 01000000
+  itensGastos:
+  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  qntdItensGastos: 1e000000
   levelComprado: 0
   buffsPermanenteManager: {fileID: 787235366}
+  linhaBuffPermanente: {fileID: 1236152816}
   inventarioSystem: {fileID: 1479555892}
 --- !u!64 &273326449
 MeshCollider:
@@ -32267,14 +32270,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffDesbloqueado: {fileID: 890322524}
-  idBuff: 0
-  nomeBuff: "Disparo \xDAnico"
   levelBuff: 2
-  nomeItensGastos:
-  - Entulho
-  qntdItensGastos: 01000000
+  itensGastos:
+  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  qntdItensGastos: 0a000000
   levelComprado: 0
   buffsPermanenteManager: {fileID: 787235366}
+  linhaBuffPermanente: {fileID: 1236152816}
   inventarioSystem: {fileID: 1479555892}
 --- !u!1 &620178448 stripped
 GameObject:
@@ -43419,6 +43421,7 @@ RectTransform:
   - {fileID: 1172492616}
   - {fileID: 30903496}
   - {fileID: 868296964}
+  - {fileID: 1151848380}
   m_Father: {fileID: 211207393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -43477,7 +43480,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesaTrigger: {fileID: 1346569093}
-  levelAtual: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  levelAtual:
+  - {fileID: 1236152816}
+  itemInventario: {fileID: 2409549580921667758, guid: f4a9bb65e96c1d041855016d10e05e56,
+    type: 3}
+  posItens: {fileID: 1151848379}
 --- !u!1 &788472386 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7561670844995762162, guid: 31c98f38eb9cf224fa8d62b9a0b190a7,
@@ -48915,10 +48922,10 @@ RectTransform:
   - {fileID: 213732447}
   m_Father: {fileID: 787235363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.19648768}
   m_AnchorMax: {x: 0.5985625, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -244.437, y: -200.675}
+  m_AnchoredPosition: {x: 0, y: -0.0007019043}
+  m_SizeDelta: {x: -244.437, y: -67.705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &869304613 stripped
 GameObject:
@@ -66673,6 +66680,68 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5302568919011541938, guid: 57f847a4f1bc2a94ab2e29e46c1221c5, type: 3}
+--- !u!1 &1151848379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151848380}
+  - component: {fileID: 1151848381}
+  m_Layer: 5
+  m_Name: Inventario
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1151848380
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151848379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787235363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.19648768}
+  m_AnchoredPosition: {x: 0, y: -18.680054}
+  m_SizeDelta: {x: -113.452, y: -115.677}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1151848381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151848379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 30
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!64 &1152268770
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -68898,9 +68967,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffDesbloqueado: {fileID: 1562206613}
   nomeItensGastos:
-  - Entulho
-  - Fio de Cobre
-  qntdItensGastos: 0500000001000000
+  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -9115670298403210258, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  qntdItensGastos: 0a00000001000000
+  leveisBuff:
+  - {fileID: 2070839473}
+  - {fileID: 619808967}
+  - {fileID: 1908072628}
+  - {fileID: 272888310}
+  - {fileID: 61421067}
+  idBuff: 0
+  levelAtualBuff: 1
+  titulo: 
+  descricao: 
+  inventarioSystem: {fileID: 1479555892}
+  buffsPermanenteManager: {fileID: 787235366}
 --- !u!114 &1236152817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94636,14 +94717,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffDesbloqueado: {fileID: 1136311999}
-  idBuff: 0
-  nomeBuff: "Disparo \xDAnico"
   levelBuff: 3
-  nomeItensGastos:
-  - Entulho
-  qntdItensGastos: 01000000
+  itensGastos:
+  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  qntdItensGastos: 14000000
   levelComprado: 0
   buffsPermanenteManager: {fileID: 787235366}
+  linhaBuffPermanente: {fileID: 1236152816}
   inventarioSystem: {fileID: 1479555892}
 --- !u!1 &1908516229 stripped
 GameObject:
@@ -98489,14 +98569,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffDesbloqueado: {fileID: 1877053877}
-  idBuff: 0
-  nomeBuff: "Disparo \xDAnico"
   levelBuff: 1
-  nomeItensGastos:
-  - Entulho
-  qntdItensGastos: 01000000
+  itensGastos:
+  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  qntdItensGastos: 05000000
   levelComprado: 0
   buffsPermanenteManager: {fileID: 787235366}
+  linhaBuffPermanente: {fileID: 1236152816}
   inventarioSystem: {fileID: 1479555892}
 --- !u!64 &2071427942
 MeshCollider:
@@ -101412,6 +101491,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198691023673503290, guid: 8207f9d9fee4d8643826c637a5b02e79,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198691023673503290, guid: 8207f9d9fee4d8643826c637a5b02e79,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198691023673503290, guid: 8207f9d9fee4d8643826c637a5b02e79,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 7394826602719657590, guid: 8207f9d9fee4d8643826c637a5b02e79,
         type: 3}

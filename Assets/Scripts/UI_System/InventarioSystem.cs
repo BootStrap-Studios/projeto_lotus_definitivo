@@ -9,10 +9,9 @@ public class InventarioSystem : MonoBehaviour, ISave
 {
     [Header("Listas dos Itens")]
     public ItemDropado[] listaItens;
-    private Image[] spritesItens;
-    private TextMeshProUGUI[] quantidadeTotalItemUI;    
-    public float[] quantidadeTotalItem;
-    
+    public Image[] spritesItens;
+    public TextMeshProUGUI[] quantidadeTotalItemUI;
+    public int[] quantidadeTotalItem;   
 
     [Header("Item Atual")]
     [SerializeField] private GameObject posItemAtual;
@@ -37,7 +36,7 @@ public class InventarioSystem : MonoBehaviour, ISave
     {
         spritesItens = new Image[listaItens.Length];
         quantidadeTotalItemUI = new TextMeshProUGUI[listaItens.Length];
-        quantidadeTotalItem = new float[listaItens.Length];
+        quantidadeTotalItem = new int[listaItens.Length];
 
         for (int i = 0; i < listaItens.Length; i++)
         {
@@ -51,7 +50,7 @@ public class InventarioSystem : MonoBehaviour, ISave
         SaveSystemManager.instance.CarregarJogo();
     }
 
-    private void VerificaListaItens(string nomeItem, float qntdItem, bool itemColetado)
+    private void VerificaListaItens(string nomeItem, int qntdItem, bool itemColetado)
     {        
         for (int i = 0; i < listaItens.Length; i++)
         {
@@ -74,15 +73,15 @@ public class InventarioSystem : MonoBehaviour, ISave
         }           
     }
 
-    public bool ConfereRecursos(string[] nomeItens, int[] qntdItens, bool descontaItens)
+    public bool ConfereRecursos(ItemDropado[] itens, int[] qntdItens, bool descontaItens)
     {
-        bool[] temItem = new bool[nomeItens.Length];
+        bool[] temItem = new bool[itens.Length];
 
-        for (int j = 0; j < nomeItens.Length; j++)
+        for (int j = 0; j < itens.Length; j++)
         {
             for (int i = 0; i < listaItens.Length; i++)
             {
-                if (nomeItens[j] == listaItens[i].nomeItem)
+                if (itens[j].nomeItem == listaItens[i].nomeItem)
                 {
                     if (descontaItens)
                     {
@@ -100,7 +99,7 @@ public class InventarioSystem : MonoBehaviour, ISave
             }
         }
 
-        for(int i = 0; i < temItem.Length; i++)
+        for (int i = 0; i < temItem.Length; i++)
         {
             if (!temItem[i])
             {
@@ -110,6 +109,8 @@ public class InventarioSystem : MonoBehaviour, ISave
 
         return true;
     }
+
+    #region Sistema de Save&Load
 
     public void CarregarSave(InfosSave save)
     {
@@ -134,5 +135,7 @@ public class InventarioSystem : MonoBehaviour, ISave
             save.quantidadeItem[i] = quantidadeTotalItem[i];
         }
     }
+
+    #endregion
 }
 

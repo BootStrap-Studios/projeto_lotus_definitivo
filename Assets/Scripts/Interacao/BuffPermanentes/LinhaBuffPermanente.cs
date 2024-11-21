@@ -4,15 +4,27 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DesbloqueiaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler
+public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler
 {
+    [Header("Config Linha de Buffs")]
     [SerializeField] private Image buffDesbloqueado;
-    [SerializeField] private string[] nomeItensGastos;
+    [SerializeField] private ItemDropado[] nomeItensGastos;
     [SerializeField] private int[] qntdItensGastos;
-    private InventarioSystem inventarioSystem;
+    [SerializeField] private LevelBuff[] leveisBuff;
+    public int idBuff;
+    public int levelAtualBuff;
     private float tempoPressionando;
     private bool pressionado;
     private bool tenhoRecursos;
+
+    [Header("UI")]
+    public string titulo;
+    public string descricao;
+
+    [Header("Outros Scripts")]
+    [SerializeField] private InventarioSystem inventarioSystem;
+    [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
+    
 
     private void Awake()
     {
@@ -31,6 +43,7 @@ public class DesbloqueiaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, 
                 buffDesbloqueado.gameObject.SetActive(false);
                 gameObject.GetComponent<Button>().interactable = false;
                 inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, true);
+                buffsPermanenteManager.AtualizaInventario();
             }
         }
     }
@@ -53,4 +66,15 @@ public class DesbloqueiaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, 
         tenhoRecursos = inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, false);
     }
 
+    public bool ConfereLevel(int levelBuff)
+    {
+        if(levelAtualBuff == levelBuff)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

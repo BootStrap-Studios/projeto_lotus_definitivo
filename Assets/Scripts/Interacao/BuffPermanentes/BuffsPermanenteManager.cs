@@ -5,103 +5,30 @@ using UnityEngine;
 public class BuffsPermanenteManager : MonoBehaviour
 {
     [SerializeField] private Collider mesaTrigger;
-    [SerializeField] private int[] levelAtual;
+    [SerializeField] private LinhaBuffPermanente[] levelAtual;
+    [SerializeField] private GameObject itemInventario;
+    [SerializeField] private GameObject posItens;
+    private GameObject[] itens;
 
     private StatusJogador statusJogador;
     private VidaPlayer vidaPlayer;
+    private InventarioSystem inventarioSystem;
 
-    private void Start()
+    private void Awake()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
         vidaPlayer = FindObjectOfType<VidaPlayer>();
-    }
-    public void QualBuff(int idBuff, int levelBuff)
-    {
-        switch (idBuff)
+        inventarioSystem = FindObjectOfType<InventarioSystem>();
+
+        itens = new GameObject[inventarioSystem.listaItens.Length];
+
+        for (int i = 0; i < itens.Length; i++)
         {
-            case 0:
-
-                //função para aprimorar pistola com base no level do buff
-
-
-                levelAtual[0]++;
-
-                break;
-
-            case 1:
-
-                //função para aprimorar shotgun com base no level do buff
-                levelAtual[1]++;
-
-                break;
-
-            case 2:
-
-                //função para aprimorar shuriken com base no level do buff
-                levelAtual[2]++;
-
-                break;
-
-            case 3:
-
-                //função para aprimorar vida maxima com base no level do buff
-                VidaPermanente(levelBuff);
-
-                levelAtual[3]++;
-
-                break;
-
-            case 4:
-
-                //função para aprimorar cura por sala com base no level do buff
-                levelAtual[4]++;
-
-                break;
-
-            case 5:
-
-                //função para aprimorar energia da manopla com base no level do buff
-                levelAtual[5]++;
-
-                break;
-
-            case 6:
-
-                //função para aprimorar coleta de recursos com base no level do buff
-                levelAtual[6]++;
-
-                break;
-
-            case 7:
-
-                //função para aprimorar dash com base no level do buff
-                levelAtual[7]++;
-
-                break;
-
-            case 8:
-
-                //função para aprimorar proffessores com base no level do buff
-                levelAtual[8]++;
-
-                break;
-
-            case 9:
-
-                //função para aprimorar quantidade de buffs na manopla com base no level do buff
-                levelAtual[9]++;
-
-                break;
-
-            case 10:
-
-                //função para desbloquear ult com base no level do buff
-                levelAtual[10]++;
-
-                break;
-
+            itens[i] = Instantiate(itemInventario, posItens.transform);
+            itens[i].GetComponent<ItemInventario>().imagem.sprite = inventarioSystem.spritesItens[i].sprite;
         }
     }
+    
 
     private void Update()
     {
@@ -118,20 +45,101 @@ public class BuffsPermanenteManager : MonoBehaviour
         }
     }
 
-    public bool LevelDesbloqueado(int idBuff, int levelBuff)
+    public void AtualizaInventario()
     {
-        //Debug.Log(levelAtual[idBuff] + " = " + levelBuff);
-
-        if(levelAtual[idBuff] == levelBuff)
+        for(int i = 0; i < itens.Length; i++)
         {
-            return true;
-        }
-        else
-        {
-            return false;
+            itens[i].GetComponent<ItemInventario>().AtualizaTexto(inventarioSystem.listaItens[i].nomeItem, inventarioSystem.quantidadeTotalItem[i]);
         }
     }
 
+    public void QualBuff(int idBuff, int levelBuff)
+    {
+        switch (idBuff)
+        {
+            case 0:
+
+                //função para aprimorar pistola com base no level do buff
+
+
+                levelAtual[0].levelAtualBuff++;
+
+                break;
+
+            case 1:
+
+                //função para aprimorar shotgun com base no level do buff
+                levelAtual[1].levelAtualBuff++;
+
+                break;
+
+            case 2:
+
+                //função para aprimorar shuriken com base no level do buff
+                levelAtual[2].levelAtualBuff++;
+
+                break;
+
+            case 3:
+
+                //função para aprimorar vida maxima com base no level do buff
+                VidaPermanente(levelBuff);
+
+                levelAtual[3].levelAtualBuff++;
+
+                break;
+
+            case 4:
+
+                //função para aprimorar cura por sala com base no level do buff
+                levelAtual[4].levelAtualBuff++;
+
+                break;
+
+            case 5:
+
+                //função para aprimorar energia da manopla com base no level do buff
+                levelAtual[5].levelAtualBuff++;
+
+                break;
+
+            case 6:
+
+                //função para aprimorar coleta de recursos com base no level do buff
+                levelAtual[6].levelAtualBuff++;
+
+                break;
+
+            case 7:
+
+                //função para aprimorar dash com base no level do buff
+                levelAtual[7].levelAtualBuff++;
+
+                break;
+
+            case 8:
+
+                //função para aprimorar proffessores com base no level do buff
+                levelAtual[8].levelAtualBuff++;
+
+                break;
+
+            case 9:
+
+                //função para aprimorar quantidade de buffs na manopla com base no level do buff
+                levelAtual[9].levelAtualBuff++;
+
+                break;
+
+            case 10:
+
+                //função para desbloquear ult com base no level do buff
+                levelAtual[10].levelAtualBuff++;
+
+                break;
+
+        }
+    }
 
     #region Funções que ativam os buffs permanentes
 
