@@ -58,8 +58,8 @@ public class InventarioSystem : MonoBehaviour, ISave
             if (listaItens[i].nomeItem == nomeItem)
             {
                 if (itemColetado)
-                {                    
-                    itemAtual.ConfigurandoItem(spritesItens[i].color, nomeItem + ": " + qntdItem.ToString());
+                {
+                    itemAtual.ConfigurandoItem(spritesItens[i].sprite, nomeItem + ": " + qntdItem.ToString());
                     Instantiate(itemAtual.gameObject, posItemAtual.transform);
                 }
 
@@ -72,6 +72,43 @@ public class InventarioSystem : MonoBehaviour, ISave
                 break;
             }
         }           
+    }
+
+    public bool ConfereRecursos(string[] nomeItens, int[] qntdItens, bool descontaItens)
+    {
+        bool[] temItem = new bool[nomeItens.Length];
+
+        for (int j = 0; j < nomeItens.Length; j++)
+        {
+            for (int i = 0; i < listaItens.Length; i++)
+            {
+                if (nomeItens[j] == listaItens[i].nomeItem)
+                {
+                    if (descontaItens)
+                    {
+                        quantidadeTotalItem[i] -= qntdItens[j];
+                        quantidadeTotalItemUI[i].text = listaItens[i].nomeItem + ": " + quantidadeTotalItem[i].ToString();
+                    }
+                    else
+                    {
+                        if (qntdItens[j] <= quantidadeTotalItem[i])
+                        {
+                            temItem[j] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; i < temItem.Length; i++)
+        {
+            if (!temItem[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void CarregarSave(InfosSave save)

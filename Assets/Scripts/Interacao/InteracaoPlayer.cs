@@ -12,6 +12,16 @@ public class InteracaoPlayer : MonoBehaviour
 {
     [SerializeField] private float rangeInteracao;
     [SerializeField] private Image botaoInteragir;
+    private bool interagindo;
+
+    private void OnEnable()
+    {
+        EventBus.Instance.onPauseGame += Interagindo;
+    }
+    private void OnDisable()
+    {
+        EventBus.Instance.onPauseGame -= Interagindo;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,7 +32,7 @@ public class InteracaoPlayer : MonoBehaviour
             if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
             {
                 botaoInteragir.gameObject.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) && !interagindo)
                 {
                     interactObj.Interagir();
                     botaoInteragir.gameObject.SetActive(false);
@@ -33,5 +43,10 @@ public class InteracaoPlayer : MonoBehaviour
                 botaoInteragir.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void Interagindo()
+    {
+        interagindo = !interagindo;
     }
 }

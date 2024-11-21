@@ -6,7 +6,8 @@ using TMPro;
 
 public class ItemColetado : MonoBehaviour
 {
-    [SerializeField] private Image spriteItemAtual;
+    [SerializeField] private Image imagemItemAtual;
+    [SerializeField] private Image background;
     [SerializeField] private TextMeshProUGUI quantidadeItemAtualTXT;
     [SerializeField] private float tempoAtivo;
     [SerializeField] private float velFadeOut;
@@ -20,19 +21,20 @@ public class ItemColetado : MonoBehaviour
 
         if (tempoAtivo <= 0)
         {
-            spriteItemAtual.color = new Color(spriteItemAtual.color.r, spriteItemAtual.color.g, spriteItemAtual.color.b, spriteItemAtual.color.a - (Time.deltaTime / velFadeOut));
+            imagemItemAtual.color = new Color(imagemItemAtual.color.r, imagemItemAtual.color.g, imagemItemAtual.color.b, imagemItemAtual.color.a - (Time.deltaTime / velFadeOut));
+            background.color = new Color(background.color.r, background.color.g, background.color.b, background.color.a - (Time.deltaTime / velFadeOut));
             quantidadeItemAtualTXT.color = new Color(1, 1, 1, quantidadeItemAtualTXT.color.a - (Time.deltaTime / velFadeOut));
 
-            if (spriteItemAtual.color.a <= 0)
+            if (imagemItemAtual.color.a <= 0)
             {
                 Destroy(gameObject);
             }
         }
     }
 
-    public void ConfigurandoItem(Color sprite, string texto)
+    public void ConfigurandoItem(Sprite sprite, string texto)
     {
-        spriteItemAtual.color = sprite;
+        imagemItemAtual.sprite = sprite;
         quantidadeItemAtualTXT.text = texto;
     }
 }
