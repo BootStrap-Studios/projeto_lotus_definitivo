@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StatusJogador : MonoBehaviour
 {
+
+
     [Header("Dano base das armas")]
     public float danoBasePistola;
     public float danoBaseShotgun;

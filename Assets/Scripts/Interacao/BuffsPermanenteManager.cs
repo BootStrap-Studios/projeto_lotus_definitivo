@@ -7,7 +7,14 @@ public class BuffsPermanenteManager : MonoBehaviour
     [SerializeField] private Collider mesaTrigger;
     [SerializeField] private int[] levelAtual;
 
+    private StatusJogador statusJogador;
+    private VidaPlayer vidaPlayer;
 
+    private void Start()
+    {
+        statusJogador = FindObjectOfType<StatusJogador>();
+        vidaPlayer = FindObjectOfType<VidaPlayer>();
+    }
     public void QualBuff(int idBuff, int levelBuff)
     {
         switch (idBuff)
@@ -15,6 +22,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 0:
 
                 //função para aprimorar pistola com base no level do buff
+
+
                 levelAtual[0]++;
 
                 break;
@@ -36,6 +45,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 3:
 
                 //função para aprimorar vida maxima com base no level do buff
+                VidaPermanente(levelBuff);
+
                 levelAtual[3]++;
 
                 break;
@@ -120,4 +131,33 @@ public class BuffsPermanenteManager : MonoBehaviour
             return false;
         }
     }
+
+
+    #region Funções que ativam os buffs permanentes
+
+    private void VidaPermanente(int levelBuff)
+    {
+        switch(levelBuff)
+        {
+            case 1:
+                vidaPlayer.vidaMaxima = 33;
+                break;
+
+            case 2:
+                vidaPlayer.vidaMaxima = 36;
+                break;
+
+            case 3:
+                vidaPlayer.vidaMaxima = 39;
+                break;
+
+            case 4:
+                vidaPlayer.vidaMaxima = 45;
+                break;
+        }
+    }
+
+
+
+    #endregion
 }

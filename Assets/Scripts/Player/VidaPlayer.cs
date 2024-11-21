@@ -9,7 +9,7 @@ public class VidaPlayer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI vidaUI;
     [SerializeField] private Slider barraDeVida;
     [SerializeField] private float velAnim;
-    [SerializeField] private float vida;
+    [SerializeField] public float vidaMaxima;
     [SerializeField] private Image vidaIMG;
 
     private float vidaAtual;
@@ -23,9 +23,9 @@ public class VidaPlayer : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        vidaAtual = vida;
-        AlterarBarraDeVida(vidaAtual, vida);
-        vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
+        vidaAtual = vidaMaxima;
+        AlterarBarraDeVida(vidaAtual, vidaMaxima);
+        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
 
         
 
@@ -68,8 +68,8 @@ public class VidaPlayer : MonoBehaviour
         }
 
         vidaAtual -= dano;
-        AlterarBarraDeVida(vidaAtual, vida);
-        vidaUI.text = vidaAtual.ToString() + " / " + vida.ToString();
+        AlterarBarraDeVida(vidaAtual, vidaMaxima);
+        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
 
         //Buff misc da velocidade
         ConferindoBuffMiscMovimentacao();
@@ -96,7 +96,7 @@ public class VidaPlayer : MonoBehaviour
 
     private void ConferindoBuffMiscMovimentacao()
     {
-        if (vidaAtual <= vida / 4)
+        if (vidaAtual <= vidaMaxima / 4)
         {
             if (statusJogador.misc2movimentacao)
             {
@@ -107,7 +107,7 @@ public class VidaPlayer : MonoBehaviour
 
     private void ConferindoBuffMiscDefesa()
     {
-        if (vidaAtual <= vida / 4)
+        if (vidaAtual <= vidaMaxima / 4)
         {
             if (statusJogador.misc2Defesa)
             {
