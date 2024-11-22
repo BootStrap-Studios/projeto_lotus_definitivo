@@ -122,3 +122,4 @@ MonoBehaviour:
   nomeItem: Borracha
   spriteItem: {fileID: 3940361511880369961, guid: a9af3d35a7a0f1a4780c04ac98e423c4,
     type: 3}
+  recompensaSala: 1

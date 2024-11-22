@@ -610,6 +610,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8897368424743339313}
+  - {fileID: 1042831342686936603}
   - {fileID: 5446328927678580914}
   - {fileID: 6631142776053553853}
   - {fileID: 8917170798570778602}
@@ -617,8 +619,6 @@ RectTransform:
   - {fileID: 9187051744281485593}
   - {fileID: 5064327083039634013}
   - {fileID: 8449005884213416569}
-  - {fileID: 8897368424743339313}
-  - {fileID: 1042831342686936603}
   m_Father: {fileID: 1547637347966821545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -10217,6 +10217,7 @@ GameObject:
   - component: {fileID: 1595357166339268160}
   - component: {fileID: 7671323510598248933}
   - component: {fileID: 4322596836643912240}
+  - component: {fileID: 7653630104129652106}
   m_Layer: 5
   m_Name: CANVAS 1.0
   m_TagString: Untagged
@@ -10417,7 +10418,13 @@ MonoBehaviour:
   - {fileID: -9115670298403210258, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
   - {fileID: -9115670298403210258, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
   - {fileID: -9115670298403210258, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
-  quantidadeTotalItem: []
+  - {fileID: -9115670298403210258, guid: 544d01218ec814b4e9a4eb1ef6e493d6, type: 3}
+  - {fileID: -9115670298403210258, guid: 95d37eebdcb010b4b9ebbf334bad18a6, type: 3}
+  - {fileID: -9115670298403210258, guid: d9a242c88c587044780107ff2caba41a, type: 3}
+  - {fileID: -9115670298403210258, guid: 6b04821b40bb6054c9969c3d95c94519, type: 3}
+  spritesItens: []
+  quantidadeTotalItemUI: []
+  quantidadeTotalItem: 
   posItemAtual: {fileID: 3561880447385462109}
   itemAtual: {fileID: -5253117121933398674, guid: ef0d9c59c0e769246a40ca9ccecd78fb,
     type: 3}
@@ -10521,6 +10528,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7653630104129652106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5139016648039773102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d5c76bcf79f0742b65216e99df944a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffsPermanenteUI: {fileID: 0}
+  mesaTrigger: {fileID: 0}
+  levelAtual:
+  - {fileID: 0}
+  itemInventario: {fileID: 2409549580921667758, guid: f4a9bb65e96c1d041855016d10e05e56,
+    type: 3}
+  posItens: {fileID: 0}
+  posItens2: {fileID: 0}
+  tituloTXT: {fileID: 0}
+  descricaoTXT: {fileID: 0}
+  msgErroTXT: {fileID: 0}
 --- !u!1 &5173832958228023432
 GameObject:
   m_ObjectHideFlags: 0

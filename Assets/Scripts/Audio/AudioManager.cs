@@ -4,7 +4,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour , ISave
 {
     public static AudioManager instance { get; private set; }
 
@@ -130,4 +130,23 @@ public class AudioManager : MonoBehaviour
         CleanUp();
     }
 
+    #region Save&Load
+
+    public void CarregarSave(InfosSave save)
+    {
+        masterVolume = save.masterVolume;
+        musicVolume = save.musicVolume;
+        ambienceVolume = save.ambienceVolume;
+        sfxVolume = save.sfxVolume;
+    }
+
+    public void SalvarSave(ref InfosSave save)
+    {
+        save.masterVolume = masterVolume;
+        save.musicVolume = musicVolume;
+        save.ambienceVolume = ambienceVolume;
+        save.sfxVolume = sfxVolume;
+    }
+
+    #endregion
 }

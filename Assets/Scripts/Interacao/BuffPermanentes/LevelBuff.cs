@@ -12,7 +12,6 @@ public class LevelBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHand
     [SerializeField] private int levelBuff;
     [SerializeField] private ItemDropado[] itensGastos;
     [SerializeField] private int[] qntdItensGastos;
-    public bool levelComprado;
     private bool pressionado;
     private float tempoPressionando;
 
@@ -34,12 +33,11 @@ public class LevelBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHand
 
                     if (tempoPressionando >= 2)
                     {
-                        buffDesbloqueado.fillAmount = 1;
-                        buffDesbloqueado.raycastTarget = true;
+                        LiberaBuff();
                         buffsPermanenteManager.QualBuff(linhaBuffPermanente.idBuff, levelBuff);
                         inventarioSystem.ConfereRecursos(itensGastos, qntdItensGastos, true);
                         buffsPermanenteManager.AtualizaInventario();
-                        gameObject.GetComponent<Button>().interactable = false;
+                        linhaBuffPermanente.levelAtualBuff++;
                     }
                 }
                 else
@@ -84,8 +82,12 @@ public class LevelBuff : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHand
         buffsPermanenteManager.MostraDebito(qntdItensGastos, itensGastos, false);
     }
 
-    public void ConfereBuff()
+    public void LiberaBuff()
     {
+        buffDesbloqueado.fillAmount = 1;
+        buffDesbloqueado.raycastTarget = true;
+        gameObject.GetComponent<Button>().interactable = false;
 
+        //Debug.Log("Desbloquiei buff level " + levelBuff);
     }
 }

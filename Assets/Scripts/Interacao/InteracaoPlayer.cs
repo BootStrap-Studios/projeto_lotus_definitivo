@@ -48,6 +48,5 @@ public class InteracaoPlayer : MonoBehaviour
     private void Interagindo()
     {
         interagindo = !interagindo;
-        EventBus.Instance.Interagindo();
     }
 }

@@ -122,3 +122,4 @@ MonoBehaviour:
   nomeItem: Fio de Cobre
   spriteItem: {fileID: 3940361511880369961, guid: 0c1d2331bc386a4499bd541a82a39cc8,
     type: 3}
+  recompensaSala: 1

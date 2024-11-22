@@ -50,6 +50,7 @@ public class InventarioSystem : MonoBehaviour, ISave
         SaveSystemManager.instance.CarregarJogo();
     }
 
+    //Função que verifica se já tenho o item coletado no inventário, se sim apenas somo a quantidade já existente, se não adiciono o item novo ao inventário
     private void VerificaListaItens(string nomeItem, int qntdItem, bool itemColetado)
     {        
         for (int i = 0; i < listaItens.Length; i++)
@@ -73,6 +74,7 @@ public class InventarioSystem : MonoBehaviour, ISave
         }           
     }
 
+    //Função que verifica se tenho os recursos suficientes no meu inventário, e desconta os mesmos caso realmente utilizados
     public bool ConfereRecursos(ItemDropado[] itens, int[] qntdItens, bool descontaItens)
     {
         bool[] temItem = new bool[itens.Length];
@@ -114,7 +116,7 @@ public class InventarioSystem : MonoBehaviour, ISave
 
     public void CarregarSave(InfosSave save)
     {
-        for (int i = 0; i < quantidadeTotalItem.Length; i++)
+        for (int i = 0; i < save.quantidadeItem.Length; i++)
         {
             quantidadeTotalItem[i] = save.quantidadeItem[i];
             quantidadeTotalItemUI[i].text = listaItens[i].nomeItem + ": " + quantidadeTotalItem[i].ToString();
@@ -130,7 +132,7 @@ public class InventarioSystem : MonoBehaviour, ISave
 
     public void SalvarSave(ref InfosSave save)
     {
-        for(int i = 0; i < quantidadeTotalItem.Length; i++)
+        for(int i = 0; i < save.quantidadeItem.Length; i++)
         {
             save.quantidadeItem[i] = quantidadeTotalItem[i];
         }

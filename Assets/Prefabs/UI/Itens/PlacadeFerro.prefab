@@ -122,3 +122,4 @@ MonoBehaviour:
   nomeItem: Placa de Ferro
   spriteItem: {fileID: 3940361511880369961, guid: 3c767e2bc2247ae42a9fa6fefe7363df,
     type: 3}
+  recompensaSala: 1

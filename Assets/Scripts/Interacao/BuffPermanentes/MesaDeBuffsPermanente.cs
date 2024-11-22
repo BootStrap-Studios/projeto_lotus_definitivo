@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class MesaDeBuffsPermanente : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject buffsPermnentesUI;
     [SerializeField] private Collider trigger;
     private BuffsPermanenteManager buffsPermanenteManager;
 
     private void Awake()
     {
-        buffsPermanenteManager = buffsPermnentesUI.GetComponent<BuffsPermanenteManager>();
+        buffsPermanenteManager = FindObjectOfType<BuffsPermanenteManager>();
     }
 
     public void Interagir()
     {
+        EventBus.Instance.Interagindo();
         EventBus.Instance.PauseGame();
 
-        trigger.enabled = false;      
-        buffsPermnentesUI.SetActive(true);
+        buffsPermanenteManager.scrollbar.value = 0.999f;
+
+        trigger.enabled = false;
+        buffsPermanenteManager.buffsPermanenteUI.SetActive(true);
+        buffsPermanenteManager.uiLigada = true;
         buffsPermanenteManager.AtualizaInventario();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

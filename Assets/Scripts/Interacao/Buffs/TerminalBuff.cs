@@ -56,7 +56,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
             case PackRecompensas.BUFF_RECURSO:
 
-                int aux = Random.Range(1, 2);
+                int aux = Random.Range(1, 3);
 
                 if(aux == 1)
                 {
@@ -71,7 +71,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
             case PackRecompensas.BUFF_DADO_CURA:
 
-                int aux1 = Random.Range(1, 3);
+                int aux1 = Random.Range(1, 4);
 
                 if (aux1 == 1)
                 {
@@ -94,7 +94,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
             case PackRecompensas.BUFF_RECURSO_DADO:
 
-                int aux2 = Random.Range(1, 3);
+                int aux2 = Random.Range(1, 4);
 
                 if (aux2 == 1)
                 {
@@ -112,7 +112,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
             case PackRecompensas.BUFF_CURA:
 
-                int aux3 = Random.Range(1, 2);
+                int aux3 = Random.Range(1, 3);
 
                 if (aux3 == 1)
                 {
@@ -126,7 +126,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
             case PackRecompensas.BUFF_RECURSO_CURA:
 
-                int aux4 = Random.Range(1, 3);
+                int aux4 = Random.Range(1, 4);
 
                 if (aux4 == 1)
                 {
@@ -150,6 +150,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
     private void Buff()
     {
         Debug.Log("Sorteou buff hein");
+        EventBus.Instance.Interagindo();
         EventBus.Instance.PauseGame();
 
         buffManager.SorteandoQualArvore();

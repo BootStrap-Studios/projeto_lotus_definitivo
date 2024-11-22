@@ -13,8 +13,9 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
     [SerializeField] private LevelBuff[] leveisBuff;
     public int idBuff;
     public int levelAtualBuff;
-    private float tempoPressionando;
+    public bool desbloqueado;
     private bool pressionado;
+    private float tempoPressionando;   
 
     [Header("UI")]
     public string titulo;
@@ -35,11 +36,11 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
                 buffDesbloqueado.fillAmount -= Time.unscaledDeltaTime / 2;
 
                 if (tempoPressionando >= 2)
-                {
-                    buffDesbloqueado.gameObject.SetActive(false);
-                    gameObject.GetComponent<Button>().interactable = false;
+                {  
                     inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, true);
                     buffsPermanenteManager.AtualizaInventario();
+                    desbloqueado = true;
+                    LiberaBuffs();
                 }
             }
             else
@@ -77,6 +78,7 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
 
     public bool ConfereLevel(int levelBuff)
     {
+        //Debug.Log(levelAtualBuff + " <-> " + levelBuff);
         if(levelAtualBuff == levelBuff)
         {
             return true;
@@ -85,5 +87,24 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
         {
             return false;
         }
+    }
+
+    public void LiberaBuffs()
+    {
+        buffDesbloqueado.gameObject.SetActive(false);
+        gameObject.GetComponent<Button>().interactable = false;
+
+        //Debug.Log("Desbloquiei arvore de buffs");
+    }
+
+    public void AtulizaBuffsDesbloqueados(int levelDesbloqueado)
+    {
+        for(int i = 0; i < levelDesbloqueado; i++)
+        {
+            leveisBuff[i].LiberaBuff();
+        }
+
+        LiberaBuffs();
+        levelAtualBuff++;
     }
 }

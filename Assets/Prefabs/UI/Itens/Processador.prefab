@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8330009454706955979}
   - component: {fileID: -9115670298403210258}
   m_Layer: 7
-  m_Name: Entulho
+  m_Name: Processador
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be282bc5f13328344a5944e47383b1c5, type: 2}
+  - {fileID: 2100000, guid: ee51d37a1764c964c92a3012273c8d02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575ca7b0ebfa8d44790b1b91cd7398b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quantidadeItemMax: 5
-  nomeItem: Entulho
-  spriteItem: {fileID: 3940361511880369961, guid: a4d88f0606c645343a9a42c5b2ad45b5,
+  quantidadeItemMax: 1
+  nomeItem: Processador
+  spriteItem: {fileID: 3940361511880369961, guid: 48be771164422ae4c9a14a1e6d57597a,
     type: 3}
   recompensaSala: 0

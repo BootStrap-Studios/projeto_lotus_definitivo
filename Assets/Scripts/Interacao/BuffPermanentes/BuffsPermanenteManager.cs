@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-public class BuffsPermanenteManager : MonoBehaviour
+public class BuffsPermanenteManager : MonoBehaviour , ISave
 {
     [Header("Config Manager")]
+    public GameObject buffsPermanenteUI;
     [SerializeField] private Collider mesaTrigger;
     [SerializeField] private LinhaBuffPermanente[] levelAtual;
     [SerializeField] private GameObject itemInventario;
     [SerializeField] private GameObject posItens;
     [SerializeField] private GameObject posItens2;
+    public Scrollbar scrollbar;
+    public bool uiLigada;
     private GameObject[] itens;
     private bool mudaSpawn;
 
@@ -35,39 +39,25 @@ public class BuffsPermanenteManager : MonoBehaviour
         inventarioSystem = FindObjectOfType<InventarioSystem>();
         player = FindObjectOfType<PlayerMovement>();
         ammoSystem = FindObjectOfType<AmmoSystem>();
-
-        itens = new GameObject[inventarioSystem.listaItens.Length];
-
-        for (int i = 0; i < itens.Length; i++)
-        {
-            if (!mudaSpawn)
-            {
-                itens[i] = Instantiate(itemInventario, posItens.transform);
-                mudaSpawn = true;
-            }
-            else
-            {
-                itens[i] = Instantiate(itemInventario, posItens2.transform);
-                mudaSpawn = false;
-            }
-            
-            itens[i].GetComponent<ItemInventario>().imagem.sprite = inventarioSystem.spritesItens[i].sprite;
-        }
     }
     
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && uiLigada)
         {
-            gameObject.SetActive(false);
+            uiLigada = false;
+
+            buffsPermanenteUI.SetActive(false);
             mesaTrigger.enabled = true;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            EventBus.Instance.PauseGame();
+            
+            //EventBus.Instance.PauseGame();
             Time.timeScale = 1;
+            EventBus.Instance.Interagindo();
         }
 
         if (msgErroAtiva)
@@ -86,6 +76,27 @@ public class BuffsPermanenteManager : MonoBehaviour
                     msgErroTXT.enabled = false;
                 } 
             }
+        }
+    }
+
+    public void CarregaInventario()
+    {
+        itens = new GameObject[inventarioSystem.listaItens.Length];
+
+        for (int i = 0; i < itens.Length; i++)
+        {
+            if (!mudaSpawn)
+            {
+                itens[i] = Instantiate(itemInventario, posItens.transform);
+                mudaSpawn = true;
+            }
+            else
+            {
+                itens[i] = Instantiate(itemInventario, posItens2.transform);
+                mudaSpawn = false;
+            }
+
+            itens[i].GetComponent<ItemInventario>().imagem.sprite = inventarioSystem.spritesItens[i].sprite;
         }
     }
 
@@ -138,16 +149,12 @@ public class BuffsPermanenteManager : MonoBehaviour
                 //função para aprimorar pistola com base no level do buff
                 PistolaPermanente(levelBuff);
 
-                levelAtual[0].levelAtualBuff++;
-
                 break;
 
             case 1:
 
                 //função para aprimorar shotgun com base no level do buff
                 ShotgunPermanente(levelBuff);
-
-                levelAtual[1].levelAtualBuff++;
 
                 break;
 
@@ -156,16 +163,12 @@ public class BuffsPermanenteManager : MonoBehaviour
                 //função para aprimorar shuriken com base no level do buff
                 ShurikenPermanente(levelBuff);
 
-                levelAtual[2].levelAtualBuff++;
-
                 break;
 
             case 3:
 
                 //função para aprimorar vida maxima com base no level do buff
                 VidaPermanente(levelBuff);
-
-                levelAtual[3].levelAtualBuff++;
 
                 break;
 
@@ -174,8 +177,6 @@ public class BuffsPermanenteManager : MonoBehaviour
                 //função para aprimorar cura por sala com base no level do buff
                 CuraPermanente(levelBuff);
 
-                levelAtual[4].levelAtualBuff++;
-
                 break;
 
             case 5:
@@ -183,14 +184,11 @@ public class BuffsPermanenteManager : MonoBehaviour
                 //função para aprimorar energia da manopla com base no level do buff
                 EnergiaPermanente(levelBuff);
 
-                levelAtual[5].levelAtualBuff++;
-
                 break;
 
             case 6:
 
                 //função para aprimorar coleta de recursos com base no level do buff
-                levelAtual[6].levelAtualBuff++;
 
                 break;
 
@@ -199,29 +197,24 @@ public class BuffsPermanenteManager : MonoBehaviour
                 //função para aprimorar dash com base no level do buff
                 DashPermanente(levelBuff);
 
-                levelAtual[7].levelAtualBuff++;
-
                 break;
 
             case 8:
 
                 //função para aprimorar proffessores com base no level do buff
-                levelAtual[8].levelAtualBuff++;
-
+                
                 break;
 
             case 9:
 
                 //função para aprimorar quantidade de buffs na manopla com base no level do buff
-                levelAtual[9].levelAtualBuff++;
-
+                
                 break;
 
             case 10:
 
                 //função para desbloquear ult com base no level do buff
-                levelAtual[10].levelAtualBuff++;
-
+                
                 break;
 
         }
@@ -374,5 +367,37 @@ public class BuffsPermanenteManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
+
+    #region Save&Load
+
+    public void CarregarSave(InfosSave save)
+    {
+        for(int i = 0; i < levelAtual.Length; i++)
+        {
+            levelAtual[i].desbloqueado = save.buffDesbloqueado[i];
+            if (levelAtual[i].desbloqueado)
+            {
+                levelAtual[i].levelAtualBuff = save.levelBuffPermanente[i];  
+                QualBuff(levelAtual[i].idBuff, levelAtual[i].levelAtualBuff);
+                levelAtual[i].AtulizaBuffsDesbloqueados(levelAtual[i].levelAtualBuff);
+            }
+        }
+
+        CarregaInventario();
+    }
+
+    public void SalvarSave(ref InfosSave save)
+    {
+        for (int i = 0; i < levelAtual.Length; i++)
+        {   
+            save.buffDesbloqueado[i] = levelAtual[i].desbloqueado;
+            if (save.buffDesbloqueado[i])
+            { 
+                save.levelBuffPermanente[i] = levelAtual[i].levelAtualBuff - 1;
+            }
+        }
+    }
+
     #endregion
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MenuSystem : MonoBehaviour
+public class MenuSystem : MonoBehaviour , ISave
 {
     [Header("Menus")]
     [SerializeField] private GameObject playerUI;
@@ -31,6 +31,7 @@ public class MenuSystem : MonoBehaviour
         menuConfig,
         menuGameOver,
         menuAudio,
+        menuInteragindo,
     };
 
     private State stateMenu;
@@ -55,18 +56,18 @@ public class MenuSystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !interagindo)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(stateMenu == State.menuFechado)
+            if (stateMenu == State.menuFechado)
             {
                 PauseMenu();
                 EventBus.Instance.PauseGame();
             }
-            else if(stateMenu == State.menuPause)
+            else if (stateMenu == State.menuPause)
             {
                 DesligarUI();
             }
-            else if(stateMenu == State.menuConfig)
+            else if (stateMenu == State.menuConfig)
             {
                 PauseMenu();
             }
@@ -74,7 +75,7 @@ public class MenuSystem : MonoBehaviour
             {
                 PauseMenu();
             }
-            else if(stateMenu == State.menuGameOver)
+            else if (stateMenu == State.menuGameOver)
             {
                 Debug.Log("Função indisponível agora!!!");
             }
@@ -84,6 +85,16 @@ public class MenuSystem : MonoBehaviour
     private void Interagindo()
     {
         interagindo = !interagindo;
+        if (interagindo)
+        {
+            stateMenu = State.menuInteragindo;
+        }
+        else
+        {
+            menuPauseUI.SetActive(false);
+
+            stateMenu = State.menuPause;
+        }
     }
 
     public void PauseMenu()
@@ -177,5 +188,19 @@ public class MenuSystem : MonoBehaviour
 
     #endregion
 
+    #region Save&Load
 
+    public void CarregarSave(InfosSave save)
+    {
+        sensiOlhar.value = save.sensiOlhando;
+        sensiMirar.value = save.sensiMirando;
+    }
+
+    public void SalvarSave(ref InfosSave save)
+    {
+        save.sensiOlhando = sensiOlhar.value;
+        save.sensiMirando = sensiMirar.value;
+    }
+
+    #endregion
 }

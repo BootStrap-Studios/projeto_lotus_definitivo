@@ -60,9 +60,7 @@ public class TP_Player : MonoBehaviour, IInteractable
     }
 
     private IEnumerator CO_TP()
-    {
-        EventBus.Instance.TP(true, true);
-
+    {      
         while (fader.color.a < 1)
         {
             fader.color = new Color(0, 0, 0, fader.color.a + (Time.deltaTime / 0.5f));
@@ -70,32 +68,41 @@ public class TP_Player : MonoBehaviour, IInteractable
         }
         fader.color = new Color(0, 0, 0, 1);
 
+
+        EventBus.Instance.TP(false, true);
+        EventBus.Instance.PauseGame();
+
         CuraPorSala();
 
         if (proxSala != null)
         {
             proxSala.SetActive(true);
 
-            EventBus.Instance.TP(false, true);
-
             player.transform.position = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.position;
             player.gameObject.transform.rotation = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.rotation;
-
-            EventBus.Instance.TP(true, true);
             proxSala.GetComponentInChildren<SpawnInimigos>().RanomizandoInimigos();
 
             //Debug.Log(spawn.gameObject.transform.eulerAngles.y);
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = proxSala.GetComponentInChildren<SpawnInimigos>().gameObject.transform.eulerAngles.y;
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = 0;
+
+            yield return new WaitForSeconds(.5f);
+
+            EventBus.Instance.PauseGame();
+            EventBus.Instance.TP(true, false);
         }
         else
         {
-            EventBus.Instance.TP(false, true);
+            
             player.gameObject.transform.position = posTP;
-            EventBus.Instance.TP(true, true);
+
+            yield return new WaitForSeconds(1f);
+
+            EventBus.Instance.PauseGame();
+            EventBus.Instance.TP(true, false);
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
 
         while (fader.color.a > 0)
         {
@@ -103,8 +110,7 @@ public class TP_Player : MonoBehaviour, IInteractable
             yield return null;
         }
         fader.color = new Color(0, 0, 0, 0);
-
-        EventBus.Instance.TP(true, false);
+        
 
         if (instituto)
         {
