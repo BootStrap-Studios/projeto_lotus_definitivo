@@ -97,7 +97,6 @@ public class StatusJogador : MonoBehaviour
 
     private void Reset()
     {
-        curaPorSala = 0f;
 
         danoAtualPistola = danoBasePistola;
         danoAtualShotgun = danoBaseShotgun;
