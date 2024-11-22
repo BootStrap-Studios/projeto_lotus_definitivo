@@ -14,6 +14,8 @@ public class EventBus : MonoBehaviour
 
     public event Action onInteragindo;
 
+    public event Action <bool, bool>onTP;
+
     public event Action <float, Action> onFadeIn;
     public event Action <float, Action> onFadeOut;
 
@@ -39,6 +41,11 @@ public class EventBus : MonoBehaviour
     public void Interagindo()
     {
         onInteragindo?.Invoke();
+    }
+
+    public void TP(bool aux1, bool aux2)
+    {
+        onTP?.Invoke(aux1, aux2);
     }
 
     public void FadeIn(float duracao, Action posFade)

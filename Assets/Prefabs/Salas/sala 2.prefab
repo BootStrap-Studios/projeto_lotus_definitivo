@@ -22491,6 +22491,7 @@ MonoBehaviour:
   cameraPlayer: {fileID: 0}
   tpFinal: 0
   fimUI: {fileID: 0}
+  sala: {fileID: 297186237158706159}
 --- !u!1 &4865171232824849044
 GameObject:
   m_ObjectHideFlags: 0
@@ -33778,6 +33779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elevador: {fileID: 4860811765193474514}
+  pack: 0
 --- !u!1 &7191252075919731720
 GameObject:
   m_ObjectHideFlags: 0

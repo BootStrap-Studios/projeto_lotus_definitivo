@@ -45,6 +45,7 @@ public class ScreenFader : MonoBehaviour
             yield return null;
         }
         fader.color = new Color(0, 0, 0, 1);
+
         ocupado = false;
         posFade?.Invoke();
         yield return null;
@@ -59,6 +60,7 @@ public class ScreenFader : MonoBehaviour
             yield return null;
         }
         fader.color = new Color(0, 0, 0, 0);
+
         ocupado = false;
         posFade?.Invoke();
         yield return null;

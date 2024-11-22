@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BuffsPermanenteManager : MonoBehaviour
 {
+    [Header("Config Manager")]
     [SerializeField] private Collider mesaTrigger;
     [SerializeField] private LinhaBuffPermanente[] levelAtual;
     [SerializeField] private GameObject itemInventario;
     [SerializeField] private GameObject posItens;
+    [SerializeField] private GameObject posItens2;
     private GameObject[] itens;
+    private bool mudaSpawn;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI tituloTXT;
+    [SerializeField] private TextMeshProUGUI descricaoTXT;
+    [SerializeField] private TextMeshProUGUI msgErroTXT;
+    private bool msgErroAtiva;
+    private float tempoMsgAtiva;
+
+    //Outros Scripts
     private StatusJogador statusJogador;
     private VidaPlayer vidaPlayer;
     private InventarioSystem inventarioSystem;
@@ -28,7 +40,17 @@ public class BuffsPermanenteManager : MonoBehaviour
 
         for (int i = 0; i < itens.Length; i++)
         {
-            itens[i] = Instantiate(itemInventario, posItens.transform);
+            if (!mudaSpawn)
+            {
+                itens[i] = Instantiate(itemInventario, posItens.transform);
+                mudaSpawn = true;
+            }
+            else
+            {
+                itens[i] = Instantiate(itemInventario, posItens2.transform);
+                mudaSpawn = false;
+            }
+            
             itens[i].GetComponent<ItemInventario>().imagem.sprite = inventarioSystem.spritesItens[i].sprite;
         }
     }
@@ -47,6 +69,24 @@ public class BuffsPermanenteManager : MonoBehaviour
             EventBus.Instance.PauseGame();
             Time.timeScale = 1;
         }
+
+        if (msgErroAtiva)
+        {
+            msgErroTXT.gameObject.transform.position = new Vector3(msgErroTXT.gameObject.transform.position.x, msgErroTXT.gameObject.transform.position.y + (Time.unscaledDeltaTime / 0.03f), msgErroTXT.gameObject.transform.position.z);
+
+            tempoMsgAtiva -= Time.unscaledDeltaTime;
+
+            if(tempoMsgAtiva <= 0)
+            {
+                msgErroTXT.color = new Color(msgErroTXT.color.r, msgErroTXT.color.g, msgErroTXT.color.b, msgErroTXT.color.a - (Time.unscaledDeltaTime / 0.7f));
+
+                if(msgErroTXT.color.a <= 0)
+                {
+                    msgErroAtiva = false;
+                    msgErroTXT.enabled = false;
+                } 
+            }
+        }
     }
 
     public void AtualizaInventario()
@@ -54,6 +94,38 @@ public class BuffsPermanenteManager : MonoBehaviour
         for(int i = 0; i < itens.Length; i++)
         {
             itens[i].GetComponent<ItemInventario>().AtualizaTexto(inventarioSystem.listaItens[i].nomeItem, inventarioSystem.quantidadeTotalItem[i]);
+        }
+    }
+
+    public void AtualizaUI(string titulo, string descricao, string buff)
+    {
+        tituloTXT.text = titulo;
+        descricaoTXT.text = descricao + "\n" + "\n" + buff;
+    }
+
+    public void MsgErro(string msgErro, Vector3 posMsg)
+    {
+        msgErroTXT.text = msgErro;
+        msgErroTXT.transform.position = posMsg;
+
+        tempoMsgAtiva = 1.5f;
+        msgErroTXT.color = new Color(msgErroTXT.color.r, msgErroTXT.color.g, msgErroTXT.color.b, 1);
+        msgErroTXT.enabled = true;
+
+        msgErroAtiva = true;
+    }
+
+    public void MostraDebito(int[] debitos, ItemDropado[] nomesItens, bool ativaDebito)
+    {
+        for (int j = 0; j < nomesItens.Length; j++)
+        {
+            for (int i = 0; i < itens.Length; i++)
+            {
+                if (nomesItens[j].nomeItem == inventarioSystem.listaItens[i].nomeItem)
+                {
+                    itens[i].GetComponent<ItemInventario>().MostraDebito(debitos[j], ativaDebito);
+                }
+            }
         }
     }
 

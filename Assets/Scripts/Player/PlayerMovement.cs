@@ -10,10 +10,10 @@ using Input = UnityEngine.Input;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movimentação Player")]
-    [SerializeField] CharacterController characterController;
-    [SerializeField] Transform transformCamera;
-    [SerializeField] float rotationSpeed;    
-    [SerializeField] float jumpSpeed;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Transform transformCamera;
+    [SerializeField] private float rotationSpeed;    
+    [SerializeField] private float jumpSpeed;
     public bool cameraCombate;
 
     [Header("Dash")]
@@ -36,6 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool tp;
 
+    private void OnEnable()
+    {
+        EventBus.Instance.onTP += MudaCharacterController;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Instance.onTP -= MudaCharacterController;
+    }
+
     private void Start()
     {
         originalStepOffSet = characterController.stepOffset;
@@ -45,32 +55,39 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Movimentacao();
-
-        if (dashCooldownAux < dashCooldown)
+        if (tp)
         {
-            dashCooldownAux += Time.deltaTime;
-            dashImage.fillAmount = dashCooldownAux / dashCooldown;
+            animator.SetBool("Correndo", false);
         }
         else
         {
-            dashImage.fillAmount =  (float) statusJogador.quantidadeDeDash / statusJogador.quantidadeDeDashTotal;
-        }
- 
-        if(Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux >= dashCooldown)
-        {
-            Dash();
-           
-            if (statusJogador.quantidadeDeDash <= 0)
-            {
-                dashCooldownAux = 0;
-                statusJogador.quantidadeDeDash = statusJogador.quantidadeDeDashTotal;
-            }
-        }
+            Movimentacao();
 
-        if(Input.GetKeyDown(KeyCode.F) && statusJogador.tenhoULT)
-        {
-            statusJogador.Ultando();
+            if (dashCooldownAux < dashCooldown)
+            {
+                dashCooldownAux += Time.deltaTime;
+                dashImage.fillAmount = dashCooldownAux / dashCooldown;
+            }
+            else
+            {
+                dashImage.fillAmount = (float)statusJogador.quantidadeDeDash / statusJogador.quantidadeDeDashTotal;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownAux >= dashCooldown)
+            {
+                Dash();
+
+                if (statusJogador.quantidadeDeDash <= 0)
+                {
+                    dashCooldownAux = 0;
+                    statusJogador.quantidadeDeDash = statusJogador.quantidadeDeDashTotal;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.F) && statusJogador.tenhoULT)
+            {
+                statusJogador.Ultando();
+            }
         }
     }
 
@@ -140,10 +157,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void MudaCharacterController()
+    private void MudaCharacterController(bool characterContorller, bool mexer)
     {
-        characterController.enabled = !characterController.enabled;
-        tp = !tp;
+        characterController.enabled = characterContorller;
+        tp = mexer;
     }
 
     #endregion

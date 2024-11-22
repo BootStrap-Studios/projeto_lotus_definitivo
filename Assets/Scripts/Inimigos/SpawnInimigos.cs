@@ -12,6 +12,7 @@ public class SpawnInimigos : MonoBehaviour
     public GameObject[] inimigosVivos;    
     [SerializeField] private CanosSpawners[] spawners;
     public Cover[] covers;
+    public GameObject posTP;
     private List<GameObject> inimigosQueSpawnam = new List<GameObject>();
     private int minInimigos;
     private int maxInimigos;
@@ -48,7 +49,7 @@ public class SpawnInimigos : MonoBehaviour
         }       
     }
 
-    private void Start()
+    private void Awake()
     {
         objectPool = FindObjectOfType<ObjectPool>();        
     }

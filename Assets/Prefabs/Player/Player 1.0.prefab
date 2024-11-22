@@ -1030,6 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 8243644179691258510}
+  pePlayer: {fileID: 4379497302672827635}
   transformCamera: {fileID: 0}
   rotationSpeed: 720
   jumpSpeed: 7.2
@@ -1052,6 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0da965ed38f4b84292d174c083acb0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curaPorSala: 0
   danoBasePistola: 1
   danoBaseShotgun: 1
   danoBaseShuriken: 3
@@ -1108,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5507232c249e5c048bbc0e83405257f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeInteracao: 3
+  rangeInteracao: 10
   botaoInteragir: {fileID: 0}
 --- !u!1001 &7582314129122360714
 PrefabInstance:

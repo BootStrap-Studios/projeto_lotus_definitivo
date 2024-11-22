@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
@@ -24,11 +25,15 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
     private VidaPlayer vidaPlayer;
 
+    private InventarioSystem inventarioSystem;
+
     void Start()
     {
         buffManager = FindObjectOfType<BuffManager>();
 
         vidaPlayer = FindObjectOfType<VidaPlayer>();
+
+        inventarioSystem = FindObjectOfType<InventarioSystem>();
     }
 
     public void Interagir()
@@ -155,14 +160,46 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
     private void Recurso()
     {
-        Debug.Log("Sorteou recursos hein");
-        // Dar recursos ao player
+        //Contabilizando quantos itens prticiparam do sorteio
+        int qualItem = 0;
+
+        for (int i = 0; i < inventarioSystem.listaItens.Length; i++)
+        {
+            if (inventarioSystem.listaItens[i].recompensaSala)
+            {
+                qualItem++;
+            }
+        }
+        Debug.Log(qualItem + " serão adicionados ao sorteio!");
+
+        //Adicionando os itens para o sorteio
+        ItemDropado[] item = new ItemDropado[qualItem];
+        qualItem = 0;
+
+        for (int i = 0; i < inventarioSystem.listaItens.Length; i++)
+        {
+            if (inventarioSystem.listaItens[i].recompensaSala)
+            {
+                item[qualItem] = inventarioSystem.listaItens[i];
+                Debug.Log(item[qualItem].nomeItem + " foi adicionado ao sorteio!");
+                qualItem++;
+            }
+        }
+
+        //Sorteando recurso
+        int numSorteado = Random.Range(0, qualItem);
+        Debug.Log(item[numSorteado].nomeItem + " foi o recurso sorteado!");
+
+        //Adicionando ao inventário o item novo
+        EventBus.Instance.ColetaItem(item[numSorteado].nomeItem, 15, true);
+
     }
 
     private void Dados()
     {
         Debug.Log("Sorteou dados hein");
-        // Dar os dados ao player
+
+        EventBus.Instance.ColetaItem("Dados de Projeto", 1, true);
     }
 
     private void Cura()

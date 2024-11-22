@@ -25,14 +25,17 @@ public class MargelaH_CAM : MonoBehaviour
     private GameObject armaAtual;
     
     private bool play = true;
+    private bool naoMexer;
      
     private void OnEnable()
     {
         EventBus.Instance.onPauseGame += PauseCam;
+        EventBus.Instance.onTP += MexerCam;
     }
     private void OnDisable()
     {
         EventBus.Instance.onPauseGame -= PauseCam;
+        EventBus.Instance.onTP -= MexerCam;
     }
 
     void Start()
@@ -49,61 +52,73 @@ public class MargelaH_CAM : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (naoMexer)
         {
-            miraUI.SetActive(true);
-            crosshair.SetActive(true);
-            aimCAM.gameObject.SetActive(true);
-            armaAtual.SetActive(true);
-
-            player.cameraCombate = true;
-
-            animator.SetBool("Atirando", true);
-
-            Animacao();
-
-            normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
-            normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
+            animator.SetBool("Atirando", false);
         }
         else
         {
-            if(ammoSystem.municaoAtual < ammoSystem.municaoTotal)
+            if (Input.GetKey(KeyCode.Mouse1))
             {
                 miraUI.SetActive(true);
+                crosshair.SetActive(true);
+                aimCAM.gameObject.SetActive(true);
+                armaAtual.SetActive(true);
+
+                player.cameraCombate = true;
+
+                animator.SetBool("Atirando", true);
+
+                Animacao();
+
+                normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
+                normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
             }
             else
             {
-                miraUI.SetActive(false);
+                if (ammoSystem.municaoAtual < ammoSystem.municaoTotal)
+                {
+                    miraUI.SetActive(true);
+                }
+                else
+                {
+                    miraUI.SetActive(false);
+                }
+
+
+                crosshair.SetActive(false);
+                aimCAM.gameObject.SetActive(false);
+                armaAtual.SetActive(false);
+
+                player.cameraCombate = false;
+
+                aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
+                aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
+
+                animator.SetBool("Atirando", false);
+
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    TrocarArma(0);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    TrocarArma(1);
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    TrocarArma(2);
+                }
             }
 
-
-            crosshair.SetActive(false);
-            aimCAM.gameObject.SetActive(false);
-            armaAtual.SetActive(false);
-
-            player.cameraCombate = false;
-
-            aimCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value;
-            aimCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value;
-
-            animator.SetBool("Atirando", false);
-
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                TrocarArma(0);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                TrocarArma(1);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                TrocarArma(2);
-            }
+            Vector3 newRotation = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
+            pontaDaArma.transform.eulerAngles = newRotation;
         }
+    }
 
-        Vector3 newRotation = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
-        pontaDaArma.transform.eulerAngles = newRotation;
+    private void MexerCam(bool nada, bool mexerCam)
+    {
+        naoMexer = mexerCam;
     }
 
     private void PauseCam()

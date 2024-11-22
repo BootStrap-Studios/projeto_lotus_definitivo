@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler
+public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Config Linha de Buffs")]
     [SerializeField] private Image buffDesbloqueado;
@@ -15,35 +15,37 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
     public int levelAtualBuff;
     private float tempoPressionando;
     private bool pressionado;
-    private bool tenhoRecursos;
 
     [Header("UI")]
     public string titulo;
     public string descricao;
+    public string[] descricaoBuff;
 
     [Header("Outros Scripts")]
     [SerializeField] private InventarioSystem inventarioSystem;
-    [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
-    
-
-    private void Awake()
-    {
-        inventarioSystem = FindObjectOfType<InventarioSystem>();
-    }
+    [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;  
 
     public void OnUpdateSelected(BaseEventData baseEvent)
     {
-        if (pressionado && tenhoRecursos)
+        if (pressionado)
         {
-            tempoPressionando = tempoPressionando + Time.unscaledDeltaTime;
-            buffDesbloqueado.fillAmount -= Time.unscaledDeltaTime / 2;
-
-            if (tempoPressionando >= 2)
+            if (inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, false))
             {
-                buffDesbloqueado.gameObject.SetActive(false);
+                tempoPressionando = tempoPressionando + Time.unscaledDeltaTime;
+                buffDesbloqueado.fillAmount -= Time.unscaledDeltaTime / 2;
+
+                if (tempoPressionando >= 2)
+                {
+                    buffDesbloqueado.gameObject.SetActive(false);
+                    gameObject.GetComponent<Button>().interactable = false;
+                    inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, true);
+                    buffsPermanenteManager.AtualizaInventario();
+                }
+            }
+            else
+            {
                 gameObject.GetComponent<Button>().interactable = false;
-                inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, true);
-                buffsPermanenteManager.AtualizaInventario();
+                buffsPermanenteManager.MsgErro("Você não tem todos os recursos necessários para esta ação", gameObject.transform.position);
             }
         }
     }
@@ -61,9 +63,16 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
         tempoPressionando = 0;
     }
 
-    public void VerificaRecursos()
+    public void OnPointerEnter(PointerEventData pointerEvent)
     {
-        tenhoRecursos = inventarioSystem.ConfereRecursos(nomeItensGastos, qntdItensGastos, false);
+        buffsPermanenteManager.MostraDebito(qntdItensGastos, nomeItensGastos, true);
+
+        buffsPermanenteManager.AtualizaUI(titulo, descricao, "Desbloqueie para Melhorar");
+    }
+
+    public void OnPointerExit(PointerEventData pointerEvent)
+    {
+        buffsPermanenteManager.MostraDebito(qntdItensGastos, nomeItensGastos, false);
     }
 
     public bool ConfereLevel(int levelBuff)
