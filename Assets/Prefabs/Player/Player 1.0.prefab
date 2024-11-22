@@ -830,7 +830,7 @@ MonoBehaviour:
   vidaUI: {fileID: 0}
   barraDeVida: {fileID: 0}
   velAnim: 2
-  vida: 30
+  vidaMaxima: 30
   vidaIMG: {fileID: 0}
 --- !u!1 &5495531672261628746
 GameObject:
@@ -1061,6 +1061,7 @@ MonoBehaviour:
   arma: {fileID: 1900775655823586086}
   shotgun: {fileID: 8773810735126341650}
   shuriken: {fileID: 8961193682299429162}
+  ammoSystem: {fileID: 0}
   danoArmadilha1: 0
   colliderAreaCritico: {fileID: 9032452000800695641}
   chanceDeAcertoCriticoBase: 0

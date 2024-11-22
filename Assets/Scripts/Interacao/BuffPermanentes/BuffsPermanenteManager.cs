@@ -64,7 +64,7 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 0:
 
                 //função para aprimorar pistola com base no level do buff
-
+                PistolaPermanente(levelBuff);
 
                 levelAtual[0].levelAtualBuff++;
 
@@ -73,6 +73,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 1:
 
                 //função para aprimorar shotgun com base no level do buff
+                ShotgunPermanente(levelBuff);
+
                 levelAtual[1].levelAtualBuff++;
 
                 break;
@@ -80,6 +82,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 2:
 
                 //função para aprimorar shuriken com base no level do buff
+                ShurikenPermanente(levelBuff);
+
                 levelAtual[2].levelAtualBuff++;
 
                 break;
@@ -96,6 +100,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 4:
 
                 //função para aprimorar cura por sala com base no level do buff
+                CuraPermanente(levelBuff);
+
                 levelAtual[4].levelAtualBuff++;
 
                 break;
@@ -209,6 +215,90 @@ public class BuffsPermanenteManager : MonoBehaviour
 
             case 4:
                 ammoSystem.municaoTotal = 15;
+                break;
+        }
+    }
+
+    private void PistolaPermanente(int levelBuff)
+    {
+        switch (levelBuff)
+        {
+            case 1:
+                statusJogador.danoBasePistola = 11;
+                break;
+
+            case 2:
+                statusJogador.danoBasePistola = 12;
+                break;
+
+            case 3:
+                statusJogador.danoBasePistola = 13;
+                break;
+
+            case 4:
+                statusJogador.danoBasePistola = 15;
+                break;
+        }
+    }
+
+    private void ShotgunPermanente(int levelBuff)
+    {
+        switch (levelBuff)
+        {
+            case 1:
+                statusJogador.danoBaseShotgun = 11;
+                break;
+
+            case 2:
+                statusJogador.danoBaseShotgun = 12;
+                break;
+
+            case 3:
+                statusJogador.danoBaseShotgun = 13;
+                break;
+
+            case 4:
+                statusJogador.danoBaseShotgun = 15;
+                break;
+        }
+    }
+
+    private void ShurikenPermanente(int levelBuff)
+    {
+        switch (levelBuff)
+        {
+            case 1:
+                statusJogador.danoBaseShuriken = 33;
+                break;
+
+            case 2:
+                statusJogador.danoBaseShotgun = 36;
+                break;
+
+            case 3:
+                statusJogador.danoBaseShotgun = 39;
+                break;
+
+            case 4:
+                statusJogador.danoBaseShotgun = 45;
+                break;
+        }
+    }
+
+    private void CuraPermanente(int levelBuff)
+    {
+        switch (levelBuff)
+        {
+            case 1:
+                statusJogador.curaPorSala = 1f;
+                break;
+
+            case 2:
+                statusJogador.curaPorSala = 2f;
+                break;
+
+            case 3:
+                statusJogador.curaPorSala = 3f;
                 break;
         }
     }

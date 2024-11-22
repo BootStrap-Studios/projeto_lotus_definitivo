@@ -13,6 +13,15 @@ public class TP_Player : MonoBehaviour, IInteractable
     [SerializeField] private GameObject fimUI;
     private PlayerMovement player;
 
+    private StatusJogador statusJogador;
+    VidaPlayer vidaPlayer;
+
+
+    private void Start()
+    {
+        statusJogador = FindObjectOfType<StatusJogador>();
+        vidaPlayer = FindObjectOfType<VidaPlayer>();
+    }
     public void Interagir()
     {
         if (tpFinal)
@@ -50,6 +59,8 @@ public class TP_Player : MonoBehaviour, IInteractable
     {
         player.GetComponent<PlayerMovement>().MudaCharacterController();
 
+        CuraPorSala();
+
         if(spawn != null)
         { 
             player.gameObject.transform.position = spawn.gameObject.transform.position;
@@ -74,5 +85,10 @@ public class TP_Player : MonoBehaviour, IInteractable
         Cursor.visible = false;
         fimUI.SetActive(false);
         SceneManager.LoadScene("Implemenetacao");
+    }
+
+    private void CuraPorSala()
+    {
+        vidaPlayer.CurarVida(statusJogador.curaPorSala);
     }
 }

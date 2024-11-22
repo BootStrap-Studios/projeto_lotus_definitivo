@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class StatusJogador : MonoBehaviour
 {
-
+    [Header("Cura por Sala")]
+    public float curaPorSala;
 
     [Header("Dano base das armas")]
     public float danoBasePistola;
@@ -96,6 +97,8 @@ public class StatusJogador : MonoBehaviour
 
     private void Reset()
     {
+        curaPorSala = 0f;
+
         danoAtualPistola = danoBasePistola;
         danoAtualShotgun = danoBaseShotgun;
         danoAtualShuriken = danoBaseShuriken;

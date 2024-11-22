@@ -83,6 +83,14 @@ public class VidaPlayer : MonoBehaviour
         }
     }
 
+    public void CurarVida(float quantaCura)
+    {
+        vidaAtual += quantaCura;
+
+        AlterarBarraDeVida(vidaAtual, vidaMaxima);
+        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
+    }
+
     public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
     {
         vidaAtualizada = vidaAtual / VidaMaxima;
@@ -115,6 +123,8 @@ public class VidaPlayer : MonoBehaviour
             }
         }
     }
+
+    
 
     #region Animação da barra piscando
 
