@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash")]
     [SerializeField] private float dashTime;
     [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashCooldown;
+    [SerializeField] public float dashCooldown;
     [SerializeField] private GameObject dashObj;
     [SerializeField] private Image dashImage;
 

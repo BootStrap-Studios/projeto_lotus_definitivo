@@ -48,7 +48,7 @@ public class Passos : MonoBehaviour
 
             case TipoPassos.INIMIGO_BASE:
 
-                EventInstance runIB = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                EventInstance runIB = AudioManager.instance.CreateEventInstance(FMODEvents.instance.inimigoBasePassos);
                 RuntimeManager.AttachInstanceToGameObject(runIB, transform, true);
 
                 runIB.start();
@@ -58,7 +58,7 @@ public class Passos : MonoBehaviour
 
             case TipoPassos.INIMIGO_BOMBA:
 
-                EventInstance runIBOMBA = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                EventInstance runIBOMBA = AudioManager.instance.CreateEventInstance(FMODEvents.instance.inimigoBombaPassos);
                 RuntimeManager.AttachInstanceToGameObject(runIBOMBA, transform, true);
                 runIBOMBA.start();
                 runIBOMBA.release();
@@ -67,7 +67,7 @@ public class Passos : MonoBehaviour
 
             case TipoPassos.INIMIGO_SNIPER:
 
-                EventInstance runIS = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);
+                EventInstance runIS = AudioManager.instance.CreateEventInstance(FMODEvents.instance.inimigoSniperPassos);
                 RuntimeManager.AttachInstanceToGameObject(runIS, transform, true);
                 runIS.start();
                 runIS.release();

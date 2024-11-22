@@ -13,12 +13,16 @@ public class BuffsPermanenteManager : MonoBehaviour
     private StatusJogador statusJogador;
     private VidaPlayer vidaPlayer;
     private InventarioSystem inventarioSystem;
+    private PlayerMovement player;
+    private AmmoSystem ammoSystem;
 
     private void Awake()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
         vidaPlayer = FindObjectOfType<VidaPlayer>();
         inventarioSystem = FindObjectOfType<InventarioSystem>();
+        player = FindObjectOfType<PlayerMovement>();
+        ammoSystem = FindObjectOfType<AmmoSystem>();
 
         itens = new GameObject[inventarioSystem.listaItens.Length];
 
@@ -99,6 +103,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 5:
 
                 //função para aprimorar energia da manopla com base no level do buff
+                EnergiaPermanente(levelBuff);
+
                 levelAtual[5].levelAtualBuff++;
 
                 break;
@@ -113,6 +119,8 @@ public class BuffsPermanenteManager : MonoBehaviour
             case 7:
 
                 //função para aprimorar dash com base no level do buff
+                DashPermanente(levelBuff);
+
                 levelAtual[7].levelAtualBuff++;
 
                 break;
@@ -165,7 +173,44 @@ public class BuffsPermanenteManager : MonoBehaviour
         }
     }
 
+    private void DashPermanente(int levelBuff)
+    {
+            switch (levelBuff)
+        {
+            case 1:
+                player.dashCooldown = 3f;
+                break;
 
+            case 2:
+                player.dashCooldown = 2.5f;
+                break;
 
+            case 3:
+                player.dashCooldown = 2f;
+                break;
+        }
+    }
+
+    private void EnergiaPermanente(int levelBuff)
+    {
+        switch (levelBuff)
+        {
+            case 1:
+                ammoSystem.municaoTotal = 11;
+                break;
+
+            case 2:
+                ammoSystem.municaoTotal = 12;
+                break;
+
+            case 3:
+                ammoSystem.municaoTotal = 13;
+                break;
+
+            case 4:
+                ammoSystem.municaoTotal = 15;
+                break;
+        }
+    }
     #endregion
 }
