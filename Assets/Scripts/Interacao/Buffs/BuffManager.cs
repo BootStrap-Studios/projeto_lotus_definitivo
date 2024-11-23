@@ -129,7 +129,6 @@ public class BuffManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
     }
 
     public void DesativandoTodosOsBotoes()
@@ -162,7 +161,7 @@ public class BuffManager : MonoBehaviour
         Time.timeScale = 1;
 
         EventBus.Instance.PauseGame();
-        EventBus.Instance.Interagindo();
+        EventBus.Instance.PodePausar(true);
     }
 
     public void RetirandoBuffDaLista(int qualArvore, GameObject botaoBuff) 

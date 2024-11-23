@@ -12,7 +12,7 @@ public class EventBus : MonoBehaviour
 
     public event Action onGameOver;
 
-    public event Action onInteragindo;
+    public event Action <bool> onPodePausar;
 
     public event Action <bool, bool>onTP;
 
@@ -38,9 +38,9 @@ public class EventBus : MonoBehaviour
         onGameOver?.Invoke();
     }
 
-    public void Interagindo()
+    public void PodePausar(bool podePausar)
     {
-        onInteragindo?.Invoke();
+        onPodePausar?.Invoke(podePausar);
     }
 
     public void TP(bool aux1, bool aux2)

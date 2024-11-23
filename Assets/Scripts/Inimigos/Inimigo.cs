@@ -13,7 +13,8 @@ public class Inimigo : MonoBehaviour
 {
     [Header("Outros")]
     [SerializeField] private Transform player;
-    public Transform pontaArma;
+    [SerializeField] private GameObject pontaArma;
+    public Transform posPontaArma;
     public Transform peInimigo;
     [SerializeField] private ObjectPool objectPool;
     [SerializeField] private GameObject[] dropPrefab;
@@ -38,7 +39,7 @@ public class Inimigo : MonoBehaviour
 
     [Header("Personagem")]
     public float velocidadeAndar;
-    [SerializeField] private GameObject objInimigo;
+    public GameObject objInimigo;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
     public bool inimigoNormal;
@@ -304,13 +305,20 @@ public class Inimigo : MonoBehaviour
     public bool Atirar()
     {        
         RaycastHit hit;
+        if (!inimigoExplosivo)
+        {
+            pontaArma.transform.position = posPontaArma.position;
 
-        if (!inimigoExplosivo && Physics.Raycast(pontaArma.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
+            Vector3 lookPos = player.transform.position - gameObject.transform.position;
+            pontaArma.transform.rotation = Quaternion.LookRotation(lookPos);
+        }
+
+        if (!inimigoExplosivo && Physics.Raycast(pontaArma.transform.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
         {          
             if (hit.transform.tag == "Player" || inimigoTorreta)
             {
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
-                tiro.InstanciaProjetil(danoTiro, pontaArma, velProjetil);
+                tiro.InstanciaProjetil(danoTiro, pontaArma.transform, velProjetil);
                 tiro.gameObject.SetActive(true);
 
 
@@ -357,7 +365,7 @@ public class Inimigo : MonoBehaviour
         if (Physics.CheckSphere(transform.position, alcanceMinArma, playerMask))
         {
             player.GetComponent<VidaPlayer>().TomarDano(danoTiro);
-            Debug.Log(gameObject.name + "aplicou dano completo");
+            //Debug.Log(gameObject.name + "aplicou dano completo");
 
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);
@@ -366,14 +374,14 @@ public class Inimigo : MonoBehaviour
         else if (!Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
         {
             player.GetComponent<VidaPlayer>().TomarDano(danoTiro / 2);
-            Debug.Log(gameObject.name + "aplicou metade do dano");
+            //Debug.Log(gameObject.name + "aplicou metade do dano");
 
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);
         }
         else if (!Physics.CheckSphere(transform.position, alcanceMinArma, playerMask) && !Physics.CheckSphere(transform.position, alcanceMaxArma, playerMask))
         {
-            Debug.Log(gameObject.name + "não aplicou nenhum dano");
+            //Debug.Log(gameObject.name + "não aplicou nenhum dano");
 
             yield return new WaitForSeconds(1f);
             Destroy(gameObject);

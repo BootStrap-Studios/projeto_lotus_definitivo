@@ -20,7 +20,7 @@ public class CanosSpawners : MonoBehaviour
     {
         if (qualPosAtivar == 0) inimigosSpawnados = new List<Inimigo>();
 
-        inimigosSpawnados.Add(spawnInimigos.inimigosVivos[numInimigo].GetComponent<Inimigo>());
+        inimigosSpawnados.Add(spawnInimigos.inimigosVivos[numInimigo].GetComponentInChildren<Inimigo>());
 
         inimigosSpawnados[qualPosAtivar].gameObject.transform.position = posSpawn[qualPosAtivar].position;
         inimigosSpawnados[qualPosAtivar].gameObject.transform.rotation = gameObject.transform.rotation;
@@ -42,7 +42,7 @@ public class CanosSpawners : MonoBehaviour
             for (int i = 0; i < inimigosSpawnados.Count; i++)
             {
                 inimigosSpawnados[i].peInimigo.transform.position = plataforma.transform.position;
-                inimigosSpawnados[i].gameObject.transform.position = new Vector3(inimigosSpawnados[i].gameObject.transform.position.x, inimigosSpawnados[i].peInimigo.transform.position.y + 1, inimigosSpawnados[i].gameObject.transform.position.z);
+                inimigosSpawnados[i].objInimigo.transform.position = new Vector3(inimigosSpawnados[i].gameObject.transform.position.x, inimigosSpawnados[i].peInimigo.transform.position.y + 1, inimigosSpawnados[i].gameObject.transform.position.z);
             }
 
             if (tempoAtivandoAux < 0)

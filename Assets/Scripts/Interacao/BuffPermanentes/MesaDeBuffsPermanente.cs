@@ -14,7 +14,7 @@ public class MesaDeBuffsPermanente : MonoBehaviour, IInteractable
 
     public void Interagir()
     {
-        EventBus.Instance.Interagindo();
+        EventBus.Instance.PodePausar(false);
         EventBus.Instance.PauseGame();
 
         buffsPermanenteManager.scrollbar.value = 0.999f;

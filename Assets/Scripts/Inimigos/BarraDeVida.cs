@@ -131,7 +131,7 @@ public class BarraDeVida : MonoBehaviour
 
                 vulneravel.gameObject.SetActive(status);
                 vulneravelBG.gameObject.SetActive(status);
-                Debug.Log("vulneravel: " + status);
+                //Debug.Log("vulneravel: " + status);
 
                 break;
 

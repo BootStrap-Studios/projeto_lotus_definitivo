@@ -140,7 +140,7 @@ public class StateInimigos
 
                     if (distCoverPlayer.magnitude <= alcanceMaxArma && distCoverInimigo.magnitude < 7f)
                     {
-                        Debug.Log("cover escolhido");
+                        //Debug.Log("cover escolhido");
                         inimigo.GetComponent<Inimigo>().spawnInimigos.covers[i].inimigoAtual = inimigo.GetComponent<Inimigo>();
                         coverSelecionado = inimigo.GetComponent<Inimigo>().spawnInimigos.covers[i];
                         break;
@@ -181,7 +181,7 @@ public class Idle : StateInimigos
 
     public override void Update()
     {
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude); 
+        if(!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude); 
 
         if (ativarChase)
         {
@@ -236,7 +236,7 @@ public class Chase : StateInimigos
     public override void Update()
     {
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
+        if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
         //persiguindo player caso ainda não esteja perto o suficiente pra atirar
         agent.SetDestination(player.position);
@@ -252,7 +252,7 @@ public class Chase : StateInimigos
 
             if (distanciaTiro.magnitude <= alcanceMaxArma)
             {
-                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);  
                 stage = EVENT.EXIT;
             }
             else
@@ -290,13 +290,22 @@ public class Atirar : StateInimigos
     {
         //mudar animação
 
+        if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+        {
+            inimigo.GetComponent<Inimigo>().animator.SetBool("Mirando", true);
+        }
+        else if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+        {
+            inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", true);
+        }
+
         base.Enter();
     }
 
     public override void Update()
     {
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
+        if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
         if(coverSelecionado != null)
         {
@@ -307,7 +316,7 @@ public class Atirar : StateInimigos
 
                 if (distanciaCover.magnitude <= 2f)
                 {
-                    Debug.Log(inimigo.name + "entrando no cover " + coverSelecionado.name + "a partir da chase");
+                    //Debug.Log(inimigo.name + "entrando no cover " + coverSelecionado.name + "a partir da chase");
                     nextState = new AtirandoCover(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
                     stage = EVENT.EXIT;
                 }
@@ -346,7 +355,19 @@ public class Atirar : StateInimigos
 
             if (pararAndar)
             {
-                agent.SetDestination(inimigo.transform.position);
+                if (TemCover())
+                {
+                    agent.SetDestination(coverSelecionado.transform.position);
+                }
+                else
+                {
+                    agent.SetDestination(inimigo.transform.position);
+
+                    Vector3 lookPos = player.transform.position - inimigo.transform.position;
+                    lookPos.y = 0;
+                    Quaternion rotation = Quaternion.LookRotation(lookPos);
+                    inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+                }
             }
             else if (VejoPlayer())
             {
@@ -399,8 +420,14 @@ public class Atirar : StateInimigos
             {
                 if (municaoAux > 0 || inimigo.GetComponent<Inimigo>().inimigoTorreta)
                 {
+                    
                     if (inimigo.GetComponent<Inimigo>().Atirar())
                     {
+                        if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+                        {
+                            if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetTrigger("Atirar");
+                        }
+
                         if (inimigo.GetComponent<Inimigo>().inimigoTorreta)
                         {
                             contagemTiros++;
@@ -455,8 +482,19 @@ public class Atirar : StateInimigos
 
     public override void Exit()
     {
-        //reset da animação
-        
+        //reset das animações
+
+        if(nextState == new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro))
+        {
+            if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Mirando", false);
+            }
+            else if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", false);
+            }
+        }      
         base.Exit();
     } 
 }
@@ -476,6 +514,7 @@ public class Reload : StateInimigos
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
 
         inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", 0);
+        inimigo.GetComponent<Inimigo>().animator.SetTrigger("Reload");
 
         base.Enter();
     }
@@ -529,7 +568,7 @@ public class AtirandoCover : StateInimigos
             nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
             stage = EVENT.EXIT;
 
-            Debug.Log(inimigo.name + " saiu do cover");
+            //Debug.Log(inimigo.name + " saiu do cover");
         }
         else
         {
