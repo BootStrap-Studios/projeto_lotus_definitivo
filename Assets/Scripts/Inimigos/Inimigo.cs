@@ -39,7 +39,7 @@ public class Inimigo : MonoBehaviour
 
     [Header("Personagem")]
     public float velocidadeAndar;
-    [SerializeField] private GameObject objInimigo;
+    public GameObject objInimigo;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
     public bool inimigoNormal;

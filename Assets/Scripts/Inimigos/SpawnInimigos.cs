@@ -199,7 +199,7 @@ public class SpawnInimigos : MonoBehaviour
         {
             inimigosVivos[i] = Instantiate(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], posSpawn, gameObject.transform.rotation);
             inimigosVivos[i].name = "Inimigo " + i;
-            inimigosVivos[i].GetComponent<Inimigo>().spawnInimigos = this;
+            inimigosVivos[i].GetComponentInChildren<Inimigo>().spawnInimigos = this;
             inimigosVivos[i].SetActive(false);
         }
     }

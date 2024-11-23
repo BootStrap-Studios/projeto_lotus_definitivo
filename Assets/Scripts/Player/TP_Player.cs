@@ -68,9 +68,9 @@ public class TP_Player : MonoBehaviour, IInteractable
         }
         fader.color = new Color(0, 0, 0, 1);
 
-
         EventBus.Instance.TP(false, true);
         EventBus.Instance.PauseGame();
+        EventBus.Instance.PodePausar(false);
 
         CuraPorSala();
 
@@ -90,6 +90,7 @@ public class TP_Player : MonoBehaviour, IInteractable
 
             EventBus.Instance.PauseGame();
             EventBus.Instance.TP(true, false);
+            EventBus.Instance.PodePausar(true);
         }
         else
         {
@@ -100,6 +101,7 @@ public class TP_Player : MonoBehaviour, IInteractable
 
             EventBus.Instance.PauseGame();
             EventBus.Instance.TP(true, false);
+            EventBus.Instance.PodePausar(true);
         }
 
         yield return new WaitForSeconds(1f);

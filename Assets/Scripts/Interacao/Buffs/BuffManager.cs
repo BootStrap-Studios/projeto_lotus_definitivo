@@ -161,7 +161,7 @@ public class BuffManager : MonoBehaviour
         Time.timeScale = 1;
 
         EventBus.Instance.PauseGame();
-        EventBus.Instance.Interagindo();
+        EventBus.Instance.PodePausar(true);
     }
 
     public void RetirandoBuffDaLista(int qualArvore, GameObject botaoBuff) 

@@ -57,7 +57,7 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
             
             EventBus.Instance.PauseGame();
             Time.timeScale = 1;
-            EventBus.Instance.Interagindo();
+            EventBus.Instance.PodePausar(true);
         }
 
         if (msgErroAtiva)

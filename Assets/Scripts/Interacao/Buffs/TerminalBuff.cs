@@ -150,7 +150,7 @@ public class TerminalBuff : MonoBehaviour, IInteractable
     private void Buff()
     {
         Debug.Log("Sorteou buff hein");
-        EventBus.Instance.Interagindo();
+        EventBus.Instance.PodePausar(false);
         EventBus.Instance.PauseGame();
 
         buffManager.SorteandoQualArvore();

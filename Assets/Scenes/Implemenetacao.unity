@@ -38599,6 +38599,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 842241962118002873, guid: 72f5820916e21304cb6b2dad0110ea4b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1859697075652965710, guid: 72f5820916e21304cb6b2dad0110ea4b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -39067,6 +39072,11 @@ PrefabInstance:
     - target: {fileID: 8333601096209895776, guid: 72f5820916e21304cb6b2dad0110ea4b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502224672906737833, guid: 72f5820916e21304cb6b2dad0110ea4b,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9109107839324818849, guid: 72f5820916e21304cb6b2dad0110ea4b,
@@ -44074,6 +44084,11 @@ PrefabInstance:
         type: 3}
       propertyPath: inimigoSimples
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552490584589573328, guid: 4942dfc3c9ade8649b74bad568db9703,
+        type: 3}
+      propertyPath: inimigoTorreta
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6552490584589573328, guid: 4942dfc3c9ade8649b74bad568db9703,
         type: 3}

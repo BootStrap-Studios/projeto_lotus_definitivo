@@ -181,7 +181,7 @@ public class Idle : StateInimigos
 
     public override void Update()
     {
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude); 
+        if(!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude); 
 
         if (ativarChase)
         {
@@ -236,7 +236,7 @@ public class Chase : StateInimigos
     public override void Update()
     {
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
+        if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
         //persiguindo player caso ainda não esteja perto o suficiente pra atirar
         agent.SetDestination(player.position);
@@ -252,7 +252,7 @@ public class Chase : StateInimigos
 
             if (distanciaTiro.magnitude <= alcanceMaxArma)
             {
-                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);  
                 stage = EVENT.EXIT;
             }
             else
@@ -305,7 +305,7 @@ public class Atirar : StateInimigos
     public override void Update()
     {
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
+        if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
         if(coverSelecionado != null)
         {
@@ -355,12 +355,19 @@ public class Atirar : StateInimigos
 
             if (pararAndar)
             {
-                agent.SetDestination(inimigo.transform.position);
+                if (TemCover())
+                {
+                    agent.SetDestination(coverSelecionado.transform.position);
+                }
+                else
+                {
+                    agent.SetDestination(inimigo.transform.position);
 
-                Vector3 lookPos = player.transform.position - inimigo.transform.position;
-                lookPos.y = 0;
-                Quaternion rotation = Quaternion.LookRotation(lookPos);
-                inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+                    Vector3 lookPos = player.transform.position - inimigo.transform.position;
+                    lookPos.y = 0;
+                    Quaternion rotation = Quaternion.LookRotation(lookPos);
+                    inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+                }
             }
             else if (VejoPlayer())
             {
@@ -418,7 +425,7 @@ public class Atirar : StateInimigos
                     {
                         if (inimigo.GetComponent<Inimigo>().inimigoSniper)
                         {
-                            inimigo.GetComponent<Inimigo>().animator.SetTrigger("Atirar");
+                            if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetTrigger("Atirar");
                         }
 
                         if (inimigo.GetComponent<Inimigo>().inimigoTorreta)

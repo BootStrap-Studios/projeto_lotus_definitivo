@@ -22,7 +22,7 @@ public class MenuSystem : MonoBehaviour , ISave
     
     [Header("Outros")]
     [SerializeField] private MargelaH_CAM scriptCAM;
-    private bool interagindo;
+    private bool interagir;
 
     private enum State
     {
@@ -40,13 +40,13 @@ public class MenuSystem : MonoBehaviour , ISave
     private void OnEnable()
     {
         EventBus.Instance.onGameOver += GameOverUI;
-        EventBus.Instance.onInteragindo += Interagindo;
+        EventBus.Instance.onPodePausar += PodePausar;
     }
 
     private void OnDisable()
     {
         EventBus.Instance.onGameOver -= GameOverUI;
-        EventBus.Instance.onInteragindo -= Interagindo;
+        EventBus.Instance.onPodePausar -= PodePausar;
     }
 
     private void Start()
@@ -82,19 +82,18 @@ public class MenuSystem : MonoBehaviour , ISave
         }
     }
 
-    private void Interagindo()
+    private void PodePausar(bool podePausar)
     {
-        interagindo = !interagindo;
-        if (interagindo)
+        interagir = podePausar;
+
+        if (!interagir)
         {
             stateMenu = State.menuInteragindo;
         }
         else
         {
             menuPauseUI.SetActive(false);
-            //EventBus.Instance.PauseGame();
-
-            stateMenu = State.menuPause;
+            stateMenu = State.menuFechado;
         }
     }
 
