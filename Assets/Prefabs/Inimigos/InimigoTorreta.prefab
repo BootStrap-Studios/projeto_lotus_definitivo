@@ -262,7 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  pontaArma: {fileID: 7157145739056762475}
+  pontaArma: {fileID: 5554116123842148149}
+  posPontaArma: {fileID: 7157145739056762475}
   peInimigo: {fileID: 0}
   objectPool: {fileID: 0}
   dropPrefab:
@@ -297,10 +298,6 @@ MonoBehaviour:
   vida: 20
   statusInimigo: {fileID: 2676457566838484742}
   vulneravel: 0
-  sourceCorrosao: {fileID: 0}
-  sourceDisparoNormal: {fileID: 0}
-  sourceExplosao: {fileID: 0}
-  sourcePreExplosao: {fileID: 0}
 --- !u!1 &2638659160133016147
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +433,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2070096447842189582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5554116123842148149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3877734578952889966}
+  m_Layer: 8
+  m_Name: PontaArma
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3877734578952889966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554116123842148149}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4948591793796373246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5750602415395949993
 GameObject:
@@ -575,6 +603,7 @@ Transform:
   - {fileID: 2070096447842189582}
   - {fileID: 4563999168191810072}
   - {fileID: 7816690809654736197}
+  - {fileID: 3877734578952889966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6741036806155247037

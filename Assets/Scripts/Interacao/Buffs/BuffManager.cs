@@ -129,7 +129,6 @@ public class BuffManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
     }
 
     public void DesativandoTodosOsBotoes()

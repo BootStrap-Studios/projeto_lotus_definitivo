@@ -92,6 +92,7 @@ public class MenuSystem : MonoBehaviour , ISave
         else
         {
             menuPauseUI.SetActive(false);
+            //EventBus.Instance.PauseGame();
 
             stateMenu = State.menuPause;
         }
