@@ -799,6 +799,16 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 199287047425475228, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048227164}
+    - target: {fileID: 199287047425475228, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2824193289199109373}
     - target: {fileID: 209852878889051964, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3152,6 +3162,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3289998224321457050, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048227164}
+    - target: {fileID: 3289998224321457050, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2824193289199109373}
     - target: {fileID: 3407615698043604327, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4947,6 +4967,16 @@ PrefabInstance:
       propertyPath: m_UseSpriteMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6456562104517486062, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048227164}
+    - target: {fileID: 6456562104517486062, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2824193289199109373}
     - target: {fileID: 6514633726149282090, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -5444,6 +5474,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7314132596566177665, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048227164}
+    - target: {fileID: 7314132596566177665, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2824193289199109373}
     - target: {fileID: 7354825181871009304, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5903,6 +5943,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8132480018673114038, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1048227164}
+    - target: {fileID: 8132480018673114038, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2824193289199109373}
     - target: {fileID: 8146125189306374563, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_Color.b
@@ -22629,7 +22679,6 @@ GameObject:
   - component: {fileID: 462322729}
   - component: {fileID: 462322728}
   - component: {fileID: 462322727}
-  - component: {fileID: 462322726}
   m_Layer: 0
   m_Name: TerminalBuffs (1)
   m_TagString: Untagged
@@ -22637,102 +22686,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &462322726
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462322725}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b4f55076d0513d94b9231dbea4fde5a5, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.595
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &462322727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22746,7 +22699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elevador: {fileID: 1452013511}
-  pack: 0
+  pack: 3
 --- !u!65 &462322728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41637,7 +41590,7 @@ PrefabInstance:
     - target: {fileID: 297186237158706159, guid: 4942dfc3c9ade8649b74bad568db9703,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 305320475156394302, guid: 4942dfc3c9ade8649b74bad568db9703,
         type: 3}
@@ -47514,10 +47467,10 @@ MonoBehaviour:
     Path: event:/SFX/ui/fimDeLevel
   <pauseGame>k__BackingField:
     Guid:
-      Data1: -946911356
-      Data2: 1196460623
-      Data3: -1108471163
-      Data4: 1808368257
+      Data1: 1157299433
+      Data2: 1128515918
+      Data3: -601238635
+      Data4: 1351964397
     Path: event:/SFX/ui/Start
   <abrirTerminalBuffs>k__BackingField:
     Guid:
@@ -109745,6 +109698,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 300, y: 0, z: 300}
   m_Center: {x: -149.99902, y: 0, z: 150}
+--- !u!1 &2029652438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7215000780831798578, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 26533744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2029652439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5030321864977442710, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 26533744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2029652440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5724850425043908939, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 26533744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2029652441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3914241689128753909, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 26533744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2029652442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7124164777473204406, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 26533744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &2030418911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113696,6 +113679,12 @@ MonoBehaviour:
   - {fileID: 1915830225}
   - {fileID: 1915830224}
   - {fileID: 1588577974}
+  botoesUlts:
+  - {fileID: 2029652442}
+  - {fileID: 2029652441}
+  - {fileID: 2029652440}
+  - {fileID: 2029652439}
+  - {fileID: 2029652438}
   menuBuffsUI: {fileID: 2075790903}
 --- !u!1001 &5871254133947487128
 PrefabInstance:

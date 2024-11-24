@@ -242,6 +242,8 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 vidaPlayer.vidaMaxima = 45;
                 break;
         }
+
+        statusJogador.AtualizaStatus();
     }
 
     private void DashPermanente(int levelBuff)
@@ -260,6 +262,8 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 player.dashCooldown = 2f;
                 break;
         }
+
+        statusJogador.AtualizaStatus();
     }
 
     private void EnergiaPermanente(int levelBuff)
@@ -282,6 +286,8 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 ammoSystem.municaoTotal = 15;
                 break;
         }
+
+        statusJogador.AtualizaStatus();
     }
 
     private void PistolaPermanente(int levelBuff)
@@ -304,12 +310,18 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 statusJogador.danoBasePistola = 15;
                 break;
         }
+
+        statusJogador.AtualizaStatus();
     }
 
     private void ShotgunPermanente(int levelBuff)
     {
         switch (levelBuff)
         {
+            case 0:
+                //LIBERAR A SHOTGUN
+                break;
+
             case 1:
                 statusJogador.danoBaseShotgun = 11;
                 break;
@@ -326,12 +338,18 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 statusJogador.danoBaseShotgun = 15;
                 break;
         }
+        statusJogador.AtualizaStatus();
+
     }
 
     private void ShurikenPermanente(int levelBuff)
     {
         switch (levelBuff)
         {
+            case 0:
+                //LIBERAR A SHURIKEN
+                break;
+
             case 1:
                 statusJogador.danoBaseShuriken = 33;
                 break;
@@ -348,6 +366,8 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 statusJogador.danoBaseShotgun = 45;
                 break;
         }
+
+        statusJogador.AtualizaStatus();
     }
 
     private void CuraPermanente(int levelBuff)
@@ -366,6 +386,8 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 statusJogador.curaPorSala = 3f;
                 break;
         }
+
+        statusJogador.AtualizaStatus();
     }
     #endregion
 

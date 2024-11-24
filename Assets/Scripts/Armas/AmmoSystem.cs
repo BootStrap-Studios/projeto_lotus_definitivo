@@ -77,7 +77,7 @@ public class AmmoSystem : MonoBehaviour
             Brilhando();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             MunicaoInfinita();
         }

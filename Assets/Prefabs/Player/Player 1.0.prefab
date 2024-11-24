@@ -832,6 +832,7 @@ MonoBehaviour:
   velAnim: 2
   vidaMaxima: 30
   vidaIMG: {fileID: 0}
+  vidaAtual: 0
 --- !u!1 &5495531672261628746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 8243644179691258510}
-  pePlayer: {fileID: 4379497302672827635}
   transformCamera: {fileID: 0}
   rotationSpeed: 720
   jumpSpeed: 7.2
@@ -1064,6 +1064,14 @@ MonoBehaviour:
   shotgun: {fileID: 8773810735126341650}
   shuriken: {fileID: 8961193682299429162}
   ammoSystem: {fileID: 0}
+  aimColliderMask:
+    serializedVersion: 2
+    m_Bits: 257
+  layerInimigo:
+    serializedVersion: 2
+    m_Bits: 256
+  vfxTiroUltBurst: {fileID: 162584487599433031, guid: 39f852c28f9c3fd45a427c24f3564ba7,
+    type: 3}
   danoArmadilha1: 0
   colliderAreaCritico: {fileID: 9032452000800695641}
   chanceDeAcertoCriticoBase: 0
@@ -1093,11 +1101,14 @@ MonoBehaviour:
   pocaCorrosao: {fileID: 1299712541643738981, guid: 2ab99c223b6255743878405e8d1010b0,
     type: 3}
   peDoJogador: {fileID: 4379497302672827635}
+  ultCorrosaoObj: {fileID: 2481071725974298853, guid: 57df0392c4b1d7c4ea9b387342edc9a3,
+    type: 3}
   tenhoULT: 0
   qualULT: 
   qualReload: 
   dashDefesaAtivo: 0
   dashCorrosaoAtivo: 0
+  vidaPlayer: {fileID: 6616900032292109443}
 --- !u!114 &3233126048945909831
 MonoBehaviour:
   m_ObjectHideFlags: 0

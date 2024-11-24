@@ -11,12 +11,14 @@ public class BuffManager : MonoBehaviour
     [SerializeField] private GameObject[] botoesCritico;
     [SerializeField] private GameObject[] botoesMovimentacao;
     [SerializeField] private GameObject[] botoesBurst;
+    [SerializeField] private GameObject[] botoesUlts;
 
     private List<GameObject> botoesDefesaList;
     private List<GameObject> botoesCorrosaoList;
     private List<GameObject> botoesCriticoList;
     private List<GameObject> botoesMovimentacaoList;
     private List<GameObject> botoesBurstList;
+    private List<GameObject> botoesUltsList;
 
     private StatusJogador statusJogador;
 
@@ -36,6 +38,7 @@ public class BuffManager : MonoBehaviour
         botoesCriticoList = botoesCritico.ToList();
         botoesMovimentacaoList = botoesMovimentacao.ToList();
         botoesBurstList = botoesBurst.ToList();
+        botoesUltsList = botoesUlts.ToList();
     }
 
     public void SorteandoQualArvore()
@@ -131,6 +134,57 @@ public class BuffManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void SorteandoUltimate()
+    {
+        List<int> numeroUsados = new List<int>();
+
+        if (botoesUltsList.Count > 3)
+        {
+            int primeiroBuff = Random.Range(0, botoesUltsList.Count - 1);
+            numeroUsados.Add(primeiroBuff);
+
+            botoesUltsList[primeiroBuff].gameObject.SetActive(true);
+
+
+            int segundoBuff = Random.Range(0, botoesUltsList.Count - 1);
+
+
+
+            while (numeroUsados.Contains(segundoBuff))
+            {
+                segundoBuff = Random.Range(0, botoesUltsList.Count - 1);
+            }
+
+
+            numeroUsados.Add(segundoBuff);
+
+            botoesUltsList[segundoBuff].gameObject.SetActive(true);
+
+
+            int terceiroBuff = Random.Range(0, botoesUltsList.Count - 1);
+
+            while (numeroUsados.Contains(terceiroBuff))
+            {
+                terceiroBuff = Random.Range(0, botoesUltsList.Count - 1);
+            }
+
+            botoesUltsList[terceiroBuff].gameObject.SetActive(true);
+        }
+        else
+        {
+            foreach (GameObject botao in botoesUltsList)
+            {
+                botao.SetActive(true);
+            }
+        }
+
+
+        menuBuffsUI.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void DesativandoTodosOsBotoes()
     {
         for(int i = 0; i < botoesDefesa.Length; i++)
@@ -152,6 +206,10 @@ public class BuffManager : MonoBehaviour
         for (int i = 0; i < botoesBurst.Length; i++)
         {
             botoesBurst[i].SetActive(false);
+        }
+        for (int i = 0; i < botoesUlts.Length; i++)
+        {
+            botoesUlts[i].SetActive(false);
         }
 
         menuBuffsUI.SetActive(false);
@@ -193,4 +251,6 @@ public class BuffManager : MonoBehaviour
                 break;
         }
     }
+
+    
 }

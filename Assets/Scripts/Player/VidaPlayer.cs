@@ -12,7 +12,7 @@ public class VidaPlayer : MonoBehaviour
     [SerializeField] public float vidaMaxima;
     [SerializeField] private Image vidaIMG;
 
-    private float vidaAtual;
+    public float vidaAtual;
     private float vidaAtualizada;
     private bool vidaBaixa;
 

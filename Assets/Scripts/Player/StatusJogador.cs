@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StatusJogador : MonoBehaviour
@@ -23,6 +24,9 @@ public class StatusJogador : MonoBehaviour
     [SerializeField] private Shotgun shotgun;
     [SerializeField] private Shuriken shuriken;
     [SerializeField] private AmmoSystem ammoSystem;
+    [SerializeField] private LayerMask aimColliderMask;
+    [SerializeField] private LayerMask layerInimigo;
+    [SerializeField] private GameObject vfxTiroUltBurst;
 
     [Header("Armadilhas")]
     public float danoArmadilha1;
@@ -79,6 +83,7 @@ public class StatusJogador : MonoBehaviour
     public float duracaoPoca;
     [SerializeField] private GameObject pocaCorrosao;
     [SerializeField] private GameObject peDoJogador;
+    [SerializeField] private GameObject ultCorrosaoObj;
 
     [Header("ULT")]
     public bool tenhoULT;
@@ -89,6 +94,8 @@ public class StatusJogador : MonoBehaviour
     public bool dashDefesaAtivo;
     public bool dashCorrosaoAtivo;
 
+    [Header("Outros scripts")]
+    [SerializeField] private VidaPlayer vidaPlayer;
 
     private void Start()
     {
@@ -137,6 +144,7 @@ public class StatusJogador : MonoBehaviour
         dashDefesaAtivo = false;
 
         tenhoULT = false;
+        qualULT = "Nenhum";
     }
 
 
@@ -184,8 +192,8 @@ public class StatusJogador : MonoBehaviour
 
     private IEnumerator BuffVelocidadeCoroutine()
     {
-        velocidadeAndando = 10;
-        velocidadePulando = 6.8f;
+        velocidadeAndando = 15f;
+        velocidadePulando = 11.8f;
 
         yield return new WaitForSeconds(duracaoBuffVelocidade);
 
@@ -201,6 +209,7 @@ public class StatusJogador : MonoBehaviour
     //Depois no codigo que for ativar a ultimate, chamar essa funcao + a municao infinita no ammo system
     public void UltimateMovimentacao()
     {
+        Debug.Log("Ult movimentacao");
         StartCoroutine(UltimateMovimentacaoCoroutine());
         ammoSystem.MunicaoInfinita();
         
@@ -210,6 +219,8 @@ public class StatusJogador : MonoBehaviour
     {
         float aux = duracaoBuffVelocidade;
         duracaoBuffVelocidade = duracaoUltimateMovimentacao;
+
+        BuffVelocidade();
 
         yield return new WaitForSeconds(duracaoUltimateMovimentacao);
 
@@ -277,6 +288,43 @@ public class StatusJogador : MonoBehaviour
 
     private void UltimateBurst()
     {
+        Debug.Log("Ult movimentacao");
+
+        RaycastHit hit;
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+        float distancia;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerInimigo))
+        {
+            distancia = hit.distance;
+        } else
+        {
+            distancia = Mathf.Infinity;
+        }
+
+        RaycastHit[] hits;
+
+        hits = Physics.RaycastAll(ray, distancia);
+
+        foreach(RaycastHit hitao in hits)
+        {
+            if (hitao.collider.CompareTag("Inimigo"))
+            {
+                hitao.transform.GetComponent<Inimigo>().TomarDanoDireto(1000f);
+                Instantiate(vfxTiroUltBurst, hit.point, Quaternion.identity);
+
+
+
+            }
+            else
+            {
+                Instantiate(vfxTiroUltBurst, hit.point, Quaternion.identity);
+
+
+            }
+        }
 
     }
 
@@ -286,6 +334,7 @@ public class StatusJogador : MonoBehaviour
 
     public void UltimateDefesa()
     {
+        Debug.Log("Ult defesa");
         StartCoroutine(UltimateDefesaCoroutine());
     }
 
@@ -389,7 +438,15 @@ public class StatusJogador : MonoBehaviour
 
     private void UltimateCorrosao()
     {
+        Debug.Log("Ult movimentacao");
 
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
+        {
+            Instantiate(ultCorrosaoObj, raycastHit.point, Quaternion.identity);
+        }
     }
 
     #endregion
@@ -427,6 +484,7 @@ public class StatusJogador : MonoBehaviour
 
     private void UltimateCritico()
     {
+        Debug.Log("Ult Critico");
         StartCoroutine(UltimateCriticoCoroutine());
     }
 
@@ -454,8 +512,8 @@ public class StatusJogador : MonoBehaviour
     public void Ultando()
     {
         //switch case com todas as ult que ira chamar a função da ult no StatusJogador
-
-        switch(qualULT)
+        Debug.Log("Ultando");
+        switch (qualULT)
         {
             case "Movimentacao":
                 UltimateMovimentacao();
@@ -483,6 +541,13 @@ public class StatusJogador : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void DandoUlt(string ult)
+    {
+        tenhoULT = true;
+
+        qualULT = ult;
     }
 
     public void ReloadBuffs()
@@ -514,5 +579,14 @@ public class StatusJogador : MonoBehaviour
                 AtivarEscudo();
                 break;
         }
+    }
+
+    public void AtualizaStatus()
+    {
+        danoAtualPistola = danoBasePistola;
+        danoAtualShotgun = danoBaseShotgun;
+        danoAtualShuriken = danoBaseShuriken;
+
+        vidaPlayer.vidaAtual = vidaPlayer.vidaMaxima;
     }
 }

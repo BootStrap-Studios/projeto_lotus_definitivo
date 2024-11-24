@@ -86,8 +86,10 @@ public class Shuriken : MonoBehaviour
     private void DetectandoParede()
     {
         RaycastHit hit;
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-        if(Physics.Raycast(pontaDaArma.position, pontaDaArma.forward, out hit, Mathf.Infinity, ~layerInimigo))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerInimigo))
         {
                 distanciaShuriken = hit.distance;
             

@@ -212,6 +212,11 @@ public class TerminalBuff : MonoBehaviour, IInteractable
     private void Ultimate()
     {
         Debug.Log("Sorteou ultimate hein");
-        //AINDA NAO TERMINEI AS ULTS :)))))))))))))))
+        EventBus.Instance.PodePausar(false);
+        EventBus.Instance.PauseGame();
+
+        buffManager.SorteandoUltimate();
+
+        Time.timeScale = 0;
     }
 }

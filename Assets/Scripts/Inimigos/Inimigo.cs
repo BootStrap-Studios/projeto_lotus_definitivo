@@ -502,10 +502,10 @@ public class Inimigo : MonoBehaviour
         if (!boolCorrosao)
         {
             statusCorrosao++;
-            _barraDeVida.AtualizaStatus(statusCorrosao, 5, "corrosao", true);
+            _barraDeVida.AtualizaStatus(statusCorrosao, 3, "corrosao", true);
 
 
-            if (statusCorrosao >= 5)
+            if (statusCorrosao >= 3)
             {
                 StartCoroutine(CoroutineCorrosao());
             }
@@ -517,8 +517,8 @@ public class Inimigo : MonoBehaviour
     {
         if(!boolCorrosao)
         {
-            statusCorrosao = 5;
-            _barraDeVida.AtualizaStatus(statusCorrosao, 5, "corrosao", true);
+            statusCorrosao = 3;
+            _barraDeVida.AtualizaStatus(statusCorrosao, 3, "corrosao", true);
 
             StartCoroutine(CoroutineCorrosao());
         }
@@ -546,7 +546,7 @@ public class Inimigo : MonoBehaviour
         }
 
         statusCorrosao = 0;
-        _barraDeVida.AtualizaStatus(statusCorrosao, 5, "corrosao", false);
+        _barraDeVida.AtualizaStatus(statusCorrosao, 3, "corrosao", false);
 
         boolCorrosao = false;
     }
@@ -556,9 +556,9 @@ public class Inimigo : MonoBehaviour
         if(!boolMovimentacao)
         {
             statusMovimentacao++;
-            _barraDeVida.AtualizaStatus(statusMovimentacao, 3, "movimentacao", true);
+            _barraDeVida.AtualizaStatus(statusMovimentacao, 2, "movimentacao", true);
 
-            if(statusMovimentacao >= 3)
+            if(statusMovimentacao >= 2)
             {
                 StartCoroutine(CoroutineMovimentacao());
             }
@@ -584,15 +584,15 @@ public class Inimigo : MonoBehaviour
     private void StatusBurst()
     {
         statusBurst++;
-        _barraDeVida.AtualizaStatus(statusBurst, 5, "burst", true);
+        _barraDeVida.AtualizaStatus(statusBurst, 3, "burst", true);
 
-        if(statusBurst >= 5)
+        if(statusBurst >= 3)
         {
             vidaAtual -= statusJogador.danoBurst;
             AudioManager.instance.PlayOneShot(FMODEvents.instance.burstProc, transform.position);
             _barraDeVida.AlterarBarraDeVida(vidaAtual, vida);
             statusBurst = 0;
-            _barraDeVida.AtualizaStatus(statusBurst, 5, "burst", false);
+            _barraDeVida.AtualizaStatus(statusBurst, 3, "burst", false);
         }
     }
 
