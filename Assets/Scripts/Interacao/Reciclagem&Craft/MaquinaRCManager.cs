@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class MaquinaRCManager : MonoBehaviour
@@ -42,7 +41,7 @@ public class MaquinaRCManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        /*if(Input.GetKeyDown(KeyCode.Escape))
         {
             if (stateRC == StateRC.inicio)
             {
@@ -60,7 +59,7 @@ public class MaquinaRCManager : MonoBehaviour
             {
                 DeselecionaItem();          
             }
-        }      
+        }     */ 
     }
 
     public void DesabilitaOutrosItens(int idItem)

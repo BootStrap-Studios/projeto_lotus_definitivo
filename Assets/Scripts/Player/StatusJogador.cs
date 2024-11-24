@@ -288,7 +288,7 @@ public class StatusJogador : MonoBehaviour
 
     private void UltimateBurst()
     {
-        Debug.Log("Ult movimentacao");
+        Debug.Log("Ult Burst");
 
         RaycastHit hit;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
