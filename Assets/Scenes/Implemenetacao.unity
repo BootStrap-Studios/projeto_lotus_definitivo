@@ -47555,6 +47555,41 @@ MonoBehaviour:
       Data3: 157322404
       Data4: 1067846600
     Path: snapshot:/GamePause
+  <acertoRecarga>k__BackingField:
+    Guid:
+      Data1: -1732638922
+      Data2: 1272555348
+      Data3: 769047424
+      Data4: 1313234415
+    Path: event:/SFX/personagens/mavie/AcertoReca
+  <duranteRecarga>k__BackingField:
+    Guid:
+      Data1: 255779724
+      Data2: 1337074519
+      Data3: -376821082
+      Data4: -1173595912
+    Path: event:/SFX/personagens/mavie/Durante recarga
+  <erroRecarga>k__BackingField:
+    Guid:
+      Data1: -1755661276
+      Data2: 1296778915
+      Data3: -2140829292
+      Data4: 1440570804
+    Path: event:/SFX/personagens/mavie/ErroRecarga
+  <recargaUnidade>k__BackingField:
+    Guid:
+      Data1: -979128646
+      Data2: 1188564237
+      Data3: 1175984305
+      Data4: 150450827
+    Path: event:/SFX/personagens/mavie/recargaunidade
+  <recargaCompleta>k__BackingField:
+    Guid:
+      Data1: -509608341
+      Data2: 1284214503
+      Data3: -1192652919
+      Data4: 1261936128
+    Path: event:/SFX/personagens/mavie/recargacompleta
 --- !u!64 &821263245
 MeshCollider:
   m_ObjectHideFlags: 0

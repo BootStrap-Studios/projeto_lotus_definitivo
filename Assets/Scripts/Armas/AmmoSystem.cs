@@ -103,6 +103,8 @@ public class AmmoSystem : MonoBehaviour
             timer = timerAux;
             toNoReloadFull = true;
 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.duranteRecarga, transform.position);
+
             QTE = true;
             QTEreload();
         }
@@ -119,9 +121,14 @@ public class AmmoSystem : MonoBehaviour
     {
         //A função de reload recarrega 1 bala da arma sempre que é chamada, se a munição ficar cheia ela reseta a bool do reload full
 
+        
+
         if (municaoAtual < municaoTotal && !toNoReloadFull)
         {
             municaoAtual++;
+
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.recargaUnidade, transform.position);
+            Debug.Log("Reload");
 
             for (int i = 0; i < balas.Length; i++)
             {
@@ -182,7 +189,8 @@ public class AmmoSystem : MonoBehaviour
             statusJogador.ReloadBuffs();
 
             //SOM DE RELOAD CERTO
-            
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.acertoRecarga, transform.position);
+
         }
         else
         {
@@ -190,6 +198,8 @@ public class AmmoSystem : MonoBehaviour
             {
                 balas[i].color = new Color(0.6f, 0, 0, 1);
             }
+
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.erroRecarga, transform.position);
 
             barraBackground.enabled = false;
 

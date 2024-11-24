@@ -68,6 +68,13 @@ public class FMODEvents : MonoBehaviour
     [field: Header("MenuSnapshot")]
     [field: SerializeField] public EventReference menuSnapshot { get; private set; }
 
+    [field: Header("Recarga")]
+    [field: SerializeField] public EventReference acertoRecarga { get; private set; }
+    [field: SerializeField] public EventReference duranteRecarga { get; private set; }
+    [field: SerializeField] public EventReference erroRecarga { get; private set; }
+    [field: SerializeField] public EventReference recargaUnidade { get; private set; }
+    [field: SerializeField] public EventReference recargaCompleta { get; private set; }
+
     public static FMODEvents instance { get; private set; }
 
     private void Awake()
