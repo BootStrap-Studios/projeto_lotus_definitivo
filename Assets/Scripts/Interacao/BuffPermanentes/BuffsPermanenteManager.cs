@@ -13,8 +13,7 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     [SerializeField] private GameObject itemInventario;
     [SerializeField] private GameObject posItens;
     [SerializeField] private GameObject posItens2;
-    public Scrollbar scrollbar;
-    public bool uiLigada;
+    public Scrollbar scrollbar;  
     private GameObject[] itens;
     private bool mudaSpawn;
 
@@ -22,6 +21,7 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     [SerializeField] private TextMeshProUGUI tituloTXT;
     [SerializeField] private TextMeshProUGUI descricaoTXT;
     [SerializeField] private TextMeshProUGUI msgErroTXT;
+    public bool uiLigada;
     private bool msgErroAtiva;
     private float tempoMsgAtiva;
 

@@ -310,10 +310,10 @@ MonoBehaviour:
   peInimigo: {fileID: 9044863550849601622}
   objectPool: {fileID: 0}
   dropPrefab:
-  - {fileID: 7399106940259868427, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
-  - {fileID: 7399106940259868427, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
-  - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
-  - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  - {fileID: 1865335757196860640, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: 8972583964046254456, guid: dfe6857045c8f9a4bae4c7030e43ae50, type: 3}
+  - {fileID: 3287569864157747587, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  - {fileID: 5802204491520348623, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
   agent: {fileID: 3150992084815142018}
   colisaoArea: {fileID: 8306862236601383029}
   animator: {fileID: 5135423991607055843}

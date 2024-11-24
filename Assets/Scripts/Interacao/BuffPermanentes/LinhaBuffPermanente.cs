@@ -49,6 +49,11 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
                 buffsPermanenteManager.MsgErro("Você não tem todos os recursos necessários para esta ação", gameObject.transform.position);
             }
         }
+        else
+        {
+            buffDesbloqueado.fillAmount = 1;
+            tempoPressionando = 0;
+        }
     }
 
     public void OnPointerDown(PointerEventData pointerEvent)

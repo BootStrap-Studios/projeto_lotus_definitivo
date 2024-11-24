@@ -179,13 +179,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   pontaArma: {fileID: 7274119449571051963}
+  posPontaArma: {fileID: 0}
   peInimigo: {fileID: 3199487515545633518}
   objectPool: {fileID: 0}
   dropPrefab:
-  - {fileID: 7399106940259868427, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
-  - {fileID: 7399106940259868427, guid: 2cc16c8d26790c4498e4eb09f61e37c4, type: 3}
-  - {fileID: 7399106940259868427, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
-  - {fileID: 7399106940259868427, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  - {fileID: 1865335757196860640, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: 8972583964046254456, guid: dfe6857045c8f9a4bae4c7030e43ae50, type: 3}
+  - {fileID: 3287569864157747587, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  - {fileID: 5802204491520348623, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
   agent: {fileID: 1687168945723254847}
   colisaoArea: {fileID: 2343993740260766673}
   animator: {fileID: 1132190854929741297}

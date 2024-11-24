@@ -2,22 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MesaDeBuffsPermanente : MonoBehaviour, IInteractable
+public class MaquinaRC : MonoBehaviour, IInteractable
 {
+    [SerializeField] private MaquinaRCManager maquinaRCManager;
     [SerializeField] private Collider trigger;
-    [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
 
     public void Interagir()
     {
         EventBus.Instance.PodePausar(false);
         EventBus.Instance.PauseGame();
 
-        buffsPermanenteManager.scrollbar.value = 0.999f;
-
         trigger.enabled = false;
-        buffsPermanenteManager.buffsPermanenteUI.SetActive(true);
-        buffsPermanenteManager.uiLigada = true;
-        buffsPermanenteManager.AtualizaInventario();
+        maquinaRCManager.stateRC = MaquinaRCManager.StateRC.inicio;
+        maquinaRCManager.maquinaRC_UI.SetActive(true);
+        maquinaRCManager.AtualizaInventario();
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
