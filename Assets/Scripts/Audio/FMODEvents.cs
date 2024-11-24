@@ -65,6 +65,9 @@ public class FMODEvents : MonoBehaviour
     [field: Header("PassosInimigoSniper")]
     [field: SerializeField] public EventReference inimigoSniperPassos { get; private set; }
 
+    [field: Header("MenuSnapshot")]
+    [field: SerializeField] public EventReference menuSnapshot { get; private set; }
+
     public static FMODEvents instance { get; private set; }
 
     private void Awake()

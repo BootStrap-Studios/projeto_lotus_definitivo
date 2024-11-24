@@ -1712,7 +1712,12 @@ PrefabInstance:
         type: 3}
       propertyPath: source
       value: 
-      objectReference: {fileID: 272414958}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1595357166339268160, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: sourceReloadCerto
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1614502544998548021, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -15034,12 +15039,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4770052907740655687, guid: eebf32931bf8cd44eb123239d3f0be0a, type: 3}
---- !u!82 &272414958 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4322596836643912240, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
-    type: 3}
-  m_PrefabInstance: {fileID: 26533744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &272888305
 GameObject:
   m_ObjectHideFlags: 0
@@ -47549,6 +47548,13 @@ MonoBehaviour:
       Data3: -1740052802
       Data4: 599776611
     Path: event:/SFX/personagens/inimigos/sniper/snipasso
+  <menuSnapshot>k__BackingField:
+    Guid:
+      Data1: -1529056005
+      Data2: 1134408948
+      Data3: 157322404
+      Data4: 1067846600
+    Path: snapshot:/GamePause
 --- !u!64 &821263245
 MeshCollider:
   m_ObjectHideFlags: 0

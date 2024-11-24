@@ -38,7 +38,7 @@ public class AmmoSystem : MonoBehaviour
     private Color corNova;
     private int faseBrilho;
 
-    [SerializeField] private AudioSource sourceReloadCerto;
+
 
 
     void Start()
@@ -180,7 +180,9 @@ public class AmmoSystem : MonoBehaviour
         {
             StartCoroutine(BalasRecaregando(timerQTECertoReload));
             statusJogador.ReloadBuffs();
-            sourceReloadCerto.PlayOneShot(sourceReloadCerto.clip);
+
+            //SOM DE RELOAD CERTO
+            
         }
         else
         {

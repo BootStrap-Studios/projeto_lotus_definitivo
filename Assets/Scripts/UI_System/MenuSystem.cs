@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class MenuSystem : MonoBehaviour , ISave
 {
@@ -23,6 +24,8 @@ public class MenuSystem : MonoBehaviour , ISave
     [Header("Outros")]
     [SerializeField] private MargelaH_CAM scriptCAM;
     private bool interagir;
+
+    private StudioEventEmitter menuSnapshot;
 
     private enum State
     {
@@ -52,6 +55,9 @@ public class MenuSystem : MonoBehaviour , ISave
     private void Start()
     {
         stateMenu = State.menuFechado;
+
+        menuSnapshot = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.menuSnapshot, this.gameObject);
+        menuSnapshot.Stop();
     }
 
     void Update()
@@ -105,6 +111,8 @@ public class MenuSystem : MonoBehaviour , ISave
         menuAudioUI.SetActive(false);
 
         AudioManager.instance.PlayOneShot(FMODEvents.instance.pauseGame, transform.position);
+        menuSnapshot.Play();
+
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -125,6 +133,8 @@ public class MenuSystem : MonoBehaviour , ISave
         menuConfigUI.SetActive(false);
         menuAudioUI.SetActive(false);
         gameOverUI.SetActive(false);
+
+        menuSnapshot.Stop();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
