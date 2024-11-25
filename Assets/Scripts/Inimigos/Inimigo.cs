@@ -40,6 +40,7 @@ public class Inimigo : MonoBehaviour
     [Header("Personagem")]
     public float velocidadeAndar;
     public GameObject objInimigo;
+    [SerializeField] private GameObject cabecaTorreta;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
     public bool inimigoNormal;
@@ -50,7 +51,6 @@ public class Inimigo : MonoBehaviour
     [Header("UI_Inimigos")]
     [SerializeField] private BarraDeVida _barraDeVida;
     [SerializeField] private float vida; 
-    [SerializeField] private TextMeshProUGUI statusInimigo; 
     private float vidaAtual;
 
 
@@ -100,6 +100,11 @@ public class Inimigo : MonoBehaviour
     void Update()
     {
         _barraDeVida.AtualizaStatus(0, 1, "vulneravel", vulneravel);
+
+        if (inimigoTorreta)
+        {
+            cabecaTorreta.transform.rotation.x = objInimigo.transform.rotation.x;
+        }
        
         stateInimigo = stateInimigo.Process(); 
     }
@@ -254,7 +259,7 @@ public class Inimigo : MonoBehaviour
         if (statusJogador.misc1movimentacao)
         {
             statusJogador.BuffVelocidade();
-            Destroy(objInimigo);
+            Destroy(gameObject);
         }
     }
 
@@ -263,7 +268,7 @@ public class Inimigo : MonoBehaviour
         if(statusJogador.misc2Burst)
         {
             statusJogador.ReloadBurst();
-            Destroy(objInimigo);
+            Destroy(gameObject);
         }
         
     }
@@ -278,7 +283,7 @@ public class Inimigo : MonoBehaviour
         }
         else
         {
-            Destroy(objInimigo);
+            Destroy(gameObject);
         }
     }
 
@@ -286,7 +291,7 @@ public class Inimigo : MonoBehaviour
     {
         yield return new WaitForSeconds(.3f);
 
-        Destroy(objInimigo);
+        Destroy(gameObject);
     }
 
     private void Misc2Critico()
@@ -297,13 +302,17 @@ public class Inimigo : MonoBehaviour
         {
             inimigoX.vulneravel = true;
         }
+
+        Destroy(gameObject);
     }
     
 
     #endregion
 
     public bool Atirar()
-    {        
+    {   
+        Debug.Log("atirar");
+
         RaycastHit hit;
         if (!inimigoExplosivo)
         {
@@ -314,7 +323,7 @@ public class Inimigo : MonoBehaviour
         }
 
         if (!inimigoExplosivo && Physics.Raycast(pontaArma.transform.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
-        {          
+        {    
             if (hit.transform.tag == "Player" || inimigoTorreta)
             {
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();

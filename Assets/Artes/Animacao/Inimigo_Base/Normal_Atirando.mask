@@ -6,7 +6,7 @@ AvatarMask:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Atirando_Mask
+  m_Name: Normal_Atirando
   m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
   m_Elements:
   - m_Path: 
@@ -42,11 +42,11 @@ AvatarMask:
   - m_Path: R_FOOT_CTRL/R_FOOT_HEEL/R_TOE_GROUP/R_TOE_IK
     m_Weight: 0
   - m_Path: ROOT_CTRL
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: ROOT_CTRL/BELLY_CTRL
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle1
     m_Weight: 0
   - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle1/nurbsCircle2
@@ -64,11 +64,11 @@ AvatarMask:
   - m_Path: ROOT_CTRL/BELLY_CTRL/CHEST_CTRL/nurbsCircle8/nurbsCircle7/nurbsCircle6
     m_Weight: 1
   - m_Path: ROOT_JNT
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: ROOT_JNT/BELLY_JNT
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/END_HEAD_JNT
     m_Weight: 0
   - m_Path: ROOT_JNT/BELLY_JNT/CHEST_JNT/END_HEAD_JNT/HEAD_JNT

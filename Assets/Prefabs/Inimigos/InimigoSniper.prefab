@@ -325,8 +325,8 @@ MonoBehaviour:
     m_Bits: 256
   spawnInimigos: {fileID: 0}
   municao: 3
-  danoTiro: 3
-  danoTiroReduzido: 1
+  danoTiro: 4
+  danoTiroReduzido: 2
   alcanceMaxArma: 10000
   alcanceMinArma: 20
   cooldownTiro: 2.5
@@ -338,7 +338,7 @@ MonoBehaviour:
   inimigoNormal: 0
   inimigoTorreta: 0
   _barraDeVida: {fileID: 4885232705448382559}
-  vida: 5
+  vida: 45
   statusInimigo: {fileID: 0}
   vulneravel: 0
 --- !u!1 &7933029950089467436

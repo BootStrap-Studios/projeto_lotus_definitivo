@@ -80,7 +80,7 @@ public class Cover : MonoBehaviour
 
         if (Physics.Linecast(gameObject.transform.position, player.transform.position, out hit))
         {
-            if (hit.transform.tag == "Player" || direcao.magnitude < 1000f && angulo < 100f)
+            if (hit.transform.tag == "Player" || direcao.magnitude < 1000f && angulo < 110f)
             {
                 coverEscondido = false;
                 coverCheio = false;

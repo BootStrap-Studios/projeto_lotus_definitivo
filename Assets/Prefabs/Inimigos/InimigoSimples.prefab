@@ -206,14 +206,14 @@ MonoBehaviour:
   alcanceMinArma: 12
   cooldownTiro: 1
   velProjetil: 40
-  velocidadeAndar: 5
+  velocidadeAndar: 6
   objInimigo: {fileID: 5160690153797411868}
   inimigoExplosivo: 0
   inimigoSniper: 0
   inimigoNormal: 1
   inimigoTorreta: 0
   _barraDeVida: {fileID: 2988810250891240077}
-  vida: 5
+  vida: 60
   statusInimigo: {fileID: 0}
   vulneravel: 0
 --- !u!1 &6533611701156937720

@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 using static StateInimigos;
 
 public class StateInimigos
@@ -289,16 +290,6 @@ public class Atirar : StateInimigos
     public override void Enter()
     {
         //mudar animação
-
-        if (inimigo.GetComponent<Inimigo>().inimigoSniper)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Mirando", true);
-        }
-        else if (inimigo.GetComponent<Inimigo>().inimigoNormal)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", true);
-        }
-
         base.Enter();
     }
 
@@ -307,14 +298,25 @@ public class Atirar : StateInimigos
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
         if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
+        tempoAux -= Time.deltaTime;
+
         if(coverSelecionado != null)
         {
+            if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Mirando", false);
+            }
+            else if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", false);
+            }
+
             if (coverSelecionado.coverEscondido)
             {
                 agent.SetDestination(coverSelecionado.transform.position);
                 Vector3 distanciaCover = inimigo.transform.position - coverSelecionado.transform.position;
 
-                if (distanciaCover.magnitude <= 2f)
+                if (distanciaCover.magnitude <= 1f)
                 {
                     //Debug.Log(inimigo.name + "entrando no cover " + coverSelecionado.name + "a partir da chase");
                     nextState = new AtirandoCover(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
@@ -337,9 +339,18 @@ public class Atirar : StateInimigos
         }
         else
         {
+            if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Mirando", true);
+            }
+            else if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Atirando", true);
+            }
+
             if (newReload)
             {
-                cooldownTiroAux = 0;
+                cooldownTiroAux = cooldownTiro + 1;
                 municaoAux = municao;
                 newReload = false;
             }
@@ -355,18 +366,48 @@ public class Atirar : StateInimigos
 
             if (pararAndar)
             {
-                if (TemCover())
+                if (TemCover() && !inimigo.GetComponent<Inimigo>().inimigoExplosivo && !inimigo.GetComponent<Inimigo>().inimigoTorreta)
                 {
                     agent.SetDestination(coverSelecionado.transform.position);
+                    pararAndar = false;
                 }
                 else
                 {
                     agent.SetDestination(inimigo.transform.position);
 
-                    Vector3 lookPos = player.transform.position - inimigo.transform.position;
-                    lookPos.y = 0;
-                    Quaternion rotation = Quaternion.LookRotation(lookPos);
-                    inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+                    if (inimigo.GetComponent<Inimigo>().inimigoTorreta)
+                    {
+                        Vector3 lookPos = player.transform.position - inimigo.transform.position;
+                        float angulo = Vector3.Angle(lookPos, inimigo.transform.forward);
+                        lookPos.y = lookPos.y - 2;
+                        Quaternion rotation = Quaternion.LookRotation(lookPos);
+
+                        if (angulo > 22)
+                        {
+                            inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .8f);
+                        }
+                        else
+                        {
+                            inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
+                        }
+                    }
+                    else if (VejoPlayer())
+                    {
+                        Vector3 lookPos = player.transform.position - inimigo.transform.position;
+                        float angulo = Vector3.Angle(lookPos, inimigo.transform.forward);
+                        lookPos.y = 0;
+                        Quaternion rotation = Quaternion.LookRotation(lookPos);
+
+                        if (angulo > 22)
+                        {
+                            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .8f);
+                        }
+                        else
+                        {
+                            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
+                        }
+
+                    }
                 }
             }
             else if (VejoPlayer())
@@ -374,19 +415,28 @@ public class Atirar : StateInimigos
                 Vector3 distanciaTiro = player.position - inimigo.transform.position;
 
                 Vector3 lookPos = player.transform.position - inimigo.transform.position;
+                float angulo = Vector3.Angle(lookPos, inimigo.transform.forward);
                 lookPos.y = 0;
                 Quaternion rotation = Quaternion.LookRotation(lookPos);
-                inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, 0.2f);
+                if (angulo > 22)
+                {
+                    inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .8f);
+                }
+                else
+                {
+                    inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
+                }
 
                 //SOM TORRETA SE MEXENDO
 
                 if (distanciaTiro.magnitude < alcanceMinArma)
                 {
                     agent.SetDestination(inimigo.transform.position);
+
                 }
                 else if (distanciaTiro.magnitude <= alcanceMaxArma && distanciaTiro.magnitude >= alcanceMinArma)
                 {
-                    if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo)
+                    if (!inimigo.GetComponent<Inimigo>().inimigoExplosivo && !inimigo.GetComponent<Inimigo>().inimigoTorreta)
                     {
                         if (TemCover())
                         {
@@ -416,6 +466,7 @@ public class Atirar : StateInimigos
 
             //verificando cooldown do tiro para disparar
             cooldownTiroAux -= Time.deltaTime;
+
             if (cooldownTiroAux <= 0)
             {
                 if (municaoAux > 0 || inimigo.GetComponent<Inimigo>().inimigoTorreta)
@@ -425,7 +476,7 @@ public class Atirar : StateInimigos
                     {
                         if (inimigo.GetComponent<Inimigo>().inimigoSniper)
                         {
-                            if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetTrigger("Atirar");
+                            inimigo.GetComponent<Inimigo>().animator.SetTrigger("Atirar");
                         }
 
                         if (inimigo.GetComponent<Inimigo>().inimigoTorreta)
@@ -441,7 +492,7 @@ public class Atirar : StateInimigos
                         }
                         else if (inimigo.GetComponent<Inimigo>().inimigoExplosivo)
                         {
-                            municao--;
+                            municaoAux--;
                             pararAndar = true;
                             cooldownTiroAux = 1000;
                         }
@@ -449,6 +500,17 @@ public class Atirar : StateInimigos
                         {
                             municaoAux--;
                             cooldownTiroAux = cooldownTiro;
+
+                            if (municaoAux > 0)
+                            {
+                                nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                                stage = EVENT.EXIT;
+
+                                if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+                                {
+                                    inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
+                                }
+                            }
                         }
                     }
                     else if (!pararAndar)
@@ -513,7 +575,7 @@ public class Reload : StateInimigos
         //tocar a animação de reloading
         //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Recarregando");
 
-        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", 0);
+        inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
         inimigo.GetComponent<Inimigo>().animator.SetTrigger("Reload");
 
         base.Enter();
@@ -527,9 +589,20 @@ public class Reload : StateInimigos
 
         if (tempoAux <= 0)
         {
-            nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
-            stage = EVENT.EXIT;
-            newReload = true;
+            if(coverSelecionado != null)
+            {
+                nextState = new AtirandoCover(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                stage = EVENT.EXIT;
+                newReload = true;
+            }
+            else
+            {
+                nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                stage = EVENT.EXIT;
+                newReload = true;
+
+                inimigo.GetComponent<Inimigo>().animator.SetBool("Cover", false);
+            }
         }
         else
         {
@@ -555,7 +628,14 @@ public class AtirandoCover : StateInimigos
     {
         base.Enter();
 
-        tempoAux = 4f;
+        tempoAux = 0f;
+
+        inimigo.GetComponent<Inimigo>().animator.SetBool("Cover", true);
+
+        if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+        {
+            inimigo.GetComponent<Inimigo>().animator.SetTrigger("EspiandoCover");
+        }
     }
 
     public override void Update()
@@ -563,34 +643,106 @@ public class AtirandoCover : StateInimigos
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
         inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
 
+        Vector3 lookPos = player.transform.position - inimigo.transform.position;
+        float angulo = Vector3.Angle(lookPos, inimigo.transform.forward);
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        if (angulo > 22)
+        {
+            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .8f);
+        }
+        else
+        {
+            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
+        }
+
         if (coverSelecionado == null)
         {
             nextState = new Atirar(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
             stage = EVENT.EXIT;
 
-            //Debug.Log(inimigo.name + " saiu do cover");
+            inimigo.GetComponent<Inimigo>().animator.SetBool("Cover", false);
+
+            if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+            {
+                inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
+            }
         }
         else
         {
             agent.SetDestination(coverSelecionado.transform.position);
 
-            //inimigo.GetComponent<Inimigo>().pontaArma.LookAt(new Vector3(player.transform.position.x, 0, player.transform.position.z));
-
-            /*
-            if (VejoPlayer())
+            if (newReload)
             {
-                Debug.Log("Atirando pelo cover");
-            }
-            else
-            {
-                tempoAux -= Time.deltaTime;
-
-                if(tempoAux < 0)
+                if (inimigo.GetComponent<Inimigo>().inimigoNormal)
                 {
-                    nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
-                    stage = EVENT.EXIT;
+                    inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", true);
                 }
-            }*/
+
+                newReload = false;
+                cooldownTiroAux = cooldownTiro + 1;
+                municaoAux = municao;
+            }
+
+            cooldownTiroAux -= Time.deltaTime;
+
+            if (cooldownTiroAux <= 0)
+            {
+                if (municaoAux > 0)
+                {
+                    if (inimigo.GetComponent<Inimigo>().Atirar())
+                    {
+                        if (inimigo.GetComponent<Inimigo>().inimigoSniper)
+                        {
+                            inimigo.GetComponent<Inimigo>().animator.SetTrigger("Atirar");
+                        }
+
+                        municaoAux--;
+                        cooldownTiroAux = cooldownTiro;
+                        tempoAux = 0;
+
+                        if (municaoAux > 0)
+                        {
+                            nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                            stage = EVENT.EXIT;
+
+                            if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+                            {
+                                inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tempoAux += Time.deltaTime;
+                        if (tempoAux >= 10)
+                        {
+                            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                            stage = EVENT.EXIT;
+
+                            inimigo.GetComponent<Inimigo>().animator.SetBool("Cover", false);
+
+                            if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+                            {
+                                inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
+                            }
+
+                            coverSelecionado.inimigoAtual = null;
+                            coverSelecionado = null;
+                        }
+                    }
+                }
+                else
+                {
+                    nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                    stage = EVENT.EXIT;
+
+                    if (inimigo.GetComponent<Inimigo>().inimigoNormal)
+                    {
+                        inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
+                    }
+                }
+            }
         }
     }
 
