@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: bcd1e3ae749d15f4d8d035824c9e34d5
+guid: d8a1d3fa61c1ec94dae0e6c67757f19d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eletronicos
+    second: {fileID: 2100000, guid: fdf5848273ffd6042be6e10b1b5e58a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesa
+    second: {fileID: 2100000, guid: 6db4ff8a95859be4ab30e8a03f962a04, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -37,7 +47,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1
