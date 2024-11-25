@@ -103,7 +103,7 @@ public class Inimigo : MonoBehaviour
 
         if (inimigoTorreta)
         {
-            cabecaTorreta.transform.rotation.x = objInimigo.transform.rotation.x;
+            //cabecaTorreta.transform.rotation = new Vector3(objInimigo.transform.rotation.x, objInimigo.transform.rotation.y + 90, objInimigo.transform.rotation.z);
         }
        
         stateInimigo = stateInimigo.Process(); 
