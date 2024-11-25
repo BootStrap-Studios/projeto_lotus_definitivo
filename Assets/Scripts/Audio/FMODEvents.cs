@@ -75,6 +75,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference recargaUnidade { get; private set; }
     [field: SerializeField] public EventReference recargaCompleta { get; private set; }
 
+    [field: Header("Dash")]
+    [field: SerializeField] public EventReference dashMavie { get; private set; }
+
+
     public static FMODEvents instance { get; private set; }
 
     private void Awake()

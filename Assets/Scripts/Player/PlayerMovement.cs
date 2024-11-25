@@ -171,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     {
         StartCoroutine(DashCoroutine());
         statusJogador.quantidadeDeDash -= 1;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.dashMavie, transform.position);
     }
 
     private IEnumerator DashCoroutine()
