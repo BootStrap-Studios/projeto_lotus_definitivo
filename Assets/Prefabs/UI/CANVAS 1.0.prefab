@@ -19958,10 +19958,10 @@ MonoBehaviour:
   posItens: {fileID: 5435600365226500200}
   posItens2: {fileID: 6068943828680883907}
   scrollbar: {fileID: 2642859386535641990}
-  uiLigada: 0
   tituloTXT: {fileID: 7679566172287702858}
   descricaoTXT: {fileID: 7368506606088495893}
   msgErroTXT: {fileID: 8980806212810423007}
+  uiLigada: 0
 --- !u!114 &5617647309862765410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20005,6 +20005,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcfaedbabc29b86469c3227230253cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maquinaRC_UI: {fileID: 0}
+  itemInventario: {fileID: 0}
+  posItens: {fileID: 0}
+  posItens2: {fileID: 0}
+  maquinaRCTrigger: {fileID: 0}
+  itensInventario: {fileID: 2409549580921667758, guid: f4a9bb65e96c1d041855016d10e05e56,
+    type: 3}
+  stateRC: 4
+  inicioUI: {fileID: 0}
+  reciclagemUI: {fileID: 0}
+  fabricacaoUI: {fileID: 0}
+  itensReciclaveis: []
+  itensFabricaveis: []
+  msgErroTXT: {fileID: 0}
 --- !u!1 &5173832958228023432
 GameObject:
   m_ObjectHideFlags: 0

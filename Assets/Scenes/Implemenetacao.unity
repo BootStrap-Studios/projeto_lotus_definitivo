@@ -923,6 +923,11 @@ PrefabInstance:
       objectReference: {fileID: 566197620}
     - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
+      propertyPath: msgErroTXT
+      value: 
+      objectReference: {fileID: 1040486740}
+    - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
       propertyPath: fabricacaoUI
       value: 
       objectReference: {fileID: 1487209028}
@@ -949,7 +954,7 @@ PrefabInstance:
     - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: itensFabricaveis.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -960,10 +965,15 @@ PrefabInstance:
         type: 3}
       propertyPath: itensFabricaveis.Array.data[0]
       value: 
-      objectReference: {fileID: 1536037477}
+      objectReference: {fileID: 590412707}
     - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: itensFabricaveis.Array.data[1]
+      value: 
+      objectReference: {fileID: 1536037477}
+    - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: itensFabricaveis.Array.data[2]
       value: 
       objectReference: {fileID: 1278229430}
     - target: {fileID: 670120670567420431, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
@@ -2733,7 +2743,7 @@ PrefabInstance:
     - target: {fileID: 2723917293494791072, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -22
+      value: -22.000061
       objectReference: {fileID: 0}
     - target: {fileID: 2734531856672784395, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -4613,6 +4623,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623403115901353199, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623403115901353199, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 17
       objectReference: {fileID: 0}
@@ -5501,6 +5516,11 @@ PrefabInstance:
       objectReference: {fileID: 2824193289199109373}
     - target: {fileID: 7354825181871009304, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354825181871009304, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 17
       objectReference: {fileID: 0}
@@ -5682,6 +5702,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707307463181383866, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 7707307463181383866, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -9708,6 +9733,7 @@ GameObject:
   - component: {fileID: 54815397}
   - component: {fileID: 54815396}
   - component: {fileID: 54815395}
+  - component: {fileID: 54815398}
   m_Layer: 5
   m_Name: Reciclar
   m_TagString: Untagged
@@ -9817,6 +9843,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54815393}
   m_CullTransparentMesh: 1
+--- !u!114 &54815398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54815393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf54e5105bab264290f5ac623647fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maquinaRCItem: {fileID: 162967997}
 --- !u!64 &55159782
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11052,7 +11091,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 99681816}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: DeselecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &99681816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11103,8 +11154,9 @@ GameObject:
   - component: {fileID: 100525546}
   - component: {fileID: 100525545}
   - component: {fileID: 100525544}
+  - component: {fileID: 100525547}
   m_Layer: 5
-  m_Name: Reciclar
+  m_Name: Fabricar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11212,6 +11264,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100525542}
   m_CullTransparentMesh: 1
+--- !u!114 &100525547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100525542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf54e5105bab264290f5ac623647fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maquinaRCItem: {fileID: 1536037477}
 --- !u!64 &101386935
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11962,8 +12027,9 @@ GameObject:
   - component: {fileID: 137135897}
   - component: {fileID: 137135896}
   - component: {fileID: 137135895}
+  - component: {fileID: 137135898}
   m_Layer: 5
-  m_Name: Reciclar
+  m_Name: Fabricar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12071,6 +12137,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137135893}
   m_CullTransparentMesh: 1
+--- !u!114 &137135898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137135893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf54e5105bab264290f5ac623647fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maquinaRCItem: {fileID: 1278229430}
 --- !u!64 &137287003
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12512,6 +12591,7 @@ GameObject:
   - component: {fileID: 161714768}
   - component: {fileID: 161714767}
   - component: {fileID: 161714766}
+  - component: {fileID: 161714769}
   m_Layer: 5
   m_Name: Reciclar
   m_TagString: Untagged
@@ -12621,6 +12701,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161714764}
   m_CullTransparentMesh: 1
+--- !u!114 &161714769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161714764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf54e5105bab264290f5ac623647fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maquinaRCItem: {fileID: 1672305101}
 --- !u!1 &162967993
 GameObject:
   m_ObjectHideFlags: 0
@@ -12713,6 +12806,14 @@ MonoBehaviour:
   idItem: 3
   itemDesabilitadoIMG: {fileID: 848953969}
   botaoItem: {fileID: 162967998}
+  botaoConfirmar: {fileID: 54815395}
+  itensGastos:
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -8108204247906794642, guid: dfe6857045c8f9a4bae4c7030e43ae50, type: 3}
+  itemGanho: {fileID: 8338258867019172214, guid: f30c29e9de89b624e88cfe8e5872ec75,
+    type: 3}
+  quantidadeItemGastos: 0a00000001000000
+  pressionado: 0
   botoesAux:
   - {fileID: 914897090}
   - {fileID: 580762906}
@@ -12762,7 +12863,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 162967995}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162967997}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: SelecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &163515631
 GameObject:
   m_ObjectHideFlags: 0
@@ -12845,7 +12958,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 163515634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278229430}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: DiminuiQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &163515634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13388,7 +13513,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 178801104}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: VoltarInicio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &179909934
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13586,7 +13723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &191879606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13601,7 +13738,7 @@ RectTransform:
   m_Children:
   - {fileID: 759480048}
   - {fileID: 566197621}
-  m_Father: {fileID: 1209647117}
+  m_Father: {fileID: 232300739}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.2521489}
@@ -14533,7 +14670,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 232300739}
-  - component: {fileID: 232300740}
   m_Layer: 5
   m_Name: RECICLAGEM_UI
   m_TagString: Untagged
@@ -14557,6 +14693,8 @@ RectTransform:
   - {fileID: 1253491756}
   - {fileID: 1209647117}
   - {fileID: 1487209029}
+  - {fileID: 191879606}
+  - {fileID: 1040486739}
   m_Father: {fileID: 211207393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14564,25 +14702,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &232300740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232300738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d0ce51488574f47bb563c2d03a928c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idItem: 0
-  itemDesabilitadoIMG: {fileID: 0}
-  botaoItem: {fileID: 0}
-  botoesAux: []
-  quantidadeTXT: {fileID: 0}
-  maquinaRCManager: {fileID: 0}
-  inventarioSystem: {fileID: 0}
 --- !u!64 &233943799
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15081,7 +15200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 264673834}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162967997}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: AumentaQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &264673834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15282,7 +15413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &269262128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15323,12 +15454,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ab4677a23ac61814c8481508f6b65192, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -19342,7 +19473,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 334738280}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672305101}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: DiminuiQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &334738280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19543,7 +19686,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 336259006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: DeselecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &337774807
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21673,7 +21828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &425901267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21714,12 +21869,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 2b88673c8208fb54d849c403acd53d10, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -23630,7 +23785,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RECICLAR
+  m_text: FABRICAR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -33942,6 +34097,16 @@ MonoBehaviour:
   idItem: 1
   itemDesabilitadoIMG: {fileID: 269262129}
   botaoItem: {fileID: 590412708}
+  botaoConfirmar: {fileID: 1918660152}
+  itensGastos:
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -8108204247906794642, guid: dfe6857045c8f9a4bae4c7030e43ae50, type: 3}
+  - {fileID: -1310641163697049459, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  - {fileID: 8338258867019172214, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  itemGanho: {fileID: -9115670298403210258, guid: 544d01218ec814b4e9a4eb1ef6e493d6,
+    type: 3}
+  quantidadeItemGastos: 140000000f0000000a00000005000000
+  pressionado: 0
   botoesAux:
   - {fileID: 99681813}
   - {fileID: 1439342972}
@@ -33991,7 +34156,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 590412705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 590412707}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: SelecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &590743453 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8677653395499698401, guid: 31c98f38eb9cf224fa8d62b9a0b190a7,
@@ -36935,7 +37112,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 631165553}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 590412707}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: DiminuiQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &631165553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37126,7 +37315,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 632083069}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: DeselecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &632083069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38217,6 +38418,7 @@ GameObject:
   - component: {fileID: 660507648}
   - component: {fileID: 660507647}
   - component: {fileID: 660507646}
+  - component: {fileID: 660507649}
   m_Layer: 5
   m_Name: Reciclar
   m_TagString: Untagged
@@ -38326,6 +38528,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660507644}
   m_CullTransparentMesh: 1
+--- !u!114 &660507649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660507644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf54e5105bab264290f5ac623647fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maquinaRCItem: {fileID: 1510991602}
 --- !u!64 &661763985
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -39024,6 +39239,7 @@ GameObject:
   - component: {fileID: 671252910}
   - component: {fileID: 671252912}
   - component: {fileID: 671252911}
+  - component: {fileID: 671252913}
   m_Layer: 5
   m_Name: CraftarImage
   m_TagString: Untagged
@@ -39088,6 +39304,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671252909}
   m_CullTransparentMesh: 1
+--- !u!114 &671252913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671252909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 671252911}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: Fabricar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &674109746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4603986274314825766, guid: 31c98f38eb9cf224fa8d62b9a0b190a7,
@@ -46196,7 +46468,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 766178279}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672305101}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: AumentaQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &766178279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46839,7 +47123,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 786018175}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1536037477}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: AumentaQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &786018175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50415,7 +50711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &848953968
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50456,12 +50752,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0a9be96d919aaea45aac0f6759e32b87, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -59649,7 +59945,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 914897093}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: DeselecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &914897093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61084,7 +61392,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 940467350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510991602}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: DiminuiQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &940467350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61275,7 +61595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &944765020
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61316,12 +61636,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 1f60a229d7523ca4790ea39f128e7708, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -62022,7 +62342,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 973294902}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278229430}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: AumentaQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &973294902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62425,68 +62757,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 300, y: 24.133198, z: 300}
   m_Center: {x: -149.99902, y: -12.066599, z: -150}
---- !u!1 &981164511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 981164512}
-  - component: {fileID: 981164513}
-  m_Layer: 5
-  m_Name: InventarioPart1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &981164512
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981164511}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2089000083}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -60.580276}
-  m_SizeDelta: {x: 1880, y: 121.16055}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &981164513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981164511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 20
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &982001909 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1282918951231634199, guid: 31c98f38eb9cf224fa8d62b9a0b190a7,
@@ -64070,6 +64340,140 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7100491929894383033, guid: eebf32931bf8cd44eb123239d3f0be0a, type: 3}
+--- !u!1 &1040486738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1040486739}
+  - component: {fileID: 1040486741}
+  - component: {fileID: 1040486740}
+  m_Layer: 5
+  m_Name: MsgErro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1040486739
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040486738}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 232300739}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00012207031, y: -0.00010681152}
+  m_SizeDelta: {x: 507.328, y: 94.237}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1040486740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040486738}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\"Voc\xEA n\xE3o tem todos os recursos necess\xE1rios para esta a\xE7\xE3o\""
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30.15
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1040486741
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040486738}
+  m_CullTransparentMesh: 1
 --- !u!64 &1041977369
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -65395,7 +65799,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1048767757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510991602}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: AumentaQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1048767757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65638,7 +66054,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1053932509}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 590412707}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: AumentaQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1053932509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70980,6 +71408,7 @@ GameObject:
   - component: {fileID: 1127531576}
   - component: {fileID: 1127531578}
   - component: {fileID: 1127531577}
+  - component: {fileID: 1127531579}
   m_Layer: 5
   m_Name: ReciclagemImage
   m_TagString: Untagged
@@ -71044,6 +71473,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127531575}
   m_CullTransparentMesh: 1
+--- !u!114 &1127531579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127531575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1127531577}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: Reciclar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &1130610601
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -71240,7 +71725,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1135289548}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: DeselecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1135289548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72194,68 +72691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a54ddd03e5d0dda43a8caff1292b5891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1162479479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1162479480}
-  - component: {fileID: 1162479481}
-  m_Layer: 5
-  m_Name: InventarioPart2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1162479480
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162479479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2089000083}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -191.74083}
-  m_SizeDelta: {x: 1880, y: 121.16055}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1162479481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162479479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 20
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!64 &1162492747
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -72489,7 +72924,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1166595870}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: FecharUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &1169164134
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -73763,7 +74210,6 @@ RectTransform:
   - {fileID: 533302826}
   - {fileID: 796146225}
   - {fileID: 2041718373}
-  - {fileID: 191879606}
   - {fileID: 692399002}
   m_Father: {fileID: 232300739}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73933,7 +74379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RECICLAR
+  m_text: FABRICAR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -75735,6 +76181,16 @@ MonoBehaviour:
   idItem: 3
   itemDesabilitadoIMG: {fileID: 1819970013}
   botaoItem: {fileID: 1278229431}
+  botaoConfirmar: {fileID: 137135895}
+  itensGastos:
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -8108204247906794642, guid: dfe6857045c8f9a4bae4c7030e43ae50, type: 3}
+  - {fileID: -1310641163697049459, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  - {fileID: 8338258867019172214, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  itemGanho: {fileID: -9115670298403210258, guid: d9a242c88c587044780107ff2caba41a,
+    type: 3}
+  quantidadeItemGastos: 140000000a000000050000000f000000
+  pressionado: 0
   botoesAux:
   - {fileID: 1135289545}
   - {fileID: 1634354300}
@@ -75784,7 +76240,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1278229428}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1278229430}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: SelecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &1278416822
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -90469,7 +90937,6 @@ RectTransform:
   - {fileID: 95458967}
   - {fileID: 513854672}
   - {fileID: 1884410213}
-  - {fileID: 2089000083}
   - {fileID: 1408654230}
   m_Father: {fileID: 232300739}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90752,7 +91219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RECICLAR
+  m_text: FABRICAR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -91035,6 +91502,14 @@ MonoBehaviour:
   idItem: 1
   itemDesabilitadoIMG: {fileID: 1942794018}
   botaoItem: {fileID: 1510991603}
+  botaoConfirmar: {fileID: 660507646}
+  itensGastos:
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -1310641163697049459, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  itemGanho: {fileID: -8108204247906794642, guid: dfe6857045c8f9a4bae4c7030e43ae50,
+    type: 3}
+  quantidadeItemGastos: 0a00000001000000
+  pressionado: 0
   botoesAux:
   - {fileID: 632083066}
   - {fileID: 438574961}
@@ -91084,7 +91559,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1510991600}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510991602}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: SelecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1511081543
 GameObject:
   m_ObjectHideFlags: 0
@@ -91746,8 +92233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4080eeb0437b1a48abc4204eca8e8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maquinaRCManager: {fileID: 0}
-  trigger: {fileID: 0}
+  maquinaRCManager: {fileID: 1689828405}
+  trigger: {fileID: 1521862327}
 --- !u!1 &1522602278 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2577305725984658727, guid: b96f32307a1c90a4c933b39a87de691d,
@@ -92040,6 +92527,16 @@ MonoBehaviour:
   idItem: 2
   itemDesabilitadoIMG: {fileID: 944765021}
   botaoItem: {fileID: 1536037478}
+  botaoConfirmar: {fileID: 100525544}
+  itensGastos:
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -8108204247906794642, guid: dfe6857045c8f9a4bae4c7030e43ae50, type: 3}
+  - {fileID: -1310641163697049459, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  - {fileID: 8338258867019172214, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  itemGanho: {fileID: -9115670298403210258, guid: 95d37eebdcb010b4b9ebbf334bad18a6,
+    type: 3}
+  quantidadeItemGastos: 14000000050000000f0000000a000000
+  pressionado: 0
   botoesAux:
   - {fileID: 1718957252}
   - {fileID: 1910581644}
@@ -92089,7 +92586,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1536037475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1536037477}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: SelecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &1537633050
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -93490,7 +93999,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1594353340}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 162967997}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: DiminuiQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1594353340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95249,7 +95770,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1640905879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1536037477}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: DiminuiQuantidade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1640905879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96335,6 +96868,14 @@ MonoBehaviour:
   idItem: 2
   itemDesabilitadoIMG: {fileID: 425901268}
   botaoItem: {fileID: 1672305102}
+  botaoConfirmar: {fileID: 161714766}
+  itensGastos:
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: 8338258867019172214, guid: f30c29e9de89b624e88cfe8e5872ec75, type: 3}
+  itemGanho: {fileID: -1310641163697049459, guid: 5cec9315e1318bb4c8ec6c4e877eee04,
+    type: 3}
+  quantidadeItemGastos: 0a00000001000000
+  pressionado: 0
   botoesAux:
   - {fileID: 336259004}
   - {fileID: 1344582336}
@@ -96384,7 +96925,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1672305099}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672305101}
+        m_TargetAssemblyTypeName: MaquinaRCItem, Assembly-CSharp
+        m_MethodName: SelecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1673039303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6765296780038060928, guid: 31c98f38eb9cf224fa8d62b9a0b190a7,
@@ -97363,7 +97916,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1718957255}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: DeselecionaItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1718957255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100130,7 +100695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1819970012
 RectTransform:
   m_ObjectHideFlags: 0
@@ -100171,12 +100736,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 8e2afe124e9fe404bbfdc60ecd37ff00, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -102212,7 +102777,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1898026733}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1689828405}
+        m_TargetAssemblyTypeName: MaquinaRCManager, Assembly-CSharp
+        m_MethodName: VoltarInicio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1898026733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102719,8 +103296,9 @@ GameObject:
   - component: {fileID: 1918660154}
   - component: {fileID: 1918660153}
   - component: {fileID: 1918660152}
+  - component: {fileID: 1918660155}
   m_Layer: 5
-  m_Name: Reciclar
+  m_Name: Fabricar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102828,6 +103406,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918660150}
   m_CullTransparentMesh: 1
+--- !u!114 &1918660155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918660150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf54e5105bab264290f5ac623647fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maquinaRCItem: {fileID: 590412707}
 --- !u!1 &1920373390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3181772220992730872, guid: 4942dfc3c9ade8649b74bad568db9703,
@@ -103646,7 +104237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1942794017
 RectTransform:
   m_ObjectHideFlags: 0
@@ -103687,12 +104278,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: a66febca94821614290b04a60b054dc6, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -107552,70 +108143,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6198525040401489066, guid: eebf32931bf8cd44eb123239d3f0be0a, type: 3}
---- !u!1 &2089000082
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2089000083}
-  - component: {fileID: 2089000084}
-  m_Layer: 5
-  m_Name: Inventario
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2089000083
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089000082}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 981164512}
-  - {fileID: 1162479480}
-  m_Father: {fileID: 1487209029}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.2521489}
-  m_AnchoredPosition: {x: 0, y: -0.00024414062}
-  m_SizeDelta: {x: 0, y: 0.00030517578}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2089000084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089000082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 20
-    m_Right: 20
-    m_Top: 0
-    m_Bottom: 20
-  m_ChildAlignment: 0
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!64 &2089847685
 MeshCollider:
   m_ObjectHideFlags: 0

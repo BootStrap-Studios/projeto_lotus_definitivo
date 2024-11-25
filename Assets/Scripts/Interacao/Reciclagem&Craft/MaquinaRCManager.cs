@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MaquinaRCManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class MaquinaRCManager : MonoBehaviour
     [SerializeField] private GameObject posItens;
     [SerializeField] private GameObject posItens2;
     [SerializeField] private Collider maquinaRCTrigger;
+    [SerializeField] private GameObject itensInventario;
     public enum StateRC
     {
         inicio,
@@ -28,10 +30,13 @@ public class MaquinaRCManager : MonoBehaviour
     [SerializeField] private GameObject fabricacaoUI;
     [SerializeField] private MaquinaRCItem[] itensReciclaveis;
     [SerializeField] private MaquinaRCItem[] itensFabricaveis;
+    [SerializeField] private TextMeshProUGUI msgErroTXT;
+    private float tempoMsgAtiva;
+    private bool msgErroAtiva;
     
     //Inventário
-    private InventarioSystem inventarioSystem;
-    private GameObject[] itensInventario;
+    private InventarioSystem inventarioSystem;   
+    private GameObject[] itens;
     private bool mudaSpawn;
 
     private void Awake()
@@ -41,7 +46,25 @@ public class MaquinaRCManager : MonoBehaviour
 
     private void Update()
     {
-        /*if(Input.GetKeyDown(KeyCode.Escape))
+        if (msgErroAtiva)
+        {
+            msgErroTXT.gameObject.transform.position = new Vector3(msgErroTXT.gameObject.transform.position.x, msgErroTXT.gameObject.transform.position.y + (Time.unscaledDeltaTime / 0.03f), msgErroTXT.gameObject.transform.position.z);
+
+            tempoMsgAtiva -= Time.unscaledDeltaTime;
+
+            if (tempoMsgAtiva <= 0)
+            {
+                msgErroTXT.color = new Color(msgErroTXT.color.r, msgErroTXT.color.g, msgErroTXT.color.b, msgErroTXT.color.a - (Time.unscaledDeltaTime / 0.7f));
+
+                if (msgErroTXT.color.a <= 0)
+                {
+                    msgErroAtiva = false;
+                    msgErroTXT.enabled = false;
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (stateRC == StateRC.inicio)
             {
@@ -59,7 +82,7 @@ public class MaquinaRCManager : MonoBehaviour
             {
                 DeselecionaItem();          
             }
-        }     */ 
+        }
     }
 
     public void DesabilitaOutrosItens(int idItem)
@@ -70,7 +93,6 @@ public class MaquinaRCManager : MonoBehaviour
             {
                 if (itensReciclaveis[i].idItem != idItem)
                 {
-                    itensReciclaveis[i].itemDesabilitadoIMG.enabled = true;
                     itensReciclaveis[i].botaoItem.interactable = false;
                 }
             }
@@ -81,8 +103,33 @@ public class MaquinaRCManager : MonoBehaviour
             {
                 if (itensFabricaveis[i].idItem != idItem)
                 {
-                    itensFabricaveis[i].itemDesabilitadoIMG.enabled = true;
                     itensFabricaveis[i].botaoItem.interactable = false;
+                }
+            }
+        }
+    }
+
+    public void MsgErro(string msgErro, Vector3 posMsg)
+    {
+        msgErroTXT.text = msgErro;
+        msgErroTXT.transform.position = posMsg;
+
+        tempoMsgAtiva = 1.5f;
+        msgErroTXT.color = new Color(msgErroTXT.color.r, msgErroTXT.color.g, msgErroTXT.color.b, 1);
+        msgErroTXT.enabled = true;
+
+        msgErroAtiva = true;
+    }
+
+    public void MostraDebito(int[] debitos, ItemDropado[] nomesItens, bool ativaDebito)
+    {
+        for (int j = 0; j < nomesItens.Length; j++)
+        {
+            for (int i = 0; i < itens.Length; i++)
+            {
+                if (nomesItens[j].nomeItem == inventarioSystem.listaItens[i].nomeItem)
+                {
+                    itens[i].GetComponent<ItemInventario>().MostraDebito(debitos[j], ativaDebito);
                 }
             }
         }
@@ -92,22 +139,28 @@ public class MaquinaRCManager : MonoBehaviour
 
     public void FecharUI()
     {
-        maquinaRC_UI.SetActive(true);
+        maquinaRC_UI.SetActive(false);
         maquinaRCTrigger.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         stateRC = StateRC.fechado;
+        EventBus.Instance.PauseGame();
+        EventBus.Instance.PodePausar(true);
+        Time.timeScale = 1;
     }
 
     public void VoltarInicio()
     {
+        DeselecionaItem();
+
         inicioUI.SetActive(true);
         reciclagemUI.SetActive(false);
         fabricacaoUI.SetActive(false);
+        itemInventario.SetActive(false);
 
-        stateRC = StateRC.inicio;
+        stateRC = StateRC.inicio;       
     }
 
     public void Reciclar()
@@ -115,12 +168,12 @@ public class MaquinaRCManager : MonoBehaviour
         inicioUI.SetActive(false);
         reciclagemUI.SetActive(true);
         fabricacaoUI.SetActive(false);
+        itemInventario.SetActive(true);
 
         qualAcao = true;
 
         for(int i = 0; i < itensReciclaveis.Length; i++)
         {
-            itensReciclaveis[i].itemDesabilitadoIMG.enabled = false;
             itensReciclaveis[i].botaoItem.interactable = true;
         }
 
@@ -133,12 +186,12 @@ public class MaquinaRCManager : MonoBehaviour
         inicioUI.SetActive(false);
         reciclagemUI.SetActive(false);
         fabricacaoUI.SetActive(true);
+        itemInventario.SetActive(true);
 
         qualAcao = false;
 
         for (int i = 0; i < itensFabricaveis.Length; i++)
         {
-            itensFabricaveis[i].itemDesabilitadoIMG.enabled = false;
             itensFabricaveis[i].botaoItem.interactable = true;
         }
 
@@ -161,7 +214,7 @@ public class MaquinaRCManager : MonoBehaviour
             Fabricar();
             for (int i = 0; i < itensFabricaveis.Length; i++)
             {
-                itensReciclaveis[i].DeselecionaItem();
+                itensFabricaveis[i].DeselecionaItem();
             }
         }
         else
@@ -176,30 +229,30 @@ public class MaquinaRCManager : MonoBehaviour
 
     public void CarregaInventario()
     {
-        itensInventario = new GameObject[inventarioSystem.listaItens.Length];
+        itens = new GameObject[inventarioSystem.listaItens.Length];
 
-        for (int i = 0; i < itensInventario.Length; i++)
+        for (int i = 0; i < itens.Length; i++)
         {
             if (!mudaSpawn)
             {
-                itensInventario[i] = Instantiate(itemInventario, posItens.transform);
+                itens[i] = Instantiate(itensInventario, posItens.transform);
                 mudaSpawn = true;
             }
             else
             {
-                itensInventario[i] = Instantiate(itemInventario, posItens2.transform);
+                itens[i] = Instantiate(itensInventario, posItens2.transform);
                 mudaSpawn = false;
             }
 
-            itensInventario[i].GetComponent<ItemInventario>().imagem.sprite = inventarioSystem.spritesItens[i].sprite;
+            itens[i].GetComponent<ItemInventario>().imagem.sprite = inventarioSystem.spritesItens[i].sprite;
         }
     }
 
     public void AtualizaInventario()
     {
-        for (int i = 0; i < itensInventario.Length; i++)
+        for (int i = 0; i < itens.Length; i++)
         {
-            itensInventario[i].GetComponent<ItemInventario>().AtualizaTexto(inventarioSystem.listaItens[i].nomeItem, inventarioSystem.quantidadeTotalItem[i]);
+            itens[i].GetComponent<ItemInventario>().AtualizaTexto(inventarioSystem.listaItens[i].nomeItem, inventarioSystem.quantidadeTotalItem[i]);
         }
     }
 

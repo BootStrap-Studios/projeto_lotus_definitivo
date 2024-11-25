@@ -15,6 +15,7 @@ public class MaquinaRC : MonoBehaviour, IInteractable
         trigger.enabled = false;
         maquinaRCManager.stateRC = MaquinaRCManager.StateRC.inicio;
         maquinaRCManager.maquinaRC_UI.SetActive(true);
+        maquinaRCManager.CarregaInventario();
         maquinaRCManager.AtualizaInventario();
 
         Cursor.lockState = CursorLockMode.None;

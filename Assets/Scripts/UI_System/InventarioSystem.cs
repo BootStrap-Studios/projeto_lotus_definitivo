@@ -112,6 +112,18 @@ public class InventarioSystem : MonoBehaviour, ISave
         return true;
     }
 
+    public void ReciclagemECraft(ItemDropado itemGanho, int qntdItensGanhos)
+    {
+        for (int i = 0; i < listaItens.Length; i++)
+        {
+            if (itemGanho.nomeItem == listaItens[i].nomeItem)
+            {
+                quantidadeTotalItem[i] += qntdItensGanhos;
+                quantidadeTotalItemUI[i].text = listaItens[i].nomeItem + ": " + quantidadeTotalItem[i].ToString();
+            }
+        }
+    }
+
     #region Sistema de Save&Load
 
     public void CarregarSave(InfosSave save)
