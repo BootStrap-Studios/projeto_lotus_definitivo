@@ -3,7 +3,12 @@ guid: 8cd2464bf6217c44ba49bfce55200df9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cano_reto
+    second: {fileID: 2100000, guid: 34a2bd7bc31fe9049b11ae12ad61fe82, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

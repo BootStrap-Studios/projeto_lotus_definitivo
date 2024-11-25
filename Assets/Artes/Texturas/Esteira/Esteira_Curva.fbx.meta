@@ -3,7 +3,12 @@ guid: 9250537135be7674991bd8f1f97a574e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cano_joelho
+    second: {fileID: 2100000, guid: 2e35a078bd0009b4aaf3727875929fec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

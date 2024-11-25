@@ -3,7 +3,17 @@ guid: 9b583a26bff2b504d8343f95f6b4000a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PrateleirA
+    second: {fileID: 2100000, guid: e4d75f4ebe3aa7c498caef7a7128ac32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roboFDS
+    second: {fileID: 2100000, guid: c9d25ec1b62a9b14e889e29c8b3bb73a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
