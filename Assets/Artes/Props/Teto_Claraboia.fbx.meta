@@ -3,7 +3,12 @@ guid: 6c33b9cee8cb1844cb649f971f988984
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Teto_claraboisa
+    second: {fileID: 2100000, guid: 7364aec31b7aa3048ac348a8e2a9d16b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
