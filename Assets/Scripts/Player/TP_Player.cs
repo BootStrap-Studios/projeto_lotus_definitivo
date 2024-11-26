@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class TP_Player : MonoBehaviour, IInteractable
 {
@@ -15,6 +16,7 @@ public class TP_Player : MonoBehaviour, IInteractable
     [SerializeField] private GameObject sala;
     [SerializeField] private GameObject proxSala;
     [SerializeField] private Image fader;
+    [SerializeField] private GameObject ruinasLoading;
     private PlayerMovement player;
 
     private StatusJogador statusJogador;
@@ -71,23 +73,45 @@ public class TP_Player : MonoBehaviour, IInteractable
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = proxSala.GetComponentInChildren<SpawnInimigos>().gameObject.transform.eulerAngles.y;
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = 0;
 
-            yield return new WaitForSeconds(.5f);
-
-            EventBus.Instance.PauseGame();
-            EventBus.Instance.TP(true, false);
-            EventBus.Instance.PodePausar(true);
+            yield return new WaitForSeconds(1f);
         }
         else
         {
             menuSystem.podeSalvar = false;
-            player.gameObject.transform.position = posTP;
 
-            yield return new WaitForSeconds(1f);
+            sala.SetActive(false);
+            proxSala.SetActive(true);
 
-            EventBus.Instance.PauseGame();
-            EventBus.Instance.TP(true, false);
-            EventBus.Instance.PodePausar(true);
+            player.transform.position = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.position;
+            player.gameObject.transform.rotation = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.rotation;
+            proxSala.GetComponentInChildren<SpawnInimigos>().RanomizandoInimigos();
+
+            //Debug.Log(spawn.gameObject.transform.eulerAngles.y);
+            cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = proxSala.GetComponentInChildren<SpawnInimigos>().gameObject.transform.eulerAngles.y;
+            cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = 0;
+
+            ruinasLoading.SetActive(true);
+
+            while (fader.color.a > 0)
+            {
+                fader.color = new Color(0, 0, 0, fader.color.a - (Time.deltaTime / 0.5f));
+                yield return null;
+            }
+            fader.color = new Color(0, 0, 0, 0);
+
+            yield return new WaitForSeconds(3f);
+
+            while (fader.color.a < 1)
+            {
+                fader.color = new Color(0, 0, 0, fader.color.a + (Time.deltaTime / 0.5f));
+                yield return null;
+            }
+            fader.color = new Color(0, 0, 0, 1);
         }
+
+        EventBus.Instance.PauseGame();
+        EventBus.Instance.TP(true, false);
+        EventBus.Instance.PodePausar(true);
 
         yield return new WaitForSeconds(1f);
 
@@ -96,8 +120,7 @@ public class TP_Player : MonoBehaviour, IInteractable
             fader.color = new Color(0, 0, 0, fader.color.a - (Time.deltaTime / 0.5f));
             yield return null;
         }
-        fader.color = new Color(0, 0, 0, 0);
-       
+        fader.color = new Color(0, 0, 0, 0);       
     }
 
     private void CuraPorSala()

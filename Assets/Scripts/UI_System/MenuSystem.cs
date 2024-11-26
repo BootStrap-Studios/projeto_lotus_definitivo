@@ -107,7 +107,7 @@ public class MenuSystem : MonoBehaviour , ISave
     }
 
     public void PauseMenu()
-    {
+    {   
         /*
         if (podeSalvar)
         {
@@ -208,15 +208,15 @@ public class MenuSystem : MonoBehaviour , ISave
     public void BTNTentarNovamente()
     {
         SaveSystemManager.instance.SalvarJogo();
-        EventBus.Instance.PodePausar(false);
         EventBus.Instance.FadeIn(1f, DesligarUI, 2);
+
         EventBus.Instance.TP(false, true);
 
         player.transform.position = player.posInstituto;
         playerStatus.Reset(); 
+
         EventBus.Instance.TP(true, false);
 
-        EventBus.Instance.PodePausar(true);
         podeSalvar = true;
     }
 
