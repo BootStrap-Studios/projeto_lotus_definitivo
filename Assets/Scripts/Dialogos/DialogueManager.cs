@@ -58,6 +58,10 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
+        EventBus.Instance.PodePausar(false);
+        EventBus.Instance.PauseGame();
+        Time.timeScale = 0;
+
         currentStory = new Story(inkJSON.text);
 
         dialogueIsPlaying = true;
@@ -69,6 +73,10 @@ public class DialogueManager : MonoBehaviour
 
     private void ExitDialogueMode()
     {
+        Time.timeScale = 1;
+        EventBus.Instance.PauseGame();
+        EventBus.Instance.PodePausar(true);
+
         dialogueIsPlaying = false;
         dialogueUI.SetActive(false);
         dialogueText.text = "";
