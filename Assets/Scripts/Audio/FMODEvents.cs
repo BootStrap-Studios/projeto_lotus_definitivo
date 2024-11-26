@@ -39,7 +39,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference ambienteFabrica { get; private set; }
 
     [field: Header("MusicaFabrica")]
-    [field: SerializeField] public EventReference musicaFabrica { get; private set; }
+    [field: SerializeField] public EventReference musicaGame { get; private set; }
 
     [field: Header("TiroInimigoBase")]
     [field: SerializeField] public EventReference tiroInimigoBase { get; private set; }

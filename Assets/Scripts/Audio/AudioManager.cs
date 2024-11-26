@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour , ISave
     {
         Debug.Log("Iniciei");
         InitializeAmbienceEventInstance(FMODEvents.instance.ambienteFabrica);
-        InitializeMusicEventInstance(FMODEvents.instance.musicaFabrica);
+        InitializeMusicEventInstance(FMODEvents.instance.musicaGame);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)

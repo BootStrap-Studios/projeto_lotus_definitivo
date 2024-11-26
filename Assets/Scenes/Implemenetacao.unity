@@ -4896,7 +4896,7 @@ PrefabInstance:
     - target: {fileID: 5623403115901353199, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17
+      value: 16.99997
       objectReference: {fileID: 0}
     - target: {fileID: 5624293870453537977, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -5841,7 +5841,7 @@ PrefabInstance:
     - target: {fileID: 7354825181871009304, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17
+      value: 16.99997
       objectReference: {fileID: 0}
     - target: {fileID: 7389334201217583896, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -6030,7 +6030,7 @@ PrefabInstance:
     - target: {fileID: 7707307463181383866, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17
+      value: 16.99997
       objectReference: {fileID: 0}
     - target: {fileID: 7726842686134186795, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -6149,6 +6149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7955325062027036455, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7958619705827861675, guid: 07ac6d33d4e4928499604e3f0bbd4d7d,
         type: 3}
@@ -43980,13 +43985,13 @@ MonoBehaviour:
       Data3: -424737348
       Data4: 374209615
     Path: event:/ambience/fabrica1
-  <musicaFabrica>k__BackingField:
+  <musicaGame>k__BackingField:
     Guid:
-      Data1: -82511759
-      Data2: 1077283053
-      Data3: -1220321634
-      Data4: 231480287
-    Path: event:/music/Combat1
+      Data1: -63666706
+      Data2: 1177084573
+      Data3: 480646585
+      Data4: -895817709
+    Path: event:/music/SoundTrack
   <tiroInimigoBase>k__BackingField:
     Guid:
       Data1: -1548487903
