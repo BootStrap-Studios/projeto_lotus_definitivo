@@ -112,7 +112,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  covers: []
+  covers:
+  - {fileID: 0}
   posTP: {fileID: 2658881615608877239}
   inimigoSimples: 0
   inimigoSniper: 0
