@@ -3,7 +3,32 @@ guid: 4ab776e98417a2547b6405103660aa63
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CapNeck
+    second: {fileID: 2100000, guid: 2cfe21f524b525f408565b43072e7633, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chest
+    second: {fileID: 2100000, guid: 79eaf64c81fd3704c8413aadecc9e3b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hands
+    second: {fileID: 2100000, guid: f59a994c526bf1e438ac4cd340f24b90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: head
+    second: {fileID: 2100000, guid: fcdb15fe111926e43b63d244621eb4f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: legs
+    second: {fileID: 2100000, guid: 3e7abfe9a2f42d54eae40a86aaab8d57, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
