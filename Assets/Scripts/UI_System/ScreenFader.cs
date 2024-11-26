@@ -51,6 +51,8 @@ public class ScreenFader : MonoBehaviour
         ocupado = false;
         posFade?.Invoke();
         yield return null;
+
+        FadeOut(duracao, null);
     }
 
     private IEnumerator CO_FadeOut(float duracao, Action posFade)

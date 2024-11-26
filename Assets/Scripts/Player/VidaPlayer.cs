@@ -87,6 +87,11 @@ public class VidaPlayer : MonoBehaviour
     {
         vidaAtual += quantaCura;
 
+        if(vidaAtual > vidaMaxima)
+        {
+            vidaAtual = vidaMaxima;
+        }
+
         AlterarBarraDeVida(vidaAtual, vidaMaxima);
         vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
     }

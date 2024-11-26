@@ -50,7 +50,7 @@ public class SaveSystemManager : MonoBehaviour
 
     public void OnSceneUnloaded(Scene scene)
     {
-        SalvarJogo();
+        //SalvarJogo();
     }
 
     public void NovoJogo()
@@ -116,6 +116,6 @@ public class SaveSystemManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SalvarJogo();
+        //SalvarJogo();
     }
 }

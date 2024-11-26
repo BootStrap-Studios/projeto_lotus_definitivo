@@ -1056,9 +1056,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curaPorSala: 0
-  danoBasePistola: 1
-  danoBaseShotgun: 1
-  danoBaseShuriken: 3
+  danoBasePistola: 10
+  danoBaseShotgun: 10
+  danoBaseShuriken: 30
   danoAtualPistola: 0
   danoAtualShotgun: 0
   danoAtualShuriken: 0

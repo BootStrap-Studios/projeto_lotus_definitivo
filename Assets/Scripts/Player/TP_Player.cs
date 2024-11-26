@@ -18,44 +18,28 @@ public class TP_Player : MonoBehaviour, IInteractable
     private PlayerMovement player;
 
     private StatusJogador statusJogador;
-    VidaPlayer vidaPlayer;
+    private VidaPlayer vidaPlayer;
+    private MenuSystem menuSystem;
 
 
     private void Start()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
         vidaPlayer = FindObjectOfType<VidaPlayer>();
+        menuSystem = FindObjectOfType<MenuSystem>();
     }
     public void Interagir()
     {
         if (tpFinal)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            fimUI.SetActive(true);
+            EventBus.Instance.PauseGame();
+            Time.timeScale = 0;
+            menuSystem.BTNTentarNovamente();
         }
         else
         {
             player = FindObjectOfType<PlayerMovement>();
             StartCoroutine(CO_TP());
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (tpFinal)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                fimUI.SetActive(true);
-            }
-            else
-            {
-                player = other.GetComponent<PlayerMovement>();
-                StartCoroutine(CO_TP());
-            }
         }
     }
 
@@ -74,8 +58,9 @@ public class TP_Player : MonoBehaviour, IInteractable
 
         CuraPorSala();
 
-        if (proxSala != null)
+        if (!instituto)
         {
+            sala.SetActive(false);
             proxSala.SetActive(true);
 
             player.transform.position = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.position;
@@ -94,7 +79,7 @@ public class TP_Player : MonoBehaviour, IInteractable
         }
         else
         {
-            
+            menuSystem.podeSalvar = false;
             player.gameObject.transform.position = posTP;
 
             yield return new WaitForSeconds(1f);
@@ -112,24 +97,7 @@ public class TP_Player : MonoBehaviour, IInteractable
             yield return null;
         }
         fader.color = new Color(0, 0, 0, 0);
-        
-
-        if (instituto)
-        {
-            //para sair do instituto
-        }
-        else
-        {
-            sala.SetActive(false);
-        }
-    }
-
-    public void JogarNovamente()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        fimUI.SetActive(false);
-        SceneManager.LoadScene("Implemenetacao");
+       
     }
 
     private void CuraPorSala()

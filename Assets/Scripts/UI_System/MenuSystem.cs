@@ -14,6 +14,8 @@ public class MenuSystem : MonoBehaviour , ISave
     [SerializeField] private GameObject menuPauseUI;
     [SerializeField] private GameObject menuConfigUI;
     [SerializeField] private GameObject menuAudioUI;
+    [SerializeField] private Button botaoSalvar;
+    public bool podeSalvar;
 
     [Header("Congigurações")]
     [SerializeField] private Slider sensiOlhar;
@@ -23,6 +25,7 @@ public class MenuSystem : MonoBehaviour , ISave
     [Header("Outros")]
     [SerializeField] private MargelaH_CAM scriptCAM;
     [SerializeField] private PlayerMovement player;
+    [SerializeField] private StatusJogador playerStatus;
     private bool interagir;
 
     private StudioEventEmitter menuSnapshot;
@@ -104,7 +107,17 @@ public class MenuSystem : MonoBehaviour , ISave
     }
 
     public void PauseMenu()
-    {        
+    {
+        /*
+        if (podeSalvar)
+        {
+            botaoSalvar.interactable = true;
+        }
+        else
+        {
+            botaoSalvar.interactable = false;
+        }*/
+
         playerUI.SetActive(false);
         menuPauseUI.SetActive(true);
         menuConfigUI.SetActive(false);
@@ -180,6 +193,8 @@ public class MenuSystem : MonoBehaviour , ISave
 
     public void BTNVoltarMenuInicial()
     {
+        stateMenu = State.menuFechado;
+
         Time.timeScale = 1;
         SceneManager.LoadScene("MenuPrincipal");
     }
@@ -192,24 +207,17 @@ public class MenuSystem : MonoBehaviour , ISave
 
     public void BTNTentarNovamente()
     {
-        //EventBus.Instance.TP(false, true);
-        //EventBus.Instance.PodePausar(false);
+        SaveSystemManager.instance.SalvarJogo();
+        EventBus.Instance.PodePausar(false);
+        EventBus.Instance.FadeIn(1f, DesligarUI, 2);
+        EventBus.Instance.TP(false, true);
 
-        //EventBus.Instance.FadeIn(0.5f, null, 5);
-        //gameOverUI.SetActive(false);
+        player.transform.position = player.posInstituto;
+        playerStatus.Reset(); 
+        EventBus.Instance.TP(true, false);
 
-        SceneManager.LoadScene("Implemenetacao");
-        //player.transform.position = player.posInstituto;
-
-        Time.timeScale = 1;
-
-        //stateMenu = State.menuFechado;
-
-        //EventBus.Instance.TP(false, true);
-        //EventBus.Instance.PodePausar(true);
-        //EventBus.Instance.PauseGame();
-
-        //EventBus.Instance.FadeOut(1f, null);
+        EventBus.Instance.PodePausar(true);
+        podeSalvar = true;
     }
 
     #endregion

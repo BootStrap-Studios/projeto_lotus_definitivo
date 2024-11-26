@@ -102,9 +102,8 @@ public class StatusJogador : MonoBehaviour
         Reset();
     }
 
-    private void Reset()
+    public void Reset()
     {
-
         danoAtualPistola = danoBasePistola;
         danoAtualShotgun = danoBaseShotgun;
         danoAtualShuriken = danoBaseShuriken;
@@ -145,6 +144,9 @@ public class StatusJogador : MonoBehaviour
 
         tenhoULT = false;
         qualULT = "Nenhum";
+
+        vidaPlayer.vidaAtual = vidaPlayer.vidaMaxima;
+        vidaPlayer.AlterarBarraDeVida(vidaPlayer.vidaAtual, vidaPlayer.vidaMaxima);
     }
 
 

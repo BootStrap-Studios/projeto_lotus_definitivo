@@ -105,7 +105,13 @@ MonoBehaviour:
   - {fileID: 3416823112405702447, guid: 14d3eb55d3418424383339faa2ac53d9, type: 3}
   - {fileID: 9109107839324818849, guid: 72f5820916e21304cb6b2dad0110ea4b, type: 3}
   inimigosVivos: []
-  spawners: []
+  spawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   covers: []
   posTP: {fileID: 2658881615608877239}
   inimigoSimples: 0
