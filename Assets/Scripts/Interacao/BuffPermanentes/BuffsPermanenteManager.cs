@@ -28,7 +28,7 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     //Outros Scripts
     private StatusJogador statusJogador;
     private VidaPlayer vidaPlayer;
-    private InventarioSystem inventarioSystem;
+    [SerializeField] private InventarioSystem inventarioSystem;
     private PlayerMovement player;
     private AmmoSystem ammoSystem;
 

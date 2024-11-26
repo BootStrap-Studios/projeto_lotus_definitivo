@@ -101,10 +101,6 @@ public class Inimigo : MonoBehaviour
     {
         _barraDeVida.AtualizaStatus(0, 1, "vulneravel", vulneravel);
 
-        if (inimigoTorreta)
-        {
-            //cabecaTorreta.transform.rotation = new Vector3(objInimigo.transform.rotation.x, objInimigo.transform.rotation.y + 90, objInimigo.transform.rotation.z);
-        }
        
         stateInimigo = stateInimigo.Process(); 
     }
@@ -309,10 +305,8 @@ public class Inimigo : MonoBehaviour
 
     #endregion
 
-    public bool Atirar()
+    public bool Atirar(bool cover)
     {   
-        Debug.Log("atirar");
-
         RaycastHit hit;
         if (!inimigoExplosivo)
         {
@@ -324,7 +318,7 @@ public class Inimigo : MonoBehaviour
 
         if (!inimigoExplosivo && Physics.Raycast(pontaArma.transform.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
         {    
-            if (hit.transform.tag == "Player" || inimigoTorreta)
+            if (hit.transform.tag == "Player" || inimigoTorreta || cover)
             {
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma.transform, velProjetil);

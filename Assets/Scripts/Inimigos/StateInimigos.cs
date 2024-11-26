@@ -139,7 +139,7 @@ public class StateInimigos
                     Vector3 distCoverPlayer = player.transform.position - inimigo.GetComponent<Inimigo>().spawnInimigos.covers[i].transform.position;
                     Vector3 distCoverInimigo = inimigo.transform.position - inimigo.GetComponent<Inimigo>().spawnInimigos.covers[i].transform.position;
 
-                    if (distCoverPlayer.magnitude <= alcanceMaxArma && distCoverInimigo.magnitude < 7f)
+                    if (distCoverPlayer.magnitude <= alcanceMaxArma && distCoverInimigo.magnitude < 8f)
                     {
                         //Debug.Log("cover escolhido");
                         inimigo.GetComponent<Inimigo>().spawnInimigos.covers[i].inimigoAtual = inimigo.GetComponent<Inimigo>();
@@ -472,7 +472,7 @@ public class Atirar : StateInimigos
                 if (municaoAux > 0 || inimigo.GetComponent<Inimigo>().inimigoTorreta)
                 {
                     
-                    if (inimigo.GetComponent<Inimigo>().Atirar())
+                    if (inimigo.GetComponent<Inimigo>().Atirar(false))
                     {
                         if (inimigo.GetComponent<Inimigo>().inimigoSniper)
                         {
@@ -501,16 +501,7 @@ public class Atirar : StateInimigos
                             municaoAux--;
                             cooldownTiroAux = cooldownTiro;
 
-                            if (municaoAux > 0)
-                            {
-                                nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
-                                stage = EVENT.EXIT;
-
-                                if (inimigo.GetComponent<Inimigo>().inimigoNormal)
-                                {
-                                    inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
-                                }
-                            }
+                           
                         }
                     }
                     else if (!pararAndar)
@@ -631,11 +622,6 @@ public class AtirandoCover : StateInimigos
         tempoAux = 0f;
 
         inimigo.GetComponent<Inimigo>().animator.SetBool("Cover", true);
-
-        if (inimigo.GetComponent<Inimigo>().inimigoNormal)
-        {
-            inimigo.GetComponent<Inimigo>().animator.SetTrigger("EspiandoCover");
-        }
     }
 
     public override void Update()
@@ -672,15 +658,22 @@ public class AtirandoCover : StateInimigos
         {
             agent.SetDestination(coverSelecionado.transform.position);
 
+
             if (newReload)
             {
                 if (inimigo.GetComponent<Inimigo>().inimigoNormal)
                 {
+                    inimigo.GetComponent<Inimigo>().animator.SetTrigger("EspiandoCover");
                     inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", true);
-                }
+                    cooldownTiroAux = cooldownTiro + 3.2f;
 
+                }
+                else
+                {
+                    cooldownTiroAux = cooldownTiro + 1;
+                }
+                
                 newReload = false;
-                cooldownTiroAux = cooldownTiro + 1;
                 municaoAux = municao;
             }
 
@@ -690,7 +683,7 @@ public class AtirandoCover : StateInimigos
             {
                 if (municaoAux > 0)
                 {
-                    if (inimigo.GetComponent<Inimigo>().Atirar())
+                    if (inimigo.GetComponent<Inimigo>().Atirar(true))
                     {
                         if (inimigo.GetComponent<Inimigo>().inimigoSniper)
                         {
@@ -700,17 +693,6 @@ public class AtirandoCover : StateInimigos
                         municaoAux--;
                         cooldownTiroAux = cooldownTiro;
                         tempoAux = 0;
-
-                        if (municaoAux > 0)
-                        {
-                            nextState = new Reload(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
-                            stage = EVENT.EXIT;
-
-                            if (inimigo.GetComponent<Inimigo>().inimigoNormal)
-                            {
-                                inimigo.GetComponent<Inimigo>().animator.SetBool("AtirandoCover", false);
-                            }
-                        }
                     }
                     else
                     {

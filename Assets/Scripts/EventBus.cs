@@ -16,7 +16,7 @@ public class EventBus : MonoBehaviour
 
     public event Action <bool, bool>onTP;
 
-    public event Action <float, Action> onFadeIn;
+    public event Action <float, Action, float> onFadeIn;
     public event Action <float, Action> onFadeOut;
 
     public event Action <string, int, bool> onColetaItem;
@@ -48,9 +48,9 @@ public class EventBus : MonoBehaviour
         onTP?.Invoke(aux1, aux2);
     }
 
-    public void FadeIn(float duracao, Action posFade)
+    public void FadeIn(float duracao, Action posFade, float tempoEspera)
     {
-        onFadeIn?.Invoke(duracao, posFade);
+        onFadeIn?.Invoke(duracao, posFade, tempoEspera);
     }
     public void FadeOut(float duracao, Action posFade)
     {

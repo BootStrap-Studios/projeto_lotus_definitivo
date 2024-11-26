@@ -16,13 +16,13 @@ public class MenuSystem : MonoBehaviour , ISave
     [SerializeField] private GameObject menuAudioUI;
 
     [Header("Congigurações")]
-    [SerializeField] private string nomeScene;
     [SerializeField] private Slider sensiOlhar;
     [SerializeField] private Slider sensiMirar;
     [SerializeField] private Scrollbar scrollbar;
     
     [Header("Outros")]
     [SerializeField] private MargelaH_CAM scriptCAM;
+    [SerializeField] private PlayerMovement player;
     private bool interagir;
 
     private StudioEventEmitter menuSnapshot;
@@ -192,8 +192,24 @@ public class MenuSystem : MonoBehaviour , ISave
 
     public void BTNTentarNovamente()
     {
+        //EventBus.Instance.TP(false, true);
+        //EventBus.Instance.PodePausar(false);
+
+        //EventBus.Instance.FadeIn(0.5f, null, 5);
+        //gameOverUI.SetActive(false);
+
+        SceneManager.LoadScene("Implemenetacao");
+        //player.transform.position = player.posInstituto;
+
         Time.timeScale = 1;
-        SceneManager.LoadScene(nomeScene);
+
+        //stateMenu = State.menuFechado;
+
+        //EventBus.Instance.TP(false, true);
+        //EventBus.Instance.PodePausar(true);
+        //EventBus.Instance.PauseGame();
+
+        //EventBus.Instance.FadeOut(1f, null);
     }
 
     #endregion

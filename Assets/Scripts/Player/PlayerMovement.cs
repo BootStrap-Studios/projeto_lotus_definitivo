@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject dashObj;
     [SerializeField] private Image dashImage;
 
+    [Header("TPs")]
+    public Vector3 posSala0;
+    public Vector3 posInstituto;
+
     private float speed;
     private float ySpeed;
     private float originalStepOffSet;

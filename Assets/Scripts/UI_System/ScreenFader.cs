@@ -23,10 +23,10 @@ public class ScreenFader : MonoBehaviour
         EventBus.Instance.onFadeOut -= FadeOut;
     }
 
-    public void FadeIn(float duracao, Action posFade)
+    public void FadeIn(float duracao, Action posFade, float tempoEspera)
     {
         if (ocupado) return;
-        StartCoroutine(CO_FadeIn(duracao, posFade));
+        StartCoroutine(CO_FadeIn(duracao, posFade, tempoEspera));
     }
 
     public void FadeOut(float duracao, Action posFade)
@@ -36,7 +36,7 @@ public class ScreenFader : MonoBehaviour
         StartCoroutine(CO_FadeOut(duracao, posFade));
     }
 
-    private IEnumerator CO_FadeIn(float duracao, Action posFade)
+    private IEnumerator CO_FadeIn(float duracao, Action posFade, float tempoEspera)
     {
         ocupado = true;
         while (fader.color.a < 1)
@@ -45,6 +45,8 @@ public class ScreenFader : MonoBehaviour
             yield return null;
         }
         fader.color = new Color(0, 0, 0, 1);
+
+        yield return new WaitForSeconds(tempoEspera);
 
         ocupado = false;
         posFade?.Invoke();

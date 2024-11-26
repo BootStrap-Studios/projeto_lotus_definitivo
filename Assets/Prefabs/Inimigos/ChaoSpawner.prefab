@@ -146,7 +146,7 @@ MonoBehaviour:
   spawnInimigos: {fileID: 0}
   plataforma: {fileID: 3282901921855042639}
   posFinal: {fileID: 3257431976641444848}
-  vel: 1
+  vel: 3
   tempoAtivando: 4
   posSpawn:
   - {fileID: 6544646715243097327}
