@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.F) && statusJogador.tenhoULT)
+            if (Input.GetKeyDown(KeyCode.F) && statusJogador.tenhoULT && statusJogador.statusULT >= 10)
             {
                 Debug.Log("ULTEEEEEEEEEEEEEEEEEEEEEI");
                 statusJogador.Ultando();

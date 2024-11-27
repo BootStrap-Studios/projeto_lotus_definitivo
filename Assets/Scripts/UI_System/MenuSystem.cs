@@ -27,11 +27,11 @@ public class MenuSystem : MonoBehaviour , ISave
     [SerializeField] private MargelaH_CAM scriptCAM;
     [SerializeField] private PlayerMovement player;
     [SerializeField] private StatusJogador playerStatus;
+    [SerializeField] private GameObject dialogo;
     private bool interagir;
 
     private StudioEventEmitter menuSnapshot;
-    [SerializeField] private GameObject dialogo;
-    [SerializeField] private GameObject tpInstituto;
+    
 
     private enum State
     {
@@ -68,10 +68,11 @@ public class MenuSystem : MonoBehaviour , ISave
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && interagir)
         {
             if (stateMenu == State.menuFechado)
             {
+                Debug.Log("passei");
                 PauseMenu();
                 EventBus.Instance.PauseGame();
             }
@@ -97,16 +98,6 @@ public class MenuSystem : MonoBehaviour , ISave
     private void PodePausar(bool podePausar)
     {
         interagir = podePausar;
-
-        if (!interagir)
-        {
-            stateMenu = State.menuInteragindo;
-        }
-        else
-        {
-            menuPauseUI.SetActive(false);
-            stateMenu = State.menuFechado;
-        }
     }
 
     public void PauseMenu()
@@ -210,7 +201,7 @@ public class MenuSystem : MonoBehaviour , ISave
     public void BTNTentarNovamente()
     {
         SaveSystemManager.instance.SalvarJogo();
-        EventBus.Instance.FadeIn(0f, DesligarUI, 0f);
+        EventBus.Instance.FadeIn(2f, DesligarUI, 4f);
 
         EventBus.Instance.TP(false, true);
 
@@ -223,12 +214,18 @@ public class MenuSystem : MonoBehaviour , ISave
         podeSalvar = true;          
 
         playerStatus.Reset();
-        tpInstituto.SetActive(true);
 
         if (dialogo != null)
         {
-            dialogo.SetActive(true);
+            StartCoroutine(AtivaDialogo());
         }
+    }
+
+    private IEnumerator AtivaDialogo()
+    {
+        yield return new WaitForSeconds(7.5f);
+
+        dialogo.SetActive(true);
     }
 
     #endregion

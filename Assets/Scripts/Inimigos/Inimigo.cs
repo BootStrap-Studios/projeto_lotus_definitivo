@@ -76,13 +76,11 @@ public class Inimigo : MonoBehaviour
     private void OnEnable()
     {
         EventBus.Instance.onAtivaInimigos += AtivarChase;
-        EventBus.Instance.onGameOver += DeletarInimigo;
     }
 
     private void OnDisable()
     {
         EventBus.Instance.onAtivaInimigos -= AtivarChase;
-        EventBus.Instance.onGameOver -= DeletarInimigo;
     }
 
     void Start()
@@ -439,11 +437,6 @@ public class Inimigo : MonoBehaviour
             int qualItemDropar = Random.Range(1, dropPrefab.Length);
             Instantiate(dropPrefab[qualItemDropar], posDrop, transform.rotation);
         }
-    }
-
-    private void DeletarInimigo()
-    {
-        Destroy(gameObject);
     }
 
     #region Efeitos de Dano

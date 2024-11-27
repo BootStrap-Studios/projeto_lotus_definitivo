@@ -21,6 +21,8 @@ public class InventarioSystem : MonoBehaviour, ISave
     [SerializeField] private GameObject objSpriteList;
     [SerializeField] private GameObject objStringList;    
     [SerializeField] private TextMeshProUGUI textoBase;
+    [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
+    [SerializeField] private MaquinaRCManager maquinaRCManager;
 
     private void OnEnable()
     {
@@ -48,6 +50,8 @@ public class InventarioSystem : MonoBehaviour, ISave
         }
 
         SaveSystemManager.instance.CarregarJogo();
+        maquinaRCManager.CarregaInventario();
+        buffsPermanenteManager.CarregaInventario();
     }
 
     //Função que verifica se já tenho o item coletado no inventário, se sim apenas somo a quantidade já existente, se não adiciono o item novo ao inventário

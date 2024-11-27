@@ -9,8 +9,7 @@ public class MesaDeBuffsPermanente : MonoBehaviour, IInteractable
 
     public void Interagir()
     {
-        EventBus.Instance.PodePausar(false);
-        EventBus.Instance.PauseGame();
+        EventBus.Instance.PodePausar(false);       
 
         buffsPermanenteManager.scrollbar.value = 0.999f;
 
@@ -22,6 +21,7 @@ public class MesaDeBuffsPermanente : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        EventBus.Instance.PauseGame();
         Time.timeScale = 0;
     }
 }

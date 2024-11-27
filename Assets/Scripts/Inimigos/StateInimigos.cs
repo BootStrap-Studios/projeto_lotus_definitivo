@@ -37,13 +37,13 @@ public class StateInimigos
     protected Animator anim;
 
     
-    public float visDistancia = 25f;
+    public float visDistancia = 35f;
     float visAngulo = 80f;
     public float cooldownTiroAux;
     public float tempoAux;
     public float municaoAux;
     public bool newReload = true;
-    public bool ativarChase = false;
+    public bool ativarChase = true;
     public bool pararAndar = false;
     public int contagemTiros;
     public Cover coverSelecionado;
@@ -355,7 +355,7 @@ public class Atirar : StateInimigos
                 newReload = false;
             }
 
-            if (inimigo.GetComponent<Inimigo>().inimigoSniper || inimigo.GetComponent<Inimigo>().inimigoTorreta)
+            if (inimigo.GetComponent<Inimigo>().inimigoTorreta)
             {
                 pararAndar = true;
             }
@@ -390,23 +390,6 @@ public class Atirar : StateInimigos
                         {
                             inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
                         }
-                    }
-                    else if (VejoPlayer())
-                    {
-                        Vector3 lookPos = player.transform.position - inimigo.transform.position;
-                        float angulo = Vector3.Angle(lookPos, inimigo.transform.forward);
-                        lookPos.y = 0;
-                        Quaternion rotation = Quaternion.LookRotation(lookPos);
-
-                        if (angulo > 22)
-                        {
-                            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .8f);
-                        }
-                        else
-                        {
-                            inimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
-                        }
-
                     }
                 }
             }

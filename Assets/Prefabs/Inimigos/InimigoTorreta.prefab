@@ -391,7 +391,7 @@ MonoBehaviour:
   inimigoNormal: 0
   inimigoTorreta: 1
   _barraDeVida: {fileID: 1697084210859825114}
-  vida: 20
+  vida: 80
   vulneravel: 0
 --- !u!1001 &6741036806155247037
 PrefabInstance:
@@ -632,6 +632,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6314562686666201287, guid: ed875ffe220d0f04ab17b228ed713fc6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 62239a220b5be3e41bef5cb2d0768c5a, type: 2}
     - target: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -652,6 +657,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torreta
       objectReference: {fileID: 0}
+    - target: {fileID: 2918904241550143408, guid: ed875ffe220d0f04ab17b228ed713fc6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ec1c1c5f1c2f40488e4400ff8a4d8a6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

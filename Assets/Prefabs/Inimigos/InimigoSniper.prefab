@@ -328,18 +328,18 @@ MonoBehaviour:
   danoTiro: 4
   danoTiroReduzido: 2
   alcanceMaxArma: 10000
-  alcanceMinArma: 20
+  alcanceMinArma: 35
   cooldownTiro: 2.5
   velProjetil: 85
   velocidadeAndar: 5
   objInimigo: {fileID: 7197857029520921749}
+  cabecaTorreta: {fileID: 0}
   inimigoExplosivo: 0
   inimigoSniper: 1
   inimigoNormal: 0
   inimigoTorreta: 0
   _barraDeVida: {fileID: 4885232705448382559}
   vida: 45
-  statusInimigo: {fileID: 0}
   vulneravel: 0
 --- !u!1 &7933029950089467436
 GameObject:

@@ -42,7 +42,6 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
         player = FindObjectOfType<PlayerMovement>();
         ammoSystem = FindObjectOfType<AmmoSystem>();
     }
-    
 
     private void Update()
     {
@@ -59,6 +58,7 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
             
             EventBus.Instance.PauseGame();
             Time.timeScale = 1;
+
             EventBus.Instance.PodePausar(true);
         }
 
@@ -402,8 +402,6 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
                 levelAtual[i].AtulizaBuffsDesbloqueados(levelAtual[i].levelAtualBuff);
             }
         }
-
-        CarregaInventario();
     }
 
     public void SalvarSave(ref InfosSave save)

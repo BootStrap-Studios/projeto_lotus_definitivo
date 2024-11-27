@@ -146,9 +146,10 @@ public class MaquinaRCManager : MonoBehaviour
         Cursor.visible = false;
 
         stateRC = StateRC.fechado;
-        EventBus.Instance.PauseGame();
-        EventBus.Instance.PodePausar(true);
+        EventBus.Instance.PauseGame();      
         Time.timeScale = 1;
+
+        EventBus.Instance.PodePausar(true);
     }
 
     public void VoltarInicio()

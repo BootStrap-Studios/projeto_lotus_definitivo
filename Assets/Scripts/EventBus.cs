@@ -12,6 +12,8 @@ public class EventBus : MonoBehaviour
 
     public event Action onGameOver;
 
+    public event Action onUltimate;
+
     public event Action <bool> onPodePausar;
 
     public event Action <bool, bool>onTP;
@@ -36,6 +38,11 @@ public class EventBus : MonoBehaviour
     public void GameOver()
     {
         onGameOver?.Invoke();
+    }
+
+    public void Ultimate()
+    {
+        onUltimate?.Invoke();
     }
 
     public void PodePausar(bool podePausar)

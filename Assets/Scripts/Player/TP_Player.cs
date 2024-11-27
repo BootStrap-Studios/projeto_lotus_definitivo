@@ -23,15 +23,6 @@ public class TP_Player : MonoBehaviour, IInteractable
     private MenuSystem menuSystem;
 
 
-    private void OnEnable()
-    {
-        EventBus.Instance.onGameOver += GameOver;
-    }
-    private void OnDisable()
-    {
-        EventBus.Instance.onGameOver -= GameOver;
-    }
-
     private void Start()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
@@ -128,20 +119,16 @@ public class TP_Player : MonoBehaviour, IInteractable
         }
         fader.color = new Color(0, 0, 0, 0);
 
-        gameObject.SetActive(false);
-        sala.SetActive(false);
+        if (!instituto)
+        {
+            gameObject.SetActive(false);
+            sala.SetActive(false);
+        }
     }
 
     private void CuraPorSala()
     {
         vidaPlayer.CurarVida(statusJogador.curaPorSala);
-    }
-
-    private void GameOver()
-    {
-        if (instituto)
-        {
-            gameObject.SetActive(true);
-        }
+        statusJogador.ResetULT();
     }
 }

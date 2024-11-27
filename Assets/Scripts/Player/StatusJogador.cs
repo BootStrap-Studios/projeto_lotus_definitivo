@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatusJogador : MonoBehaviour
 {
@@ -88,6 +89,9 @@ public class StatusJogador : MonoBehaviour
     [Header("ULT")]
     public bool tenhoULT;
     public string qualULT;
+    public int statusULT;
+    private int ultValorAtual;
+    [SerializeField] private Slider barraULT;
 
     [Header("Dashes e Reload")]
     public string qualReload;
@@ -102,6 +106,21 @@ public class StatusJogador : MonoBehaviour
     private void Start()
     {
         Reset();
+    }
+
+    private void Update()
+    {
+        barraULT.value = Mathf.MoveTowards(barraULT.value, ultValorAtual, 0.5f * Time.deltaTime);
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Instance.onUltimate += StatusUlt;
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Instance.onUltimate -= StatusUlt;
     }
 
     public void Reset()
@@ -152,6 +171,9 @@ public class StatusJogador : MonoBehaviour
 
         vidaPlayer.vidaAtual = vidaPlayer.vidaMaxima;
         vidaPlayer.AlterarBarraDeVida(vidaPlayer.vidaAtual, vidaPlayer.vidaMaxima);
+
+        barraULT.gameObject.SetActive(false);
+        ResetULT();
     }
 
 
@@ -219,7 +241,7 @@ public class StatusJogador : MonoBehaviour
         Debug.Log("Ult movimentacao");
         StartCoroutine(UltimateMovimentacaoCoroutine());
         ammoSystem.MunicaoInfinita();
-        
+
     }
 
     private IEnumerator UltimateMovimentacaoCoroutine()
@@ -259,7 +281,7 @@ public class StatusJogador : MonoBehaviour
 
     }
 
-    
+
 
     public void BuffDisparoBurst()
     {
@@ -306,7 +328,8 @@ public class StatusJogador : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~layerInimigo))
         {
             distancia = hit.distance;
-        } else
+        }
+        else
         {
             distancia = Mathf.Infinity;
         }
@@ -315,7 +338,7 @@ public class StatusJogador : MonoBehaviour
 
         hits = Physics.RaycastAll(ray, distancia);
 
-        foreach(RaycastHit hitao in hits)
+        foreach (RaycastHit hitao in hits)
         {
             if (hitao.collider.CompareTag("Inimigo"))
             {
@@ -354,7 +377,7 @@ public class StatusJogador : MonoBehaviour
         ultimateDefesa = false;
     }
 
-   
+
 
     public void AtivarEscudo()
     {
@@ -514,6 +537,7 @@ public class StatusJogador : MonoBehaviour
     {
         tenhoULT = true;
         qualULT = _qualUlt;
+        barraULT.gameObject.SetActive(true);
     }
 
     public void Ultando()
@@ -548,6 +572,22 @@ public class StatusJogador : MonoBehaviour
                 break;
         }
 
+        ResetULT();
+    }
+
+    private void StatusUlt()
+    {
+        if (tenhoULT)
+        {
+            statusULT++;
+            ultValorAtual = statusULT / 10;
+        }
+    }
+
+    public void ResetULT()
+    {
+        statusULT = 0;
+        ultValorAtual = statusULT / 10;
     }
 
     public void DandoUlt(string ult)
@@ -555,6 +595,8 @@ public class StatusJogador : MonoBehaviour
         tenhoULT = true;
 
         qualULT = ult;
+
+        barraULT.gameObject.SetActive(true);
     }
 
     public void ReloadBuffs()
@@ -602,6 +644,12 @@ public class StatusJogador : MonoBehaviour
         foreach (GameObject spawn in spawnInimigos)
         {
             spawn.GetComponent<BoxCollider>().enabled = true;
+
         }
+
+        foreach (GameObject spawn in spawnInimigos)
+        {
+            spawn.GetComponent<SpawnInimigos>().terminalBuff.GetComponent<BoxCollider>().enabled = true; ;
+        }  
     }
-    }
+}

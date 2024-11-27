@@ -206,13 +206,13 @@ MonoBehaviour:
   velProjetil: 30
   velocidadeAndar: 8
   objInimigo: {fileID: 3416823112405702447}
+  cabecaTorreta: {fileID: 0}
   inimigoExplosivo: 1
   inimigoSniper: 0
   inimigoNormal: 0
   inimigoTorreta: 0
   _barraDeVida: {fileID: 5441554329553712561}
   vida: 30
-  statusInimigo: {fileID: 0}
   vulneravel: 0
 --- !u!1 &3835908710334161532
 GameObject:
@@ -347,6 +347,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2121688100182035073}
     m_Modifications:
+    - target: {fileID: 1165833908593067979, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165833908593067979, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1173736726555696729, guid: 38eaffe0d8f631249808110155ca751a,
         type: 3}
       propertyPath: m_Pivot.x
@@ -462,10 +472,30 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7650646276451333122, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650646276451333122, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650646276451333122, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8466103087306775086, guid: 38eaffe0d8f631249808110155ca751a,
         type: 3}
       propertyPath: m_Name
       value: InimigoCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8466103087306775086, guid: 38eaffe0d8f631249808110155ca751a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8699022073293761629, guid: 38eaffe0d8f631249808110155ca751a,
         type: 3}
@@ -583,6 +613,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inimigo_Bomba_Riggado
       objectReference: {fileID: 0}
+    - target: {fileID: 4750673870735888870, guid: 64957aed4afda264f8d43abb684a7a01,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e617b9311215534aaa2d6bd1f19d0a2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

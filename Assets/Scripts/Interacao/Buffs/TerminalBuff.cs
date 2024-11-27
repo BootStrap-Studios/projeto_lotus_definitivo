@@ -23,6 +23,8 @@ public class TerminalBuff : MonoBehaviour, IInteractable
 
     [SerializeField] private PackRecompensas pack;
 
+
+
     private VidaPlayer vidaPlayer;
 
     private InventarioSystem inventarioSystem;

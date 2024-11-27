@@ -7,7 +7,7 @@ public class SpawnInimigos : MonoBehaviour
     [Header("Configurações da Sala")]
     [SerializeField] private int tierSala;  
     [SerializeField] private BoxCollider colliderSpawn;
-    [SerializeField] private GameObject terminalBuff;
+    public GameObject terminalBuff;
     [SerializeField] private GameObject[] inimigos;    
     public GameObject[] inimigosVivos;    
     [SerializeField] private CanosSpawners[] spawners;
@@ -34,8 +34,7 @@ public class SpawnInimigos : MonoBehaviour
     private int inimigosTorreta;
     private int inimigosTotais = 0;
 
-    private ObjectPool objectPool;
-    
+    private ObjectPool objectPool;  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,6 +46,15 @@ public class SpawnInimigos : MonoBehaviour
                 AtivandoInimigos();
             }   
         }       
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Instance.onGameOver += ReativarSpawn;
+    }
+    private void OnDisable()
+    {
+        EventBus.Instance.onGameOver -= ReativarSpawn;
     }
 
     private void Awake()
@@ -229,7 +237,6 @@ public class SpawnInimigos : MonoBehaviour
       
         if (inimigosPorWave[wavesSpawnadas] > 0)
         {
-
             AtivandoInimigos();
         }
         else
@@ -284,6 +291,14 @@ public class SpawnInimigos : MonoBehaviour
                 AudioManager.instance.SetMusicParameter("area", 3);
             }
         }       
+    }
+
+    private void ReativarSpawn()
+    {
+        for(int i = 0; i < inimigosVivos.Length; i++)
+        {
+            Destroy(inimigosVivos[i].gameObject);
+        }
     }
 
     private void ColocandoMusica()
