@@ -80,6 +80,7 @@ public class AmmoSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             MunicaoInfinita();
+            statusJogador.UltimateDefesa();
         }
     }
 

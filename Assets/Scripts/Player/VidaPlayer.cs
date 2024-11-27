@@ -105,6 +105,11 @@ public class VidaPlayer : MonoBehaviour
             vidaBaixa = true;
             StartCoroutine(CO_VidaPiscandoFadeOut());
         }
+        else
+        {
+            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 1);
+            vidaBaixa = false;
+        }
     }
 
     private void ConferindoBuffMiscMovimentacao()
@@ -134,7 +139,7 @@ public class VidaPlayer : MonoBehaviour
     #region Animação da barra piscando
 
     private IEnumerator CO_VidaPiscandoFadeIn()
-    {
+    {       
         while (vidaIMG.color.a < 1)
         {
             vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, vidaIMG.color.a + (Time.deltaTime / 0.3f));
@@ -142,7 +147,7 @@ public class VidaPlayer : MonoBehaviour
         }
 
         yield return new WaitForSeconds(.3f);
-        StartCoroutine(CO_VidaPiscandoFadeOut());
+        if (!vidaBaixa) StartCoroutine(CO_VidaPiscandoFadeOut());
     }
 
     private IEnumerator CO_VidaPiscandoFadeOut()
@@ -153,7 +158,7 @@ public class VidaPlayer : MonoBehaviour
             yield return null;
         }
 
-        StartCoroutine(CO_VidaPiscandoFadeIn());
+        if (!vidaBaixa) StartCoroutine(CO_VidaPiscandoFadeIn());
     }
 
     #endregion

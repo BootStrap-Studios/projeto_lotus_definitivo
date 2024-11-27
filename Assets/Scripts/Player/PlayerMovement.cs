@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Image dashImage;
 
     [Header("TPs")]
-    public Vector3 posSala0;
     public Vector3 posInstituto;
 
     private float speed;

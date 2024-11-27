@@ -23,6 +23,15 @@ public class TP_Player : MonoBehaviour, IInteractable
     private MenuSystem menuSystem;
 
 
+    private void OnEnable()
+    {
+        EventBus.Instance.onGameOver += GameOver;
+    }
+    private void OnDisable()
+    {
+        EventBus.Instance.onGameOver -= GameOver;
+    }
+
     private void Start()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
@@ -33,9 +42,7 @@ public class TP_Player : MonoBehaviour, IInteractable
     {
         if (tpFinal)
         {
-            EventBus.Instance.PauseGame();
-            Time.timeScale = 0;
-            menuSystem.BTNTentarNovamente();
+            SceneManager.LoadScene("Final");
         }
         else
         {
@@ -85,7 +92,7 @@ public class TP_Player : MonoBehaviour, IInteractable
             proxSala.GetComponentInChildren<SpawnInimigos>().RanomizandoInimigos();
 
             //Debug.Log(spawn.gameObject.transform.eulerAngles.y);
-            cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = proxSala.GetComponentInChildren<SpawnInimigos>().gameObject.transform.eulerAngles.y;
+            cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.eulerAngles.y;
             cameraPlayer.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = 0;
 
             ruinasLoading.SetActive(true);
@@ -121,11 +128,20 @@ public class TP_Player : MonoBehaviour, IInteractable
         }
         fader.color = new Color(0, 0, 0, 0);
 
+        gameObject.SetActive(false);
         sala.SetActive(false);
     }
 
     private void CuraPorSala()
     {
         vidaPlayer.CurarVida(statusJogador.curaPorSala);
+    }
+
+    private void GameOver()
+    {
+        if (instituto)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

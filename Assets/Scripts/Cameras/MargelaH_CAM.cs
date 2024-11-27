@@ -14,7 +14,7 @@ public class MargelaH_CAM : MonoBehaviour
     [SerializeField] private TextMeshProUGUI armasDesc;
 
     [Header("Outros")]
-    [SerializeField] private CinemachineVirtualCamera normalCAM;
+    public CinemachineVirtualCamera normalCAM;
     [SerializeField] private CinemachineVirtualCamera aimCAM;
     [SerializeField] private PlayerMovement player;   
     [SerializeField] private GameObject pontaDaArma;

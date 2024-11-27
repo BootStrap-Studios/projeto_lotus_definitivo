@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using FMODUnity;
+using Cinemachine;
 
 public class MenuSystem : MonoBehaviour , ISave
 {
@@ -29,6 +30,8 @@ public class MenuSystem : MonoBehaviour , ISave
     private bool interagir;
 
     private StudioEventEmitter menuSnapshot;
+    [SerializeField] private GameObject dialogo;
+    [SerializeField] private GameObject tpInstituto;
 
     private enum State
     {
@@ -160,7 +163,6 @@ public class MenuSystem : MonoBehaviour , ISave
     private void GameOverUI()
     {
         EventBus.Instance.PauseGame();
-        Time.timeScale = 0;
 
         playerUI.SetActive(false);
         gameOverUI.SetActive(true);
@@ -208,16 +210,25 @@ public class MenuSystem : MonoBehaviour , ISave
     public void BTNTentarNovamente()
     {
         SaveSystemManager.instance.SalvarJogo();
-        EventBus.Instance.FadeIn(1f, DesligarUI, 2);
+        EventBus.Instance.FadeIn(0f, DesligarUI, 0f);
 
         EventBus.Instance.TP(false, true);
 
-        player.transform.position = player.posInstituto;
-        playerStatus.Reset(); 
+        player.transform.position = player.posInstituto;  
+        scriptCAM.normalCAM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.Value = 0;
+        scriptCAM.normalCAM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.Value = 180;
 
         EventBus.Instance.TP(true, false);
+        
+        podeSalvar = true;          
 
-        podeSalvar = true;
+        playerStatus.Reset();
+        tpInstituto.SetActive(true);
+
+        if (dialogo != null)
+        {
+            dialogo.SetActive(true);
+        }
     }
 
     #endregion
