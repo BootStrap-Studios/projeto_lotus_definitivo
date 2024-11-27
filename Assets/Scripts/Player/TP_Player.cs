@@ -45,7 +45,7 @@ public class TP_Player : MonoBehaviour, IInteractable
     }
 
     private IEnumerator CO_TP()
-    {      
+    {
         while (fader.color.a < 1)
         {
             fader.color = new Color(0, 0, 0, fader.color.a + (Time.deltaTime / 0.5f));
@@ -53,15 +53,14 @@ public class TP_Player : MonoBehaviour, IInteractable
         }
         fader.color = new Color(0, 0, 0, 1);
 
-        EventBus.Instance.TP(false, true);
         EventBus.Instance.PauseGame();
+        EventBus.Instance.TP(false, true);
         EventBus.Instance.PodePausar(false);
 
         CuraPorSala();
 
         if (!instituto)
         {
-            sala.SetActive(false);
             proxSala.SetActive(true);
 
             player.transform.position = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.position;
@@ -78,7 +77,7 @@ public class TP_Player : MonoBehaviour, IInteractable
         {
             menuSystem.podeSalvar = false;
 
-            sala.SetActive(false);
+            //sala.SetActive(false);
             proxSala.SetActive(true);
 
             player.transform.position = proxSala.GetComponentInChildren<SpawnInimigos>().posTP.transform.position;
@@ -106,20 +105,23 @@ public class TP_Player : MonoBehaviour, IInteractable
                 yield return null;
             }
             fader.color = new Color(0, 0, 0, 1);
+
+            yield return new WaitForSeconds(.5f);
+            ruinasLoading.SetActive(false);
         }
 
         EventBus.Instance.PauseGame();
         EventBus.Instance.TP(true, false);
         EventBus.Instance.PodePausar(true);
 
-        yield return new WaitForSeconds(1f);
-
         while (fader.color.a > 0)
         {
             fader.color = new Color(0, 0, 0, fader.color.a - (Time.deltaTime / 0.5f));
             yield return null;
         }
-        fader.color = new Color(0, 0, 0, 0);       
+        fader.color = new Color(0, 0, 0, 0);
+
+        sala.SetActive(false);
     }
 
     private void CuraPorSala()
