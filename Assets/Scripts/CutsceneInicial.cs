@@ -8,10 +8,11 @@ public class CutsceneInicial : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IrProJogo());
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.cutsceneInicial, transform.position);
     }
     private IEnumerator IrProJogo()
     {
-        yield return new WaitForSeconds(185f);
+        yield return new WaitForSeconds(190f);
 
         SceneManager.LoadScene("Implemenetacao");
     }
