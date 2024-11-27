@@ -8,7 +8,6 @@ using UnityEngine.Playables;
 
 public class TP_Player : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Vector3 posTP;
     [SerializeField] private CinemachineVirtualCamera cameraPlayer;
     [SerializeField] private bool tpFinal;
     [SerializeField] private bool instituto;
@@ -17,8 +16,8 @@ public class TP_Player : MonoBehaviour, IInteractable
     [SerializeField] private GameObject proxSala;
     [SerializeField] private Image fader;
     [SerializeField] private GameObject ruinasLoading;
-    private PlayerMovement player;
 
+    private PlayerMovement player;
     private StatusJogador statusJogador;
     private VidaPlayer vidaPlayer;
     private MenuSystem menuSystem;
