@@ -18,6 +18,9 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject playerUI;
 
+    [Header("PrimeiroDialogo")]
+    [SerializeField] private TextAsset primeiroDialogo;
+
     private Story currentStory;
 
     public bool dialogueIsPlaying { get; private set; }
@@ -41,6 +44,8 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
 
         dialogueUI.SetActive(false);
+
+        EnterDialogueMode(primeiroDialogo);
     }
 
     private void Update()

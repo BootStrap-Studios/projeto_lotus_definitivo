@@ -11,6 +11,8 @@ public class DialogueTrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             DialogueManager.instance.EnterDialogueMode(inkJSON);
+
+            Destroy(gameObject);
         }
     }
 }

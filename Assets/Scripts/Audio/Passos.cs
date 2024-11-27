@@ -99,6 +99,10 @@ public class Passos : MonoBehaviour
                 case "Mix":
                     materialValue = 2;
                     break;
+
+                case "Madeira":
+                    materialValue = 3;
+                    break;
             }
         }
     }
