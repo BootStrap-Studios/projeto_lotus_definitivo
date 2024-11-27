@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,7 +19,9 @@ public class VidaPlayer : MonoBehaviour
 
     private StatusJogador statusJogador;
 
-    
+    [SerializeField] private GameObject escudoVFX;
+
+    private StudioEventEmitter escudoEmitter;
 
     // Start is called before the first frame update
     private void Start()
@@ -27,7 +30,7 @@ public class VidaPlayer : MonoBehaviour
         AlterarBarraDeVida(vidaAtual, vidaMaxima);
         vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
 
-        
+        //escudoEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.escudoAtivo, gameObject);
 
         statusJogador = FindObjectOfType<StatusJogador>();
     }
@@ -35,6 +38,17 @@ public class VidaPlayer : MonoBehaviour
     private void Update()
     {
         barraDeVida.value = Mathf.MoveTowards(barraDeVida.value, vidaAtualizada, velAnim * Time.deltaTime);
+
+        if(statusJogador.escudoAtivo)
+        {
+            escudoVFX.SetActive(true);
+            //escudoEmitter.Play();
+        } else
+        {
+            escudoVFX.SetActive(false);
+            //escudoEmitter.Stop();
+            
+        }
 
         //Se o jogador tiver a habilidade de ganhar mais dano com escudo ativo
         if(statusJogador.misc1Defesa)
@@ -64,6 +78,7 @@ public class VidaPlayer : MonoBehaviour
         if(statusJogador.escudoAtivo)
         {
             statusJogador.escudoAtivo = false;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.escudoQuebra, transform.position);
             return;
         }
 

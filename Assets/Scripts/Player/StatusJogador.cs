@@ -96,6 +96,8 @@ public class StatusJogador : MonoBehaviour
 
     [Header("Outros scripts")]
     [SerializeField] private VidaPlayer vidaPlayer;
+    [SerializeField] private GameObject terminalBuffSala0;
+    [SerializeField] private GameObject[] spawnInimigos;
 
     private void Start()
     {
@@ -131,7 +133,7 @@ public class StatusJogador : MonoBehaviour
         misc2Burst = false;
         misc3Burst = false;
 
-        danoCorrosao = 1f;
+        danoCorrosao = 5f;
         duracaoCorrosao = 5;
         duracaoPoca = 5f;
         dashCorrosaoAtivo = false;
@@ -144,6 +146,9 @@ public class StatusJogador : MonoBehaviour
 
         tenhoULT = false;
         qualULT = "Nenhum";
+
+        terminalBuffSala0.GetComponent<BoxCollider>().enabled = true;
+        AtivarSpawns();
 
         vidaPlayer.vidaAtual = vidaPlayer.vidaMaxima;
         vidaPlayer.AlterarBarraDeVida(vidaPlayer.vidaAtual, vidaPlayer.vidaMaxima);
@@ -425,7 +430,7 @@ public class StatusJogador : MonoBehaviour
 
     public void BuffMisc1Corrosao()
     {
-        danoCorrosao = 1.5f;
+        danoCorrosao = 10f;
     }
 
     public void BuffMisc2Corrosao()
@@ -591,4 +596,12 @@ public class StatusJogador : MonoBehaviour
 
         vidaPlayer.vidaAtual = vidaPlayer.vidaMaxima;
     }
-}
+
+    private void AtivarSpawns()
+    {
+        foreach (GameObject spawn in spawnInimigos)
+        {
+            spawn.GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+    }

@@ -278,6 +278,7 @@ public class SpawnInimigos : MonoBehaviour
             {
                 fimWaveAtual = false;
                 terminalBuff.SetActive(true);
+                terminalBuff.GetComponent<BoxCollider>().enabled = true;
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.terminouSala, transform.position);
 
                 AudioManager.instance.SetMusicParameter("area", 3);

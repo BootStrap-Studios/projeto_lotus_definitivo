@@ -18,6 +18,7 @@ public class MesaDeBuffsPermanente : MonoBehaviour, IInteractable
         buffsPermanenteManager.buffsPermanenteUI.SetActive(true);
         buffsPermanenteManager.uiLigada = true;
         buffsPermanenteManager.AtualizaInventario();
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 

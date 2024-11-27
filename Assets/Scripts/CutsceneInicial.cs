@@ -10,6 +10,14 @@ public class CutsceneInicial : MonoBehaviour
         StartCoroutine(IrProJogo());
         AudioManager.instance.PlayOneShot(FMODEvents.instance.cutsceneInicial, transform.position);
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Implemenetacao");
+        }
+    }
     private IEnumerator IrProJogo()
     {
         yield return new WaitForSeconds(190f);

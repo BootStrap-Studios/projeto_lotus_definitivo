@@ -79,7 +79,9 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference dashMavie { get; private set; }
     [field: SerializeField] public EventReference cutsceneInicial { get; private set; }
 
-    
+    [field: Header("Escudo")]
+    [field: SerializeField] public EventReference escudoAtivo { get; private set; }
+    [field: SerializeField] public EventReference escudoQuebra { get; private set; }
 
 
     public static FMODEvents instance { get; private set; }

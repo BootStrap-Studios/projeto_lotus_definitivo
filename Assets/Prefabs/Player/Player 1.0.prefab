@@ -716,6 +716,7 @@ GameObject:
   - component: {fileID: 8598718556682429382}
   - component: {fileID: 4746805734180760083}
   - component: {fileID: 6616900032292109443}
+  - component: {fileID: 1998470919920316274}
   m_Layer: 7
   m_Name: PlayerObj
   m_TagString: Player
@@ -740,6 +741,7 @@ Transform:
   - {fileID: 8600996343546916260}
   - {fileID: 8831259769576532249}
   - {fileID: 1284467353796199596}
+  - {fileID: 4955227715491348299}
   m_Father: {fileID: 140276070889115716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6063665375638039518
@@ -833,6 +835,38 @@ MonoBehaviour:
   vidaMaxima: 30
   vidaIMG: {fileID: 0}
   vidaAtual: 0
+  escudoVFX: {fileID: 2473424454325872265}
+--- !u!114 &1998470919920316274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174054128739968532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -931561147
+      Data2: 1083253978
+      Data3: 2113741195
+      Data4: 1481080800
+    Path: event:/SFX/habilidades/escudo/escudo
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5495531672261628746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +1074,6 @@ MonoBehaviour:
   dashCooldown: 2
   dashObj: {fileID: 3170620440045834065}
   dashImage: {fileID: 0}
-  posSala0: {x: 30.13, y: 1.05, z: -72.9}
   posInstituto: {x: -301.71, y: 1.3, z: 42.65}
   animator: {fileID: 1080298710523985698}
 --- !u!114 &80179656904436247
@@ -1111,6 +1144,18 @@ MonoBehaviour:
   dashDefesaAtivo: 0
   dashCorrosaoAtivo: 0
   vidaPlayer: {fileID: 6616900032292109443}
+  terminalBuffSala0: {fileID: 0}
+  spawnInimigos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3233126048945909831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,6 +1170,101 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeInteracao: 10
   botaoInteragir: {fileID: 0}
+--- !u!1001 &4171569848321276057
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5408378857368954297}
+    m_Modifications:
+    - target: {fileID: 1997129570803834384, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_Name
+      value: Escudo
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.221
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.221
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.221
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d8dfa7d2a2f89aa4c88996e003308030, type: 3}
+--- !u!1 &2473424454325872265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1997129570803834384, guid: d8dfa7d2a2f89aa4c88996e003308030,
+    type: 3}
+  m_PrefabInstance: {fileID: 4171569848321276057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4955227715491348299 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
+    type: 3}
+  m_PrefabInstance: {fileID: 4171569848321276057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7582314129122360714
 PrefabInstance:
   m_ObjectHideFlags: 0
