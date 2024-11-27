@@ -98,6 +98,7 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
 
     public void LiberaBuffs()
     {
+
         buffDesbloqueado.gameObject.SetActive(false);
         gameObject.GetComponent<Button>().interactable = false;
 
