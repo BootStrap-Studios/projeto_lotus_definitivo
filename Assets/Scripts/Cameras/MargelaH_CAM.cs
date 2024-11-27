@@ -25,7 +25,10 @@ public class MargelaH_CAM : MonoBehaviour
     private GameObject armaAtual;
     
     private bool play = true;
-     
+
+    public bool shotgun;
+    public bool shuriken;
+
     private void OnEnable()
     {
         EventBus.Instance.onPauseGame += PauseCam;
@@ -94,11 +97,17 @@ public class MargelaH_CAM : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                TrocarArma(1);
+                
+                    TrocarArma(1);
+                
+                
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                TrocarArma(2);
+               
+                    TrocarArma(2);
+                
+                
             }
         }
 

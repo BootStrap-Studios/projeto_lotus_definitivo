@@ -207,6 +207,8 @@ public class SpawnInimigos : MonoBehaviour
     [ContextMenu("Ativa Inimigos")]
     private void AtivandoInimigos()
     {
+        ColocandoMusica();
+
         for (int i = 0; i < spawners.Length; i++)
         {
             //Debug.Log((i + 1) + "/" + inimigosPorWave[wavesSpawnadas]);
@@ -277,7 +279,29 @@ public class SpawnInimigos : MonoBehaviour
                 fimWaveAtual = false;
                 terminalBuff.SetActive(true);
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.terminouSala, transform.position);
+
+                AudioManager.instance.SetMusicParameter("area", 3);
             }
         }       
+    }
+
+    private void ColocandoMusica()
+    {
+        int aux = Random.Range(1, 3);
+
+        if (aux == 1)
+        {
+            AudioManager.instance.SetMusicParameter("area", 2);
+        }
+
+        if (aux == 2)
+        {
+            AudioManager.instance.SetMusicParameter("area", 4);
+        }
+
+        if (aux == 3)
+        {
+            AudioManager.instance.SetMusicParameter("area", 5);
+        }
     }
 }

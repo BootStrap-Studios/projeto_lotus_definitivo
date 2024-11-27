@@ -81,5 +81,72 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 68bcb931b070c4742bcb0571cef8a5bb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5916201583523424375}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 68bcb931b070c4742bcb0571cef8a5bb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7984445167972485691}
   m_SourcePrefab: {fileID: 100100000, guid: 68bcb931b070c4742bcb0571cef8a5bb, type: 3}
+--- !u!1 &6789665977690567855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68bcb931b070c4742bcb0571cef8a5bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 5978762607421557246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &5916201583523424375
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789665977690567855}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1543044855783420060, guid: 68bcb931b070c4742bcb0571cef8a5bb, type: 3}
+--- !u!114 &7984445167972485691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789665977690567855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -110686529
+      Data2: 1115869998
+      Data3: -173369155
+      Data4: -1327345652
+    Path: event:/ambiente/Maquinario
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 2.5
+  OverrideMaxDistance: 5

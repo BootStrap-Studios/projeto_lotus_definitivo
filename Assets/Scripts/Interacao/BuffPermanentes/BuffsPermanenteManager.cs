@@ -32,6 +32,8 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     private PlayerMovement player;
     private AmmoSystem ammoSystem;
 
+    [SerializeField] private MargelaH_CAM cam;
+
     private void Awake()
     {
         statusJogador = FindObjectOfType<StatusJogador>();
@@ -294,6 +296,7 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     {
         switch (levelBuff)
         {
+
             case 1:
                 statusJogador.danoBasePistola = 11;
                 break;
@@ -318,9 +321,6 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     {
         switch (levelBuff)
         {
-            case 0:
-                //LIBERAR A SHOTGUN
-                break;
 
             case 1:
                 statusJogador.danoBaseShotgun = 11;
@@ -346,9 +346,6 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     {
         switch (levelBuff)
         {
-            case 0:
-                //LIBERAR A SHURIKEN
-                break;
 
             case 1:
                 statusJogador.danoBaseShuriken = 33;

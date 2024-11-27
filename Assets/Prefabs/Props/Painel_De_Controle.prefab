@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Painel_De_Controle
       objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: d8a1d3fa61c1ec94dae0e6c67757f19d,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
