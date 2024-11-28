@@ -52,4 +52,7 @@ Ok, hora de ir! Só uma coisa antes: Belmira disse que enjoo em primeiras viagen
 
 #speaker:Mavie #anim:Mavie
 Aff, claro que ia ter enjoo...
+
+#tp:vapo
+.
     -> END

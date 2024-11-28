@@ -29,7 +29,7 @@ Que isso na sua manopla?
 AH, NÃOOO! Os chips fritaram!
 
 #speaker:Bubbles #anim:Bubbles
-É, já era de se esperar, assim, Com todo esse lance1 de teleporte por ondas.
+É, já era de se esperar, assim, com todo esse lance de teleporte por ondas.
 
 #speaker:Mavie #anim:Mavie
 Eu tinha gostado tanto das melhorias. 

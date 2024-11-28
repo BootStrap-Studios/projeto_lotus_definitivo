@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour
     [Header("PrimeiroDialogo")]
     [SerializeField] private TextAsset primeiroDialogo;
 
+    private StatusJogador statusJogador;
+
     private Story currentStory;
 
     public bool dialogueIsPlaying { get; private set; }
@@ -28,6 +30,10 @@ public class DialogueManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
 
     private const string ANIM_TAG = "anim";
+
+    private const string TP_TAG = "tp";
+
+
 
     private void Awake()
     {
@@ -41,11 +47,15 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        statusJogador = FindObjectOfType<StatusJogador>();
+
         dialogueIsPlaying = false;
 
         dialogueUI.SetActive(false);
 
         EnterDialogueMode(primeiroDialogo);
+
+
     }
 
     private void Update()
@@ -127,6 +137,11 @@ public class DialogueManager : MonoBehaviour
 
                 case ANIM_TAG:
                     portraitAnimator.Play(tagValue);
+                    break;
+
+                case TP_TAG:
+                    EventBus.Instance.GameOver();
+                    
                     break;
 
                 default:

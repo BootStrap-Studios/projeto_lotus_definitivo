@@ -50,26 +50,64 @@ public class BuffManager : MonoBehaviour
         switch(i)
         {
             case 1:
-                SorteandoQuaisBuffs(botoesDefesaList);
+                if(botoesDefesaList.Count > 0)
+                {
+                    SorteandoQuaisBuffs(botoesDefesaList);
+                } else
+                {
+                    SorteandoQualArvore();
+                }
+                
                 //Debug.Log("Defesa");
                 break;
 
             case 2:
-                SorteandoQuaisBuffs(botoesCorrosaoList);
+                if (botoesCorrosaoList.Count > 0)
+                {
+                    SorteandoQuaisBuffs(botoesCorrosaoList);
+                } else
+                {
+                    SorteandoQualArvore();
+                }
+                    
                 //Debug.Log("Corrosao");
                 break;
 
             case 3:
-                SorteandoQuaisBuffs(botoesCriticoList);
+                if (botoesCriticoList.Count > 0)
+                {
+                    SorteandoQuaisBuffs(botoesCriticoList);
+                }
+                else
+                {
+                    SorteandoQualArvore();
+                }
+
                 break;
 
             case 4:
-                SorteandoQuaisBuffs(botoesMovimentacaoList);
+                if (botoesMovimentacaoList.Count > 0)
+                {
+                    SorteandoQuaisBuffs(botoesMovimentacaoList);
+                }
+                else
+                {
+                    SorteandoQualArvore();
+                }
+
                 //Debug.Log("Movimentacao");
                 break;
 
             case 5:
-                SorteandoQuaisBuffs(botoesBurstList);
+                if (botoesBurstList.Count > 0)
+                {
+                    SorteandoQuaisBuffs(botoesBurstList);
+                }
+                else
+                {
+                    SorteandoQualArvore();
+                }
+
                 //Debug.Log("Burst");
                 break;
         }

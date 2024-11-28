@@ -1140,6 +1140,8 @@ MonoBehaviour:
     type: 3}
   tenhoULT: 0
   qualULT: 
+  statusULT: 0
+  barraULT: {fileID: 0}
   qualReload: 
   dashDefesaAtivo: 0
   dashCorrosaoAtivo: 0
@@ -1182,6 +1184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Escudo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997129570803834384, guid: d8dfa7d2a2f89aa4c88996e003308030,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
         type: 3}
