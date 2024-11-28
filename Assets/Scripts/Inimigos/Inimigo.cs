@@ -239,6 +239,7 @@ public class Inimigo : MonoBehaviour
     {
         if (vidaAtual <= 0)
         {
+            EventBus.Instance.Ultimate();
             DroparItem();
 
             MiscMovimentacao();

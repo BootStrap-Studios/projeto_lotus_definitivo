@@ -14,6 +14,8 @@ public class EventBus : MonoBehaviour
 
     public event Action onUltimate;
 
+    public event Action onSalvarJogo;
+
     public event Action <bool> onPodePausar;
 
     public event Action <bool, bool>onTP;
@@ -43,6 +45,11 @@ public class EventBus : MonoBehaviour
     public void Ultimate()
     {
         onUltimate?.Invoke();
+    }
+
+    public void SalvarJogo()
+    {
+        onSalvarJogo?.Invoke();
     }
 
     public void PodePausar(bool podePausar)

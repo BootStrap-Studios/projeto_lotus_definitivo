@@ -60,8 +60,8 @@ public class MenuPrincipal : MonoBehaviour
         DesabilitarBTNS();
 
         SaveSystemManager.instance.NovoJogo();
-        //SceneManager.LoadSceneAsync("CutsceneInicial");
-        SceneManager.LoadSceneAsync("Implemenetacao");
+        SceneManager.LoadSceneAsync("CutsceneInicial");
+        //SceneManager.LoadSceneAsync("Implemenetacao");
     }
     public void BTNContinuarJogo()
     {

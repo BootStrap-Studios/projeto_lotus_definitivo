@@ -285,6 +285,8 @@ public class Atirar : StateInimigos
         
         agent.isStopped = false;
         cooldownTiroAux = cooldownTiro;
+
+        tempoAux = 0;
     }
 
     public override void Enter()
@@ -297,8 +299,6 @@ public class Atirar : StateInimigos
     {
         agent.speed = inimigo.GetComponent<Inimigo>().velocidadeAndar;
         if (!inimigo.GetComponent<Inimigo>().inimigoTorreta) inimigo.GetComponent<Inimigo>().animator.SetFloat("velocidade", agent.desiredVelocity.sqrMagnitude);
-
-        tempoAux -= Time.deltaTime;
 
         if(coverSelecionado != null)
         {
@@ -355,7 +355,7 @@ public class Atirar : StateInimigos
                 newReload = false;
             }
 
-            if (inimigo.GetComponent<Inimigo>().inimigoTorreta)
+            if (inimigo.GetComponent<Inimigo>().inimigoTorreta || inimigo.GetComponent<Inimigo>().inimigoSniper)
             {
                 pararAndar = true;
             }
@@ -389,6 +389,40 @@ public class Atirar : StateInimigos
                         else
                         {
                             inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
+                        }
+                    }
+                    else if(inimigo.GetComponent<Inimigo>().inimigoSniper)
+                    {
+                        if (VejoPlayer())
+                        {
+                            Vector3 lookPos = player.transform.position - inimigo.transform.position;
+                            float angulo = Vector3.Angle(lookPos, inimigo.transform.forward);
+                            lookPos.y = lookPos.y - 2;
+                            Quaternion rotation = Quaternion.LookRotation(lookPos);
+
+                            if (angulo > 22)
+                            {
+                                inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .8f);
+                            }
+                            else
+                            {
+                                inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
+                            }
+
+                            tempoAux = 0;
+                        }
+                        else
+                        {
+                            tempoAux += Time.deltaTime;
+
+                            if(tempoAux >= 5)
+                            {
+                                nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                                stage = EVENT.EXIT;
+
+                                tempoAux = 0;
+                                pararAndar = false;
+                            }
                         }
                     }
                 }

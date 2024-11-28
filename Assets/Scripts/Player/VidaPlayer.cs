@@ -94,6 +94,7 @@ public class VidaPlayer : MonoBehaviour
 
         if (vidaAtual <= 0)
         {
+            SaveSystemManager.instance.SalvarJogo();
             EventBus.Instance.GameOver();
         }
     }

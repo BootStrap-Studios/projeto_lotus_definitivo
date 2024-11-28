@@ -32829,8 +32829,9 @@ MonoBehaviour:
   buffDesbloqueado: {fileID: 9051271491612546177}
   levelBuff: 1
   itensGastos:
-  - {fileID: -9115670298403210258, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
-  qntdItensGastos: 05000000
+  - {fileID: -3141679230753316396, guid: e9f07bbc6365c0f4c8b1c687e26348df, type: 3}
+  - {fileID: -1310641163697049459, guid: 5cec9315e1318bb4c8ec6c4e877eee04, type: 3}
+  qntdItensGastos: 5000000014000000
   buffsPermanenteManager: {fileID: 7653630104129652106}
   linhaBuffPermanente: {fileID: 8884757974661403630}
   inventarioSystem: {fileID: 7671323510598248933}

@@ -35,12 +35,14 @@ public class SaveSystemManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+        EventBus.Instance.onSalvarJogo += SalvarJogo;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        EventBus.Instance.onSalvarJogo -= SalvarJogo;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -81,6 +83,7 @@ public class SaveSystemManager : MonoBehaviour
 
     public void SalvarJogo()
     {
+        Debug.Log("Salvando");
         if (this.infosSave == null)
         {
             Debug.LogError("Nenhum arquivo de save encontrado. É nescessário criar um novo jogo");

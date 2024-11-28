@@ -26,8 +26,6 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
     [SerializeField] private InventarioSystem inventarioSystem;
     [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
 
-    [SerializeField] MargelaH_CAM cam;
-
     public void OnUpdateSelected(BaseEventData baseEvent)
     {
         if (pressionado)

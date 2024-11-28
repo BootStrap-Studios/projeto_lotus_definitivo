@@ -200,7 +200,7 @@ public class MenuSystem : MonoBehaviour , ISave
 
     public void BTNTentarNovamente()
     {
-        SaveSystemManager.instance.SalvarJogo();
+        EventBus.Instance.SalvarJogo();
         EventBus.Instance.FadeIn(2f, DesligarUI, 4f);
 
         EventBus.Instance.TP(false, true);
