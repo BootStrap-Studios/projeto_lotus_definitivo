@@ -413,16 +413,10 @@ public class Atirar : StateInimigos
                         }
                         else
                         {
-                            tempoAux += Time.deltaTime;
+                            nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
+                            stage = EVENT.EXIT;
 
-                            if(tempoAux >= 5)
-                            {
-                                nextState = new Chase(inimigo, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro);
-                                stage = EVENT.EXIT;
-
-                                tempoAux = 0;
-                                pararAndar = false;
-                            }
+                            pararAndar = false;
                         }
                     }
                 }
