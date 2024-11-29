@@ -31,7 +31,7 @@ public class BuffManager : MonoBehaviour
         PassandoArrayPraList();
     }
 
-    private void PassandoArrayPraList()
+    public void PassandoArrayPraList()
     {
         botoesDefesaList = botoesDefesa.ToList();
         botoesCorrosaoList = botoesCorrosao.ToList();

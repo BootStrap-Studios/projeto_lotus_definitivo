@@ -102,6 +102,7 @@ public class StatusJogador : MonoBehaviour
     [SerializeField] private VidaPlayer vidaPlayer;
     [SerializeField] private GameObject terminalBuffSala0;
     [SerializeField] private GameObject[] spawnInimigos;
+    [SerializeField] private BuffManager buffManager;
 
     private void Start()
     {
@@ -125,6 +126,8 @@ public class StatusJogador : MonoBehaviour
 
     public void Reset()
     {
+        buffManager.PassandoArrayPraList();
+
         danoAtualPistola = danoBasePistola;
         danoAtualShotgun = danoBaseShotgun;
         danoAtualShuriken = danoBaseShuriken;
