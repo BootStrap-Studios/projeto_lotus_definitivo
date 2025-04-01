@@ -408,8 +408,6 @@ public class Atirar : StateInimigos
                             {
                                 inimigo.GetComponent<Inimigo>().objInimigo.transform.rotation = Quaternion.Slerp(inimigo.transform.rotation, rotation, .2f);
                             }
-
-                            tempoAux = 0;
                         }
                         else
                         {
