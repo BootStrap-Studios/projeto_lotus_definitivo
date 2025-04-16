@@ -72,7 +72,7 @@ public class MenuSystem : MonoBehaviour , ISave
         {
             if (stateMenu == State.menuFechado)
             {
-                Debug.Log("passei");
+                //Debug.Log("Sistema de Menu: Abrindo meun...");
                 PauseMenu();
                 EventBus.Instance.PauseGame();
             }
@@ -90,7 +90,7 @@ public class MenuSystem : MonoBehaviour , ISave
             }
             else if (stateMenu == State.menuGameOver)
             {
-                Debug.Log("Função indisponível agora!!!");
+                Debug.Log("Sistema de Menu: Função indisponível agora!!!");
             }
         }
     }
@@ -194,7 +194,7 @@ public class MenuSystem : MonoBehaviour , ISave
 
     public void BTNSairJogo()
     {
-        Debug.Log("Fechar o jogo");
+        Debug.Log("Sistema de Menu: Fechar o jogo");
         Application.Quit();
     }
 
