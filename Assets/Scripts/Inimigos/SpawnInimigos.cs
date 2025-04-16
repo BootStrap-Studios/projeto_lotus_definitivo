@@ -94,10 +94,6 @@ public class SpawnInimigos : MonoBehaviour
                 maxInimigos = spawners.Length;
 
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
-            
-                Debug.Log("Sistema de Spawn de Inimigos: Min de Inimigos ---> " + minInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Max de Inimigos ---> " + maxInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Waves ---> " + waves);
 
                 break;
 
@@ -109,11 +105,7 @@ public class SpawnInimigos : MonoBehaviour
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
 
                 if (inimigosTotais < spawners.Length ) waves = 1;
-                else waves = 2;
-
-                Debug.Log("Sistema de Spawn de Inimigos: Min de Inimigos ---> " + minInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Max de Inimigos ---> " + maxInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Waves ---> " + waves);              
+                else waves = 2;             
 
                 break;
 
@@ -127,10 +119,6 @@ public class SpawnInimigos : MonoBehaviour
                 if (inimigosTotais < spawners.Length + (spawners.Length / 2)) waves = 2 ;
                 else waves = 3;
 
-                Debug.Log("Sistema de Spawn de Inimigos: Min de Inimigos ---> " + minInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Max de Inimigos ---> " + maxInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Waves ---> " + waves);
-
                 break;
 
             case classSala.Tier4:
@@ -143,9 +131,6 @@ public class SpawnInimigos : MonoBehaviour
                 if (inimigosTotais < spawners.Length * 2) waves = 3;
                 else waves = 4;
 
-                Debug.Log("Sistema de Spawn de Inimigos: Min de Inimigos ---> " + minInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Max de Inimigos ---> " + maxInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Waves ---> " + waves);
 
                 break;
 
@@ -159,10 +144,6 @@ public class SpawnInimigos : MonoBehaviour
                 if (inimigosTotais < (spawners.Length * 2) + (spawners.Length / 2)) waves = 4;
                 else waves = 5;
 
-                Debug.Log("Sistema de Spawn de Inimigos: Min de Inimigos ---> " + minInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Max de Inimigos ---> " + maxInimigos);
-                Debug.Log("Sistema de Spawn de Inimigos: Waves ---> " + waves);
-
                 break;
 
             case classSala.Tier0:
@@ -173,7 +154,10 @@ public class SpawnInimigos : MonoBehaviour
 
         RandomizandoInimigosPorWave();
 
-        Debug.Log("Sistema de Spawn de Inimigos: Inimigos Totais ---> " + inimigosTotais);
+        //Debug.Log("Min de Inimigos ---> " + minInimigos);
+        //Debug.Log("Max de Inimigos ---> " + maxInimigos);
+        //Debug.Log("Waves de Inimigos ---> " + waves);
+        //Debug.Log("Total de Inimigos ---> " + inimigosTotais);
     }
 
     private void RandomizandoInimigosPorWave()

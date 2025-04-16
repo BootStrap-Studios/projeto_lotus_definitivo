@@ -1141,6 +1141,7 @@ MonoBehaviour:
   tenhoULT: 0
   qualULT: 
   statusULT: 0
+  statusMaxULT: 8
   barraULT: {fileID: 0}
   qualReload: 
   dashDefesaAtivo: 0
@@ -1158,6 +1159,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  buffManager: {fileID: 0}
 --- !u!114 &3233126048945909831
 MonoBehaviour:
   m_ObjectHideFlags: 0
