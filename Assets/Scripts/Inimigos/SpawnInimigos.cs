@@ -9,12 +9,14 @@ public class SpawnInimigos : MonoBehaviour
     [SerializeField] private BoxCollider colliderSpawn;
     public GameObject terminalBuff;    
     [SerializeField] private CanosSpawners[] spawners;
+    private List<CanosSpawners> spawnerSorteado;
     public Cover[] covers;
     public GameObject posTP;
     private List<GameObject> inimigosQueSpawnam = new List<GameObject>();  
     private int waves;
     private int wavesSpawnadas;
     private bool fimWaveAtual;
+
     private enum classSala
     {
         Tier0,
@@ -25,18 +27,17 @@ public class SpawnInimigos : MonoBehaviour
         Tier5,
     };
 
-
     [Header("Configurações de Inimigos")]
     [SerializeField] private GameObject[] inimigos;
     public GameObject[] inimigosVivos;
     [SerializeField] private bool inimigoSimples;
-    private int inimigosSimples;
+    private int qntdInimigosSimples;
     [SerializeField] private bool inimigoSniper;
-    private int inimigosSniper;
+    private int qntdInimigosSniper;
     [SerializeField] private bool inimigoExplosivo;
-    private int inimigosExplosivo;
+    private int qntdInimigosExplosivo;
     [SerializeField] private bool inimigoTorreta;
-    private int inimigosTorreta;
+    private int qntdInimigosTorreta;
     private int minInimigos;
     private int maxInimigos;
     private int inimigosTotais = 0;
@@ -52,6 +53,7 @@ public class SpawnInimigos : MonoBehaviour
             if(waves > 0)
             {
                 colliderSpawn.enabled = false;
+                ColocandoMusica();
                 AtivandoInimigos();
             }   
         }       
@@ -157,7 +159,7 @@ public class SpawnInimigos : MonoBehaviour
         //Debug.Log("Min de Inimigos ---> " + minInimigos);
         //Debug.Log("Max de Inimigos ---> " + maxInimigos);
         //Debug.Log("Waves de Inimigos ---> " + waves);
-        //Debug.Log("Total de Inimigos ---> " + inimigosTotais);
+        Debug.Log("Total de Inimigos ---> " + inimigosTotais);
     }
 
     private void RandomizandoInimigosPorWave()
@@ -175,14 +177,27 @@ public class SpawnInimigos : MonoBehaviour
             //Debug.Log("Waves: " + (i + 1) + "/" + waves);
             if (i + 1 < waves)
             {
-                inimigosPorWave[i] = Random.Range(spawners.Length - 1, (inimigosRestantes / wavesCalculo) + 2);
-                //Debug.Log("Min e Max de inimigos na Wave: " + (spawners.Length - 1) + "/" + ((inimigosRestantes / wavesCalculo) + 1));
-                //Debug.Log("Inimigos na Wave " + (i+1) +": " + inimigosPorWave[i]);
+                int inimigosMin = spawners.Length / 2;
+                int inimigosMax = inimigosRestantes/wavesCalculo + 1;
 
-                inimigosRestantes -= inimigosPorWave[i];
-                //Debug.Log("Inimigos Restantes: " + inimigosRestantes);
+                if (inimigosMax <= inimigosMin) inimigosPorWave[i] = inimigosMin;
+                else inimigosPorWave[i] = Random.Range(inimigosMin, inimigosMax);
+
+                //Debug.Log("Min e Max de inimigos na Wave " + (i + 1) + ": " + inimigosMin + "/" + (inimigosMax - 1));
+                //Debug.Log("Inimigos na Wave " + (i + 1) + ": " + inimigosPorWave[i]);
 
                 wavesCalculo--;
+
+                if ((inimigosRestantes - inimigosPorWave[i]) / wavesCalculo > spawners.Length)
+                {
+                    while ((inimigosRestantes - inimigosPorWave[i]) / wavesCalculo > spawners.Length) inimigosPorWave[i]++;
+
+                    Debug.LogWarning("Número de inimigos na Wave " + (i + 1) + " foram insuficientes");
+                }
+
+                inimigosRestantes -= inimigosPorWave[i];
+
+                //Debug.Log("Inimigos Restantes: " + inimigosRestantes);
             }
             else
             {
@@ -203,27 +218,30 @@ public class SpawnInimigos : MonoBehaviour
         if (inimigoSimples)
         {
             inimigosQueSpawnam.Add(inimigos[0]);
+            qntdInimigosSimples = 0;
         }
 
         if (inimigoSniper)
         {
             inimigosQueSpawnam.Add(inimigos[1]);
+            qntdInimigosSniper = 0;
         }
 
         if (inimigoExplosivo)
         {
             inimigosQueSpawnam.Add(inimigos[2]);
+            qntdInimigosExplosivo = 0;
         }
 
         if (inimigoTorreta)
         {
             inimigosQueSpawnam.Add(inimigos[3]);
+            qntdInimigosTorreta = 0;
         }
 
         inimigosVivos = new GameObject[inimigosTotais];
         wavesSpawnadas = 0;
         inimigosInstanciados = 0;
-
 
         Vector3 posSpawn = new Vector3(transform.position.x, transform.position.y - 10, transform.position.z);
 
@@ -233,42 +251,72 @@ public class SpawnInimigos : MonoBehaviour
             inimigosVivos[i].name = "Inimigo " + i;
             inimigosVivos[i].GetComponentInChildren<Inimigo>().spawnInimigos = this;
             inimigosVivos[i].SetActive(false);
+
+            if (inimigosVivos[i].GetComponent<Inimigo>().inimigoSniper)
+            {
+                qntdInimigosSniper++;
+
+                if (qntdInimigosSniper >= inimigosTotais / 4)
+                {
+                    inimigosQueSpawnam.Remove(inimigos[1]);
+                    Debug.Log("Total de Inimigos Sniper ---> " + qntdInimigosSniper);
+                }
+            }
+            else if (inimigosVivos[i].GetComponent<Inimigo>().inimigoExplosivo)
+            {
+                qntdInimigosExplosivo++;
+
+                if (qntdInimigosExplosivo >= inimigosTotais / 3)
+                {
+                    inimigosQueSpawnam.Remove(inimigos[2]);
+                    Debug.Log("Total de Inimigos Explosivo ---> " +  qntdInimigosExplosivo);
+                }
+            }
+            else if (inimigosVivos[i].GetComponent<Inimigo>().inimigoTorreta)
+            {
+                qntdInimigosTorreta++;
+
+                if (qntdInimigosTorreta >= inimigosTotais / 5)
+                {
+                    inimigosQueSpawnam.Remove(inimigos[3]);
+                    Debug.Log("Total de Inimigos Torreta ---> " + qntdInimigosTorreta);
+                }
+            }
+            else
+            {
+                qntdInimigosSimples++;
+            }
         }
+
+        Debug.Log("Total de Inimigos Simples ---> " + qntdInimigosSimples);
     }
 
     [ContextMenu("Ativa Inimigos")]
     private void AtivandoInimigos()
     {
-        ColocandoMusica();
-
+        spawnerSorteado = new List<CanosSpawners>();
         for (int i = 0; i < spawners.Length; i++)
         {
-            //Debug.Log((i + 1) + "/" + inimigosPorWave[wavesSpawnadas]);
+            spawnerSorteado.Add(spawners[i]);
+        }
 
-            inimigosVivos[inimigosInstanciados].SetActive(true);           
+        for (int i = 0; i < inimigosPorWave[wavesSpawnadas]; i++)
+        {
+            inimigosVivos[inimigosInstanciados].SetActive(true);
 
-            spawners[i].AtivaInimigo(inimigosInstanciados);
+            int spawnerSorteadoAtual = Random.Range(0, spawnerSorteado.Count);
+            //Debug.Log(spawnerSorteadoAtual);
+
+            //Debug.Log(spawnerSorteado[spawnerSorteadoAtual].name + " foi sorteado e será removido do sorteio");
+            spawnerSorteado[spawnerSorteadoAtual].AtivaInimigo(inimigosInstanciados);
+            spawnerSorteado.Remove(spawnerSorteado[spawnerSorteadoAtual]);
 
             inimigosInstanciados++;
-            inimigosPorWave[wavesSpawnadas]--;
+        }
 
-            if (inimigosPorWave[wavesSpawnadas] == 0)
-            {
-                break;
-            }
-          
-        }
-      
-        if (inimigosPorWave[wavesSpawnadas] > 0)
-        {
-            AtivandoInimigos();
-        }
-        else
-        {           
-            wavesSpawnadas++;
-            //Debug.Log("Wave: " + (wavesSpawnadas) + "/" + waves);
-            fimWaveAtual = true;
-        }
+        fimWaveAtual = true;
+        wavesSpawnadas++;
+        //Debug.Log("Wave: " + (wavesSpawnadas) + "/" + waves);
     }
 
     private void VerificaInimigosVivos()
@@ -327,7 +375,7 @@ public class SpawnInimigos : MonoBehaviour
 
     private void ColocandoMusica()
     {
-        int aux = Random.Range(1, 3);
+        int aux = Random.Range(1, 4);
 
         if (aux == 1)
         {

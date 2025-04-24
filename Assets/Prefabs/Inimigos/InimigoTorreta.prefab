@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021600321109481767}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -279.5, y: 60.6, z: -5.7}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.5, y: 64.4, z: 278.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,7 +49,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7816690809654736197
 Transform:
   m_ObjectHideFlags: 0
@@ -125,37 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c06ef825ec4b34ea4da3f2ff209c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4834063952817376945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5177593525131999687}
-  m_Layer: 0
-  m_Name: LadoCerto
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5177593525131999687
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4834063952817376945}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.47, z: 0.04005777}
-  m_LocalScale: {x: 0.01, y: 0.009999999, z: 0.01}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8778938150307185513}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5554116123842148149
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,8 +149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5554116123842148149}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.024666212, y: 1.1412077, z: 1.6103185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -229,7 +198,6 @@ GameObject:
   - component: {fileID: 4948591793796373246}
   - component: {fileID: 5056784437465583906}
   - component: {fileID: 9171586459846889195}
-  - component: {fileID: 2453417228989288154}
   - component: {fileID: 4713831412202774632}
   - component: {fileID: 1429935429389818380}
   m_Layer: 8
@@ -299,29 +267,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3, y: 1.3403229, z: 1.3}
-  m_Center: {x: 0, y: 0.09, z: 0}
---- !u!65 &2453417228989288154
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9109107839324818849}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7917595, y: 0.7178068, z: 2.1349826}
-  m_Center: {x: 0.04141392, y: 1.06, z: 0.4548006}
+  m_Size: {x: 1.3, y: 2.3, z: 1.3}
+  m_Center: {x: 0, y: 0.29, z: 0}
 --- !u!195 &4713831412202774632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -357,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  olhosRobo: {fileID: 0}
   pontaArma: {fileID: 5554116123842148149}
   posPontaArma: {fileID: 5899036145146535571}
   peInimigo: {fileID: 6070851846191662101}
@@ -379,19 +327,19 @@ MonoBehaviour:
   municao: 3
   danoTiro: 2
   danoTiroReduzido: 1
-  alcanceMaxArma: 25
-  alcanceMinArma: 1
+  alcanceMaxArma: 35
+  alcanceMinArma: 2
   cooldownTiro: 2.5
-  velProjetil: 45
+  velProjetil: 75
   velocidadeAndar: 0
-  objInimigo: {fileID: 240839366736454186}
+  objInimigo: {fileID: 8259281830530718163}
   cabecaTorreta: {fileID: 240839366736454186}
   inimigoExplosivo: 0
   inimigoSniper: 0
-  inimigoNormal: 0
+  inimigoSimples: 0
   inimigoTorreta: 1
   _barraDeVida: {fileID: 1697084210859825114}
-  vida: 80
+  vida: 85
   vulneravel: 0
 --- !u!1001 &6741036806155247037
 PrefabInstance:
@@ -644,7 +592,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
+        type: 3}
       propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
@@ -665,10 +623,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ed875ffe220d0f04ab17b228ed713fc6,
-        type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 5177593525131999687}
     - targetCorrespondingSourceObject: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
         type: 3}
       insertIndex: -1
@@ -684,6 +638,12 @@ GameObject:
 --- !u!4 &1206118478304400581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1233059834852773817, guid: ed875ffe220d0f04ab17b228ed713fc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 9106195714141201538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8259281830530718163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ed875ffe220d0f04ab17b228ed713fc6,
     type: 3}
   m_PrefabInstance: {fileID: 9106195714141201538}
   m_PrefabAsset: {fileID: 0}

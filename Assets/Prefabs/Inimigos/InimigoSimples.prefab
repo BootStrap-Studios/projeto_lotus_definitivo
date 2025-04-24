@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4588514796258696966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1070167396307248940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9203570543399857765}
+  m_Layer: 0
+  m_Name: Olhos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9203570543399857765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070167396307248940}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.433422, y: 0.5586998, z: -0.433422, w: -0.5586998}
+  m_LocalPosition: {x: -0.0108, y: -0.0189, z: -0.00019999966}
+  m_LocalScale: {x: 0.06666666, y: 0.06666666, z: 0.06666666}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2572474896862011757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5160690153797411868
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  olhosRobo: {fileID: 1070167396307248940}
   pontaArma: {fileID: 7521849811187319620}
   posPontaArma: {fileID: 3774878338423736963}
   peInimigo: {fileID: 8581139767265042284}
@@ -199,22 +231,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   spawnInimigos: {fileID: 0}
-  municao: 5
+  municao: 6
   danoTiro: 2
   danoTiroReduzido: 1
-  alcanceMaxArma: 20
-  alcanceMinArma: 12
+  alcanceMaxArma: 25
+  alcanceMinArma: 10
   cooldownTiro: 1
-  velProjetil: 40
+  velProjetil: 50
   velocidadeAndar: 6
   objInimigo: {fileID: 5160690153797411868}
+  cabecaTorreta: {fileID: 0}
   inimigoExplosivo: 0
   inimigoSniper: 0
-  inimigoNormal: 1
+  inimigoSimples: 1
   inimigoTorreta: 0
   _barraDeVida: {fileID: 2988810250891240077}
-  vida: 60
-  statusInimigo: {fileID: 0}
+  vida: 65
   vulneravel: 0
 --- !u!1 &6533611701156937720
 GameObject:
@@ -487,6 +519,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3774878338423736963}
+    - targetCorrespondingSourceObject: {fileID: -1870878814551979649, guid: 4ab776e98417a2547b6405103660aa63,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 9203570543399857765}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ab776e98417a2547b6405103660aa63,
         type: 3}
@@ -497,6 +533,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8956612426872343}
   m_SourcePrefab: {fileID: 100100000, guid: 4ab776e98417a2547b6405103660aa63, type: 3}
+--- !u!4 &2572474896862011757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1870878814551979649, guid: 4ab776e98417a2547b6405103660aa63,
+    type: 3}
+  m_PrefabInstance: {fileID: 5024339241048647698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4588514796258696966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8797680777134159636, guid: 4ab776e98417a2547b6405103660aa63,

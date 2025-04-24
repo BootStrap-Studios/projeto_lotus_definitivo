@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  olhosRobo: {fileID: 0}
   pontaArma: {fileID: 7274119449571051963}
   posPontaArma: {fileID: 0}
   peInimigo: {fileID: 3199487515545633518}
@@ -197,22 +198,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   spawnInimigos: {fileID: 0}
-  municao: 1
+  municao: 0
   danoTiro: 6
   danoTiroReduzido: 4
-  alcanceMaxArma: 4
+  alcanceMaxArma: 4.5
   alcanceMinArma: 2
   cooldownTiro: 0
-  velProjetil: 30
-  velocidadeAndar: 8
+  velProjetil: 0
+  velocidadeAndar: 9
   objInimigo: {fileID: 3416823112405702447}
   cabecaTorreta: {fileID: 0}
   inimigoExplosivo: 1
   inimigoSniper: 0
-  inimigoNormal: 0
+  inimigoSimples: 0
   inimigoTorreta: 0
   _barraDeVida: {fileID: 5441554329553712561}
-  vida: 30
+  vida: 35
   vulneravel: 0
 --- !u!1 &3835908710334161532
 GameObject:
