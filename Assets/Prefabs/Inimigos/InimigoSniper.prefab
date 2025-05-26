@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &109394581553747566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8218424974205134059}
+  m_Layer: 0
+  m_Name: OlhosRobo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8218424974205134059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109394581553747566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00052, y: 0.0085, z: 0.0185}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181899136978029582}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1101724948185662059
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  olhosRobo: {fileID: 109394581553747566}
   pontaArma: {fileID: 3139709112851957586}
   posPontaArma: {fileID: 5238335158701005813}
   peInimigo: {fileID: 9044863550849601622}
@@ -327,16 +359,16 @@ MonoBehaviour:
   municao: 3
   danoTiro: 4
   danoTiroReduzido: 2
-  alcanceMaxArma: 10000
-  alcanceMinArma: 35
+  alcanceMaxArma: 99999
+  alcanceMinArma: 10
   cooldownTiro: 2.5
-  velProjetil: 85
-  velocidadeAndar: 5
+  velProjetil: 100
+  velocidadeAndar: 6
   objInimigo: {fileID: 7197857029520921749}
   cabecaTorreta: {fileID: 0}
   inimigoExplosivo: 0
   inimigoSniper: 1
-  inimigoNormal: 0
+  inimigoSimples: 0
   inimigoTorreta: 0
   _barraDeVida: {fileID: 4885232705448382559}
   vida: 45
@@ -644,12 +676,22 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 452847334375285884, guid: 5accd69eaf695b24da98a5eeb1ac3e1c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8218424974205134059}
     - targetCorrespondingSourceObject: {fileID: -9062804782730583066, guid: 5accd69eaf695b24da98a5eeb1ac3e1c,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5238335158701005813}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5accd69eaf695b24da98a5eeb1ac3e1c, type: 3}
+--- !u!4 &1181899136978029582 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 452847334375285884, guid: 5accd69eaf695b24da98a5eeb1ac3e1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1598255877205354610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1271312784453013401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5accd69eaf695b24da98a5eeb1ac3e1c,

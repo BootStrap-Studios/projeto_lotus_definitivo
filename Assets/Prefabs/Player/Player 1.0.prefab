@@ -1141,6 +1141,7 @@ MonoBehaviour:
   tenhoULT: 0
   qualULT: 
   statusULT: 0
+  statusMaxULT: 8
   barraULT: {fileID: 0}
   qualReload: 
   dashDefesaAtivo: 0
@@ -1158,6 +1159,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  buffManager: {fileID: 0}
 --- !u!114 &3233126048945909831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,21 +1191,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.221
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.221
-      objectReference: {fileID: 0}
-    - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.221
       objectReference: {fileID: 0}
     - target: {fileID: 9016459301537138642, guid: d8dfa7d2a2f89aa4c88996e003308030,
         type: 3}

@@ -129,7 +129,7 @@ public class AmmoSystem : MonoBehaviour
             municaoAtual++;
 
             AudioManager.instance.PlayOneShot(FMODEvents.instance.recargaUnidade, transform.position);
-            Debug.Log("Reload");
+            //Debug.Log("Reload");
 
             for (int i = 0; i < balas.Length; i++)
             {

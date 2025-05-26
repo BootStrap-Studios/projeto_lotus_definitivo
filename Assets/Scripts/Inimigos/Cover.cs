@@ -24,22 +24,24 @@ public class Cover : MonoBehaviour
     {
         if(inimigoAtual == null)
         {
+            VerificaCover2();
             coverCheio = false;
         }
         else
         {
             coverCheio = true;
-            inimigoAtual.stateInimigo.coverSelecionado = this;
+            if (inimigoAtual.inimigoSimples)
+            {
+                inimigoAtual.stateInimigoSimples.coverSelecionado = this;
+            }
+            else if (inimigoAtual.inimigoSniper)
+            {
+                inimigoAtual.stateInimigoSniper.coverSelecionado = this;
+            }
         }
-
-        //metodo 1
-        //VerificaCover();
-
-        //método 2
-        VerificaCover2();
     }
 
-    private void VerificaCover()
+    /*private void VerificaCover()
     {
         Vector3 direcao = player.transform.position - gameObject.transform.position;
         float angulo = Vector3.Angle(direcao, gameObject.transform.forward);
@@ -70,9 +72,9 @@ public class Cover : MonoBehaviour
                 this.GetComponent<MeshRenderer>().material = verde;
             }
         }
-    }
-
-    private void VerificaCover2()
+    }*/
+        
+    public void VerificaCover2()
     {
         RaycastHit hit;
         Vector3 direcao = player.transform.position - gameObject.transform.position;
@@ -87,7 +89,14 @@ public class Cover : MonoBehaviour
 
                 if (inimigoAtual != null)
                 {
-                    inimigoAtual.stateInimigo.coverSelecionado = null;
+                    if (inimigoAtual.inimigoSimples)
+                    {
+                        inimigoAtual.stateInimigoSimples.coverSelecionado = this;
+                    }
+                    else if (inimigoAtual.inimigoSniper)
+                    {
+                        inimigoAtual.stateInimigoSniper.coverSelecionado = this;
+                    }
                 }
                 inimigoAtual = null;
 

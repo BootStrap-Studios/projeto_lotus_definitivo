@@ -26,11 +26,11 @@ public class ObjectPool : MonoBehaviour
     {
         if (quantidadeWaves <= 0) quantidadeWaves = 1;
 
-        int quantidadePool = (quantidadeInimigos / quantidadeWaves) * 6;
+        int quantidadePool = (quantidadeInimigos / quantidadeWaves) * 20;
 
         if (amountToPool == 0)
         {
-            Debug.Log("Munições definidas para " + quantidadePool);
+            //Debug.Log("Munições definidas para " + quantidadePool);
             amountToPool = quantidadePool;
 
             for (int i = 0; i < amountToPool; i++)
@@ -42,7 +42,7 @@ public class ObjectPool : MonoBehaviour
         }
         else if(amountToPool < quantidadePool)
         {
-            Debug.Log("Aumentiei as munições de " + amountToPool + " para " + quantidadePool);
+            //Debug.Log("Aumentiei as munições de " + amountToPool + " para " + quantidadePool);
 
             int novoPool = quantidadePool - amountToPool;
 

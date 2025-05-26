@@ -33,7 +33,7 @@ public class Passos : MonoBehaviour
         {
             case TipoPassos.PLAYER:
 
-                Debug.Log("Run event");
+                //Debug.Log("Run event");
 
                 MaterialCheck();
                 EventInstance run = AudioManager.instance.CreateEventInstance(FMODEvents.instance.passos);

@@ -7,5 +7,97 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sniper_Bracos
-  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  m_Elements: []
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: L_Knee_Ctrl
+    m_Weight: 0
+  - m_Path: L_Leg_Group
+    m_Weight: 0
+  - m_Path: L_Leg_Group/L_Ankle_Group
+    m_Weight: 0
+  - m_Path: L_Leg_Group/L_Ankle_Group/ikHandle1
+    m_Weight: 0
+  - m_Path: L_Leg_Group/L_Ball_IK_Handle
+    m_Weight: 0
+  - m_Path: L_Leg_Group/L_TOe_Group
+    m_Weight: 0
+  - m_Path: L_Leg_Group/L_TOe_Group/L_Toe_IK_Handle
+    m_Weight: 0
+  - m_Path: polySurface63
+    m_Weight: 0
+  - m_Path: R_knee_Ctrl
+    m_Weight: 0
+  - m_Path: R_Leg_Group
+    m_Weight: 0
+  - m_Path: R_Leg_Group/group1
+    m_Weight: 0
+  - m_Path: R_Leg_Group/group1/ikHandle3
+    m_Weight: 0
+  - m_Path: R_Leg_Group/group2
+    m_Weight: 0
+  - m_Path: R_Leg_Group/group2/ikHandle4
+    m_Weight: 0
+  - m_Path: R_Leg_Group/ikHandle2
+    m_Weight: 0
+  - m_Path: Root_Ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl/L_Shoulder_ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl/L_Shoulder_ctrl/L_Elbow_Ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl/L_Shoulder_ctrl/L_Elbow_Ctrl/L_Wrist_ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl/Neck_ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl/Neck_ctrl/Head_Ctrl
+    m_Weight: 1
+  - m_Path: Root_Ctrl/Chest_Ctrl/Sniper_Ctrl
+    m_Weight: 1
+  - m_Path: Root_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/L_Shoulder_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/L_Shoulder_Jnt/L_Elbow_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/L_Shoulder_Jnt/L_Elbow_Jnt/L_Wrist_jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/Neck_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/Neck_Jnt/Head_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/Neck_Jnt/Head_Jnt/End_Head_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/Sniper_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/Chest_Jnt/Sniper_Jnt/End_Sniper_jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/L_Thigh_jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/L_Thigh_jnt/L_Knee_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/L_Thigh_jnt/L_Knee_Jnt/L_Ankle_jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/L_Thigh_jnt/L_Knee_Jnt/L_Ankle_jnt/L_ankle_Jnt2
+    m_Weight: 1
+  - m_Path: Root_Jnt/L_Thigh_jnt/L_Knee_Jnt/L_Ankle_jnt/L_ankle_Jnt2/L_Ball_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/L_Thigh_jnt/L_Knee_Jnt/L_Ankle_jnt/L_ankle_Jnt2/L_Ball_Jnt/L_Toe_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/R_Thigh_jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/R_Thigh_jnt/R_Knee_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/R_Thigh_jnt/R_Knee_Jnt/R_Ankle_jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/R_Thigh_jnt/R_Knee_Jnt/R_Ankle_jnt/R_ankle_Jnt2
+    m_Weight: 1
+  - m_Path: Root_Jnt/R_Thigh_jnt/R_Knee_Jnt/R_Ankle_jnt/R_ankle_Jnt2/R_Ball_Jnt
+    m_Weight: 1
+  - m_Path: Root_Jnt/R_Thigh_jnt/R_Knee_Jnt/R_Ankle_jnt/R_ankle_Jnt2/R_Ball_Jnt/R_Toe_Jnt
+    m_Weight: 1

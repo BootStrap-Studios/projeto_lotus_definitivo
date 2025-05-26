@@ -89,8 +89,9 @@ public class StatusJogador : MonoBehaviour
     [Header("ULT")]
     public bool tenhoULT;
     public string qualULT;
-    public int statusULT;
-    private int ultValorAtual;
+    public float statusULT;
+    public float statusMaxULT;
+    private float ultValorAtual;
     [SerializeField] private Slider barraULT;
 
     [Header("Dashes e Reload")]
@@ -111,7 +112,7 @@ public class StatusJogador : MonoBehaviour
 
     private void Update()
     {
-        barraULT.value = Mathf.MoveTowards(barraULT.value, ultValorAtual, 0.5f * Time.deltaTime);
+        barraULT.value = Mathf.MoveTowards(barraULT.value, ultValorAtual, .75f * Time.deltaTime);
     }
 
     private void OnEnable()
@@ -536,17 +537,12 @@ public class StatusJogador : MonoBehaviour
 
 
     //quando jogador selecionar uma ult chamar essa função
-    public void DesbloqueiaUlt(string _qualUlt)
-    {
-        tenhoULT = true;
-        qualULT = _qualUlt;
-        barraULT.gameObject.SetActive(true);
-    }
+
+    #region Ultimates
 
     public void Ultando()
     {
         //switch case com todas as ult que ira chamar a função da ult no StatusJogador
-        Debug.Log("Ultando");
         switch (qualULT)
         {
             case "Movimentacao":
@@ -581,26 +577,31 @@ public class StatusJogador : MonoBehaviour
     private void StatusUlt()
     {
         if (tenhoULT)
-        {
+        {     
             statusULT++;
-            ultValorAtual = statusULT / 10;
+            ultValorAtual = statusULT / statusMaxULT;
+
+            //Debug.Log("Pontos de ULT: " + statusULT + "/" + statusMaxULT);
+            //Debug.Log("Porcentagem da Barra: " + ultValorAtual);
         }
     }
 
     public void ResetULT()
     {
         statusULT = 0;
-        ultValorAtual = statusULT / 10;
+        ultValorAtual = 0;
     }
 
-    public void DandoUlt(string ult)
+    public void DandoUlt(string _qualUlt)
     {
         tenhoULT = true;
-
-        qualULT = ult;
-
+        qualULT = _qualUlt;
         barraULT.gameObject.SetActive(true);
+
+        Debug.Log("Desbloqueando ULT: " + _qualUlt);
     }
+
+    #endregion
 
     public void ReloadBuffs()
     {

@@ -123,7 +123,6 @@ public class VidaPlayer : MonoBehaviour
         }
         else
         {
-            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 1);
             vidaBaixa = false;
         }
     }
@@ -163,7 +162,15 @@ public class VidaPlayer : MonoBehaviour
         }
 
         yield return new WaitForSeconds(.3f);
-        if (!vidaBaixa) StartCoroutine(CO_VidaPiscandoFadeOut());
+
+        if (!vidaBaixa)
+        {
+            StartCoroutine(CO_VidaPiscandoFadeOut());
+        }
+        else
+        {
+            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 1);
+        }
     }
 
     private IEnumerator CO_VidaPiscandoFadeOut()
@@ -174,7 +181,14 @@ public class VidaPlayer : MonoBehaviour
             yield return null;
         }
 
-        if (!vidaBaixa) StartCoroutine(CO_VidaPiscandoFadeIn());
+        if (!vidaBaixa)
+        {
+            StartCoroutine(CO_VidaPiscandoFadeIn());
+        }
+        else
+        {
+            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 1);
+        }
     }
 
     #endregion

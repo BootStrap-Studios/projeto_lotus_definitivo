@@ -8,11 +8,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using static Cinemachine.CinemachineCore;
 using static StateInimigos;
+using static StateInimigoSniper;
+using static StateInimigoExplosivo;
+using static StateInimigoTorreta;
 
 public class Inimigo : MonoBehaviour
 {
     [Header("Outros")]
     [SerializeField] private Transform player;
+    public GameObject olhosRobo;
     [SerializeField] private GameObject pontaArma;
     public Transform posPontaArma;
     public Transform peInimigo;
@@ -24,10 +28,14 @@ public class Inimigo : MonoBehaviour
     public Animator animator;
     public LayerMask playerMask, inimigoMask;
     private ProjetilInimigo tiro;   
-    public StateInimigos stateInimigo;
     public SpawnInimigos spawnInimigos;
 
-    [Header("Arma")]
+    public StateInimigos stateInimigoSimples;
+    public StateInimigoSniper stateInimigoSniper;
+    public StateInimigoExplosivo stateInimigoExplosivo;
+    public StateInimigoTorreta stateInimigoTorreta;
+
+    [Header("Configs da Arma")]
     [SerializeField] private int municao;
     [SerializeField] private float danoTiro;
     [SerializeField] private float danoTiroReduzido;
@@ -37,13 +45,13 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private float velProjetil;
     
 
-    [Header("Personagem")]
+    [Header("Configs do Inimigo")]
     public float velocidadeAndar;
     public GameObject objInimigo;
     [SerializeField] private GameObject cabecaTorreta;
     public bool inimigoExplosivo;
     public bool inimigoSniper;
-    public bool inimigoNormal;
+    public bool inimigoSimples;
     public bool inimigoTorreta;
     private bool dropando;
     private bool explodindo;
@@ -54,7 +62,7 @@ public class Inimigo : MonoBehaviour
     private float vidaAtual;
 
 
-    [Header("Status")]
+    [Header("Status do Inimigo")]
     private int statusCorrosao = 0;
     private bool boolCorrosao = false; 
 
@@ -72,15 +80,14 @@ public class Inimigo : MonoBehaviour
     public bool vulneravel = false;
 
 
-
     private void OnEnable()
     {
-        EventBus.Instance.onAtivaInimigos += AtivarChase;
+        EventBus.Instance.onAtivaInimigos += AtivarRobos;
     }
 
     private void OnDisable()
     {
-        EventBus.Instance.onAtivaInimigos -= AtivarChase;
+        EventBus.Instance.onAtivaInimigos -= AtivarRobos;
     }
 
     void Start()
@@ -94,28 +101,99 @@ public class Inimigo : MonoBehaviour
 
         vulneravel = false;
 
-        stateInimigo = new Idle(gameObject, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro); 
+
+        if (inimigoSimples)
+            stateInimigoSimples = new SimplesDesativado(gameObject, this, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, animator);
+        else if (inimigoSniper)
+            stateInimigoSniper = new SniperDesativado(gameObject, this, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, animator);
+        else if (inimigoExplosivo)
+            stateInimigoExplosivo = new ExplosivoDesativado(gameObject, this, agent, player, alcanceMaxArma, alcanceMinArma, cooldownTiro, animator);
+        else if (inimigoTorreta)
+            stateInimigoTorreta = new TorretaDesativada(cabecaTorreta, this, agent, player, alcanceMaxArma, alcanceMinArma, cooldownTiro, municao);
     }
 
     void Update()
     {
         _barraDeVida.AtualizaStatus(0, 1, "vulneravel", vulneravel);
 
-       
-        stateInimigo = stateInimigo.Process(); 
+        agent.speed = velocidadeAndar;
+
+        if (inimigoSimples)
+        {
+            pontaArma.transform.position = posPontaArma.position;
+
+            Vector3 lookPos = player.transform.position - pontaArma.transform.position;
+            pontaArma.transform.rotation = Quaternion.LookRotation(new Vector3(lookPos.x, player.transform.position.y - 1.08f, lookPos.z));
+
+            stateInimigoSimples = stateInimigoSimples.Process();
+        }
+        else if (inimigoSniper)
+        {
+            pontaArma.transform.position = posPontaArma.position;
+
+            Vector3 lookPos = player.transform.position - pontaArma.transform.position;
+            pontaArma.transform.rotation = Quaternion.LookRotation(new Vector3(lookPos.x, player.transform.position.y - 1.08f, lookPos.z));
+
+            stateInimigoSniper = stateInimigoSniper.Process();
+        }
+        else if (inimigoExplosivo)
+        {
+            stateInimigoExplosivo = stateInimigoExplosivo.Process();
+        }
+        else if (inimigoTorreta)
+        {
+            pontaArma.transform.position = posPontaArma.position;
+
+            Vector3 lookPos = player.transform.position - pontaArma.transform.position;
+            pontaArma.transform.rotation = Quaternion.LookRotation(new Vector3(lookPos.x, player.transform.position.y - 1.78f, lookPos.z));
+
+            Debug.Log(new Vector3(lookPos.x, player.transform.position.y - 1.78f, lookPos.z));
+
+            stateInimigoTorreta = stateInimigoTorreta.Process();
+        }
     }
 
-    private void AtivarChase(bool estado)
+    private void AtivarRobos(bool estado)
     {
-        stateInimigo.ativarChase = estado;
+        if (inimigoSimples) stateInimigoSimples.ativarRobo = estado;
+        else if (inimigoSniper) stateInimigoSniper.ativarRobo = estado;
+        else if (inimigoExplosivo) stateInimigoExplosivo.ativarRobo = estado;
+        else if (inimigoTorreta) stateInimigoTorreta.ativarRobo = estado;
     }
 
     public void TomarDano(string tipoDeArma, string tipoDoDano)
-    { 
-        if (vidaAtual == vida && !stateInimigo.ativarChase)
+    {
+        if (inimigoSimples)
         {
-            stateInimigo.ativarChase = true;
-            EventBus.Instance.AtivaInimigos(true);
+            if (vidaAtual == vida && !stateInimigoSimples.ativarRobo)
+            {
+                stateInimigoSimples.ativarRobo = true;
+                EventBus.Instance.AtivaInimigos(true);
+            }
+        }
+        else if (inimigoSniper)
+        {
+            if (vidaAtual == vida && !stateInimigoSniper.ativarRobo)
+            {
+                stateInimigoSniper.ativarRobo = true;
+                EventBus.Instance.AtivaInimigos(true);
+            }
+        }
+        else if (inimigoExplosivo)
+        {
+            if (vidaAtual == vida && !stateInimigoExplosivo.ativarRobo)
+            {
+                stateInimigoExplosivo.ativarRobo = true;
+                EventBus.Instance.AtivaInimigos(true);
+            }
+        }
+        else if (inimigoTorreta)
+        {
+            if (vidaAtual == vida && !stateInimigoTorreta.ativarRobo)
+            {
+                stateInimigoTorreta.ativarRobo = true;
+                EventBus.Instance.AtivaInimigos(true);
+            }
         }
 
         switch(tipoDeArma)
@@ -307,36 +385,24 @@ public class Inimigo : MonoBehaviour
     #endregion
 
     public bool Atirar(bool cover)
-    {   
+    {
         RaycastHit hit;
-        if (!inimigoExplosivo)
+
+        if (!inimigoTorreta && Physics.Raycast(pontaArma.transform.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
         {
-            pontaArma.transform.position = posPontaArma.position;
-
-            Vector3 lookPos = player.transform.position - gameObject.transform.position;
-            pontaArma.transform.rotation = Quaternion.LookRotation(lookPos);
-        }
-
-        if (!inimigoExplosivo && Physics.Raycast(pontaArma.transform.position, transform.TransformDirection(Vector3.forward), out hit, alcanceMaxArma + 3))
-        {    
-            if (hit.transform.tag == "Player" || inimigoTorreta || cover)
+            if (hit.transform.tag == "Player" || cover)
             {
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma.transform, velProjetil);
                 tiro.gameObject.SetActive(true);
 
-
-                if (inimigoNormal)
+                if (inimigoSimples)
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoBase, transform.position);
                 }
-                if (inimigoSniper)
+                else if (inimigoSniper)
                 {
                     AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoSniper, transform.position);
-                }
-                if (inimigoTorreta)
-                {
-                    AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoTorreta, transform.position);
                 }
 
                 return true;
@@ -346,19 +412,34 @@ public class Inimigo : MonoBehaviour
                 return false;
             }
         }
+        else if (inimigoTorreta)
+        {
+            tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
+            tiro.InstanciaProjetil(danoTiro, pontaArma.transform, velProjetil);
+            tiro.gameObject.SetActive(true);
+
+            Debug.Log("PEW");
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.tiroInimigoTorreta, transform.position);
+
+            return true;
+        }
         else
         {
-            if (inimigoExplosivo && !explodindo)
-            {
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.avisoBomba, transform.position);
-                StartCoroutine(Explodir());
-            }
-                       
-            return true;
+            return false;
         }
     }
 
-    private IEnumerator Explodir()
+    public void Explodir()
+    {
+        if (!explodindo)
+        {
+            Debug.Log("VAI EXPLODIIIR!!!");
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.avisoBomba, transform.position);
+            StartCoroutine(Explodindo());
+        }
+    }
+
+    private IEnumerator Explodindo()
     {
         explodindo = true;
 
@@ -396,12 +477,14 @@ public class Inimigo : MonoBehaviour
     {
         try
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, alcanceMaxArma);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, alcanceMinArma);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, stateInimigo.visDistancia);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(pontaArma.transform.position, new Vector3(player.position.x, player.position.y, player.position.z));
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(olhosRobo.transform.position, new Vector3(player.position.x, player.position.y, player.position.z));
         }
         catch
         {
@@ -573,7 +656,7 @@ public class Inimigo : MonoBehaviour
         float velAux = velocidadeAndar;
         boolMovimentacao = true;
 
-        velocidadeAndar = 2.5f;
+        velocidadeAndar = velocidadeAndar / 2;
 
         yield return new WaitForSeconds(5f);
 
