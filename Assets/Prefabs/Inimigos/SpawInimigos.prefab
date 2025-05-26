@@ -99,12 +99,6 @@ MonoBehaviour:
   tierSala: 1
   colliderSpawn: {fileID: 8073575393503591927}
   terminalBuff: {fileID: 0}
-  inimigos:
-  - {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25, type: 3}
-  - {fileID: 7197857029520921749, guid: 8207f9d9fee4d8643826c637a5b02e79, type: 3}
-  - {fileID: 3416823112405702447, guid: 14d3eb55d3418424383339faa2ac53d9, type: 3}
-  - {fileID: 9109107839324818849, guid: 72f5820916e21304cb6b2dad0110ea4b, type: 3}
-  inimigosVivos: []
   spawners:
   - {fileID: 0}
   - {fileID: 0}
@@ -115,6 +109,12 @@ MonoBehaviour:
   covers:
   - {fileID: 0}
   posTP: {fileID: 2658881615608877239}
+  inimigos:
+  - {fileID: 5160690153797411868, guid: e4d8dceacb598ba4db72a302bed78a25, type: 3}
+  - {fileID: 7197857029520921749, guid: 8207f9d9fee4d8643826c637a5b02e79, type: 3}
+  - {fileID: 3416823112405702447, guid: 14d3eb55d3418424383339faa2ac53d9, type: 3}
+  - {fileID: 9109107839324818849, guid: 72f5820916e21304cb6b2dad0110ea4b, type: 3}
+  inimigosVivos: []
   inimigoSimples: 0
   inimigoSniper: 0
   inimigoExplosivo: 0

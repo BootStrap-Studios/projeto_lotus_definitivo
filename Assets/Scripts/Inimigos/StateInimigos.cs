@@ -120,6 +120,10 @@ public class StateInimigos
                 return false;
             }
         }
+        else if (direcao.magnitude < 4f)
+        {
+            return true;
+        }
 
         return false;
     }
@@ -274,7 +278,7 @@ public class SimplesAtivado : StateInimigos
         }
         else if (distanciaTiro.magnitude <= alcanceMinArma)
         {
-            agent.SetDestination(player.position);
+            agent.SetDestination(inimigoObj.transform.position);
             RotacionaRobo();
 
             nextState = new SimplesAtirar(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
@@ -287,7 +291,7 @@ public class SimplesAtivado : StateInimigos
                 agent.SetDestination(coverSelecionado.transform.position);
                 coverSelecionado.VerificaCover2();
 
-                if (coverSelecionado.coverEscondido)
+                if (coverSelecionado.coverEscondido && coverSelecionado.inimigoAtual == inimigoScript)
                 {
                     Vector3 distanciaCover = inimigoObj.transform.position - coverSelecionado.transform.position;
 
@@ -306,12 +310,17 @@ public class SimplesAtivado : StateInimigos
                 {
                     coverSelecionado.inimigoAtual = null;
                     coverSelecionado = null;
+
+                    agent.SetDestination(inimigoObj.transform.position);
+
+                    base.Update();
                     return;
                 }
             }
             else if (TemCover())
             {
                 agent.SetDestination(coverSelecionado.transform.position);
+                base.Update();
                 return;
             }
             else
@@ -378,7 +387,7 @@ public class SimplesAtirar : StateInimigos
                     {
                         municaoAux++;
                         tempoAux = cooldownTiro;
-                        if (municaoAux > municao)
+                        if (municaoAux >= municao)
                         {
                             nextState = new SimplesReload(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
                             stage = EVENT.EXIT;
@@ -470,6 +479,8 @@ public class SimplesCover : StateInimigos
         anim.SetBool("Cover", true);
         anim.SetTrigger("EspiandoCover");
         anim.SetBool("AtirandoCover", true);
+        coverSelecionado.VerificaCover2();
+        RotacionaRobo();
 
         base.Enter();
     }
@@ -491,7 +502,7 @@ public class SimplesCover : StateInimigos
                 {
                     if (tempoAux <= 0)
                     {
-                        if (inimigoScript.Atirar(true))
+                        if (inimigoScript.Atirar(false))
                         {
                             municaoAux++;
                             tempoAux = cooldownTiro;
@@ -548,9 +559,6 @@ public class SimplesCover : StateInimigos
         }
         else
         {
-            coverSelecionado.inimigoAtual = null;
-            coverSelecionado = null;
-
             anim.SetBool("Cover", false);
 
             nextState = new SimplesAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);

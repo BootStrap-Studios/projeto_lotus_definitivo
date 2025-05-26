@@ -92,8 +92,8 @@ public class SpawnInimigos : MonoBehaviour
 
                 waves = 1;
 
-                minInimigos = spawners.Length / 2;
-                maxInimigos = spawners.Length;
+                minInimigos = spawners.Length / 3;
+                maxInimigos = spawners.Length - (spawners.Length/4);
 
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
 
@@ -101,36 +101,36 @@ public class SpawnInimigos : MonoBehaviour
 
             case classSala.Tier2:
 
-                minInimigos = spawners.Length / 2;
+                minInimigos = spawners.Length - (spawners.Length / 4);
                 maxInimigos = spawners.Length + (spawners.Length / 2);
 
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
 
-                if (inimigosTotais < spawners.Length ) waves = 1;
+                if (inimigosTotais < spawners.Length) waves = 1;
                 else waves = 2;             
 
                 break;
 
             case classSala.Tier3:
 
-                minInimigos = spawners.Length;
+                minInimigos = spawners.Length + (spawners.Length / 2);
                 maxInimigos = spawners.Length * 2;
 
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
 
-                if (inimigosTotais < spawners.Length + (spawners.Length / 2)) waves = 2 ;
+                if (inimigosTotais < (spawners.Length * 2) - (spawners.Length / 3)) waves = 2 ;
                 else waves = 3;
 
                 break;
 
             case classSala.Tier4:
 
-                minInimigos = spawners.Length + (spawners.Length / 2);
+                minInimigos = spawners.Length * 2;
                 maxInimigos = (spawners.Length * 2) + (spawners.Length / 2);
 
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
 
-                if (inimigosTotais < spawners.Length * 2) waves = 3;
+                if (inimigosTotais < (spawners.Length * 2) + (spawners.Length / 3)) waves = 3;
                 else waves = 4;
 
 
@@ -138,12 +138,12 @@ public class SpawnInimigos : MonoBehaviour
 
             case classSala.Tier5:
 
-                minInimigos = spawners.Length * 2;
+                minInimigos = (spawners.Length * 2) + (spawners.Length / 2);
                 maxInimigos = spawners.Length * 3;
 
                 inimigosTotais = Random.Range(minInimigos, maxInimigos + 1);
 
-                if (inimigosTotais < (spawners.Length * 2) + (spawners.Length / 2)) waves = 4;
+                if (inimigosTotais < (spawners.Length * 2) + ((spawners.Length) - spawners.Length / 4)) waves = 4;
                 else waves = 5;
 
                 break;
@@ -154,12 +154,12 @@ public class SpawnInimigos : MonoBehaviour
                 break;
         }
 
-        RandomizandoInimigosPorWave();
-
         //Debug.Log("Min de Inimigos ---> " + minInimigos);
         //Debug.Log("Max de Inimigos ---> " + maxInimigos);
         //Debug.Log("Waves de Inimigos ---> " + waves);
-        Debug.Log("Total de Inimigos ---> " + inimigosTotais);
+        //Debug.Log("Total de Inimigos ---> " + inimigosTotais);
+
+        RandomizandoInimigosPorWave();
     }
 
     private void RandomizandoInimigosPorWave()
@@ -190,9 +190,12 @@ public class SpawnInimigos : MonoBehaviour
 
                 if ((inimigosRestantes - inimigosPorWave[i]) / wavesCalculo > spawners.Length)
                 {
-                    while ((inimigosRestantes - inimigosPorWave[i]) / wavesCalculo > spawners.Length) inimigosPorWave[i]++;
-
                     Debug.LogWarning("Número de inimigos na Wave " + (i + 1) + " foram insuficientes");
+                    while ((inimigosRestantes - inimigosPorWave[i]) / wavesCalculo > spawners.Length)
+                    {
+                        Debug.Log("Média de Inimigos Restantes: " + (inimigosRestantes - inimigosPorWave[i]) / wavesCalculo);
+                        inimigosPorWave[i]++;
+                    } 
                 }
 
                 inimigosRestantes -= inimigosPorWave[i];
@@ -214,7 +217,6 @@ public class SpawnInimigos : MonoBehaviour
 
     private void SpawnaInimigos()
     {
-
         if (inimigoSimples)
         {
             inimigosQueSpawnam.Add(inimigos[0]);
@@ -247,48 +249,79 @@ public class SpawnInimigos : MonoBehaviour
 
         for (int i = 0; i < inimigosTotais; i++)
         {
-            inimigosVivos[i] = Instantiate(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], posSpawn, gameObject.transform.rotation);
-            inimigosVivos[i].name = "Inimigo " + i;
+            //Debug.LogWarning("Spawnando inimigo de número [" + (i + 1) + "]");
+            inimigosVivos[i] = Instantiate(inimigosQueSpawnam[Random.Range(0, inimigosQueSpawnam.Count)], posSpawn, gameObject.transform.rotation);   
             inimigosVivos[i].GetComponentInChildren<Inimigo>().spawnInimigos = this;
             inimigosVivos[i].SetActive(false);
 
             if (inimigosVivos[i].GetComponent<Inimigo>().inimigoSniper)
             {
-                qntdInimigosSniper++;
-
-                if (qntdInimigosSniper >= inimigosTotais / 4)
+                if(qntdInimigosSniper < (i + 1) / 4 || qntdInimigosSniper == 0)
                 {
-                    inimigosQueSpawnam.Remove(inimigos[1]);
-                    Debug.Log("Total de Inimigos Sniper ---> " + qntdInimigosSniper);
+                    qntdInimigosSniper++;
+                    inimigosVivos[i].name = "Inimigo Sniper [" + (i + 1) + "]";
+
+                    if (qntdInimigosSniper >= inimigosTotais / 4)
+                    {
+                        inimigosQueSpawnam.Remove(inimigos[1]);
+                    }
+                }
+                else
+                {
+                    //Debug.LogWarning("Um inimigo SNIPER não pode spawnar");
+                    Destroy(inimigosVivos[i]);
+                    i--;
                 }
             }
             else if (inimigosVivos[i].GetComponent<Inimigo>().inimigoExplosivo)
             {
-                qntdInimigosExplosivo++;
-
-                if (qntdInimigosExplosivo >= inimigosTotais / 3)
+                if (qntdInimigosExplosivo < (i + 1) / 3 || qntdInimigosExplosivo == 0)
                 {
-                    inimigosQueSpawnam.Remove(inimigos[2]);
-                    Debug.Log("Total de Inimigos Explosivo ---> " +  qntdInimigosExplosivo);
+                    qntdInimigosExplosivo++;
+                    inimigosVivos[i].name = "Inimigo Explosivo [" + (i + 1) + "]";
+
+                    if (qntdInimigosExplosivo >= inimigosTotais / 3)
+                    {
+                        inimigosQueSpawnam.Remove(inimigos[2]);
+                    }
+                }
+                else
+                {
+                    //Debug.LogWarning("Um inimigo EXPLOSIVO não pode spawnar");
+                    Destroy(inimigosVivos[i]);
+                    i--;
                 }
             }
             else if (inimigosVivos[i].GetComponent<Inimigo>().inimigoTorreta)
             {
-                qntdInimigosTorreta++;
-
-                if (qntdInimigosTorreta >= inimigosTotais / 5)
+                if (qntdInimigosTorreta < (i + 1) / 3 || qntdInimigosTorreta == 0)
                 {
-                    inimigosQueSpawnam.Remove(inimigos[3]);
-                    Debug.Log("Total de Inimigos Torreta ---> " + qntdInimigosTorreta);
+                    qntdInimigosTorreta++;
+                    inimigosVivos[i].name = "Inimigo TORRETA [" + (i + 1) + "]";
+
+                    if (qntdInimigosTorreta >= inimigosTotais / 4)
+                    {
+                        inimigosQueSpawnam.Remove(inimigos[3]);
+                    }
+                }
+                else
+                {
+                    //Debug.LogWarning("Um inimigo TORRETA não pode spawnar");
+                    Destroy(inimigosVivos[i]);
+                    i--;
                 }
             }
             else
             {
                 qntdInimigosSimples++;
+                inimigosVivos[i].name = "Inimigo Simples [" + (i + 1) + "]";
             }
         }
 
-        Debug.Log("Total de Inimigos Simples ---> " + qntdInimigosSimples);
+        //Debug.Log("Total de Inimigos Simples ---> " + qntdInimigosSimples);
+        //Debug.Log("Total de Inimigos Sniper ---> " + qntdInimigosSniper);
+        //Debug.Log("Total de Inimigos Explosivo ---> " +  qntdInimigosExplosivo);
+        //Debug.Log("Total de Inimigos Torreta ---> " + qntdInimigosTorreta);
     }
 
     [ContextMenu("Ativa Inimigos")]

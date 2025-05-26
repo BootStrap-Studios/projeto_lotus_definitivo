@@ -40,39 +40,6 @@ public class Cover : MonoBehaviour
             }
         }
     }
-
-    /*private void VerificaCover()
-    {
-        Vector3 direcao = player.transform.position - gameObject.transform.position;
-        float angulo = Vector3.Angle(direcao, gameObject.transform.forward);
-
-        if (direcao.magnitude < 200f && angulo < 100f)
-        {
-            coverEscondido = false;
-            coverCheio = false;
-
-            if (inimigoAtual != null)
-            {
-                inimigoAtual.stateInimigo.coverSelecionado = null;
-            }
-            inimigoAtual = null;
-
-            this.GetComponent<MeshRenderer>().material = vermelho;
-        }
-        else
-        {
-            coverEscondido = true;
-
-            if (coverCheio)
-            {
-                this.GetComponent<MeshRenderer>().material = azul;
-            }
-            else
-            {
-                this.GetComponent<MeshRenderer>().material = verde;
-            }
-        }
-    }*/
         
     public void VerificaCover2()
     {

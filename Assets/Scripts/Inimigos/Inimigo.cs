@@ -170,6 +170,10 @@ public class Inimigo : MonoBehaviour
                 stateInimigoSimples.ativarRobo = true;
                 EventBus.Instance.AtivaInimigos(true);
             }
+            else if(stateInimigoSimples.coverSelecionado != null)
+            {
+                gameObject.transform.LookAt(player);
+            }
         }
         else if (inimigoSniper)
         {
@@ -177,6 +181,10 @@ public class Inimigo : MonoBehaviour
             {
                 stateInimigoSniper.ativarRobo = true;
                 EventBus.Instance.AtivaInimigos(true);
+            }
+            else if(stateInimigoSniper.coverSelecionado != null)
+            {
+                gameObject.transform.LookAt(player);
             }
         }
         else if (inimigoExplosivo)

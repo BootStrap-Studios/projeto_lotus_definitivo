@@ -115,6 +115,10 @@ public class StateInimigoSniper
                 return false;
             }
         }
+        else if (direcao.magnitude < 4f)
+        {
+            return true;
+        }
 
         return false;
     }
@@ -233,13 +237,12 @@ public class SniperAtivado : StateInimigoSniper
     public SniperAtivado(GameObject _inimigoObj, Inimigo _inimigoScript, NavMeshAgent _agent, Transform _player, int _municao, float _alcanceMaxArma, float _alcanceMinArma, float _cooldownTiro, Animator _anim) : base(_inimigoObj, _inimigoScript, _agent, _player, _municao, _alcanceMaxArma, _alcanceMinArma, _cooldownTiro, _anim)
     {
         stateName = STATE.ATIVADO;
-        //inimigo.GetComponent<Inimigo>().AtualizaStatus("STATUS: Idle");
         agent.isStopped = false;
     }
 
     public override void Enter()
     {
-        //tocar animação idle    
+        anim.SetBool("Mirando", false);  
         base.Enter();
     }
 
@@ -259,10 +262,9 @@ public class SniperAtivado : StateInimigoSniper
             }
             else
             {
-                //verificando se player está em seu campo de visão
                 if (MiraPlayer())
                 {
-                    //SOM DE DETECTAR O PLAYER
+                    RotacionaRobo();
                     nextState = new SniperAtirando(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
                     stage = EVENT.EXIT;
                 }
@@ -279,11 +281,11 @@ public class SniperAtivado : StateInimigoSniper
             agent.SetDestination(coverSelecionado.transform.position);
             coverSelecionado.VerificaCover2();
 
-            if (coverSelecionado.coverEscondido)
+            if (coverSelecionado.coverEscondido && coverSelecionado.inimigoAtual == inimigoScript)
             {
                 Vector3 distanciaCover = inimigoObj.transform.position - coverSelecionado.transform.position;
 
-                if (distanciaCover.magnitude <= 1f)
+                if (distanciaCover.magnitude <= 0.8f)
                 {
                     nextState = new SniperCover(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
                     stage = EVENT.EXIT;
@@ -309,7 +311,6 @@ public class SniperAtivado : StateInimigoSniper
 
     public override void Exit()
     {
-        //reset da animação
         base.Exit();
     }
 }
@@ -375,7 +376,6 @@ public class SniperAtirando : StateInimigoSniper
         {
             anim.SetBool("Mirando", false);
 
-            Debug.Log("Não vejo o player");
             nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
             stage = EVENT.EXIT;
         }
@@ -385,7 +385,6 @@ public class SniperAtirando : StateInimigoSniper
             {
                 anim.SetBool("Mirando", false);
 
-                Debug.Log("Não vejo o player, mas achei um cover");
                 agent.SetDestination(coverSelecionado.transform.position);
                 nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
                 stage = EVENT.EXIT;
@@ -414,8 +413,8 @@ public class SniperCover : StateInimigoSniper
 
     public override void Enter()
     {
-        anim.SetBool("Cover", true);
-        tempoAUX = 3f;
+        anim.SetTrigger("Cover");
+        tempoAUX = cooldownTiro + 2f;
         coverSelecionado.VerificaCover2();
         RotacionaRobo();
         base.Enter();
@@ -427,6 +426,7 @@ public class SniperCover : StateInimigoSniper
 
         if (coverSelecionado != null)
         {
+            anim.SetBool("Mirando", true);
             tempoAUX -= Time.deltaTime;
 
             if (MiraPlayer())
@@ -438,7 +438,7 @@ public class SniperCover : StateInimigoSniper
                 {                    
                     if (tempoAUX <= 0)
                     {
-                        if (inimigoScript.Atirar(true))
+                        if (inimigoScript.Atirar(false))
                         {
                             anim.SetTrigger("Atirar");
                             tirosDisparados++;
@@ -472,10 +472,22 @@ public class SniperCover : StateInimigoSniper
                     coverSelecionado.inimigoAtual = null;
                     coverSelecionado = null;
 
-                    anim.SetBool("Cover", false);
+                    if (MiraPlayer())
+                    {
+                        Debug.Log("estou saindo do cover mas vejo o player");
 
-                    nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
-                    stage = EVENT.EXIT;
+                        nextState = new SniperAtirando(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
+                        stage = EVENT.EXIT;
+                    }
+                    else
+                    {
+                        Debug.Log("estou saindo do cover mas NÃO vejo o player");
+
+                        anim.SetBool("Mirando", false);
+
+                        nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
+                        stage = EVENT.EXIT;
+                    }
                 }
             }
             else if (tempoAUX <= -12f)
@@ -483,7 +495,7 @@ public class SniperCover : StateInimigoSniper
                 coverSelecionado.inimigoAtual = null;
                 coverSelecionado = null;
 
-                anim.SetBool("Cover", false);
+                anim.SetBool("Mirando", false);
 
                 nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
                 stage = EVENT.EXIT;
@@ -496,10 +508,22 @@ public class SniperCover : StateInimigoSniper
         }
         else
         {
-            anim.SetBool("Cover", false);
+            if (MiraPlayer())
+            {
+                Debug.Log("estou saindo do cover mas vejo o player");
 
-            nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
-            stage = EVENT.EXIT;
+                nextState = new SniperAtirando(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
+                stage = EVENT.EXIT;
+            }
+            else
+            {
+                Debug.Log("estou saindo do cover mas NÃO vejo o player");
+
+                anim.SetBool("Mirando", false);
+
+                nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
+                stage = EVENT.EXIT;
+            }
         }
     }
 
