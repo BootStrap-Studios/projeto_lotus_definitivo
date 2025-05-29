@@ -111,7 +111,7 @@ public class AudioManager : MonoBehaviour , ISave
         return (emitter);
     }
 
-    private void CleanUp()
+    public void CleanUp()
     {
         foreach(EventInstance eventInstance in eventInstances)
         {

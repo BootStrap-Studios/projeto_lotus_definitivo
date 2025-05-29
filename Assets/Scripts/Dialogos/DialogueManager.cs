@@ -69,7 +69,7 @@ public class DialogueManager : MonoBehaviour, ISave
         {
             for (int i = 0; i < dialogosTutoriais.Length; i++)
             {
-                dialogosTutoriais[i].SetActive(false);
+                Destroy(dialogosTutoriais[i]);
             }
             pcSala0.SetActive(true);
         }

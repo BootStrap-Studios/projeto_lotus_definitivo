@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575ca7b0ebfa8d44790b1b91cd7398b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quantidadeItemMax: 3
+  quantidadeItemMax: 4
   nomeItem: Entulho
   spriteItem: {fileID: 3940361511880369961, guid: a4d88f0606c645343a9a42c5b2ad45b5,
     type: 3}

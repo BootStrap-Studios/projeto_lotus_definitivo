@@ -56,11 +56,12 @@ public class MenuPrincipal : MonoBehaviour, ISave
     public void BTNNovoJogo()
     {
         DesabilitarBTNS();
+        AudioManager.instance.CleanUp();
 
         SaveSystemManager.instance.NovoJogo();
         //SceneManager.LoadScene("MargelaH");
-        SceneManager.LoadSceneAsync("CutsceneInicial");
-        //SceneManager.LoadSceneAsync("Implemenetacao");
+        //SceneManager.LoadSceneAsync("CutsceneInicial");
+        SceneManager.LoadSceneAsync("Implemenetacao");
     }
     public void BTNContinuarJogo()
     {

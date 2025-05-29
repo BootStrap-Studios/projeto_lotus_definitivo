@@ -1501,11 +1501,11 @@ MonoBehaviour:
     Path: event:/ambiente/Amb
   <musicaGame>k__BackingField:
     Guid:
-      Data1: -63666706
-      Data2: 1177084573
-      Data3: 480646585
-      Data4: -895817709
-    Path: event:/music/SoundTrack
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <tiroInimigoBase>k__BackingField:
     Guid:
       Data1: -1548487903

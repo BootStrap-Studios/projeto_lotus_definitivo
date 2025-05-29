@@ -18,7 +18,6 @@ public class CutsceneInicial : MonoBehaviour
 
     private void Update()
     {
-        /*
         if (Input.anyKeyDown)
         {
             botao.SetActive(true);
@@ -37,7 +36,7 @@ public class CutsceneInicial : MonoBehaviour
         if(tempoSegurando >= 2)
         {
             SceneManager.LoadScene("Implemenetacao");
-        }*/
+        }
     }
     private IEnumerator IrProJogo()
     {

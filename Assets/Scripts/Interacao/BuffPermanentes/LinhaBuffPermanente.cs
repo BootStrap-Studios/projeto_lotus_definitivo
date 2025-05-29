@@ -148,6 +148,7 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
         {
             buffDesbloqueado.fillAmount = 1;
             tempoPressionando = 0;
+            gameObject.GetComponent<Button>().interactable = true;
         }
     }
 }

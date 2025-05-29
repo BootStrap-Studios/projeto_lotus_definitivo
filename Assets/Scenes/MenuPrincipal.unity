@@ -234,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
       propertyPath: m_Value
-      value: 0.47
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
@@ -895,7 +895,7 @@ PrefabInstance:
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
       propertyPath: m_Value
-      value: 0.47
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
@@ -3669,7 +3669,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 629239937}
   m_HandleRect: {fileID: 2048831683}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 0.99999994
   m_Size: 0.372839
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5981,7 +5981,7 @@ PrefabInstance:
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
       propertyPath: m_Value
-      value: 0.47
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
@@ -6434,7 +6434,7 @@ PrefabInstance:
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
       propertyPath: m_Value
-      value: 0.47
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4682051223747385056, guid: 175abd444414b8e4db8c81d33bc1e46a,
         type: 3}
@@ -7720,6 +7720,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440902864}
   m_CullTransparentMesh: 1
+--- !u!1 &1457327812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457327814}
+  - component: {fileID: 1457327813}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1457327813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457327812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1266745476f543b4bbee49b802bede99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 0.8
+  musicVolume: 0.8
+  ambienceVolume: 0.8
+  sfxVolume: 0.8
+--- !u!4 &1457327814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457327812}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2100585291}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1499135681
 GameObject:
   m_ObjectHideFlags: 0
@@ -10166,8 +10215,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 629239935}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.372839}
+  m_AnchorMin: {x: 0, y: 0.627161}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10209,6 +10258,260 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048831682}
   m_CullTransparentMesh: 1
+--- !u!1 &2100585290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100585291}
+  - component: {fileID: 2100585292}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100585291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100585290}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457327814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2100585292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100585290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcb93ce16161cc4b93211a02ce248d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <passos>k__BackingField:
+    Guid:
+      Data1: -304187273
+      Data2: 1101464058
+      Data3: -94899793
+      Data4: -230047973
+    Path: event:/SFX/personagens/mavie/passos
+  <manoEsco>k__BackingField:
+    Guid:
+      Data1: -1856319547
+      Data2: 1270431467
+      Data3: -72715590
+      Data4: -1068559510
+    Path: event:/SFX/personagens/mavie/manoesco
+  <manoPistol>k__BackingField:
+    Guid:
+      Data1: -1587523682
+      Data2: 1187363038
+      Data3: 597295257
+      Data4: -1765536473
+    Path: event:/SFX/personagens/mavie/manopisto
+  <manoShuri>k__BackingField:
+    Guid:
+      Data1: 1989706920
+      Data2: 1154226789
+      Data3: 37953455
+      Data4: 573907357
+    Path: event:/SFX/personagens/mavie/manoshuri
+  <morte>k__BackingField:
+    Guid:
+      Data1: 928067590
+      Data2: 1193361506
+      Data3: -131894357
+      Data4: 529538833
+    Path: event:/SFX/personagens/mavie/morte
+  <spawnPoca>k__BackingField:
+    Guid:
+      Data1: 1381940812
+      Data2: 1269348900
+      Data3: -1808010334
+      Data4: 37302615
+    Path: event:/SFX/habilidades/corrosao/poca
+  <burstProc>k__BackingField:
+    Guid:
+      Data1: 956182399
+      Data2: 1315865825
+      Data3: -1043764608
+      Data4: 1376641141
+    Path: event:/SFX/habilidades/burst/burst
+  <terminouSala>k__BackingField:
+    Guid:
+      Data1: -1563960734
+      Data2: 1284310405
+      Data3: -1562389577
+      Data4: 41629761
+    Path: event:/SFX/ui/fimDeLevel
+  <pauseGame>k__BackingField:
+    Guid:
+      Data1: 1157299433
+      Data2: 1128515918
+      Data3: -601238635
+      Data4: 1351964397
+    Path: event:/SFX/ui/Start
+  <abrirTerminalBuffs>k__BackingField:
+    Guid:
+      Data1: -940944476
+      Data2: 1075243000
+      Data3: 231293326
+      Data4: -267474319
+    Path: event:/music/terminal
+  <ambienteFabrica>k__BackingField:
+    Guid:
+      Data1: -112736265
+      Data2: 1133483710
+      Data3: -424737348
+      Data4: 374209615
+    Path: event:/ambiente/Amb
+  <musicaGame>k__BackingField:
+    Guid:
+      Data1: -63666706
+      Data2: 1177084573
+      Data3: 480646585
+      Data4: -895817709
+    Path: event:/music/SoundTrack
+  <tiroInimigoBase>k__BackingField:
+    Guid:
+      Data1: -1548487903
+      Data2: 1326403158
+      Data3: 1054941586
+      Data4: 598523251
+    Path: event:/SFX/personagens/inimigos/robocap/atirar
+  <tiroInimigoSniper>k__BackingField:
+    Guid:
+      Data1: 942769293
+      Data2: 1313321835
+      Data3: -1128338522
+      Data4: -1068087838
+    Path: event:/SFX/personagens/inimigos/sniper/snipada
+  <tiroInimigoTorreta>k__BackingField:
+    Guid:
+      Data1: 1233580867
+      Data2: 1339057039
+      Data3: 2081402256
+      Data4: -596350591
+    Path: event:/SFX/personagens/inimigos/torreta/tiro
+  <avisoBomba>k__BackingField:
+    Guid:
+      Data1: 1199449241
+      Data2: 1214897372
+      Data3: 1006272145
+      Data4: -573877880
+    Path: event:/SFX/personagens/inimigos/robomba/avisoExp
+  <bombaExplodiu>k__BackingField:
+    Guid:
+      Data1: -1748339738
+      Data2: 1206738565
+      Data3: -684854884
+      Data4: 1956382904
+    Path: event:/SFX/personagens/inimigos/robomba/vaiexplodir
+  <inimigoBasePassos>k__BackingField:
+    Guid:
+      Data1: -405491409
+      Data2: 1156873075
+      Data3: -1605199966
+      Data4: 869775444
+    Path: event:/SFX/personagens/inimigos/robocap/capasso
+  <inimigoBombaPassos>k__BackingField:
+    Guid:
+      Data1: 1953411298
+      Data2: 1266180284
+      Data3: 290068659
+      Data4: 1715378689
+    Path: event:/SFX/personagens/inimigos/robomba/bombpass
+  <inimigoSniperPassos>k__BackingField:
+    Guid:
+      Data1: -2039858665
+      Data2: 1105113448
+      Data3: -1740052802
+      Data4: 599776611
+    Path: event:/SFX/personagens/inimigos/sniper/snipasso
+  <menuSnapshot>k__BackingField:
+    Guid:
+      Data1: -1529056005
+      Data2: 1134408948
+      Data3: 157322404
+      Data4: 1067846600
+    Path: snapshot:/GamePause
+  <acertoRecarga>k__BackingField:
+    Guid:
+      Data1: -1732638922
+      Data2: 1272555348
+      Data3: 769047424
+      Data4: 1313234415
+    Path: event:/SFX/personagens/mavie/AcertoReca
+  <duranteRecarga>k__BackingField:
+    Guid:
+      Data1: 255779724
+      Data2: 1337074519
+      Data3: -376821082
+      Data4: -1173595912
+    Path: event:/SFX/personagens/mavie/Durante recarga
+  <erroRecarga>k__BackingField:
+    Guid:
+      Data1: -1755661276
+      Data2: 1296778915
+      Data3: -2140829292
+      Data4: 1440570804
+    Path: event:/SFX/personagens/mavie/ErroRecarga
+  <recargaUnidade>k__BackingField:
+    Guid:
+      Data1: -979128646
+      Data2: 1188564237
+      Data3: 1175984305
+      Data4: 150450827
+    Path: event:/SFX/personagens/mavie/recargaunidade
+  <recargaCompleta>k__BackingField:
+    Guid:
+      Data1: -509608341
+      Data2: 1284214503
+      Data3: -1192652919
+      Data4: 1261936128
+    Path: event:/SFX/personagens/mavie/recargacompleta
+  <dashMavie>k__BackingField:
+    Guid:
+      Data1: 1543050356
+      Data2: 1136233957
+      Data3: -1627135063
+      Data4: -502230263
+    Path: event:/SFX/personagens/mavie/Dash
+  <cutsceneInicial>k__BackingField:
+    Guid:
+      Data1: -564799672
+      Data2: 1296933726
+      Data3: 1116629144
+      Data4: -304922294
+    Path: event:/CutsceneInicial
+  <escudoAtivo>k__BackingField:
+    Guid:
+      Data1: -931561147
+      Data2: 1083253978
+      Data3: 2113741195
+      Data4: 1481080800
+    Path: event:/SFX/habilidades/escudo/escudo
+  <escudoQuebra>k__BackingField:
+    Guid:
+      Data1: -190352439
+      Data2: 1199198538
+      Data3: -2104432723
+      Data4: 6776387
+    Path: event:/SFX/habilidades/escudo/escudoQuebra
 --- !u!1 &2104095600
 GameObject:
   m_ObjectHideFlags: 0
@@ -10427,7 +10730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 532.5171}
+  m_AnchoredPosition: {x: 0.000030517578, y: -532.51697}
   m_SizeDelta: {x: 0, y: 1065.034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109984765
@@ -10549,5 +10852,6 @@ SceneRoots:
   - {fileID: 552756301}
   - {fileID: 117193222}
   - {fileID: 751667895}
+  - {fileID: 1457327814}
   - {fileID: 344490904}
   - {fileID: 508165662}
