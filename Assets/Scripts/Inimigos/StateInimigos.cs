@@ -120,7 +120,7 @@ public class StateInimigos
                 return false;
             }
         }
-        else if (direcao.magnitude < 4f)
+        else if (direcao.magnitude < alcanceMinArma)
         {
             return true;
         }
@@ -193,17 +193,20 @@ public class StateInimigos
     {
         Vector3 lookPos = player.transform.position - inimigoObj.transform.position;
         float angulo = Vector3.Angle(lookPos, inimigoObj.transform.forward);
-        lookPos.y = lookPos.y - 2;
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        lookPos.y = lookPos.y + .5f;
+        Quaternion rotation;
 
-        if (angulo > 25)
+        if(lookPos.magnitude >= 4)
         {
-            inimigoObj.transform.rotation = Quaternion.Slerp(inimigoObj.transform.rotation, rotation, .8f);
+            rotation = Quaternion.LookRotation(lookPos);
+            inimigoObj.transform.rotation = Quaternion.Slerp(inimigoObj.transform.rotation, rotation, .3f);
         }
         else
         {
-            inimigoObj.transform.rotation = Quaternion.Slerp(inimigoObj.transform.rotation, rotation, .2f);
-        }
+            lookPos.y = lookPos.y + .5f;
+            rotation = Quaternion.LookRotation(lookPos);
+            inimigoObj.transform.rotation = Quaternion.Slerp(inimigoObj.transform.rotation, rotation, .3f);
+        }       
     }
 }
 
@@ -225,6 +228,7 @@ public class SimplesDesativado : StateInimigos
     {
         if (ativarRobo)
         {
+            inimigoObj.transform.LookAt(player.transform);
             nextState = new SimplesAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
             stage = EVENT.EXIT;
         }
@@ -276,7 +280,7 @@ public class SimplesAtivado : StateInimigos
                 return;
             }
         }
-        else if (distanciaTiro.magnitude <= alcanceMinArma)
+        else if (distanciaTiro.magnitude <= alcanceMinArma && MiraPlayer() && coverSelecionado == null)
         {
             agent.SetDestination(inimigoObj.transform.position);
             RotacionaRobo();

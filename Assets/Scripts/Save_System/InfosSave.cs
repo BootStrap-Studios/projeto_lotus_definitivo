@@ -12,6 +12,8 @@ public class InfosSave
     //Informações sobre os buffs permanentes
     public int[] levelBuffPermanente;
     public bool[] buffDesbloqueado;
+    public bool shotgunLiberada;
+    public bool shurikenLiberada;
 
     //Informações sobre configuração de volume
     public float masterVolume;
@@ -24,6 +26,7 @@ public class InfosSave
     public float sensiMirando;
 
     //Informações sobre a narrativa
+    public bool fimTutorial;
 
     public InfosSave()
     {
@@ -52,6 +55,9 @@ public class InfosSave
             }
         }
 
+        shotgunLiberada = false;
+        shurikenLiberada = false;
+
         //Setando valores sobre configuração de volume
         masterVolume = .8f;
         musicVolume = .8f;
@@ -61,5 +67,8 @@ public class InfosSave
         //Setando valores sobre a sensibilidade do mouse
         sensiOlhando = .5f;
         sensiMirando = .5f;
+
+        //Setando informações da narrativa
+        fimTutorial = false;
     }
 }

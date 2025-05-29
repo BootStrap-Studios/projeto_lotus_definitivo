@@ -2774,7 +2774,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 6b91d9953dceb004cb9590bd2e97228d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 576ca7ec81a5a0e44a24acfeec6f191b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &280450054501224230
 GameObject:
@@ -68797,6 +68797,7 @@ GameObject:
   - component: {fileID: 1450441649104339914}
   - component: {fileID: 3345338569218753902}
   - component: {fileID: 5983131706121356974}
+  - component: {fileID: 5309146217417191716}
   m_Layer: 0
   m_Name: suporte segundo andar
   m_TagString: Untagged
@@ -68869,6 +68870,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5309146217417191716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330662407855888830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 40.2, y: 397.42734, z: 21.111206}
+  m_Center: {x: -13.6, y: -201.28633, z: 0.00030517578}
 --- !u!1 &8334819415708025562
 GameObject:
   m_ObjectHideFlags: 0
@@ -85975,7 +85997,7 @@ PrefabInstance:
     - target: {fileID: 2329830485628206249, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}
       propertyPath: tierSala
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2329830485628206249, guid: 4f679da5eaf6fc5419ad65540410841c,
         type: 3}

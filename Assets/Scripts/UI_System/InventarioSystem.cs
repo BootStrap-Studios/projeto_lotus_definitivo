@@ -49,7 +49,11 @@ public class InventarioSystem : MonoBehaviour, ISave
             quantidadeTotalItemUI[i].gameObject.SetActive(false);     
         }
 
-        SaveSystemManager.instance.CarregarJogo();
+        if (SaveSystemManager.instance.TemSave())
+        {
+            SaveSystemManager.instance.CarregarJogo();
+        }
+
         maquinaRCManager.CarregaInventario();
         buffsPermanenteManager.CarregaInventario();
     }

@@ -32,8 +32,6 @@ public class BuffsPermanenteManager : MonoBehaviour , ISave
     private PlayerMovement player;
     private AmmoSystem ammoSystem;
 
-    [SerializeField] private MargelaH_CAM cam;
-
     private void Awake()
     {
         statusJogador = FindObjectOfType<StatusJogador>();

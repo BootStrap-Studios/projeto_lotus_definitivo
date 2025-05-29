@@ -216,6 +216,7 @@ public class SniperDesativado : StateInimigoSniper
     {
         if (ativarRobo)
         {
+            inimigoObj.transform.LookAt(player);
             nextState = new SniperAtivado(inimigoObj, inimigoScript, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, anim);
             stage = EVENT.EXIT;
         }

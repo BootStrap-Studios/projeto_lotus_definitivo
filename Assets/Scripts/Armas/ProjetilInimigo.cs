@@ -7,6 +7,7 @@ public class ProjetilInimigo : MonoBehaviour
     [SerializeField] private Rigidbody rbProjetil;
     [SerializeField] private float tempoAtivo;
     [SerializeField] private TrailRenderer rastroProjetil;
+    Vector3 positionInicial;
     private float velProjetil;   
     private float tempoAtivoAux;
     private float danoProjetil;
@@ -30,6 +31,7 @@ public class ProjetilInimigo : MonoBehaviour
         else
         {
             rastroProjetil.time = 0;
+            transform.position = positionInicial;
             gameObject.SetActive(false);
         }
     }
@@ -44,6 +46,7 @@ public class ProjetilInimigo : MonoBehaviour
         if(tempoAtivoAux <= 0)
         {
             rastroProjetil.time = 0;
+            transform.position = positionInicial;
             gameObject.SetActive(false);
             return;
         }
@@ -58,6 +61,7 @@ public class ProjetilInimigo : MonoBehaviour
     {
         tempoAtivoAux = tempoAtivo;
         transform.position = pontaArma.position;
+        positionInicial = pontaArma.position;
         danoProjetil = dano;
         transform.rotation = pontaArma.rotation;
         velProjetil = velocidadeProjetil;

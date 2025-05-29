@@ -20,7 +20,7 @@ public class SaveSystemManager : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogError("Mais de SaveSystem encontrado na Scene. Deletando este...");
+            Debug.LogError("Mais de um SaveSystem encontrado. Deletando este...");
             Destroy(this.gameObject);
             return;
         }
@@ -58,6 +58,8 @@ public class SaveSystemManager : MonoBehaviour
     public void NovoJogo()
     {
         this.infosSave = new InfosSave();
+        Debug.Log("Criando um Novo Jogo");
+        SalvarJogo();
     }
 
     public void CarregarJogo()
@@ -83,7 +85,8 @@ public class SaveSystemManager : MonoBehaviour
 
     public void SalvarJogo()
     {
-        Debug.Log("Salvando");
+        Debug.Log("Salvando o jogo");
+
         if (this.infosSave == null)
         {
             Debug.LogError("Nenhum arquivo de save encontrado. É nescessário criar um novo jogo");
@@ -109,16 +112,13 @@ public class SaveSystemManager : MonoBehaviour
     {
         if(infosSave == null)
         {
+            //Debug.Log("Não tem save");
             return false;
         }
         else
         {
+            //Debug.Log("Tem save");
             return true;
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        //SalvarJogo();
     }
 }

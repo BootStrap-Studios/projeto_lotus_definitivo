@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/CenaMetricas.unity
     guid: 32c278b2d30ca274390d9fffc77645a6
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MargelaH.unity
     guid: 59d79181f76f1d3428663704cc2a464f
   - enabled: 0

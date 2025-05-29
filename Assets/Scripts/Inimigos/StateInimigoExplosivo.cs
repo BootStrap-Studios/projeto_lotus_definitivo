@@ -93,7 +93,7 @@ public class StateInimigoExplosivo
 
         RaycastHit hit;
 
-        if (direcao.magnitude < 45 && angulo < 80)
+        if (direcao.magnitude < 35)
         {
             if (Physics.Linecast(inimigoObj.transform.position, new Vector3(player.position.x, inimigoObj.transform.position.y, player.position.z), out hit))
             {

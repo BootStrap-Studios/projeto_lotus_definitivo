@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, ISave
 {
     [Header("Config Linha de Buffs")]
     [SerializeField] private Image buffDesbloqueado;
@@ -15,7 +15,9 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
     public int levelAtualBuff;
     public bool desbloqueado;
     private bool pressionado;
-    private float tempoPressionando;   
+    private float tempoPressionando;
+    public bool shotgun;
+    public bool shuriken;
 
     [Header("UI")]
     public string titulo;
@@ -25,6 +27,7 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
     [Header("Outros Scripts")]
     [SerializeField] private InventarioSystem inventarioSystem;
     [SerializeField] private BuffsPermanenteManager buffsPermanenteManager;
+    [SerializeField] private MargelaH_CAM cam;
 
     public void OnUpdateSelected(BaseEventData baseEvent)
     {
@@ -47,12 +50,10 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
             {
                 gameObject.GetComponent<Button>().interactable = false;
                 buffsPermanenteManager.MsgErro("Você não tem todos os recursos necessários para esta ação", gameObject.transform.position);
+
+                buffDesbloqueado.fillAmount = 1;
+                tempoPressionando = 0;
             }
-        }
-        else
-        {
-            buffDesbloqueado.fillAmount = 1;
-            tempoPressionando = 0;
         }
     }
 
@@ -100,6 +101,16 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
         buffDesbloqueado.gameObject.SetActive(false);
         gameObject.GetComponent<Button>().interactable = false;
 
+        if (shotgun)
+        {
+            cam.shotgun = true;
+        }
+
+        if (shuriken)
+        {
+            cam.shuriken = true;
+        }
+
         //Debug.Log("Desbloquiei arvore de buffs");
     }
 
@@ -112,5 +123,31 @@ public class LinhaBuffPermanente : MonoBehaviour, IUpdateSelectedHandler, IPoint
 
         LiberaBuffs();
         levelAtualBuff++;
+    }
+
+
+    #region Save&Load
+
+    public void CarregarSave(InfosSave save)
+    {
+        cam.shotgun = save.shotgunLiberada;
+        cam.shuriken = save.shurikenLiberada;
+    }
+
+    public void SalvarSave(ref InfosSave save)
+    {
+        save.shotgunLiberada = cam.shotgun;
+        save.shurikenLiberada = cam.shuriken; 
+    }
+
+    #endregion
+
+    private void Update()
+    {
+        if (!pressionado)
+        {
+            buffDesbloqueado.fillAmount = 1;
+            tempoPressionando = 0;
+        }
     }
 }

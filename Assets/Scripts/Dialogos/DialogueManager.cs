@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour, ISave
 {
     public static DialogueManager instance { get; private set; }
 
@@ -20,10 +20,13 @@ public class DialogueManager : MonoBehaviour
 
     [Header("PrimeiroDialogo")]
     [SerializeField] private TextAsset primeiroDialogo;
-
-    private StatusJogador statusJogador;
+    [SerializeField] private GameObject[] dialogosTutoriais;
+    [SerializeField] private GameObject pcSala0;
 
     private Story currentStory;
+    private StatusJogador statusJogador;
+
+    int numDialogo = 0;
 
     public bool dialogueIsPlaying { get; private set; }
 
@@ -33,7 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     private const string TP_TAG = "tp";
 
-
+    bool fimTutorial = true;
 
     private void Awake()
     {
@@ -53,9 +56,23 @@ public class DialogueManager : MonoBehaviour
 
         dialogueUI.SetActive(false);
 
-        EnterDialogueMode(primeiroDialogo);
+        if (SaveSystemManager.instance.TemSave())
+        {
+            SaveSystemManager.instance.CarregarJogo();
+        }
 
-
+        if (!fimTutorial)
+        {
+            EnterDialogueMode(primeiroDialogo);
+        }
+        else
+        {
+            for (int i = 0; i < dialogosTutoriais.Length; i++)
+            {
+                dialogosTutoriais[i].SetActive(false);
+            }
+            pcSala0.SetActive(true);
+        }
     }
 
     private void Update()
@@ -88,6 +105,17 @@ public class DialogueManager : MonoBehaviour
 
     private void ExitDialogueMode()
     {
+        numDialogo++;
+        if(numDialogo >= 5)
+        {
+            if (SaveSystemManager.instance.TemSave())
+            {
+                Debug.Log("Fim do Tutorial");
+                SaveSystemManager.instance.SalvarJogo();
+                fimTutorial = true;
+            }
+        }
+
         Time.timeScale = 1;
         EventBus.Instance.PauseGame();
         EventBus.Instance.PodePausar(true);
@@ -97,7 +125,6 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
 
         playerUI.SetActive(true);
-
     }
 
     private void ContinueStory()
@@ -149,6 +176,19 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
-
     }
+
+    #region Sistema de Save&Load
+
+    public void CarregarSave(InfosSave save)
+    {
+        fimTutorial = save.fimTutorial;
+    }
+
+    public void SalvarSave(ref InfosSave save)
+    {
+        save.fimTutorial = fimTutorial;
+    }
+
+    #endregion
 }

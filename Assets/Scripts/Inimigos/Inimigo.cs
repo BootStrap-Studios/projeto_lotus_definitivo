@@ -43,7 +43,6 @@ public class Inimigo : MonoBehaviour
     [SerializeField] private float alcanceMinArma;
     [SerializeField] private float cooldownTiro;
     [SerializeField] private float velProjetil;
-    
 
     [Header("Configs do Inimigo")]
     public float velocidadeAndar;
@@ -101,15 +100,24 @@ public class Inimigo : MonoBehaviour
 
         vulneravel = false;
 
-
         if (inimigoSimples)
+        {
             stateInimigoSimples = new SimplesDesativado(gameObject, this, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, animator);
+        }
         else if (inimigoSniper)
+        {
             stateInimigoSniper = new SniperDesativado(gameObject, this, agent, player, municao, alcanceMaxArma, alcanceMinArma, cooldownTiro, animator);
+        }
         else if (inimigoExplosivo)
+        {
             stateInimigoExplosivo = new ExplosivoDesativado(gameObject, this, agent, player, alcanceMaxArma, alcanceMinArma, cooldownTiro, animator);
+        }
         else if (inimigoTorreta)
+        { 
             stateInimigoTorreta = new TorretaDesativada(cabecaTorreta, this, agent, player, alcanceMaxArma, alcanceMinArma, cooldownTiro, municao);
+        }
+
+        EventBus.Instance.AtivaInimigos(true);
     }
 
     void Update()
@@ -169,11 +177,9 @@ public class Inimigo : MonoBehaviour
             {
                 stateInimigoSimples.ativarRobo = true;
                 EventBus.Instance.AtivaInimigos(true);
-            }
-            else if(stateInimigoSimples.coverSelecionado != null)
-            {
                 gameObject.transform.LookAt(player);
             }
+            gameObject.transform.LookAt(player);
         }
         else if (inimigoSniper)
         {
@@ -181,11 +187,9 @@ public class Inimigo : MonoBehaviour
             {
                 stateInimigoSniper.ativarRobo = true;
                 EventBus.Instance.AtivaInimigos(true);
-            }
-            else if(stateInimigoSniper.coverSelecionado != null)
-            {
                 gameObject.transform.LookAt(player);
             }
+            gameObject.transform.LookAt(player);
         }
         else if (inimigoExplosivo)
         {
@@ -193,8 +197,12 @@ public class Inimigo : MonoBehaviour
             {
                 stateInimigoExplosivo.ativarRobo = true;
                 EventBus.Instance.AtivaInimigos(true);
+                gameObject.transform.LookAt(player);
+                agent.SetDestination(player.transform.position);
             }
+            gameObject.transform.LookAt(player);
         }
+
         else if (inimigoTorreta)
         {
             if (vidaAtual == vida && !stateInimigoTorreta.ativarRobo)
@@ -388,9 +396,10 @@ public class Inimigo : MonoBehaviour
 
         Destroy(gameObject);
     }
-    
+
 
     #endregion
+
 
     public bool Atirar(bool cover)
     {
@@ -402,6 +411,7 @@ public class Inimigo : MonoBehaviour
             {
                 tiro = objectPool.GetPooledObject().GetComponent<ProjetilInimigo>();
                 tiro.InstanciaProjetil(danoTiro, pontaArma.transform, velProjetil);
+                tiro.transform.LookAt(player.transform);
                 tiro.gameObject.SetActive(true);
 
                 if (inimigoSimples)
@@ -511,8 +521,8 @@ public class Inimigo : MonoBehaviour
             return;
         }
 
-        float posX = Random.Range(transform.position.x - 2, transform.position.x + 2);
-        float posZ = Random.Range(transform.position.z - 2, transform.position.z + 2);
+        float posX = Random.Range(transform.position.x - 1, transform.position.x + 1);
+        float posZ = Random.Range(transform.position.z - 1, transform.position.z + 1);
 
         Vector3 posDrop = new Vector3(posX, transform.position.y, posZ);
 

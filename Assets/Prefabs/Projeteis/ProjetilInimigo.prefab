@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbProjetil: {fileID: 5200228755360601332}
-  tempoAtivo: 10
+  tempoAtivo: 8
   rastroProjetil: {fileID: -5223430157281918876}
 --- !u!96 &-5223430157281918876
 TrailRenderer:

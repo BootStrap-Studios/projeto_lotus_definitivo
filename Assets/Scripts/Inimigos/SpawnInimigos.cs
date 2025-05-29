@@ -208,8 +208,6 @@ public class SpawnInimigos : MonoBehaviour
                 //Debug.Log("Inimigos na Wave " + (i + 1) + ": " + inimigosPorWave[i]);
             }
         }
-
-        objectPool.DeterminaPool(inimigosTotais, waves);
         //Debug.Log("Inimigos Totais: " + inimigosTotais);
 
         SpawnaInimigos();
@@ -318,6 +316,8 @@ public class SpawnInimigos : MonoBehaviour
             }
         }
 
+        objectPool.DeterminaPool(inimigosVivos);
+
         //Debug.Log("Total de Inimigos Simples ---> " + qntdInimigosSimples);
         //Debug.Log("Total de Inimigos Sniper ---> " + qntdInimigosSniper);
         //Debug.Log("Total de Inimigos Explosivo ---> " +  qntdInimigosExplosivo);
@@ -389,6 +389,7 @@ public class SpawnInimigos : MonoBehaviour
             if (qntdInimigosMortos >= inimigosInstanciados)
             {
                 fimWaveAtual = false;
+                objectPool.FimFase();
                 terminalBuff.SetActive(true);
                 terminalBuff.GetComponent<BoxCollider>().enabled = true;
                 AudioManager.instance.PlayOneShot(FMODEvents.instance.terminouSala, transform.position);

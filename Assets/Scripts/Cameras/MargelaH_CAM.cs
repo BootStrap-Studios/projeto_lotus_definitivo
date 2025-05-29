@@ -95,19 +95,14 @@ public class MargelaH_CAM : MonoBehaviour
             {
                 TrocarArma(0);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && shotgun)
             {
-                
-                    TrocarArma(1);
-                
-                
+                TrocarArma(1);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && shuriken)
             {
-               
-                    TrocarArma(2);
-                
-                
+
+                TrocarArma(2);
             }
         }
 

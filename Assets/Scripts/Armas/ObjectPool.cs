@@ -11,49 +11,45 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetPooledObject()
     {
-        for(int i = 0; i < pooledObjects.Count; i++)
+        for (int i = 0; i < pooledObjects.Count; i++)
         {
             if (!pooledObjects[i].activeInHierarchy)
             {
                 return pooledObjects[i];
+            }
+            else if(i + 1 >= pooledObjects.Count)
+            {
+                GameObject obj = Instantiate(objectToPool);
+                obj.SetActive(false);
+                pooledObjects.Add(obj);
             }
         }
 
         return null;
     }
 
-    public void DeterminaPool(int quantidadeInimigos, int quantidadeWaves)
+    public void DeterminaPool(GameObject[] inimigo)
     {
-        if (quantidadeWaves <= 0) quantidadeWaves = 1;
-
-        int quantidadePool = (quantidadeInimigos / quantidadeWaves) * 20;
-
-        if (amountToPool == 0)
+        for (int i = 0; i < inimigo.Length; i++)
         {
-            //Debug.Log("Munições definidas para " + quantidadePool);
-            amountToPool = quantidadePool;
-
-            for (int i = 0; i < amountToPool; i++)
-            {
-                GameObject obj = Instantiate(objectToPool);
-                obj.SetActive(false);
-                pooledObjects.Add(obj);
-            }
+            amountToPool += 3;
         }
-        else if(amountToPool < quantidadePool)
+
+        for (int i = 0; i < amountToPool; i++)
         {
-            //Debug.Log("Aumentiei as munições de " + amountToPool + " para " + quantidadePool);
-
-            int novoPool = quantidadePool - amountToPool;
-
-            for (int i = 0; i < novoPool; i++)
-            {
-                GameObject obj = Instantiate(objectToPool);
-                obj.SetActive(false);
-                pooledObjects.Add(obj);
-            }
-
-            amountToPool = quantidadePool;
+            GameObject obj = Instantiate(objectToPool);
+            obj.SetActive(false);
+            pooledObjects.Add(obj);
         }
+    }
+
+    public void FimFase()
+    {
+        for (int i = 0; i < pooledObjects.Count; i++)
+        {
+            Destroy(pooledObjects[i]);
+        }
+
+        pooledObjects = new List<GameObject>();
     }
 }

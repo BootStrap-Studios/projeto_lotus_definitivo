@@ -28,7 +28,6 @@ public class VidaPlayer : MonoBehaviour
     {
         vidaAtual = vidaMaxima;
         AlterarBarraDeVida(vidaAtual, vidaMaxima);
-        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
 
         //escudoEmitter = AudioManager.instance.InitializeEventEmitter(FMODEvents.instance.escudoAtivo, gameObject);
 
@@ -84,7 +83,6 @@ public class VidaPlayer : MonoBehaviour
 
         vidaAtual -= dano;
         AlterarBarraDeVida(vidaAtual, vidaMaxima);
-        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
 
         //Buff misc da velocidade
         ConferindoBuffMiscMovimentacao();
@@ -94,8 +92,10 @@ public class VidaPlayer : MonoBehaviour
 
         if (vidaAtual <= 0)
         {
+            EventBus.Instance.SalvarJogo();
             SaveSystemManager.instance.SalvarJogo();
             EventBus.Instance.GameOver();
+            vidaBaixa = false;
         }
     }
 
@@ -109,14 +109,14 @@ public class VidaPlayer : MonoBehaviour
         }
 
         AlterarBarraDeVida(vidaAtual, vidaMaxima);
-        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
     }
 
-    public void AlterarBarraDeVida(float vidaAtual, float VidaMaxima)
+    public void AlterarBarraDeVida(float vidaAtual, float vidaMaxima)
     {
-        vidaAtualizada = vidaAtual / VidaMaxima;
+        vidaAtualizada = vidaAtual / vidaMaxima;
+        vidaUI.text = vidaAtual.ToString() + " / " + vidaMaxima.ToString();
 
-        if (vidaAtual <= VidaMaxima / 4 && !vidaBaixa)
+        if (vidaAtual <= vidaMaxima / 4 && !vidaBaixa)
         {
             vidaBaixa = true;
             StartCoroutine(CO_VidaPiscandoFadeOut());
@@ -149,12 +149,12 @@ public class VidaPlayer : MonoBehaviour
         }
     }
 
-    
+
 
     #region Animação da barra piscando
 
     private IEnumerator CO_VidaPiscandoFadeIn()
-    {       
+    {
         while (vidaIMG.color.a < 1)
         {
             vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, vidaIMG.color.a + (Time.deltaTime / 0.3f));
@@ -163,13 +163,11 @@ public class VidaPlayer : MonoBehaviour
 
         yield return new WaitForSeconds(.3f);
 
-        if (!vidaBaixa)
+        vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 1);
+
+        if (vidaBaixa)
         {
             StartCoroutine(CO_VidaPiscandoFadeOut());
-        }
-        else
-        {
-            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 1);
         }
     }
 
@@ -181,8 +179,9 @@ public class VidaPlayer : MonoBehaviour
             yield return null;
         }
 
-        if (!vidaBaixa)
+        if (vidaBaixa)
         {
+            vidaIMG.color = new Color(vidaIMG.color.r, vidaIMG.color.g, vidaIMG.color.b, 0);
             StartCoroutine(CO_VidaPiscandoFadeIn());
         }
         else
